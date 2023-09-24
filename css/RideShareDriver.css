@@ -1,0 +1,76 @@
+* {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-family:'Cagliostro',sans-serif; */
+    /* font-family:'Arial',sans-serif; */
+    font-size: 1.1rem;
+    margin-left: 5px;
+    color: black;
+    background-color:rgb(170,185,180);
+    /* background-color:rgb(209, 248, 235); */
+    /* background-color:navy; */
+}
+h1 {
+    /* color:rgba(0,0,255,.7); */
+    color:navy;
+    /* background-color: rgba(255,255,0,.5); */
+    /* background-color:rgb(170,185,180); */
+    text-align: center;
+    /* font-size: 1.5em; */
+}
+h2 {
+    /* color:rgba(0,0,255,.7); */
+    color:blue;
+    /* background-color: rgba(255,255,0,.5); */
+    /* background-color:rgb(170,185,180); */
+    /* text-align: center; */
+    /* font-size: 1.4em; */
+}
+
+.mySEOelement{
+    position:fixed;
+    top:0;
+    left:0;
+    opacity:0;
+    width:1px;
+    height:1px;
+    z-index: -10;
+}
+form.form-as-table {
+    display: table;
+}
+
+div.form-as-table {
+    display: table-row;
+}
+
+label,
+input {
+    display: table-cell;
+    margin-bottom: 10px;
+}
+
+label {
+    padding-right: 10px;
+}
+.driver-records-access-button{
+    cursor:pointer;
+    border:1px solid green;
+}
+.driver-records-container{
+    /* display:none; */
+}
+fieldset input{
+    color:blue;
+    background-color: antiquewhite;
+}
+.driver-records-container{
+    display:none;
+}
+.save-driver-day-book-record-button{
+    cursor:pointer;
+    border:1px solid green;
+}
+.email-my-phone-data-to-button{
+    cursor:pointer;
+    border:1px solid green;
+}

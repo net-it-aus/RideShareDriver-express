@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- SEO -->
+            <title>Ride Share Driver Australia</title>
+            <meta name="description" content="Safe travelling, information for Australian Ride Share riders and drivers.">
+            <!-- Use meta robots tags only when you want to restrict the way GOOGLE crawls a page; -->
+            <meta name="robots" content="index, follow">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- SEO -->
+
+        <link href="https://fonts.googleapis.com/css?family=Cagliostro" rel="stylesheet">
+        <link rel="stylesheet" href="../css/RideShareDriver.css" type="text/css">
+        <script src="../js/RideShareDriver.js" type="text/JavaScript"></script>
+
+    </head>
+
+    <body>
+
+        <div id="driverRecordsAccessButton" class="driver-records-access-button" onclick="driverRecordsAccess()">Access Driver Records</div>
+        <br>
+        <div id="driverRecordsContainer" class="driver-records-container">
+            <form id="driver-day-book" name="driver-day-book" action="" method="get" class="form-as-table">
+                <div class="form-as-table">
+                    <input type="submit" value="View data stored on my phone" />
+                </div>
+                <br>
+                <fieldset>
+                    <div class="form-as-table">
+                        <label for="xDate">Date: </label>
+                        <input type="date" name="xDate" id="xDate" required />
+                    </div>
+                    <fieldset>
+                        <legend>End of day totals:</legend>
+                        <div class="form-as-table">
+                            <label for="xKlms">Kilometres travelled: </label>
+                            <input type="number" pattern="\d*" pattern="\d*" name="xKlms" id="xKlms" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xEndingOdometre">Ending odometre: </label>
+                            <input type="number" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xFuelEconomyPerDashComputer">Fuel economy - per dash computer: </label>
+                            <input type="number" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xTotalGross">Total gross dollars earned: </label>
+                            <input type="text" inputmode="numeric" pattern="\d*" name="xTotalGross" id="xTotalGross" min="0" step="0.01" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xTrips">Trips completed: </label>
+                            <input type="number" pattern="\d*" name="xTrips" id="xTrips" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xPointsEarned">Points earned: </label>
+                            <input type="number" pattern="\d*" name="xPointsEarned" id="xPointsEarned" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xHoursOnline">Hours online: </label>
+                            <input type="number" pattern="\d*" name="xHoursOnline" id="xHoursOnline" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xMinutesOnline">Minutes online: </label>
+                            <input type="number" pattern="\d*" name="xMinutesOnline" id="xMinutesOnline" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xTipsIncludedInGross">Tips included in Gross: </label>
+                            <input type="number" pattern="\d*" name="xTipsIncludedInGross" id="xTipsIncludedInGross" min="0" step="0.01" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xPromosIncludedInGross">Promotions included in Gross: </label>
+                            <input type="number" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" required />
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Today's Performance</legend>
+                        <div class="form-as-table">
+                            <label for="xTotalGrossX">Total gross dollars earned: </label>
+                            <input type="number" pattern="\d*" name="xTotalGrossX" id="xTotalGrossX" disabled readonly />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xDollarsPerKlm">Average $'s earned per klm': </label>
+                            <input type="number" pattern="\d*" name="xDollarsPerKlm" id="xDollarsPerKlm" />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xDollarsPerHour">Average $'s earned per hour: </label>
+                            <input type="number" pattern="\d*" name="xDollarsPerHour" id="xDollarsPerHour"  />
+                        </div>
+                    </fieldset>
+                    <!-- <fieldset>
+                        <legend>My Star Rating</legend>
+                        <div class="form-as-table">
+                            <label for="xStarsCurrent1">Current 1 star ratings: </label>
+                            <input type="number" pattern="\d*" name="xStarsCurrent1" id="xStarsCurrent1" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xStarsCurrent2">Current 2 star ratings: </label>
+                            <input type="number" pattern="\d*" name="xStarsCurrent2" id="xStarsCurrent2" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xStarsCurrent3">Current 3 star ratings: </label>
+                            <input type="number" pattern="\d*" name="xStarsCurrent3" id="xStarsCurrent3" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xStarsCurrent4">Current 4 star ratings: </label>
+                            <input type="number" pattern="\d*" name="xStarsCurrent4" id="xStarsCurrent4" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xStarsCurrent5">Current 5 star ratings: </label>
+                            <input type="number" pattern="\d*" name="xStarsCurrent5" id="xStarsCurrent5" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xTotalRidesRated">Total rides rated: </label>
+                            <input type="number" pattern="\d*" name="xTotalRidesRated" id="xTotalRidesRated" disabled readonly />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xMyRating">My Curent Rating: </label>
+                            <input type="number" pattern="\d*" name="xMyRating" id="xMyRating" disabled readonly />
+                        </div>
+                    </fieldset> -->
+                    <fieldset>
+                        <legend>Vehicle Costs</legend>
+                        <fieldset>
+                            <legend>Fuel Purhases</legend>
+                            <div class="form-as-table">
+                                <label for="xLitresPurchased">Litres purchased: </label>
+                                <input type="number" pattern="\d*" name="xLitresPurchased" id="xLitresPurchased" />
+                            </div>
+                            <div class="form-as-table">
+                                <label for="xPricePerLitre">Price $'s per litre': </label>
+                                <input type="number" pattern="\d*" name="xPricePerLitre" id="xPricePerLitre"  />
+                            </div>
+                            <div class="form-as-table">
+                                <label for="xFuelPurchaseTotal">Total fuel purchase $'s': </label>
+                                <input type="number" pattern="\d*" name="xFuelPurchaseTotal" id="xFuelPurchaseTotal"  />
+                            </div>
+                            <div class="form-as-table">
+                                <label for="xKlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
+                                <input type="number" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  />
+                            </div>
+                            <div class="form-as-table">
+                                <label for="xFuelEconomyCalculated">Fuel economy - calculated: </label>
+                                <input type="number" pattern="\d*" name="xFuelEconomyCalculated" id="xFuelEconomyCalculated"  />
+                            </div>
+                        </fieldset>
+                        <div class="form-as-table">
+                            <label for="xVehicleServiceScheduled">Vehicle service - scheduled $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleServiceScheduled" id="xVehicleServiceScheduled"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleServiceNonScheduled">Vehicle service - non-scheduled $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleServiceNonScheduled" id="xVehicleServiceNonScheduled"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleRepairs">Vehicle repairs $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleRepairs" id="xVehicleRepairs"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleTyresReplace">Vehicle tyres - replace $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleTyresReplace" id="xVehicleTyresReplace"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleTyresRepair">Vehicle tyres - repair $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleTyresRepair" id="xVehicleTyresRepair"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleInsurancePremium">Vehicle insurance premium $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleInsurancePremium" id="xVehicleInsurancePremium"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xVehicleInsuranceExcess">Vehicle insurance excess $'s: </label>
+                            <input type="number" pattern="\d*" name="xVehicleInsuranceExcess" id="xVehicleInsuranceExcess"  />
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Other Costs</legend>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDescription1">Other cost # 1 description: </label>
+                            <input type="text" name="xOtherCostDescription1" id="xOtherCostDescription1"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDollars1">Other cost # 1 $'s: </label>
+                            <input type="number" pattern="\d*" name="xOtherCostDollars1" id="xOtherCostDollars1"  />
+                        </div>
+                        <!-- <div class="form-as-table">
+                            <label for="xOtherCostDescription2">Other cost # 2 description: </label>
+                            <input type="text" name="xOtherCostDescription2" id="xOtherCostDescription2"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDollars2">Other cost # 2 $'s: </label>
+                            <input type="number" pattern="\d*" name="xOtherCostDollars2" id="xOtherCostDollars2"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDescription3">Other cost # 3 description: </label>
+                            <input type="text" name="xOtherCostDescription3" id="xOtherCostDescription3"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDollars3">Other cost # 3 $'s: </label>
+                            <input type="number" pattern="\d*" name="xOtherCostDollars3" id="xOtherCostDollars3"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDescription4">Other cost # 4 description: </label>
+                            <input type="text" name="xOtherCostDescription4" id="xOtherCostDescription4"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDollars4">Other cost # 4 $'s: </label>
+                            <input type="number" pattern="\d*" name="xOtherCostDollars4" id="xOtherCostDollars4"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDescription5">Other cost # 5 description: </label>
+                            <input type="text" name="xOtherCostDescription5" id="xOtherCostDescription5"  />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xOtherCostDollars5">Other cost # 5 $'s: </label>
+                            <input type="number" pattern="\d*" name="xOtherCostDollars5" id="xOtherCostDollars5"  />
+                        </div> -->
+                    </fieldset>
+                    <br>
+                </fieldset>
+                <div class="form-as-table">
+                    <input type="submit" class="save-driver-day-book-record-button" value="Save to my phone" onclick="saveDriverDayBookRecord()" />
+                </div>
+                <!-- <br> -->
+                <div class="form-as-table">
+                    <input type="button" class="email-my-phone-data-to-button" value="Email my phone data to ..." onclick="emailMyPhoneDataTo()"/>
+                </div>
+            </form>
+        </div>
+          
+        <h1>How to enjoy the Ride Share experience</h1>
+
+        ride-share
+        rideshare
+        ...participate in an arrangement in which a passenger travels in a private vehicle driven by its owner for a fee especially as arranged by means of a website or app:
+        "riders place a request to ride-share by setting a pick-up and drop-off location via the app".
+
+        <h1>Riders guide</h1>
+        <p>To fully enjoy the Ride Share experience might mean that you cannot 'be yourself' when sharing a ride with a Ride Share Driver.</p>
+        <p>You will need to follow some rules (local laws) and we recommend considering the following when using a Ride Share service.</p>
+        <p>A Ride Share vehicle is an expensive asset. Please follow the Driver's instructions before, during and at the end of the Ride.</p>
+        <ul>
+            <li>Treat everyone with respect</li>
+                <ul>
+                    <li>co-Riders</li>
+                    <li>Drivers
+                        <ul><li>Consider, you are a stranger and a guest in the driver's vehicle.</li></ul>
+                    </li>
+                    <li>pedestrians</li>
+                    <li>other road users</li>
+                </ul>
+            <li>Be safe</li>
+            <li>Everyone should feel supported and welcomed to the Ride Share experience.</li>
+        </ul>
+
+        <h2>Booking</h2>
+        <p>Ride Share vehicles are passenger motor vehicles.<br>
+        They are perfect for transporting people and their luggage when travelling.</p>
+
+        <h2>Pick-up</h2>
+        <p>Ride Share vehicles are not Taxis.<br>
+        Ride Share vehicles cannot pick you up at a Taxi Rank or in a Taxi Zone.</p>
+        <ul>Ride Share vehicles cannot pick you up
+            <li>at Traffic Lights</li>
+            <li>in No Stopping Zones</li>
+            <li>at Bus Stops</li>
+            <li>in Taxi Zones</li>
+            <li>in unsafe places, for example:-
+                <ul>
+                    <li>at street corners</li>
+                </ul>
+            </li>
+        </ul>
+        <ul><u>Do</u>
+            <li>wait for the vehicle to stop</li>
+            <li>get the Driver's attention before entering the vehicle</li>
+            <li>wait for the Driver to prepare the vehicle - for example 7 or 8 seaters</li>
+            <li>enter from the curb-side</li>
+            <li>enter calmly and carefully</li>
+            <li>allow the Driver to control the loading of luggage</li>
+            <li>Riding in the front seat?</u>
+                <ul>
+                    <li>Front seat riders should not enter the vehicle unless the driver is also seated in the vehicle.</li>
+                </ul>
+            </li>
+        </ul>
+        <ul><u>Don't</u>
+            <li>enter a moving vehicle</li>
+            <li>run or rush towards the vehicle</li>
+            <li>enter from the roadside</li>
+            <li>enter the vehicle quickly - or "jump in"</li>
+        </ul>
+        <p>Pickup locations recommended by your Ride Share App may be out of date.  Please check signage at the pickup location and move to another pickup location if necessary.  Or call your Driver and ask for their advice.<br>
+        </p>
+
+        <h2>the ride</h2>
+        <ul><u>Do</u>
+            <li>Be respectful to the Driver and co-Riders.  Keep conversations casual and friendly.</li>
+            <li>Ensure your seat belt is buckled at all times</li>
+        </ul>
+        <ul><u>Don't</u>
+            <li>Distract the Driver from their task of driving</li>
+        </ul>
+
+        <h2>Drop-off</h2>
+        <ul><u>Do</u>
+            <li>wait for the vehicle to stop</li>
+            <li>get the Driver's attention before exiting the vehicle</li>
+            <li>wait for the Driver to prepare the vehicle - for example 7 or 8 seaters</li>
+            <li>exit on the curb-side</li>
+            <li>exit calmly and carefully</li>
+            <li>allow the Driver to control the unloading of luggage</li>
+        </ul>
+        <ul><u>Don't</u>
+            <li>exit a moving vehicle</li>
+            <li>run or rush away from the vehicle</li>
+            <li>exit to the roadside</li>
+            <li>exit the vehicle quickly - or "jump out"</li>
+        </ul>
+
+        Please consider the following:-
+        <ul>
+            <li>safety*</li>
+            <li>emergencies</li>
+            <!-- <li>Driver</li> -->
+            <!-- <li>Driver's vehicle</li> -->
+            <li>ending a Ride</li>
+            <li>physical contact</li>
+            <li>threatening and rude behaviour</li>
+            <li>property damage</li>
+        </ul>
+        * The SAFETY both mental and physical of Riders, the Driver and their property is at the forefront of these guidelines.
+
+        <h2>Safety*</h2>
+        <p>The SAFETY both mental and physical of Riders, Drivers and their property (including the Driver's vehicle) is at the forefront of these guidelines.</p>
+
+        <h2>Emergencies</h2>
+        <p>Do not use Ride Share for emergency transport.  Consider if an Ambulance or a Police escort is necessary and make arrangements by calling your local emergency services.</p>
+
+        <!-- <h2>Driver's Vehicle</h2> -->
+        <!-- <p>A Motor Vehicle is an expensive asset to a Ride Share Driver. ...to anyone really. </p> -->
+
+        <h2>Ending a Ride</h2>
+        <p>The Ride can be cancelled/ended by the Rider or the Driver at any time.</p>
+        <ul>
+            <li>if the Driver ends the Ride</li>
+                <ul>
+                    <li>the Driver will stop the vehicle at the nearest safe location and allow you to exit the vehicle</li>
+                    <li>you must leave the vehicle immediately, providing it is safe to do so</li>
+                    <li>follow the Drop-off protocol</li>
+                </ul>
+            <li>if you end the Ride</li>
+            <ul>
+                <li>the Driver will stop the vehicle at the nearest safe location and allow you to exit the vehicle</li>
+                <li>you must leave the vehicle immediately, providing it is safe to do so</li>
+                <li>follow the Drop-off protocol</li>
+            </ul>
+        </ul>
+
+        <h2>Physical contact</h2>
+        <p>Riders must not make physical contact with Drivers.</p>
+        <p>Drivers must not make physical contact with Riders.</p>
+
+        <h2>Threatening and rude behaviour</h2>
+        <p>Aggressive, confrontational and harassing behaviour is not allowed. Don’t use language or make gestures that could be disrespectful or threatening.</p>
+
+        <h2>Property damage</h2>
+        <p>If you damage property, you’re responsible for the cost of cleaning and repair fees.</p>
+
+    <footer>
+        <!-- SEO -->
+            <div class="mySEOelement">
+                <a href="https://www.netit.com.au"></a>
+                <a href="https://netit.com.au"></a>
+                <a href="https://www.netit.au"></a>
+                <a href="https://netit.au"></a>
+                <a href="https://www.netitaustralia.com"></a>
+                <a href="https://netitaustralia.com"></a>
+                <a href="https://www.bgfinancial.net.au"></a>
+                <a href="https://bgfinancial.net.au"></a>
+                <a href="https://www.ridesharedriver.com.au"></a>
+                <a href="https://ridesharedriver.com.au"></a>
+                <a href="https://www.xlaccounts.com.au"></a>
+                <a href="https://xlaccounts.com.au"></a>
+                <a href="https://www.turramurratrotters.org"></a>
+                <a href="https://turramurratrotters.org"></a>
+                <a href="https://www.runclub.net.au"></a>
+                <a href="https://runclub.net.au"></a>
+                <h1>Uber. DiDi. OLA. rideshare. ridesharedriver.  ride share.  ride share driver.</h1>
+            </div>
+        <!-- SEO -->
+    </footer>
+    </body>
+</html>
