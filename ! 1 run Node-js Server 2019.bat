@@ -1,0 +1,1 @@
+start /min nodemon index.js 2019

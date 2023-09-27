@@ -15,12 +15,14 @@
         <!-- SEO -->
 
         <link href="https://fonts.googleapis.com/css?family=Cagliostro" rel="stylesheet">
+
         <!-- <link rel="stylesheet" href="index.css" type="text/css"> -->
+
         <link rel="stylesheet" href="RideShareDriver.css" type="text/css">
-        <link rel="stylesheet" href="../css/RideShareDriver.css" type="text/css">
+        <!-- <link rel="stylesheet" href="../css/RideShareDriver.css" type="text/css"> -->
         <!-- <script src="index.js" type="text/JavaScript"></script> -->
         <script src="RideShareDriver.js" type="text/JavaScript"></script>
-        <script src="../js/RideShareDriver.js" type="text/JavaScript"></script>
+        <!-- <script src="../js/RideShareDriver.js" type="text/JavaScript"></script> -->
 
     </head>
 
@@ -47,7 +49,7 @@
                         </div>
                         <div class="form-as-table">
                             <label for="xEndingOdometre">Ending odometre: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" required />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" min="0" step="0.01" required />
                         </div>
                         <div class="form-as-table">
                             <label for="xFuelEconomyPerDashComputer">Fuel economy - per dash computer: </label>
@@ -81,6 +83,10 @@
                         <div class="form-as-table">
                             <label for="xPromosIncludedInGross">Promotions included in Gross: </label>
                             <input type="number" inputmode="decimal" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" required />
+                        </div>
+                        <div class="form-as-table">
+                            <label for="xTolls">Tolls (optional): </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" />
                         </div>
                     </fieldset>
                     <fieldset>
