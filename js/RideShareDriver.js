@@ -84,3 +84,37 @@ function emailMyPhoneDataTo(){
         var emailSubject = "Ride Share Driver Autralia - driver's day records - comma separated for spreadsheet compatibility";
         window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
+function viewDataStored(){
+    let aRSDdata = [];
+    let aRSDdataRow = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).slice(0,4)==="rsd!"){
+            aRSDdataRow = localStorage.getItem(localStorage.key(i)).split(",");
+            aRSDdata.push(aRSDdataRow);
+        }
+    }
+    aRSDdata.sort();
+    aRSDdata.reverse();
+    console.log(aRSDdata);
+    let vHTML = ``;
+    for (let i = 0; i < aRSDdata.length; i++) {
+        if (i !== 0){
+            vHTML += aRSDdata[i] + `%0D%0A`;
+        }
+    }
+    console.log(vHTML);
+}
+function sumTolls(){
+    let tollsNumber = 0;
+    tollsNumber = window.prompt('Enter a number to add to Tolls (negatives allowed, use -), then click OK.',tollsNumber);
+    console.log(tollsNumber);
+    if (!tollsNumber){
+        // document.getElementById("xTolls").blur();
+    } else {
+        tollsNumber = tollsNumber * 1;
+        console.log(tollsNumber);
+        tollsNumber += document.getElementById("xTolls").value * 1;
+        console.log(tollsNumber);
+        document.getElementById("xTolls").value = tollsNumber;
+    }
+}
