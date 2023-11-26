@@ -59,7 +59,7 @@ function timeStampString(){
     var v_millisecond = v_dateNow.getMilliseconds();
     if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
     if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
-    const v_timeStampStr = "now" + v_fullYear + v_month + v_day + v_hour + v_minute + v_second + v_millisecond;
+    const v_timeStampStr = "timeStamped" + v_fullYear + v_month + v_day + v_hour + v_minute + v_second + v_millisecond;
     // console.log("v_timeStampString:- ",v_timeStampStr);
     return v_timeStampStr;
 }
@@ -88,10 +88,10 @@ function saveDriverDayBookRecord(){
             // console.log(input.name + " | " + input.value);
         }
     });
-    window.localStorage.setItem("rsd!" + xDate.value + "headerRow!" + xTimeStamp,txtHeaderRow);
-    window.localStorage.setItem("rsd!" + xDate.value + "dataRow!" + xTimeStamp,txtDataRow);
+    window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
+    window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
 }
-function emailMyPhoneDataTo(){
+function emailMyPhoneDataTo_OLD(){
         let aRSDdata = [];
         for (let i = 0; i < localStorage.length; i++) {
             if (localStorage.key(i).slice(0,4)==="rsd!"){
@@ -112,22 +112,62 @@ function emailMyPhoneDataTo(){
         var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
         window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
-function viewDataStored(){
+function emailMyPhoneDataTo(){
     let aRSDdata = [];
     let aRSDdataRow = [];
+    let aRSDdataRowSplit = [];
     for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).slice(0,4)==="rsd!"){
-            aRSDdataRow = localStorage.getItem(localStorage.key(i)).split(",");
+            aRSDdataRowSplit = localStorage.getItem(localStorage.key(i)).split(",");
+            aRSDdataRowSplit.push(localStorage.key(i));
+            for (let a = 0; a < aRSDdataRowSplit.length; a++) {
+                console.log(i,a,aRSDdataRowSplit[a]);
+            }
+            aRSDdataRow = localStorage.getItem(localStorage.key(i)) + localStorage.key(i);
             aRSDdata.push(aRSDdataRow);
         }
     }
-    aRSDdata.sort();
-    aRSDdata.reverse();
-    console.log(aRSDdata);
-    let vHTML = ``;
+    // aRSDdata.sort();
+    // aRSDdata.reverse();
+    // console.log(aRSDdata);
+    // console.log(aRSDdata[0]);
+    // console.log(aRSDdata[0].indexOf("_0]head"));
+    let vTEXT = ``;
+    vTEXT += aRSDdata[0] + `%0D%0A`;
     for (let i = 0; i < aRSDdata.length; i++) {
-        if (i !== 0){
-            vHTML += aRSDdata[i] + `%0D%0A`;
+        if (aRSDdata[i].indexOf("_0]head")<0){
+            vTEXT += aRSDdata[i] + `%0D%0A`;
+        }
+    }
+    console.log(vTEXT);
+    var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
+    window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
+}
+function viewDataStored(){
+    let aRSDdata = [];
+    let aRSDdataRow = [];
+    let aRSDdataRowSplit = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i).slice(0,4)==="rsd!"){
+            aRSDdataRowSplit = localStorage.getItem(localStorage.key(i)).split(",");
+            aRSDdataRowSplit.push(localStorage.key(i));
+            for (let a = 0; a < aRSDdataRowSplit.length; a++) {
+                console.log(i,a,aRSDdataRowSplit[a]);
+            }
+            aRSDdataRow = localStorage.getItem(localStorage.key(i)) + localStorage.key(i);
+            aRSDdata.push(aRSDdataRow);
+        }
+    }
+    // aRSDdata.sort();
+    // aRSDdata.reverse();
+    // console.log(aRSDdata);
+    // console.log(aRSDdata[0]);
+    // console.log(aRSDdata[0].indexOf("_0]head"));
+    let vHTML = ``;
+    vHTML += aRSDdata[0] + `<br>`;
+    for (let i = 0; i < aRSDdata.length; i++) {
+        if (aRSDdata[i].indexOf("_0]head")<0){
+            vHTML += aRSDdata[i] + `<br>`;
         }
     }
     console.log(vHTML);
