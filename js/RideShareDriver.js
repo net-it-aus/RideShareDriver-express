@@ -1,55 +1,83 @@
 // wait for DOM to load
-window.addEventListener("load", () => {
-    // Fully loaded!
-    var v_today = new Date();
-    document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+    window.addEventListener("load", () => {
+        // Fully loaded!
+        var v_today = new Date();
+        document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
 
-    // document.getElementById("futureDate").value = getFutureDate();
-    // document.getElementById("xHours").addEventListener("change",calcStats());
-    // document.getElementById("xMinutes").addEventListener("change",calcStats());
-    // document.getElementById("xSeconds").addEventListener("change",calcStats());
-    // document.getElementById("xDistance").addEventListener("change",calcStats());
-    // document.getElementById("ttCourse").addEventListener("change",calcStats());
-    // document.getElementById("xPace").addEventListener("mouseover",calcStats());
-    // document.getElementById("xPace").addEventListener("touchstart",calcStats());
-    // document.getElementById("ttName").addEventListener("change",document.getElementById("xHours").focus())
-    // document.getElementById("ttName").select();
+        // document.getElementById("futureDate").value = getFutureDate();
+        // document.getElementById("xHours").addEventListener("change",calcStats());
+        // document.getElementById("xMinutes").addEventListener("change",calcStats());
+        // document.getElementById("xSeconds").addEventListener("change",calcStats());
+        // document.getElementById("xDistance").addEventListener("change",calcStats());
+        // document.getElementById("ttCourse").addEventListener("change",calcStats());
+        // document.getElementById("xPace").addEventListener("mouseover",calcStats());
+        // document.getElementById("xPace").addEventListener("touchstart",calcStats());
+        // document.getElementById("ttName").addEventListener("change",document.getElementById("xHours").focus())
+        // document.getElementById("ttName").select();
 
-    // DATA VALIDATION START 
-    const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
-    datval_xMinutesOnline.addEventListener("input", (event) => {
-        if (datval_xMinutesOnline.validity.valid) {
-        } else {
-            // datval_xMinutesOnline.setCustomValidity("");
-            alert("value out of range, please try again");
-            document.getElementById("xMinutesOnline").value = 0;
-            document.getElementById("xMinutesOnline").focus();
-            document.getElementById("xMinutesOnline").select();
-        }
-    });
-    const datval_xTotalGross = document.getElementById("xTotalGross");
-    datval_xTotalGross.addEventListener("change", (event) => {
-        document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-        // if (datval_xTotalGrossX.validity.valid) {
-        // } else {
-        //     // datval_xSeconds.setCustomValidity("");
-        //     alert("value out of range, please try again");
-        //     document.getElementById("xTotalGrossX").value = 0;
-        //     document.getElementById("xTotalGrossX").focus();
-        //     document.getElementById("xTotalGrossX").select();
-        // }
-    });
-    // DATA VALIDATION END 
-// window.addEventListener("load", () => {
+        // DATA VALIDATION START 
+        const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
+        datval_xMinutesOnline.addEventListener("input", (event) => {
+            if (datval_xMinutesOnline.validity.valid) {
+            } else {
+                // datval_xMinutesOnline.setCustomValidity("");
+                alert("value out of range, please try again");
+                document.getElementById("xMinutesOnline").value = 0;
+                document.getElementById("xMinutesOnline").focus();
+                document.getElementById("xMinutesOnline").select();
+            }
+        });
+        const datval_xTotalGross = document.getElementById("xTotalGross");
+        datval_xTotalGross.addEventListener("change", (event) => {
+            document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+            // if (datval_xTotalGrossX.validity.valid) {
+            // } else {
+            //     // datval_xSeconds.setCustomValidity("");
+            //     alert("value out of range, please try again");
+            //     document.getElementById("xTotalGrossX").value = 0;
+            //     document.getElementById("xTotalGrossX").focus();
+            //     document.getElementById("xTotalGrossX").select();
+            // }
+        });
+        // DATA VALIDATION END 
+    // window.addEventListener("load", () => {
 });
+
+function timeStampString(){
+    const v_dateNow = new Date(); 
+    var v_fullYear = v_dateNow.getFullYear();
+    var v_month = v_dateNow.getMonth()+1;
+    if (v_month<10)(v_month="0"+v_month);
+    var v_day = v_dateNow.getDate();
+    if (v_day<10)(v_day="0"+v_day);
+    var v_hour = v_dateNow.getHours();
+    if (v_hour<10)(v_hour="0"+v_hour);
+    var v_minute = v_dateNow.getMinutes();
+    if (v_minute<10)(v_minute="0"+v_minute);
+    var v_second = v_dateNow.getSeconds();
+    if (v_second<10)(v_second="0"+v_second);
+    var v_millisecond = v_dateNow.getMilliseconds();
+    if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
+    if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
+    const v_timeStampStr = "now" + v_fullYear + v_month + v_day + v_hour + v_minute + v_second + v_millisecond;
+    // console.log("v_timeStampString:- ",v_timeStampStr);
+    return v_timeStampStr;
+}
 function driverRecordsAccess(){
+    const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
+    if (accessCode!=="aus"){
+        return;
+    }
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
         document.getElementById("driverRecordsContainer").style.display = "none";
+        document.getElementById("originalBody").style.display = "body";
     } else {
         document.getElementById("driverRecordsContainer").style.display = "block";
+        document.getElementById("originalBody").style.display = "none";
     }
 }
 function saveDriverDayBookRecord(){
+    const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
     const frm = document.getElementById("driver-day-book");
@@ -60,8 +88,8 @@ function saveDriverDayBookRecord(){
             // console.log(input.name + " | " + input.value);
         }
     });
-    window.localStorage.setItem("rsd!" + xDate.value + "headerRow!",txtHeaderRow);
-    window.localStorage.setItem("rsd!" + xDate.value + "dataRow!",txtDataRow);
+    window.localStorage.setItem("rsd!" + xDate.value + "headerRow!" + xTimeStamp,txtHeaderRow);
+    window.localStorage.setItem("rsd!" + xDate.value + "dataRow!" + xTimeStamp,txtDataRow);
 }
 function emailMyPhoneDataTo(){
         let aRSDdata = [];
@@ -81,7 +109,7 @@ function emailMyPhoneDataTo(){
             vTEXT += aRSDdata[i] + `%0D%0A`;
         }
         console.log(vTEXT);
-        var emailSubject = "Ride Share Driver Autralia - driver's day records - comma separated for spreadsheet compatibility";
+        var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
         window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
 function viewDataStored(){
@@ -103,6 +131,7 @@ function viewDataStored(){
         }
     }
     console.log(vHTML);
+    document.getElementById("displayLocalStorage").innerHTML = vHTML;
 }
 function sumTolls(){
     let tollsNumber = 0;

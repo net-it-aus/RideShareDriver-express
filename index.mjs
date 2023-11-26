@@ -95,57 +95,57 @@ app.all('*', (req, res) => {
     switch (req.url) {
     case '*':
         emailSiteVisit(emailBody);
-    case '/getATOrss':
-        getATOrss(req,res);
-        break;
+    // case '/getATOrss':
+    //     getATOrss(req,res);
+    //     break;
     case '/getRBArss':
         getRBArss(req,res);
         break;
-    case '/emailATOrss':
-        emailATOrss(req,res);
-        break;
+    // case '/emailATOrss':
+    //     emailATOrss(req,res);
+    //     break;
     case '/saveTheData':
         saveTheData(req,res);
         break;
-    case '/getTickerData_ASX_MI':
-        getTickerData_ASX_MI(req,res);
-        break;
-    case '/getTickerData_xyz':
-        getTickerData.getTickerData_xyz(req,res);
-        break;
-    case '/getTickerData_ASX_G':
-        getTickerData_ASX_G(req,res);
-        break;
-    case '/getTickerData_google':
-        getTickerData.getTickerData_google(req,res);
-        break;
-    case '/getTickerData_ASX_YH':
-        getTickerData_ASX_YH(req,res);
-        break;
-    case '/getTickerData_yahoo':
-        getTickerData.getTickerData_yahoo(req,res);
-        break;
-    case '/getTickerData_ASX_AX':
-        getTickerData_ASX_AX(req,res);
-        break;
-    case '/getTickerData_afr':
-        getTickerData.getTickerData_afr(req,res);
-        break;
-    case '/getTickerData_financialtimes':
-        getTickerData.getTickerData_financialtimes(req,res);
-        break;
-    case '/getTickerData_ASX_MS':
-        getTickerData_ASX_MS(req,res);
-        break;
-    case '/getVanguardETFs':
-        getVanguardETFs(req,res);
-        break;
-    case '/getTickerData_CommSec':
-        getTickerData_CommSec(req,res);
-        break;
-    case '/getASXannouncements':
-        getASXannouncements(req,res);
-        break;
+    // case '/getTickerData_ASX_MI':
+    //     getTickerData_ASX_MI(req,res);
+    //     break;
+    // case '/getTickerData_xyz':
+    //     getTickerData.getTickerData_xyz(req,res);
+    //     break;
+    // case '/getTickerData_ASX_G':
+    //     getTickerData_ASX_G(req,res);
+    //     break;
+    // case '/getTickerData_google':
+    //     getTickerData.getTickerData_google(req,res);
+    //     break;
+    // case '/getTickerData_ASX_YH':
+    //     getTickerData_ASX_YH(req,res);
+    //     break;
+    // case '/getTickerData_yahoo':
+    //     getTickerData.getTickerData_yahoo(req,res);
+    //     break;
+    // case '/getTickerData_ASX_AX':
+    //     getTickerData_ASX_AX(req,res);
+    //     break;
+    // case '/getTickerData_afr':
+    //     getTickerData.getTickerData_afr(req,res);
+    //     break;
+    // case '/getTickerData_financialtimes':
+    //     getTickerData.getTickerData_financialtimes(req,res);
+    //     break;
+    // case '/getTickerData_ASX_MS':
+    //     getTickerData_ASX_MS(req,res);
+    //     break;
+    // case '/getVanguardETFs':
+    //     getVanguardETFs(req,res);
+    //     break;
+    // case '/getTickerData_CommSec':
+    //     getTickerData_CommSec(req,res);
+    //     break;
+    // case '/getASXannouncements':
+    //     getASXannouncements(req,res);
+    //     break;
     case '/txtFromClient':
         txtFromClient(req,res);
         break;
@@ -165,7 +165,7 @@ function emailSiteVisit(emailBody){
 //     // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
 //     from: '"Net.IT.Australia@outlook.com',
 //     to: 'd.garton@outlook.com',
-//     subject: 'update from Net IT Australia',
+//     subject: 'update from Net IT Australia (168)',
 //     // html: '<b>Do Not reply to this email.</b>',
 //     html: `<p>${emailBody}</p>`,
 //     text: 'This is text version!',
@@ -307,7 +307,7 @@ function emailATOrss(req,res){
         from: '"Net.IT.Australia@outlook.com',
         to: 'support@netit.com.au',
         bcc: 'd.garton@outlook.com.au;donald@bgfinancial.net.au',
-        subject: 'update from Net IT Australia',
+        subject: 'update from Net IT Australia (310)',
         html: JSON.stringify(req.body.emailBody),
         // html: `<p>${emailBody}</p>`,
         text: 'This is text version!',
@@ -438,7 +438,7 @@ async function retrieveATOrss(){
             from: '"Net.IT.Australia@outlook.com',
             to: 'support@netit.com.au',
             // bcc: 'd.garton@outlook.com.au;donald@bgfinancial.net.au;stephen@bgfinancial.net.au;Railesh@bgfinancial.net.au;charlotte@bgfinancial.net.au;grace@bgfinancial.net.au;faye@bgfinancial.net.au;felicia@bgfinancial.net.au;peter@bgfinancial.net.au',
-            subject: 'update from Net IT Australia',
+            subject: 'update from Net IT Australia (441)',
             // html: JSON.stringify(req.body.emailBody),
             html: res_html,
             text: 'This is text version!',
@@ -462,11 +462,10 @@ console.log("date0Time",date0Time);
 console.log("date1Time",date1Time);
 const timeDelay = date1Time - date0Time;
 console.log("time delay in minutes",(date1Time - date0Time) / 60 / 60 / 24);
-setTimeout(() =>{
-    retrieveATOrss();
-    const intervalID1 = setInterval(retrieveATOrss, 1000 * 60 * 60 * 24);
-},
-timeDelay)
+// setTimeout(() =>{
+//     retrieveATOrss();
+//     const intervalID1 = setInterval(retrieveATOrss, 1000 * 60 * 60 * 24);
+// },timeDelay)
 
 const intervalID2 = setInterval(isServerRunning, 1000 * 65 * 65);
 async function isServerRunning(){
