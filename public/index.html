@@ -28,7 +28,12 @@
 
     <body>
 
-        <div id="driverRecordsAccessButton" class="driver-records-access-button" onclick="driverRecordsAccess()">Access My Driver Records</div>
+        <div id="driverRecordsAccessControl" class="driver-records-access-control">
+            <i>Access My Driver Records</i>
+            <label for="xAccess">Please enter code to access my driver records data stored on my phone:</label>
+            <!-- <input type="text" name="xAccess" id ="xAccess" value="" onclick="viewDataStored()" autocapitalize="none"/> -->
+            <input type="password" name="xAccess" id ="xAccess" autocapitalize="none" onchange="driverRecordsAccess(this)"/>
+        </div>
         <br>
         <div id="driverRecordsContainer" class="driver-records-container">
             <form id="driver-day-book" name="driver-day-book" action="" method="get" class="form-as-table">

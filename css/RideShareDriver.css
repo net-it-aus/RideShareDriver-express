@@ -48,12 +48,18 @@ input {
     display: table-cell;
     margin-bottom: 10px;
 }
-
 label {
     padding-right: 10px;
 }
-.driver-records-access-button{
-    cursor:pointer;
+input {
+    max-width: 10ch;
+}
+input[type=button] {
+    max-width: 100%;
+}
+
+.driver-records-access-control{
+    /* cursor:pointer; */
     border:1px solid green;
 }
 .driver-records-container{

@@ -1,8 +1,12 @@
 // wait for DOM to load
     window.addEventListener("load", () => {
         // Fully loaded!
+       
         var v_today = new Date();
         document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+
+        document.getElementById("xAccess").focus();
+        document.getElementById("xAccess").select();
 
         // document.getElementById("futureDate").value = getFutureDate();
         // document.getElementById("xHours").addEventListener("change",calcStats());
@@ -63,18 +67,26 @@ function timeStampString(){
     // console.log("v_timeStampString:- ",v_timeStampStr);
     return v_timeStampStr;
 }
-function driverRecordsAccess(){
-    const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
-    if (accessCode!=="aus"){
+function driverRecordsAccess(e){
+    console.log(e.value);
+    // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
+    // if (accessCode!=="aus"){
+    //     return;
+    // }
+    if (e.value!=="aus"){
         return;
     }
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
         document.getElementById("driverRecordsContainer").style.display = "none";
         document.getElementById("originalBody").style.display = "body";
+        document.getElementById("driverRecordsAccessControl").style.display = "body";
     } else {
         document.getElementById("driverRecordsContainer").style.display = "block";
         document.getElementById("originalBody").style.display = "none";
+        document.getElementById("driverRecordsAccessControl").style.display = "none";
     }
+    document.getElementById("xEndingOdometre").focus();
+    document.getElementById("xEndingOdometre").select();
 }
 function saveDriverDayBookRecord(){
     const xTimeStamp = timeStampString();
