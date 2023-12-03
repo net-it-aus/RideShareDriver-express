@@ -20,9 +20,17 @@
 
         <link rel="stylesheet" href="RideShareDriver.css" type="text/css">
         <!-- <link rel="stylesheet" href="../css/RideShareDriver.css" type="text/css"> -->
+
         <!-- <script src="index.js" type="text/JavaScript"></script> -->
+
         <script src="RideShareDriver.js" type="text/JavaScript"></script>
         <!-- <script src="../js/RideShareDriver.js" type="text/JavaScript"></script> -->
+
+        <script src="RideShareDriver-IndexedDB-CRUD.js" type="text/JavaScript"></script>
+
+        <script src="RideShareDriver-IndexedDB-maintain.js" type="text/JavaScript"></script>
+
+        <script src="RideShareDriver-dataManagement.js" type="text/JavaScript"></script>
 
     </head>
 
@@ -47,69 +55,69 @@
                 <fieldset>
                     <div class="form-as-table">
                         <label for="xDate">Date: </label>
-                        <input type="date" name="xDate" id="xDate" NOTrequired />
+                        <input type="date" name="xDate" id="xDate" NOTrequired class="xData"/>
                     </div>
                     <fieldset>
                         <legend>End of day totals:</legend>
                         <div class="form-as-table">
                             <label for="xEndingOdometre">Ending odometre: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xKlms">Kilometres travelled: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xKlms" id="xKlms" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xKlms" id="xKlms" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xFuelEconomyPerDashComputer">Fuel economy - per dash computer: </label>
                             <!-- <input type="text" inputmode="decimal" pattern="^\d*(\.\d{0,2})?$" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired /> -->
-                            <input type="number" inputmode="decimal" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xTotalGross">Total gross dollars earned: </label>
-                            <input type="number" inputmode="decimal" name="xTotalGross" id="xTotalGross" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" name="xTotalGross" id="xTotalGross" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xTrips">Trips completed: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTrips" id="xTrips" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTrips" id="xTrips" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xPointsEarned">Points earned: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xPointsEarned" id="xPointsEarned" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xPointsEarned" id="xPointsEarned" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xHoursOnline">Hours online: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xHoursOnline" id="xHoursOnline" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xHoursOnline" id="xHoursOnline" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xMinutesOnline">Minutes online: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xMinutesOnline" id="xMinutesOnline" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xMinutesOnline" id="xMinutesOnline" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xTipsIncludedInGross">Tips included in Gross: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTipsIncludedInGross" id="xTipsIncludedInGross" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTipsIncludedInGross" id="xTipsIncludedInGross" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xPromosIncludedInGross">Promotions included in Gross: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" NOTrequired />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xTolls">Tolls (optional): </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" onclick="sumTolls()" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" onclick="sumTolls()" class="xData" />
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Today's Performance</legend>
                         <div class="form-as-table">
                             <label for="xTotalGrossX">Total gross dollars earned: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossX" id="xTotalGrossX" disabled readonly />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossX" id="xTotalGrossX" disabled readonly class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xDollarsPerKlm">Average $'s earned per klm': </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerKlm" id="xDollarsPerKlm" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerKlm" id="xDollarsPerKlm" class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xDollarsPerHour">Average $'s earned per hour: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerHour" id="xDollarsPerHour"  />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerHour" id="xDollarsPerHour" class="xData" />
                         </div>
                     </fieldset>
                     <!-- <fieldset>
@@ -149,54 +157,54 @@
                             <legend>Fuel Purhases</legend>
                             <div class="form-as-table">
                                 <label for="xLitresPurchased">Litres purchased: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xLitresPurchased" id="xLitresPurchased" min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xLitresPurchased" id="xLitresPurchased" min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xPricePerLitre">Price $'s per litre': </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xPricePerLitre" id="xPricePerLitre"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xPricePerLitre" id="xPricePerLitre"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xFuelPurchaseTotal">Total fuel purchase $'s': </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelPurchaseTotal" id="xFuelPurchaseTotal"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelPurchaseTotal" id="xFuelPurchaseTotal"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xKlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xFuelEconomyCalculated">Fuel economy - calculated: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelEconomyCalculated" id="xFuelEconomyCalculated"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelEconomyCalculated" id="xFuelEconomyCalculated"  min="0" step="0.01" class="xData" />
                             </div>
                         </fieldset>
                         <fieldset>
                             <legend>Other Vehicle Costs</legend>
                             <div class="form-as-table">
                                 <label for="xVehicleServiceScheduled">Vehicle service - scheduled $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceScheduled" id="xVehicleServiceScheduled"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceScheduled" id="xVehicleServiceScheduled"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleServiceNonScheduled">Vehicle service - non-scheduled $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceNonScheduled" id="xVehicleServiceNonScheduled"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceNonScheduled" id="xVehicleServiceNonScheduled"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleRepairs">Vehicle repairs $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleRepairs" id="xVehicleRepairs"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleRepairs" id="xVehicleRepairs"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleTyresReplace">Vehicle tyres - replace $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresReplace" id="xVehicleTyresReplace"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresReplace" id="xVehicleTyresReplace"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleTyresRepair">Vehicle tyres - repair $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresRepair" id="xVehicleTyresRepair"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresRepair" id="xVehicleTyresRepair"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleInsurancePremium">Vehicle insurance premium $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsurancePremium" id="xVehicleInsurancePremium"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsurancePremium" id="xVehicleInsurancePremium"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xVehicleInsuranceExcess">Vehicle insurance excess $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsuranceExcess" id="xVehicleInsuranceExcess"  min="0" step="0.01" />
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsuranceExcess" id="xVehicleInsuranceExcess"  min="0" step="0.01" class="xData" />
                             </div>
                         </fieldset>
                     </fieldset>
@@ -204,11 +212,11 @@
                         <legend>Other Costs</legend>
                         <div class="form-as-table">
                             <label for="xOtherCostDescription1">Other cost # 1 description: </label>
-                            <input type="text" name="xOtherCostDescription1" id="xOtherCostDescription1"  />
+                            <input type="text" name="xOtherCostDescription1" id="xOtherCostDescription1" class="xData" />
                         </div>
                         <div class="form-as-table">
                             <label for="xOtherCostDollars1">Other cost # 1 $'s: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xOtherCostDollars1" id="xOtherCostDollars1"  min="0" step="0.01" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xOtherCostDollars1" id="xOtherCostDollars1"  min="0" step="0.01" class="xData" />
                         </div>
                         <!-- <div class="form-as-table">
                             <label for="xOtherCostDescription2">Other cost # 2 description: </label>
@@ -246,7 +254,7 @@
                     <br>
                 </fieldset>
                 <div class="form-as-table">
-                    <input type="submit" class="save-driver-day-book-record-button" value="Save to my phone" onclick="saveDriverDayBookRecord()" />
+                    <input type="button" class="save-driver-day-book-record-button" value="Save to my phone" onclick="saveDriverDayBookRecord()" />
                 </div>
                 <!-- <br> -->
                 <div class="form-as-table">
