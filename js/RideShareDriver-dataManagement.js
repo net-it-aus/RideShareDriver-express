@@ -132,7 +132,7 @@ function storeFormDataInIndexedDB(){
     // v_objectString += `}`;
     idbAdd("rsd","rsdDayBook",v_objectString);
 }
-function emailMyPhoneDataTo_OLD(){
+function emailMyDeviceDataTo_OLD(){
         let aRSDdata = [];
         for (let i = 0; i < localStorage.length; i++) {
             if (localStorage.key(i).slice(0,4)==="rsd!"){
@@ -153,7 +153,7 @@ function emailMyPhoneDataTo_OLD(){
         var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
         window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
-function emailMyPhoneDataTo(){
+function emailMyDeviceDataTo(){
     let aRSDdata = [];
     let aRSDdataRow = [];
     let aRSDdataRowSplit = [];
