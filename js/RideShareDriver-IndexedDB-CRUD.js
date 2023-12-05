@@ -1,45 +1,161 @@
 function idbAdd(p_database,p_store,p_objectString){
     console.log(p_database,p_store,p_objectString);
-    // const valueToStore = `{${pfield} + ":" + p_value}`;
     var dbOpenRequest = indexedDB.open(p_database); // first step is opening the database
     dbOpenRequest.onsuccess = function(e) {
+
+        var db =  e.target.result;
+        var trans = db.transaction(p_store, 'readwrite'); //second step is opening the object store
+        var store = trans.objectStore(p_store);
+
+        var storeRequest = store.add(JSON.parse(p_objectString)); // adding single object to object store
+
+        storeRequest.onsuccess = function(e) {
+            // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
+            if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+            // idbGetOne(p_database,p_store,e.target.result)
+            db.close();
+            // idbGetAll(p_database,p_store)
+        };
+
+        storeRequest.onerror = function(e) {
+            if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+        };
+
+    };    
+}
+
+function idbGetOne(p_database,p_store,p_keyPath){
+
+    // get
+
+    p_keyPath = p_keyPath * 1;
+
+    if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
+    if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
+    if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
+
+    var request = indexedDB.open(p_database); // first step is opening the database
+    request.onsuccess = function(e) {
             var db =  e.target.result;
             var trans = db.transaction(p_store, 'readwrite'); //second step is opening the object store
             var store = trans.objectStore(p_store);
-
-            // console.log(storeRecord);
-            // console.log(JSON.parse(storeRecord));
-            // const x = JSON.stringify(storeRecord);
-            // console.log(x);
-            // var request = store.add(v_value,v_key); // adding single object to object store
-            var storeRequest = store.add(JSON.parse(p_objectString)); // adding single object to object store
-
-            storeRequest.onsuccess = function(e) {
-                // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
+            
+            var request = store.get(p_keyPath); //getting single object by id from object store
+            
+            request.onsuccess = function(e) {
                 if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
-                // idbGetOne(p_database,p_store,e.target.result)
+                var myArrayOfKeys = Object.keys(e.target.result); // convert javascript object to an array
+                var myArrayOfValues = Object.values(e.target.result); // convert javascript object to an array
+                var myArray = Object.entries(e.target.result).map(([key, value]) => ({key,value})); // convert javascript object to an array
+                // if(v_clientOS=="Windows"){console.log(myArray);} // data retreived
+                var v_elements = document.getElementsByTagName("input");
+                var v_element;
+                for (var i = 0; i < myArray.length; i++) {
+                    try {
+                        if (myArray[i].key === "id"){
+                            document.getElementById('e_dataSetKeyPath').innerHTML = myArray[i].value;
+                        } else {
+                            // if(v_clientOS=="Windows"){console.log(myArray[i].key + ': ' + myArray[i].value);}
+                            document.getElementById(myArray[i].key).value = myArray[i].value;
+                        }
+                    }
+                    catch(err) {
+                        // errors will occur if an element does not exist on the form but an item exists in the store
+                        // console.warn(err);
+                    }
+                }
                 db.close();
-                // idbGetAll(p_database,p_store)
+                if (p_store==='rsdTrips'){
+                    calcTrip();
+                }
+                if (p_store==='rsdCosts'){
+                    calcCosts();
+                }
             };
-
-            storeRequest.onerror = function(e) {
+            
+            request.onerror = function(e) {
                 if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
             };
-    };    
+    };
+
 }
-async function idbAdd_OLD(p_database,p_store,p_form){
-    // add
-    console.log("idbAdd()");
+
+function idbGetAll(p_database,p_store){
+
+    // getAll
+
+    var request = indexedDB.open(p_database); // first step is opening the database
+    request.onsuccess = function(e) {
+
+        var db =  e.target.result;
+        var trans = db.transaction(p_store, 'readwrite'); //second step is opening the object store
+        var store = trans.objectStore(p_store);
+        
+        var request = store.getAll(); //getting all objects from object store
+        
+        request.onsuccess = function(e) {
+            console.log(request.result);
+            console.log(request.result.length);
+            let v_HTML = ``;
+            for (i=0;i<request.result.length;i++){
+                        v_HTML += `<li keyPath="${request.result[i].id}" onclick="idbGetOne('rsd','rsdCosts','${request.result[i].id}')">[id ${request.result[i].id}] [date ${request.result[i].xDate}] [Odometre: ${request.result[i].xEndingOdometre}]</li>`;
+            }
+            // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
+            // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+
+            // dataSets.innerHTML = request.result
+            document.getElementById("IndexedDB_rsd_rsdDayBook").innerHTML = v_HTML;
+
+            // .map(rsdStore =>{
+            //     switch(p_store) {
+            //         case 'rsdCosts':
+            //             return `<li keyPath="${rsdStore.id}" onclick="idbGetOne('rsd','rsdCosts','${rsdStore.id}')">[id${rsdStore.id}] [last update ${rsdStore.trxSortDateTime}] [named: ${rsdStore.f_dataSetName}]</li>`;
+            //             break;
+            //         case 'rsdTrips':
+            //             return `<li keyPath="${rsdStore.id}" onclick="idbGetOne('rsd','rsdTrips','${rsdStore.id}')">[id${rsdStore.id}] [last update ${rsdStore.trxSortDateTime}] [named: ${rsdStore.f_dataSetName}]</li>`;
+            //             break;
+            //         default:
+            //             // code block
+            //     }
+            // })
+            // .join(`\n`);
+
+            db.close();
+        };
+        
+        request.onerror = function(e) {
+            if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+        };
+    };
+
+}
+idbGetAll("rsd","rsdDayBook")
+
+function idbUpdateOne(p_database,p_store,p_keyPath){
+
+    if (p_store==='rsdTrips'){
+        calcTrip();
+    }
+    if (p_store==='rsdCosts'){
+        calcCosts();
+    }
+
+    // put
+
+    p_keyPath = p_keyPath * 1;
+    if (p_keyPath===0){
+        alert('unable to update - no document selected');
+        return;
+    }
+
+    if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
+    if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
+    if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
 
     var v_elements = document.getElementsByTagName("input");
-    console.log(v_elements);
     // v_id = '1';
-    // v_trxObjStr += `{id:"` + v_id + `",`;
-
-    // var v_geolocation = await getLocation();
-    // var v_trxObjStr = `{"geolocation":"` + v_geolocation + `",`;
-    var v_trxObjStr = "";
-
+    var v_trxObjStr = `{`;
+    v_trxObjStr += `"id":` + p_keyPath + `,`;
     for (var i = 0; i < v_elements.length; i++) {
         v_key = v_elements[i].name;
         v_value = v_elements[i].value;
@@ -56,14 +172,10 @@ async function idbAdd_OLD(p_database,p_store,p_form){
             v_trxObjStr += `"` + v_key + `":"` + v_value + `",`;
         }
     }
-    if(v_clientOS=="Windows"){console.log('v_trxObjStr original:-\n',v_trxObjStr);}
-    // v_trxObjStr = JSON.parse(v_trxObjStr);
-    if(v_clientOS=="Windows"){console.log('v_trxObjStr parsed:-\n',v_trxObjStr);}
-    // auditTrail(v_trxObjStr);
-
-    if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
-    if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
-    if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_form);}
+    // if(v_clientOS=="Windows"){console.log('v_trxObjStr original:-\n',v_trxObjStr);}
+    v_trxObjStr = JSON.parse(v_trxObjStr);
+    auditTrail(v_trxObjStr);
+    // if(v_clientOS=="Windows"){console.log('v_trxObjStr parsed:-\n',v_trxObjStr);}
 
     var request = indexedDB.open(p_database); // first step is opening the database
     request.onsuccess = function(e) {
@@ -71,19 +183,73 @@ async function idbAdd_OLD(p_database,p_store,p_form){
             var trans = db.transaction(p_store, 'readwrite'); //second step is opening the object store
             var store = trans.objectStore(p_store);
             
-            var request = store.add(v_trxObjStr); // adding single object to object store
+            var request = store.put(v_trxObjStr); // put single object to object store
             
             request.onsuccess = function(e) {
                 // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
                 // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
-                idbGetOne(p_database,p_store,e.target.result)
-                db.close();
                 idbGetAll(p_database,p_store)
+                db.close();
             };
             
             request.onerror = function(e) {
                 if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
             };
     };
+
+}
+
+function idbDeleteOne(p_database,p_store,p_keyPath){
+
+    // delete
+
+    p_keyPath = p_keyPath * 1;
+    if (p_keyPath===0){
+        alert('unable to delete - no document selected');
+        return;
+    }
+
+    if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
+    if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
+    if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
+
+    var request = indexedDB.open(p_database); // first step is opening the database
+    request.onsuccess = function(e) {
+            var db =  e.target.result;
+            var trans = db.transaction(p_store, 'readwrite'); //second step is opening the object store
+            var store = trans.objectStore(p_store);
+            
+            var request = store.delete(p_keyPath); //deleting single object by id from object store
+            
+            request.onsuccess = function(e) {
+                // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
+                // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+                idbGetAll(p_database,p_store)
+                switch(p_store) {
+                  case 'rsdCosts':
+                    clearForm('rsdForm01');
+                    break;
+                case 'rsdTrips':
+                    clearForm('rsdForm02');
+                    break;
+                }
+                db.close();
+            };
+            
+            request.onerror = function(e) {
+                if(v_clientOS=="Windows"){console.log("Error deleting: ", e);}
+            };
+    };
+
+}
+
+function initTrx(p_storeName,p_mode){
+
+    // let trx = db.transaction('rsdCosts','readwrite');
+    let v_trx = db.transaction(p_storeName,p_mode);
+    v_trx.onerror = (err) => {
+        console.warn('trx.onerror err:- ',err);
+    }
+    return v_trx;
 
 }
