@@ -75,6 +75,15 @@ function driverRecordsAccess(e){
     // }
     if (e.value!=="aus"){
         return;
+    } else {
+        let newUserEmailAddress = '';
+        newUserEmailAddress = prompt("Please enter email address at which you wish to receive a User Access Code.");
+        if (newUserEmailAddress===''){
+            return;
+        } else {
+            console.log(newUserEmailAddress);
+            create(newUserEmailAddress);
+        }
     }
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
         document.getElementById("driverRecordsContainer").style.display = "none";
@@ -88,6 +97,33 @@ function driverRecordsAccess(e){
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
 }
+// create - start ///////////////////////////////////////////////////////////////////////////////////////////////
+async function create(newUserEmailAddress){
+    console.log('create');
+    const v_data = JSON.stringify(
+        {
+            v_emailAddress: newUserEmailAddress
+        }
+    );
+    const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
+    if(getClientOS()=="Windows"){console.log('/create options:- ',v_options)};
+    await fetch('/create',v_options)
+    .then(res => {
+        console.log('create:- res:- ',res);
+        return res.json();
+        // return res.body;
+    })
+    .then((res_data) => {
+        console.log('create:- userPIN:- ',res_data);
+        // writeToLocalStorage('clickedTickerPrice',res_data.price);
+        // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
+        // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
+        // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
+        // return res_data.price;
+    })
+}
+// create - end /////////////////////////////////////////////////////////////////////////////////////////////////
+
 function saveDriverDayBookRecord(){
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";

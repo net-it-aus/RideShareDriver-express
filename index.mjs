@@ -2,7 +2,7 @@
 var v_portNumber = process.argv[2];
 if (v_portNumber == undefined) {
     console.log('Port Number not provided.');
-    v_portNumber = 2070;
+    v_portNumber = 2019;
     console.log('Port Number assigned is:- ', v_portNumber);
 } else {
     console.log('Port Number argument/option:- ',v_portNumber);
@@ -16,6 +16,9 @@ if (v_portNumber == undefined) {
 // npm install node-fetch --save
 // const fetch = require('node-fetch');
     import fetch from 'node-fetch';
+
+    // const fs = require('fs');
+    import fs from 'fs';
 
 // // NODEOUTLOOK - START ================================================================================================
 //     // nodemailer initialise - start
@@ -60,7 +63,7 @@ if (v_portNumber == undefined) {
     app.use(express.static('css'));
     // app.use(express.static('images'));
     app.use(express.static('js'));
-    app.use(express.static('media'));
+    // app.use(express.static('media'));
 // app.use(express.static('resources'));
 
 //  tell the express server to recognise incoming data as JSON
@@ -80,6 +83,7 @@ console.log(Date().slice(0,25));
 
 // SERVER REQUESTS LOG start
 app.all('*', (req, res) => {
+    console.log('app.all information START');
     const v_ipAddress = req.connection.remoteAddress;
     const v_ipAddressForwarded = req.headers['x-forwarded-for'];
     console.log('total memory:- ',os.totalmem()/1000000000);
@@ -87,20 +91,32 @@ app.all('*', (req, res) => {
     console.log(`incoming IP address:-  ${v_ipAddress}`);
     console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
     console.log('app.all req.url:- ', req.url);
-    console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
+    // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
+    console.log(`app.all req date:- ${Date().slice(0, 25)}`);
+    console.log('app.all information END\n');
 
-    const emailBody = 'incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
-    console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
-    emailSiteVisit();
-    switch (req.url) {
-    case '*':
+    if (v_ipAddress.length > 3){
+        const emailBody = '(95) incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
+        // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
         emailSiteVisit(emailBody);
+    }
+    switch (req.url) {
+        case '/create':
+            const userPIN = createRSDuserPIN();
+            create(req,res,userPIN);
+            break;
+        case '/read':
+            break;
+        case '/append':
+            break;
+    // case '*':
+    //     emailSiteVisit(emailBody);
     // case '/getATOrss':
     //     getATOrss(req,res);
     //     break;
-    case '/getRBArss':
-        getRBArss(req,res);
-        break;
+    // case '/getRBArss':
+    //     getRBArss(req,res);
+    //     break;
     // case '/emailATOrss':
     //     emailATOrss(req,res);
     //     break;
@@ -156,23 +172,42 @@ app.all('*', (req, res) => {
 });
 // SERVER REQUESTS LOG end
 
+// create START //////////////////////////////////////////////////////
+function create(req,res,userPIN){
+    console.log("create !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(req.body);
+    const v_fileName = userPIN + "_emailAddress"
+    fs.appendFile('data/' + v_fileName + '.csv', req.body.v_emailAddress ,(err) => {
+    });
+    // fs.appendFile('../../SiteStatistics/turramurra-trotters-analytics.csv', v_csvText ,(err) => {
+    // });
+    const v_data = JSON.stringify(
+        {
+            v_userPIN: userPIN
+        }
+    );
+    res.send(v_data);
+    res.end();
+}
+// create END ////////////////////////////////////////////////////////
+
 function emailSiteVisit(emailBody){
-//     nodeoutlook.sendEmail({
-//     auth: {
-//         user: "Net.IT.Australia@outlook.com",
-//         pass: "SonicBroom.000"
-//     },
-//     // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-//     from: '"Net.IT.Australia@outlook.com',
-//     to: 'd.garton@outlook.com',
-//     subject: 'update from Net IT Australia (168)',
-//     // html: '<b>Do Not reply to this email.</b>',
-//     html: `<p>${emailBody}</p>`,
-//     text: 'This is text version!',
-//     replyTo: 'NoReply@outlook.com',
-//     onError: (e) => console.log(e),
-//     onSuccess: (i) => console.log(i)
-// });
+    nodeoutlook.sendEmail({
+    auth: {
+        user: "Net.IT.Australia@outlook.com",
+        pass: "SonicBroom.000"
+    },
+    // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+    from: '"Net.IT.Australia@outlook.com',
+    to: 'd.garton@outlook.com',
+    subject: 'RideShareDriver.com.au site visit details (171)',
+    // html: '<b>Do Not reply to this email.</b>',
+    html: `<p>${emailBody}</p>`,
+    text: 'This is text version!',
+    replyTo: 'NoReply@outlook.com',
+    onError: (e) => console.log(e),
+    onSuccess: (i) => console.log(i)
+});
 }
 
 // RECORD ANALYTICS start
@@ -273,6 +308,29 @@ function timeStampString(){
     const v_timeStampStr = "now" + v_fullYear + v_month + v_day + v_hour + v_minute + v_second + v_millisecond;
     // console.log("v_timeStampString:- ",v_timeStampStr);
     return v_timeStampStr;
+}
+function createRSDuserPIN(){
+    const v_dateNow = new Date(); 
+    var v_fullYear = v_dateNow.getFullYear();
+    var v_fullYear = v_fullYear + '';
+    var v_fullYear = v_fullYear.slice(2,4);
+    // console.log(v_fullYear);
+    var v_month = v_dateNow.getMonth()+1;
+    if (v_month<10)(v_month="0"+v_month);
+    var v_day = v_dateNow.getDate();
+    if (v_day<10)(v_day="0"+v_day);
+    var v_hour = v_dateNow.getHours();
+    if (v_hour<10)(v_hour="0"+v_hour);
+    var v_minute = v_dateNow.getMinutes();
+    if (v_minute<10)(v_minute="0"+v_minute);
+    var v_second = v_dateNow.getSeconds();
+    if (v_second<10)(v_second="0"+v_second);
+    var v_millisecond = v_dateNow.getMilliseconds();
+    if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
+    if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
+    const v_rsdUserPIN = v_second + '' + v_day + '' +  v_hour + '' +  v_month + '' +  v_millisecond + '' + v_minute + '' + v_fullYear;
+    console.log("v_rsdUserPIN:- ",v_rsdUserPIN);
+    return v_rsdUserPIN;
 }
 
 async function getATOrss(req, res){
