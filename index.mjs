@@ -105,7 +105,9 @@ app.all('*', (req, res) => {
             const userPIN = createRSDuserPIN();
             create(req,res,userPIN);
             break;
-        case '/read':
+        case '/checkOut':
+            const userPIN_checkOut = req.body.v_userPIN;
+            checkOutUserFiles(req,res,userPIN_checkOut);
             break;
         case '/append':
             break;
@@ -188,26 +190,59 @@ function create(req,res,userPIN){
     );
     res.send(v_data);
     res.end();
+    emailUSERpin(req.body.v_emailAddress,userPIN);
 }
 // create END ////////////////////////////////////////////////////////
 
+function checkOutUserFiles(req,res,userPIN_checkOut){
+    console.log("checkOut !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(req.body);
+    const v_fileName = userPIN_checkOut + "_emailAddress"
+    fs.ReadStream('data/' + v_fileName + '.csv',(err) => {
+    });
+    const v_data = JSON.stringify(
+        {
+            v_userPIN: userPIN_checkOut
+        }
+    );
+    res.send(v_data);
+    res.end();
+}
 function emailSiteVisit(emailBody){
     nodeoutlook.sendEmail({
-    auth: {
-        user: "Net.IT.Australia@outlook.com",
-        pass: "SonicBroom.000"
-    },
-    // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-    from: '"Net.IT.Australia@outlook.com',
-    to: 'd.garton@outlook.com',
-    subject: 'RideShareDriver.com.au site visit details (171)',
-    // html: '<b>Do Not reply to this email.</b>',
-    html: `<p>${emailBody}</p>`,
-    text: 'This is text version!',
-    replyTo: 'NoReply@outlook.com',
-    onError: (e) => console.log(e),
-    onSuccess: (i) => console.log(i)
-});
+        auth: {
+            user: "Net.IT.Australia@outlook.com",
+            pass: "SonicBroom.000"
+        },
+        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+        from: '"Net.IT.Australia@outlook.com',
+        to: 'd.garton@outlook.com',
+        subject: 'RideShareDriver.com.au site visit details (171)',
+        // html: '<b>Do Not reply to this email.</b>',
+        html: `<p>${emailBody}</p>`,
+        text: 'This is text version!',
+        replyTo: 'NoReply@outlook.com',
+        onError: (e) => console.log(e),
+        onSuccess: (i) => console.log(i)
+    });
+}
+function emailUSERpin(emailAddress,userPIN){
+    nodeoutlook.sendEmail({
+        auth: {
+            user: "Net.IT.Australia@outlook.com",
+            pass: "SonicBroom.000"
+        },
+        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+        from: '"Net.IT.Australia@outlook.com',
+        to: emailAddress,
+        subject: 'RideShareDriver.com.au user PIN',
+        // html: '<b>Do Not reply to this email.</b>',
+        html: `<p>${userPIN}</p><p>Use the PIN to access the Driver Records portal.</p><p><b>Anyoone can access your records by using this PIN.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+        text: 'This is text version!',
+        replyTo: 'NoReply@outlook.com',
+        onError: (e) => console.log(e),
+        onSuccess: (i) => console.log(i)
+    });
 }
 
 // RECORD ANALYTICS start
@@ -328,7 +363,7 @@ function createRSDuserPIN(){
     var v_millisecond = v_dateNow.getMilliseconds();
     if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
     if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
-    const v_rsdUserPIN = v_second + '' + v_day + '' +  v_hour + '' +  v_month + '' +  v_millisecond + '' + v_minute + '' + v_fullYear;
+    const v_rsdUserPIN = v_second + '' + v_day + '' +  v_hour + '' +  v_month + '' +  v_millisecond + '' + v_minute + '' + v_fullYear + '' +  (v_millisecond/19).toFixed(0);
     console.log("v_rsdUserPIN:- ",v_rsdUserPIN);
     return v_rsdUserPIN;
 }

@@ -67,6 +67,32 @@ function timeStampString(){
     // console.log("v_timeStampString:- ",v_timeStampStr);
     return v_timeStampStr;
 }
+// CHECK OUT user files START
+async function checkOutUserFiles(userPIN){
+    console.log('checkOut');
+    const v_data = JSON.stringify(
+        {
+            v_userPIN: userPIN
+        }
+    );
+    const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
+    if(getClientOS()=="Windows"){console.log('/checkOut options:- ',v_options)};
+    await fetch('/checkOut',v_options)
+    .then(res => {
+        console.log('checkOut:- res:- ',res);
+        return res.json();
+        // return res.body;
+    })
+    .then((res_data) => {
+        console.log('checkOut:- userPIN:- ',res_data);
+        // writeToLocalStorage('clickedTickerPrice',res_data.price);
+        // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
+        // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
+        // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
+        // return res_data.price;
+    })
+} 
+// CHECK OUT user files END
 function driverRecordsAccess(e){
     console.log(e.value);
     // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
@@ -74,7 +100,7 @@ function driverRecordsAccess(e){
     //     return;
     // }
     if (e.value!=="aus"){
-        return;
+        checkOutUserFiles(e.value);
     } else {
         let newUserEmailAddress = '';
         newUserEmailAddress = prompt("Please enter email address at which you wish to receive a User Access Code.");
