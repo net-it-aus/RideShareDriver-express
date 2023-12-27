@@ -1,3 +1,4 @@
+let aDriverDayBook;
 // wait for DOM to load
     window.addEventListener("load", () => {
         // Fully loaded!
@@ -79,38 +80,23 @@ async function checkOutUserFiles(userPIN){
     if(getClientOS()=="Windows"){console.log('/checkOut options:- ',v_options)};
     await fetch('/checkOut',v_options)
     .then(res => {
-        console.log('checkOut:- res:- ',res);
+        // console.log('checkOut:- res.body:- ',res.body);
+        // console.log('checkOut:- res.json():- ',res.json());
         return res.json();
-        // return res.body;
+        // return res.tex4t();
     })
     .then((res_data) => {
-        console.log('checkOut:- userPIN:- ',res_data);
+        console.log('checkOut:- jsonObject:- ',res_data);
+        console.log('checkOut:- jsonObject:- ',res_data.v_emailAddress);
+        aDriverDayBook = res_data;
+        // console.log('checkOut:- jsonObject:- ',JSON.stringify(res_data));
+        // console.log('checkOut:- jsonObject:- ',JSON.parse(res_data));
         // writeToLocalStorage('clickedTickerPrice',res_data.price);
         // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
         // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
         // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
         // return res_data.price;
     })
-} 
-// CHECK OUT user files END
-function driverRecordsAccess(e){
-    console.log(e.value);
-    // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
-    // if (accessCode!=="aus"){
-    //     return;
-    // }
-    if (e.value!=="aus"){
-        checkOutUserFiles(e.value);
-    } else {
-        let newUserEmailAddress = '';
-        newUserEmailAddress = prompt("Please enter email address at which you wish to receive a User Access Code.");
-        if (newUserEmailAddress===''){
-            return;
-        } else {
-            console.log(newUserEmailAddress);
-            create(newUserEmailAddress);
-        }
-    }
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
         document.getElementById("driverRecordsContainer").style.display = "none";
         document.getElementById("originalBody").style.display = "body";
@@ -122,6 +108,36 @@ function driverRecordsAccess(e){
     }
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
+    console.log(aDriverDayBook.v_emailAddress);
+    console.log(aDriverDayBook[0].d20231225.friends[0]);
+    console.log(aDriverDayBook);
+    console.log(JSON.stringify(aDriverDayBook));
+    aDriverDayBook.push(JSON.parse(`{"d20121226":{"odometre":64000}}`));
+    console.log(aDriverDayBook);
+    console.log(JSON.stringify(aDriverDayBook));
+} 
+// CHECK OUT user files END
+function driverRecordsAccess(e){
+    console.log(e.value);
+    // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
+    // if (accessCode!=="aus"){
+    //     return;
+    // }
+    if (e.value!=="aus"){
+        checkOutUserFiles(e.value);
+    } else {
+        // let newUserEmailAddress = '';
+        let newUserEmailAddress = '"d.garton@outlook.com"';
+        // newUserEmailAddress = prompt("Please enter email address at which you wish to receive a User Access Code.","d.garton@outlook.com");
+        newUserEmailAddress = prompt("Please enter email address at which you wish to receive a User Access Code.");
+        if (!newUserEmailAddress){
+            location.reload();
+            // return;
+        } else {
+            console.log(newUserEmailAddress);
+            create(newUserEmailAddress);
+        }
+    }
 }
 // create - start ///////////////////////////////////////////////////////////////////////////////////////////////
 async function create(newUserEmailAddress){
@@ -151,6 +167,8 @@ async function create(newUserEmailAddress){
 // create - end /////////////////////////////////////////////////////////////////////////////////////////////////
 
 function saveDriverDayBookRecord(){
+    storeFormDataInIndexedDB();
+    updateaDriverDayBook();
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
@@ -165,7 +183,6 @@ function saveDriverDayBookRecord(){
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
     console.log("localStorage done");
-    storeFormDataInIndexedDB();
 }
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
@@ -193,6 +210,9 @@ function storeFormDataInIndexedDB(){
     }
     // v_objectString += `}`;
     idbAdd("rsd","rsdDayBook",v_objectString);
+}
+function updateaDriverDayBook(){
+
 }
 function emailMyDeviceDataTo_OLD(){
         let aRSDdata = [];

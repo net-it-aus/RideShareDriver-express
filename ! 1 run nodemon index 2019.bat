@@ -1,1 +1,1 @@
-start /min nodemon index.js 2019
+start /min nodemon index.mjs 2019

@@ -96,14 +96,15 @@ app.all('*', (req, res) => {
     console.log('app.all information END\n');
 
     if (v_ipAddress.length > 3){
-        const emailBody = '(95) incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
+        const emailBody = 'Incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
         // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
         emailSiteVisit(emailBody);
     }
     switch (req.url) {
         case '/create':
             const userPIN = createRSDuserPIN();
-            create(req,res,userPIN);
+            createEmail(req,res,userPIN);
+            createFile(req,res,userPIN);
             break;
         case '/checkOut':
             const userPIN_checkOut = req.body.v_userPIN;
@@ -174,41 +175,67 @@ app.all('*', (req, res) => {
 });
 // SERVER REQUESTS LOG end
 
-// create START //////////////////////////////////////////////////////
-function create(req,res,userPIN){
-    console.log("create !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// createEmail START //////////////////////////////////////////////////////
+function createEmail(req,res,userPIN){
+    console.log("createEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.body);
-    const v_fileName = userPIN + "_emailAddress"
-    fs.appendFile('data/' + v_fileName + '.csv', req.body.v_emailAddress ,(err) => {
-    });
+    emailUSERpin(req.body.v_emailAddress,userPIN);
+    // const v_fileName = userPIN + "_emailAddress"
+    const v_fileName = userPIN + "_checkedIN";
     // fs.appendFile('../../SiteStatistics/turramurra-trotters-analytics.csv', v_csvText ,(err) => {
     // });
+    // fs.appendFile('data/' + v_fileName + '.csv', req.body.v_emailAddress ,(err) => {
+    // });
+    // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
+    // });
+                        // fs.readFile('results.json', function (err, data) {
+                        // var json = JSON.parse(data)
+                        //     json.push('search result: ' + currentSearchResult)
+                        
+                        //     fs.writeFile("results.json", JSON.stringify(json))
+                        // })
     const v_data = JSON.stringify(
+        // {
+        //     v_userPIN: userPIN
+        // }
         {
-            v_userPIN: userPIN
+            v_userPIN: "created"
         }
     );
     res.send(v_data);
     res.end();
-    emailUSERpin(req.body.v_emailAddress,userPIN);
 }
-// create END ////////////////////////////////////////////////////////
+// createEmail END ////////////////////////////////////////////////////////
+// createFile START //////////////////////////////////////////////////////
+function createFile(req,res,userPIN){
+    console.log("createFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    const v_fileName = userPIN + "_checkedIN";
+    // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
+    // });
+    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
+    });
+}
+// createFile END //////////////////////////////////////////////////////
 
 function checkOutUserFiles(req,res,userPIN_checkOut){
     console.log("checkOut !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.body);
-    const v_fileName = userPIN_checkOut + "_emailAddress"
-    fs.ReadStream('data/' + v_fileName + '.csv',(err) => {
+    const v_fileName = userPIN_checkOut + "_checkedIN";
+    const v_data = fs.readFileSync('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(err) => {
     });
-    const v_data = JSON.stringify(
-        {
-            v_userPIN: userPIN_checkOut
-        }
-    );
+    // const v_data = JSON.stringify(
+    //     {
+    //         v_userPIN: userPIN_checkOut
+    //     }
+    // );
+    console.log('v_data:- ',v_data);
+    // console.log('JSON.stringify(v_data):- ',JSON.stringify(v_data));
+    // res.send(JSON.stringify(v_data));
     res.send(v_data);
     res.end();
 }
 function emailSiteVisit(emailBody){
+    console.log('emailSiteVisit nodeoutlook.sendEmail() START .....................................');
     nodeoutlook.sendEmail({
         auth: {
             user: "Net.IT.Australia@outlook.com",
@@ -217,7 +244,7 @@ function emailSiteVisit(emailBody){
         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
         from: '"Net.IT.Australia@outlook.com',
         to: 'd.garton@outlook.com',
-        subject: 'RideShareDriver.com.au site visit details (171)',
+        subject: 'RideShareDriver.com.au site visit details',
         // html: '<b>Do Not reply to this email.</b>',
         html: `<p>${emailBody}</p>`,
         text: 'This is text version!',
@@ -227,6 +254,7 @@ function emailSiteVisit(emailBody){
     });
 }
 function emailUSERpin(emailAddress,userPIN){
+    console.log(`emailUSERpin(${emailAddress},${userPIN})`);
     nodeoutlook.sendEmail({
         auth: {
             user: "Net.IT.Australia@outlook.com",
@@ -560,24 +588,24 @@ console.log("time delay in minutes",(date1Time - date0Time) / 60 / 60 / 24);
 //     const intervalID1 = setInterval(retrieveATOrss, 1000 * 60 * 60 * 24);
 // },timeDelay)
 
-const intervalID2 = setInterval(isServerRunning, 1000 * 65 * 65);
-async function isServerRunning(){
-    var started = Date().slice(0, 25);
-    await nodeoutlook.sendEmail({
-        auth: {
-            user: "Net.IT.Australia@outlook.com",
-            pass: "SonicBroom.000"
-        },
-        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-        from: '"Net.IT.Australia@outlook.com',
-        to: 'support@netit.com.au',
-        // bcc: 'd.garton@outlook.com.au;donald@bgfinancial.net.au',
-        subject: 'message from Net IT Australia Server',
-        // html: JSON.stringify(req.body.emailBody),
-        html: `<p>Server is running. ${started}</p>`,
-        text: 'This is text version!',
-        replyTo: 'support@netit.com.au',
-        onError: (e) => console.log(e),
-        onSuccess: (i) => console.log(i)
-    });
-}
+// const intervalID2 = setInterval(isServerRunning, 1000 * 65 * 65);
+// async function isServerRunning(){
+//     var started = Date().slice(0, 25);
+//     await nodeoutlook.sendEmail({
+//         auth: {
+//             user: "Net.IT.Australia@outlook.com",
+//             pass: "SonicBroom.000"
+//         },
+//         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+//         from: '"Net.IT.Australia@outlook.com',
+//         to: 'support@netit.com.au',
+//         // bcc: 'd.garton@outlook.com.au;donald@bgfinancial.net.au',
+//         subject: 'message from Net IT Australia Server',
+//         // html: JSON.stringify(req.body.emailBody),
+//         html: `<p>Server is running. ${started}</p>`,
+//         text: 'This is text version!',
+//         replyTo: 'support@netit.com.au',
+//         onError: (e) => console.log(e),
+//         onSuccess: (i) => console.log(i)
+//     });
+// }
