@@ -171,7 +171,7 @@ async function create(newUserEmailAddress){
     // if(getClientOS()=="Windows"){console.log('create')};
     const v_data = JSON.stringify(
         {
-            v_userPIN: userPIN,
+            // v_userPIN: userPIN,
             v_emailAddress: newUserEmailAddress
         }
     );
@@ -231,6 +231,7 @@ function saveDriverDayBookRecord(){
     // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
     updateaDriverDayBook(aDriverDayBook);
 }
+
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
     var v_elements = document.getElementsByClassName("xData");
@@ -279,6 +280,16 @@ async function updateaDriverDayBook(aDriverDayBook){
         // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
         // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
         // return res_data.price;
+        // if (res_data==JSON.parse(v_data)){
+        if (JSON.stringify(res_data)===v_data){
+            alert("updated ok");
+        } else {
+            alert("update error!");
+            // console.log(res_data);
+            // console.log(JSON.parse(v_data));
+            // console.log(JSON.stringify(res_data));
+            // console.log(v_data);
+        };
     })
 }
 // updateaDriverDayBook() END ////////////////////////////////////////////////////////////

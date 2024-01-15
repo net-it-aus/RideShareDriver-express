@@ -252,6 +252,8 @@ function updateUserFile(req,res){
             console.log("updateUserFile err");
         } else {
             console.log("updateUserFile OK");
+            res.send(req.body);
+            res.end
         }
     });
 
