@@ -275,11 +275,6 @@ async function updateaDriverDayBook(aDriverDayBook){
     })
     .then((res_data) => {
         // if(getClientOS()=="Windows"){console.log('update:- ...:- ',res_data)};
-        // writeToLocalStorage('clickedTickerPrice',res_data.price);
-        // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
-        // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
-        // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
-        // return res_data.price;
         // if (res_data==JSON.parse(v_data)){
         if (JSON.stringify(res_data)===v_data){
             alert("updated ok");
