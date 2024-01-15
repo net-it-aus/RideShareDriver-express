@@ -22,7 +22,7 @@ function init(){
 
         // DB opened -OR- DB opened after upgradeNeeded
         db = ev.target.result;
-        if(v_clientOS=="Windows"){console.log('opened:- ',db.name, db.version);}
+        // if(v_clientOS=="Windows"){console.log('opened:- ',db.name, db.version);}
         // if(v_clientOS=="iOS"){alert('opened:- ',db.name, db.version);}
         db.close();
 
@@ -34,8 +34,8 @@ function init(){
         db = ev.target.result;
         let oldVersion = ev.oldVersion;
         let newVersion = ev.newVersion || db.version;
-        if(v_clientOS=="Windows"){console.log('upgraded from :- ',oldVersion,' to:- ',newVersion);}
-        if(v_clientOS=="Windows"){console.log('upgradeneeded:- ',db.name, db.version);}
+        // if(v_clientOS=="Windows"){console.log('upgraded from :- ',oldVersion,' to:- ',newVersion);}
+        // if(v_clientOS=="Windows"){console.log('upgradeneeded:- ',db.name, db.version);}
 
         // CREATE object store "rsdCosts"
         if ( ! db.objectStoreNames.contains('rsdCosts')) {
@@ -44,7 +44,7 @@ function init(){
                 autoIncrement: true
             });
         }else{
-            if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
+            // if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
         }
         // CREATE object store "rsdTrips"
         if ( ! db.objectStoreNames.contains('rsdTrips')) {
@@ -53,7 +53,7 @@ function init(){
                 autoIncrement: true
             });
         }else{
-            if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
+            // if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
         }
         // CREATE object store "rsdDayBook"
         if ( ! db.objectStoreNames.contains('rsdDayBook')) {
@@ -62,7 +62,7 @@ function init(){
                 autoIncrement: true
             });
         }else{
-            if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
+            // if(v_clientOS=="Windows"){console.log('upgradeneeded:- NO');}
         }
 
         // DELETE object store "?"

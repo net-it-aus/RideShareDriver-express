@@ -1,3 +1,7 @@
+// <!-- collapse all     Ctrl + k + 0 -->
+// <!-- expand all       Ctrl + k + j -->
+// <!-- word wrap toggle Alt + z -->
+
 //  set the port number for the server
 var v_portNumber = process.argv[2];
 if (v_portNumber == undefined) {
@@ -67,7 +71,7 @@ if (v_portNumber == undefined) {
 // app.use(express.static('resources'));
 
 //  tell the express server to recognise incoming data as JSON
-    app.use(express.json({limit: '1mb'}));
+    app.use(express.json({limit: '10mb'}));
 //  tell the express server to recognise incoming data as JSON
 
 // const os = require('os');
@@ -181,7 +185,7 @@ app.all('*', (req, res) => {
 // sendNewUserEmail START //////////////////////////////////////////////////////
 function sendNewUserEmail(req,res,userPIN){
     console.log("sendNewUserEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body);
+    // console.log(req.body);
     emailUSERpin(req.body.v_emailAddress,userPIN);
     // const v_fileName = userPIN + "_emailAddress"
     const v_fileName = userPIN + "_checkedIN";
@@ -214,7 +218,7 @@ function sendNewUserEmail(req,res,userPIN){
 function createUserFile(req,res,userPIN){
 
     console.log("createUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body,userPIN);
+    // console.log(req.body,userPIN);
     const v_fileName = userPIN + "_checkedIN";
 
     // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
@@ -244,6 +248,11 @@ function updateUserFile(req,res){
     // });
 
     fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
+        if (err){
+            console.log("updateUserFile err");
+        } else {
+            console.log("updateUserFile OK");
+        }
     });
 
 }
@@ -252,15 +261,17 @@ function updateUserFile(req,res){
 // checkOutUserFile START //////////////////////////////////////////////////////
 function checkOutUserFile(req,res,userPIN_checkOut){
     console.log("checkOut !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body);
+    // console.log(req.body);
     const v_fileName = userPIN_checkOut + "_checkedIN";
 
     // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
         fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
             if (errASync){
-                console.log('v_dataASyncERR:- ',errASync);
+                // console.log('v_dataASyncERR:- ',errASync);
+                console.log('checkOut:- error');
             } else {
-                console.log('v_dataASync:- ',v_dataASync);
+                // console.log('v_dataASync:- ',v_dataASync);
+                console.log('checkOut:- OK');
                 res.send(v_dataASync);
                 res.end();
             }
@@ -305,7 +316,7 @@ function emailSiteVisit(emailBody){
     });
 }
 function emailUSERpin(emailAddress,userPIN){
-    console.log(`emailUSERpin(${emailAddress},${userPIN})`);
+    // console.log(`emailUSERpin(${emailAddress},${userPIN})`);
     nodeoutlook.sendEmail({
         auth: {
             user: "Net.IT.Australia@outlook.com",
