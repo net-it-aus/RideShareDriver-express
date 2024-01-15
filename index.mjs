@@ -103,12 +103,15 @@ app.all('*', (req, res) => {
     switch (req.url) {
         case '/create':
             const userPIN = createRSDuserPIN();
-            createEmail(req,res,userPIN);
-            createFile(req,res,userPIN);
+            sendNewUserEmail(req,res,userPIN);
+            createUserFile(req,res,userPIN);
             break;
         case '/checkOut':
             const userPIN_checkOut = req.body.v_userPIN;
-            checkOutUserFiles(req,res,userPIN_checkOut);
+            checkOutUserFile(req,res,userPIN_checkOut);
+            break;
+        case '/update':
+            updateUserFile(req,res);
             break;
         case '/append':
             break;
@@ -175,9 +178,9 @@ app.all('*', (req, res) => {
 });
 // SERVER REQUESTS LOG end
 
-// createEmail START //////////////////////////////////////////////////////
-function createEmail(req,res,userPIN){
-    console.log("createEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// sendNewUserEmail START //////////////////////////////////////////////////////
+function sendNewUserEmail(req,res,userPIN){
+    console.log("sendNewUserEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.body);
     emailUSERpin(req.body.v_emailAddress,userPIN);
     // const v_fileName = userPIN + "_emailAddress"
@@ -205,35 +208,83 @@ function createEmail(req,res,userPIN){
     res.send(v_data);
     res.end();
 }
-// createEmail END ////////////////////////////////////////////////////////
-// createFile START //////////////////////////////////////////////////////
-function createFile(req,res,userPIN){
-    console.log("createFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// sendNewUserEmail END ////////////////////////////////////////////////////////
+
+// createUserFile START //////////////////////////////////////////////////////
+function createUserFile(req,res,userPIN){
+
+    console.log("createUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(req.body,userPIN);
     const v_fileName = userPIN + "_checkedIN";
+
     // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
     // });
-    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
-    });
-}
-// createFile END //////////////////////////////////////////////////////
 
-function checkOutUserFiles(req,res,userPIN_checkOut){
+    // fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
+    // });
+
+    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},` + JSON.stringify(req.body) + `]`,(err) => {
+    });
+
+}
+// createUserFile END //////////////////////////////////////////////////////
+
+// updateUserFile START //////////////////////////////////////////////////////
+function updateUserFile(req,res){
+
+    console.log("updateUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    // console.log(req.body);
+    // console.log(req.body[0].v_userPIN);
+    const v_fileName = req.body[0].v_userPIN + "_checkedIN";
+
+    // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
+    // });
+
+    // fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
+    // });
+
+    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
+    });
+
+}
+// updateUserFile END //////////////////////////////////////////////////////
+
+// checkOutUserFile START //////////////////////////////////////////////////////
+function checkOutUserFile(req,res,userPIN_checkOut){
     console.log("checkOut !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.body);
     const v_fileName = userPIN_checkOut + "_checkedIN";
-    const v_data = fs.readFileSync('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(err) => {
-    });
+
+    // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+        fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
+            if (errASync){
+                console.log('v_dataASyncERR:- ',errASync);
+            } else {
+                console.log('v_dataASync:- ',v_dataASync);
+                res.send(v_dataASync);
+                res.end();
+            }
+        });
+    // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+
+    // // fs.readFileSync - read the file synchronously i.e, code executions are blocked until this process is completed
+    //     const v_dataSync = fs.readFileSync('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errSync) => {
+    //     });
+    //     console.log('v_dataSync:- ',v_dataSync);
+    //     res.send(v_dataSync);
+    //     res.end();
+    // // fs.readFileSync - read the file synchronously i.e, code executions are blocked until this process is completed
+    
+    // console.log('JSON.stringify(v_data):- ',JSON.stringify(v_data));
+    // res.send(JSON.stringify(v_data));
     // const v_data = JSON.stringify(
     //     {
     //         v_userPIN: userPIN_checkOut
     //     }
     // );
-    console.log('v_data:- ',v_data);
-    // console.log('JSON.stringify(v_data):- ',JSON.stringify(v_data));
-    // res.send(JSON.stringify(v_data));
-    res.send(v_data);
-    res.end();
 }
+// checkOutUserFile END //////////////////////////////////////////////////////
+
 function emailSiteVisit(emailBody){
     console.log('emailSiteVisit nodeoutlook.sendEmail() START .....................................');
     nodeoutlook.sendEmail({

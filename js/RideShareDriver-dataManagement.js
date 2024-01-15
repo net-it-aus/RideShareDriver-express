@@ -1,4 +1,6 @@
 let aDriverDayBook;
+// nlr? let userPIN;
+
 // wait for DOM to load
     window.addEventListener("load", () => {
         // Fully loaded!
@@ -33,8 +35,10 @@ let aDriverDayBook;
             }
         });
         const datval_xTotalGross = document.getElementById("xTotalGross");
+        const datval_xKlms = document.getElementById("xKlms");
         datval_xTotalGross.addEventListener("change", (event) => {
             document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+            document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
             // if (datval_xTotalGrossX.validity.valid) {
             // } else {
             //     // datval_xSeconds.setCustomValidity("");
@@ -68,7 +72,8 @@ function timeStampString(){
     // console.log("v_timeStampString:- ",v_timeStampStr);
     return v_timeStampStr;
 }
-// CHECK OUT user files START
+
+// CHECK OUT user file START
 async function checkOutUserFiles(userPIN){
     console.log('checkOut');
     const v_data = JSON.stringify(
@@ -86,8 +91,8 @@ async function checkOutUserFiles(userPIN){
         // return res.tex4t();
     })
     .then((res_data) => {
-        console.log('checkOut:- jsonObject:- ',res_data);
-        console.log('checkOut:- jsonObject:- ',res_data.v_emailAddress);
+        console.log('checkOut:-\n jsonObject:- res_data\n',res_data);
+        console.log('checkOut:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[1].v_emailAddress);
         aDriverDayBook = res_data;
         // console.log('checkOut:- jsonObject:- ',JSON.stringify(res_data));
         // console.log('checkOut:- jsonObject:- ',JSON.parse(res_data));
@@ -98,25 +103,27 @@ async function checkOutUserFiles(userPIN){
         // return res_data.price;
     })
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
-        document.getElementById("driverRecordsContainer").style.display = "none";
-        document.getElementById("originalBody").style.display = "body";
-        document.getElementById("driverRecordsAccessControl").style.display = "body";
+            document.getElementById("driverRecordsContainer").style.display = "none";
+            document.getElementById("originalBody").style.display = "body";
+            document.getElementById("driverRecordsAccessControl").style.display = "body";
+            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
     } else {
-        document.getElementById("driverRecordsContainer").style.display = "block";
-        document.getElementById("originalBody").style.display = "none";
-        document.getElementById("driverRecordsAccessControl").style.display = "none";
+            document.getElementById("driverRecordsContainer").style.display = "block";
+            document.getElementById("originalBody").style.display = "none";
+            document.getElementById("driverRecordsAccessControl").style.display = "none";
+            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
     }
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
-    console.log(aDriverDayBook.v_emailAddress);
-    console.log(aDriverDayBook[0].d20231225.friends[0]);
-    console.log(aDriverDayBook);
-    console.log(JSON.stringify(aDriverDayBook));
-    aDriverDayBook.push(JSON.parse(`{"d20121226":{"odometre":64000}}`));
-    console.log(aDriverDayBook);
-    console.log(JSON.stringify(aDriverDayBook));
+    // console.log(aDriverDayBook.v_emailAddress);
+    // console.log(aDriverDayBook);
+    // console.log(JSON.stringify(aDriverDayBook));
+    // aDriverDayBook.push(JSON.parse(`{"Date":20231226,"Odometre":64000}`));
+    // console.log(aDriverDayBook);
+    // console.log(JSON.stringify(aDriverDayBook));
 } 
-// CHECK OUT user files END
+// CHECK OUT user file END
+
 function driverRecordsAccess(e){
     console.log(e.value);
     // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
@@ -139,11 +146,13 @@ function driverRecordsAccess(e){
         }
     }
 }
-// create - start ///////////////////////////////////////////////////////////////////////////////////////////////
+
+// create user file - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function create(newUserEmailAddress){
     console.log('create');
     const v_data = JSON.stringify(
         {
+            v_userPIN: userPIN,
             v_emailAddress: newUserEmailAddress
         }
     );
@@ -164,25 +173,46 @@ async function create(newUserEmailAddress){
         // return res_data.price;
     })
 }
-// create - end /////////////////////////////////////////////////////////////////////////////////////////////////
+// create user file - end /////////////////////////////////////////////////////////////////////////////////////////////////
 
 function saveDriverDayBookRecord(){
+    // saves to Local Storage
+    console.log(aDriverDayBook);
     storeFormDataInIndexedDB();
-    updateaDriverDayBook();
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
+    let txtDayBookEntry = "";
+    txtDayBookEntry += "{";
+    addCommaPrefix = false;
     const frm = document.getElementById("driver-day-book");
     Array.from(frm.elements).forEach((input) => {
         if (input.name.slice(0,1)==="x"){
             txtHeaderRow += input.name + " , ";
             txtDataRow += input.value + " , ";
             // console.log(input.name + " | " + input.value);
+            if(!addCommaPrefix){
+                addCommaPrefix = true;
+                txtDayBookEntry += `"${input.name}":"${input.value}"`;
+            } else {
+                txtDayBookEntry += `,"${input.name}":"${input.value}"`;
+            }
         }
     });
+    txtDayBookEntry += "}";
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
     console.log("localStorage done");
+    // saves to Local Storage
+
+    console.log(txtDayBookEntry);
+    // Array.from(txtDayBookEntry).forEach((i)=>{
+    //         console.log(i);
+    // });
+    aDriverDayBook.push(JSON.parse(txtDayBookEntry));
+    console.log(aDriverDayBook);
+    console.log(JSON.stringify(aDriverDayBook));
+    updateaDriverDayBook(aDriverDayBook);
 }
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
@@ -211,9 +241,32 @@ function storeFormDataInIndexedDB(){
     // v_objectString += `}`;
     idbAdd("rsd","rsdDayBook",v_objectString);
 }
-function updateaDriverDayBook(){
 
+// updateaDriverDayBook() START \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+async function updateaDriverDayBook(aDriverDayBook){
+    console.log('updateaDriverDayBook() triggered');
+    console.log(aDriverDayBook);
+    const v_data = JSON.stringify(aDriverDayBook);
+    const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
+    console.log(v_options);
+    if(getClientOS()=="Windows"){console.log('/create options:- ',v_options)};
+    await fetch('/update',v_options)
+    .then(res => {
+        console.log('update:- res:- ',res);
+        return res.json();
+        // return res.body;
+    })
+    .then((res_data) => {
+        console.log('update:- ...:- ',res_data);
+        // writeToLocalStorage('clickedTickerPrice',res_data.price);
+        // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
+        // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
+        // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
+        // return res_data.price;
+    })
 }
+// updateaDriverDayBook() END ////////////////////////////////////////////////////////////
+
 function emailMyDeviceDataTo_OLD(){
         let aRSDdata = [];
         for (let i = 0; i < localStorage.length; i++) {

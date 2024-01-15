@@ -52,7 +52,7 @@ label {
     padding-right: 10px;
 }
 input {
-    max-width: 10ch;
+    max-width: 13ch;
 }
 input[type=button] {
     max-width: 100%;
@@ -62,14 +62,14 @@ input[type=button] {
     /* cursor:pointer; */
     border:1px solid green;
 }
-.driver-records-container{
-    /* display:none; */
-}
 fieldset input{
     color:blue;
     background-color: antiquewhite;
 }
 .driver-records-container{
+    display:none;
+}
+.IndexedDB_rsd_rsdDayBook{
     display:none;
 }
 .save-driver-day-book-record-button{
