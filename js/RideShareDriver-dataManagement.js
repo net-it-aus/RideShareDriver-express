@@ -53,6 +53,18 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             //     document.getElementById("xTotalGrossX").select();
             // }
         });
+        datval_xKlms.addEventListener("change", (event) => {
+            document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+            document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+            // if (datval_xTotalGrossX.validity.valid) {
+            // } else {
+            //     // datval_xSeconds.setCustomValidity("");
+            //     alert("value out of range, please try again");
+            //     document.getElementById("xTotalGrossX").value = 0;
+            //     document.getElementById("xTotalGrossX").focus();
+            //     document.getElementById("xTotalGrossX").select();
+            // }
+        });
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
 });
