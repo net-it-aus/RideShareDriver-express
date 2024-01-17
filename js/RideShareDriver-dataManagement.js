@@ -42,28 +42,46 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         const datval_xTotalGross = document.getElementById("xTotalGross");
         const datval_xKlms = document.getElementById("xKlms");
         datval_xTotalGross.addEventListener("change", (event) => {
-            document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-            document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
-            // if (datval_xTotalGrossX.validity.valid) {
+            if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
+                if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+                } else {
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerKlm").value = null;
+                }
+            }
+            // if (datval_xTotalGross.validity.valid) {
+            //     console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length);
             // } else {
-            //     // datval_xSeconds.setCustomValidity("");
-            //     alert("value out of range, please try again");
-            //     document.getElementById("xTotalGrossX").value = 0;
-            //     document.getElementById("xTotalGrossX").focus();
-            //     document.getElementById("xTotalGrossX").select();
+            //     console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length);
+            // //     // datval_xSeconds.setCustomValidity("");
+            // //     alert("value out of range, please try again");
+            // //     document.getElementById("xTotalGrossX").value = 0;
+            // //     document.getElementById("xTotalGrossX").focus();
+            // //     document.getElementById("xTotalGrossX").select();
             // }
         });
         datval_xKlms.addEventListener("change", (event) => {
-            document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-            document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
-            // if (datval_xTotalGrossX.validity.valid) {
-            // } else {
-            //     // datval_xSeconds.setCustomValidity("");
-            //     alert("value out of range, please try again");
-            //     document.getElementById("xTotalGrossX").value = 0;
-            //     document.getElementById("xTotalGrossX").focus();
-            //     document.getElementById("xTotalGrossX").select();
-            // }
+            if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
+                if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+                } else {
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerKlm").value = null;
+                }
+            }
+            // document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+            // document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+            // // if (datval_xTotalGrossX.validity.valid) {
+            // // } else {
+            // //     // datval_xSeconds.setCustomValidity("");
+            // //     alert("value out of range, please try again");
+            // //     document.getElementById("xTotalGrossX").value = 0;
+            // //     document.getElementById("xTotalGrossX").focus();
+            // //     document.getElementById("xTotalGrossX").select();
+            // // }
         });
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
