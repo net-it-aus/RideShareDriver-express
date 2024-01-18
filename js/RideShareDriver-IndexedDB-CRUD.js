@@ -1,3 +1,8 @@
+// <!-- collapse all     Ctrl + k + 0 -->
+// <!-- expand all       Ctrl + k + j -->
+// <!-- format           Alt + Shift + F (USE WITH CAUTION)-->
+// <!-- word wrap toggle Alt + z -->
+
 function idbAdd(p_database,p_store,p_objectString){
     // if(v_clientOS=="Windows"){console.log(p_database,p_store,p_objectString)};
     var dbOpenRequest = indexedDB.open(p_database); // first step is opening the database

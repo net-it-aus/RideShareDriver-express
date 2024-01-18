@@ -1,5 +1,6 @@
 /* <!-- collapse all     Ctrl + k + 0 --> */
 /* <!-- expand all       Ctrl + k + j --> */
+/* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
 /* <!-- word wrap toggle Alt + z --> */
 
 * {
@@ -60,6 +61,10 @@ input {
 }
 input[type=button] {
     max-width: 100%;
+    padding:0.25ch;
+    margin:0.5ch;
+    border-radius: 5px;
+    background-color: ghostwhite;
 }
 
 .driver-records-access-control{

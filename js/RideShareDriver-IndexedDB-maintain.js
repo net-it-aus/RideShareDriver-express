@@ -1,3 +1,8 @@
+// <!-- collapse all     Ctrl + k + 0 -->
+// <!-- expand all       Ctrl + k + j -->
+// <!-- format           Alt + Shift + F (USE WITH CAUTION)-->
+// <!-- word wrap toggle Alt + z -->
+
 // const idb = (function init(){
 //     let db = null;
 //     let objectStore = null;

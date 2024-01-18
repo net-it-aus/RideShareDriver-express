@@ -1,5 +1,6 @@
 // <!-- collapse all     Ctrl + k + 0 -->
 // <!-- expand all       Ctrl + k + j -->
+// <!-- format           Alt + Shift + F (USE WITH CAUTION)-->
 // <!-- word wrap toggle Alt + z -->
 
 //  set the port number for the server

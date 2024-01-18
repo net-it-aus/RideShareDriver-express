@@ -27,6 +27,20 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         // document.getElementById("ttName").addEventListener("change",document.getElementById("xHours").focus())
         // document.getElementById("ttName").select();
 
+        // DATE CHANGE DETECT start
+        const datval_xDate = document.getElementById("xDate");
+        datval_xDate.addEventListener("change", (event) => {
+            // if(getClientOS()=="Windows"){console.log('datval_xDate.addEventListener("change", (event) =>')};
+            // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+            for (var i=0; i < aDriverDayBook.length; i++){
+                console.log(aDriverDayBook[i].xDate,datval_xDate.value);
+                if (aDriverDayBook[i].xDate===datval_xDate.value){
+
+                }
+            }
+        });
+        // DATE CHANGE DETECT end
+
         // DATA VALIDATION START 
         const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
         datval_xMinutesOnline.addEventListener("input", (event) => {
@@ -52,9 +66,9 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
                 }
             }
             // if (datval_xTotalGross.validity.valid) {
-            //     console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length);
+            //     if(getClientOS()=="Windows"){console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length)};
             // } else {
-            //     console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length);
+            //     if(getClientOS()=="Windows"){console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length)};
             // //     // datval_xSeconds.setCustomValidity("");
             // //     alert("value out of range, please try again");
             // //     document.getElementById("xTotalGrossX").value = 0;
@@ -164,12 +178,12 @@ async function checkOutUserFiles(userPIN){
         };
     }
 
-    // console.log(aDriverDayBook.v_emailAddress);
-    // console.log(aDriverDayBook);
-    // console.log(JSON.stringify(aDriverDayBook));
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.v_emailAddress)};
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
     // aDriverDayBook.push(JSON.parse(`{"Date":20231226,"Odometre":64000}`));
-    // console.log(aDriverDayBook);
-    // console.log(JSON.stringify(aDriverDayBook));
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
 } 
 // CHECK OUT user file END
 
@@ -310,10 +324,10 @@ async function updateaDriverDayBook(aDriverDayBook){
             alert("updated ok");
         } else {
             alert("update error!");
-            // console.log(res_data);
-            // console.log(JSON.parse(v_data));
-            // console.log(JSON.stringify(res_data));
-            // console.log(v_data);
+            // if(getClientOS()=="Windows"){console.log(res_data)};
+            // if(getClientOS()=="Windows"){console.log(JSON.parse(v_data))};
+            // if(getClientOS()=="Windows"){console.log(JSON.stringify(res_data))};
+            // if(getClientOS()=="Windows"){console.log(v_data)};
         };
     })
 }
