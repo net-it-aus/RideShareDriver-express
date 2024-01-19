@@ -32,10 +32,23 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         datval_xDate.addEventListener("change", (event) => {
             // if(getClientOS()=="Windows"){console.log('datval_xDate.addEventListener("change", (event) =>')};
             // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+            const frm = document.getElementById("driver-day-book");
             for (var i=0; i < aDriverDayBook.length; i++){
-                console.log(aDriverDayBook[i].xDate,datval_xDate.value);
+                // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
                 if (aDriverDayBook[i].xDate===datval_xDate.value){
-
+                    // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
+                    for (const key in aDriverDayBook[i]){
+                        // console.log(key);
+                        // console.log(`${key}:${aDriverDayBook[i][key]}`);
+                        if (aDriverDayBook[i][key].length>0){
+                            // console.log([key]);
+                            // console.log([key][0].slice(0,1));
+                            if ([key][0].slice(0,1)==="x"){
+                                // console.log(aDriverDayBook[i][key]);
+                                document.getElementById(key).value = aDriverDayBook[i][key];
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -118,7 +131,8 @@ function timeStampString(){
     var v_millisecond = v_dateNow.getMilliseconds();
     if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
     if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
-    const v_timeStampStr = "timeStamped_" + v_fullYear + "-" + v_month + "-" + v_day + "_" + v_dayName + "_" + v_hour + ":" + v_minute + "_" + v_second + v_millisecond;
+    // const v_timeStampStr = "timeStamped_" + v_fullYear + "-" + v_month + "-" + v_day + "_" + v_dayName + "_" + v_hour + ":" + v_minute + "_" + v_second + v_millisecond;
+    const v_timeStampStr = v_fullYear + "-" + v_month + "-" + v_day + "_" + v_dayName + "_" + v_hour + ":" + v_minute + "_" + v_second + v_millisecond;
     // if(getClientOS()=="Windows"){console.log("v_timeStampString:- ",v_timeStampStr)};
     return v_timeStampStr;
 }
