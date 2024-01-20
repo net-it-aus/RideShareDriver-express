@@ -60,3 +60,18 @@ const v_clientOS = getClientOS();
         return v_geolocation
     }
 // GEOLOCATION end
+
+// LOGIN FORM start
+    // // Get the modal
+    // var modal = document.getElementById('id01');
+    // // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        // alert("screen clicked");
+        // console.log(event.target.id);
+        // if (event.target == modal) {
+        if (event.target.id === "id01") {
+            document.getElementById('id01').style.display="none";
+            // modal.style.display = "none";
+        }
+    }
+// LOGIN FORM end

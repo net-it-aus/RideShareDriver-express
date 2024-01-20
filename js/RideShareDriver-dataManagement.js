@@ -13,8 +13,8 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         var v_today = new Date();
         document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
 
-        document.getElementById("xAccess").focus();
-        document.getElementById("xAccess").select();
+        // document.getElementById("xAccess").focus();
+        // document.getElementById("xAccess").select();
 
         // document.getElementById("futureDate").value = getFutureDate();
         // document.getElementById("xHours").addEventListener("change",calcStats());
@@ -225,12 +225,21 @@ function driverRecordsAccess(e){
 }
 
 // create user file - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-async function create(newUserEmailAddress){
+// async function create(newUserEmailAddress){
+async function create(){
     // if(getClientOS()=="Windows"){console.log('create')};
+    const userW = document.getElementById("pw").value;
+    const userW2 = document.getElementById("pw2").value;
+    const uEmail = document.getElementById("uEmail").value;
+    if(userW != userW2){
+        alert("passwords do not match");
+        return;
+    }
     const v_data = JSON.stringify(
         {
-            // v_userPIN: userPIN,
-            v_emailAddress: newUserEmailAddress
+            v_userW: userW,
+            // v_emailAddress: newUserEmailAddress
+            v_uEmail: uEmail
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
@@ -251,6 +260,68 @@ async function create(newUserEmailAddress){
     })
 }
 // create user file - end /////////////////////////////////////////////////////////////////////////////////////////////////
+
+// logIn - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+async function logIn(){
+    // if(getClientOS()=="Windows"){console.log('logIn')};
+    const userW = document.getElementById("pw").value;
+    const uEmail = document.getElementById("uEmail").value;
+    const v_data = JSON.stringify(
+        {
+            v_userW: userW,
+            v_uEmail: uEmail
+        }
+    );
+    const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
+    if(getClientOS()=="Windows"){console.log('/logIn options:- ',v_options)};
+    await fetch('/logIn',v_options)
+    .then(res => {
+        // if(getClientOS()=="Windows"){console.log('logIn:- res.body:- ',res.body)};
+        // if(getClientOS()=="Windows"){console.log('logIn:- res.json():- ',res.json())};
+        return res.json();
+        // return res.tex4t();
+    })
+    .then((res_data) => {
+        if(getClientOS()=="Windows"){console.log('logIn:-\n jsonObject:- res_data\n',res_data)};
+        if(getClientOS()=="Windows"){console.log('logIn:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
+        aDriverDayBook = res_data;
+        // if(getClientOS()=="Windows"){console.log('logIn:- jsonObject:- ',JSON.stringify(res_data))};
+        // if(getClientOS()=="Windows"){console.log('logIn:- jsonObject:- ',JSON.parse(res_data))};
+    })
+    if (document.getElementById("driverRecordsContainer").style.display==="block"){
+            document.getElementById("driverRecordsContainer").style.display = "none";
+            document.getElementById("originalBody").style.display = "body";
+            document.getElementById("driverRecordsAccessControl").style.display = "body";
+            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
+    } else {
+            document.getElementById("driverRecordsContainer").style.display = "block";
+            document.getElementById("originalBody").style.display = "none";
+            document.getElementById("driverRecordsAccessControl").style.display = "none";
+            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+    }
+    document.getElementById("xEndingOdometre").focus();
+    document.getElementById("xEndingOdometre").select();
+
+    if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // const containsText = (element) => element.includes("2024-01-15");
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(containsText))};
+    for (i=0;i<aDriverDayBook.length;i++){
+        // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook[i]))};
+        txt = JSON.stringify(aDriverDayBook[i]);
+        // if(getClientOS()=="Windows"){console.log(txt.search("2024-01-15"))};
+        if (txt.search("2024-01-15")>=0){
+
+        };
+    }
+
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.v_emailAddress)};
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
+    // aDriverDayBook.push(JSON.parse(`{"Date":20231226,"Odometre":64000}`));
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
+} 
+// logIn - end \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 function saveDriverDayBookRecord(){
     // saves to Local Storage

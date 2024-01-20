@@ -22,13 +22,16 @@ if (v_portNumber == undefined) {
 // const fetch = require('node-fetch');
     import fetch from 'node-fetch';
 
-    // const fs = require('fs');
+// const fs = require('fs');
     import fs from 'fs';
+
+// nodeoutlook
+     import nodeoutlook from 'nodejs-nodemailer-outlook';
 
 // // NODEOUTLOOK - START ================================================================================================
 //     // nodemailer initialise - start
 //         // var nodeoutlook = require('nodejs-nodemailer-outlook')
-        import nodeoutlook from 'nodejs-nodemailer-outlook';
+//            // import nodeoutlook from 'nodejs-nodemailer-outlook';
 //         nodeoutlook.sendEmail({
 //             auth: {
 //                 user: "Net.IT.Australia@outlook.com",
@@ -82,8 +85,8 @@ console.log('total memory:- ',os.totalmem()/1000000000);
 console.log('free memory:- ',os.freemem()/1000000000);
 
 console.log(Date().slice(0,25));
-  app.listen( process.env.PORT || v_portNumber, () => { 
-  console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber + '\n');
+    app.listen( process.env.PORT || v_portNumber, () => { 
+    console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber + '\n');
 });
 
 // SERVER REQUESTS LOG start
@@ -107,9 +110,13 @@ app.all('*', (req, res) => {
     }
     switch (req.url) {
         case '/create':
+            // console.log(req.body);
             const userPIN = createRSDuserPIN();
             sendNewUserEmail(req,res,userPIN);
             createUserFile(req,res,userPIN);
+            break;
+        case '/logIn':
+            logIn(req,res);
             break;
         case '/checkOut':
             const userPIN_checkOut = req.body.v_userPIN;
@@ -186,10 +193,11 @@ app.all('*', (req, res) => {
 // sendNewUserEmail START //////////////////////////////////////////////////////
 function sendNewUserEmail(req,res,userPIN){
     console.log("sendNewUserEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body);
-    emailUSERpin(req.body.v_emailAddress,userPIN);
+    console.log(req.body.v_uEmail);
+    // emailUSERpin(req.body.v_emailAddress,userPIN);
+    emailUSERpin(req.body.v_uEmail,userPIN);
     // const v_fileName = userPIN + "_emailAddress"
-    const v_fileName = userPIN + "_checkedIN";
+    // const v_fileName = userPIN + "_checkedIN";
     // fs.appendFile('../../SiteStatistics/turramurra-trotters-analytics.csv', v_csvText ,(err) => {
     // });
     // fs.appendFile('data/' + v_fileName + '.csv', req.body.v_emailAddress ,(err) => {
@@ -219,8 +227,9 @@ function sendNewUserEmail(req,res,userPIN){
 function createUserFile(req,res,userPIN){
 
     console.log("createUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body,userPIN);
-    const v_fileName = userPIN + "_checkedIN";
+    console.log(req.body.v_userW);
+    console.log(req.body.v_uEmail);
+    const v_fileName = req.body.v_uEmail + "_accountDetails";
 
     // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
     // });
@@ -228,11 +237,35 @@ function createUserFile(req,res,userPIN){
     // fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
     // });
 
-    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},` + JSON.stringify(req.body) + `]`,(err) => {
+    // fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},` + JSON.stringify(req.body) + `]`,(err) => {
+    // });
+
+    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
     });
 
 }
 // createUserFile END //////////////////////////////////////////////////////
+
+// logIn START //////////////////////////////////////////////////////
+    function logIn(req,res,userPIN_checkOut){
+        console.log("logIn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(req.body.v_uEmail);
+        const v_fileName = req.body.v_uEmail + "_accountDetails";
+        // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+            fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
+                if (errASync){
+                    console.log('v_dataASyncERR:- ',errASync);
+                    console.log('logIn:- error');
+                } else {
+                    console.log('v_dataASync:- ',v_dataASync);
+                    console.log('logIn:- OK');
+                    res.send(v_dataASync);
+                    res.end();
+                }
+            });
+        // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+    }
+// logIn END //////////////////////////////////////////////////////
 
 // updateUserFile START //////////////////////////////////////////////////////
 function updateUserFile(req,res){
@@ -328,9 +361,10 @@ function emailUSERpin(emailAddress,userPIN){
         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
         from: '"Net.IT.Australia@outlook.com',
         to: emailAddress,
-        subject: 'RideShareDriver.com.au user PIN',
+        subject: 'RideShareDriver.com.au user account number',
         // html: '<b>Do Not reply to this email.</b>',
-        html: `<p>${userPIN}</p><p>Use the PIN to access the Driver Records portal.</p><p><b>Anyoone can access your records by using this PIN.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+        // html: `<p>${userPIN}</p><p>Use the PIN to access the Driver Records portal.</p><p><b>Anyoone can access your records by using this PIN.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+        html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au account number.</p><p><b>...you can copy and paste it into your browser when required.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
         text: 'This is text version!',
         replyTo: 'NoReply@outlook.com',
         onError: (e) => console.log(e),
@@ -456,8 +490,11 @@ function createRSDuserPIN(){
     var v_millisecond = v_dateNow.getMilliseconds();
     if (v_millisecond<10)(v_millisecond="0"+v_millisecond);
     if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
+    if (v_millisecond<1000)(v_millisecond="0"+v_millisecond);
+    if (v_millisecond<10000)(v_millisecond="0"+v_millisecond);
     const v_rsdUserPIN = v_second + '' + v_day + '' +  v_hour + '' +  v_month + '' +  v_millisecond + '' + v_minute + '' + v_fullYear + '' +  (v_millisecond/19).toFixed(0);
     console.log("v_rsdUserPIN:- ",v_rsdUserPIN);
+    console.log("v_rsdUserPIN:- ",v_rsdUserPIN.length);
     return v_rsdUserPIN;
 }
 
