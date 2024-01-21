@@ -276,7 +276,7 @@ async function logIn(){
     if(getClientOS()=="Windows"){console.log('/logIn options:- ',v_options)};
     await fetch('/logIn',v_options)
     .then(res => {
-        // if(getClientOS()=="Windows"){console.log('logIn:- res.body:- ',res.body)};
+        if(getClientOS()=="Windows"){console.log('logIn:- res.body:- ',res.body)};
         // if(getClientOS()=="Windows"){console.log('logIn:- res.json():- ',res.json())};
         return res.json();
         // return res.tex4t();
@@ -298,21 +298,22 @@ async function logIn(){
             document.getElementById("originalBody").style.display = "none";
             document.getElementById("driverRecordsAccessControl").style.display = "none";
             document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+            document.getElementById("id01").style.display = "none";
     }
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
 
-    if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-    // const containsText = (element) => element.includes("2024-01-15");
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(containsText))};
-    for (i=0;i<aDriverDayBook.length;i++){
-        // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook[i]))};
-        txt = JSON.stringify(aDriverDayBook[i]);
-        // if(getClientOS()=="Windows"){console.log(txt.search("2024-01-15"))};
-        if (txt.search("2024-01-15")>=0){
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
+    // // const containsText = (element) => element.includes("2024-01-15");
+    // // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(containsText))};
+    // for (i=0;i<aDriverDayBook.length;i++){
+    //     // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook[i]))};
+    //     txt = JSON.stringify(aDriverDayBook[i]);
+    //     // if(getClientOS()=="Windows"){console.log(txt.search("2024-01-15"))};
+    //     if (txt.search("2024-01-15")>=0){
 
-        };
-    }
+    //     };
+    // }
 
     // if(getClientOS()=="Windows"){console.log(aDriverDayBook.v_emailAddress)};
     // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
