@@ -91,7 +91,7 @@ fieldset input{
 }
 
 
-/* LOGIN FORM start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+/* login FORM start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
 
     /* Full-width input fields */
     /* input[type=text], input[type=password] {
@@ -123,6 +123,7 @@ fieldset input{
         width: auto;
         /* padding: 10px 18px; */
         background-color: #f44336;
+        cursor:pointer;
     }
   
     /* Center the image and position the close button */
@@ -147,7 +148,7 @@ fieldset input{
     }
   
     /* The Modal (background) */
-    .modal {
+    .login1, .login2{
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
@@ -162,7 +163,7 @@ fieldset input{
     }
   
     /* Modal Content/Box */
-    .modal-content {
+    .login1-form, .login2-form {
         background-color: #fefefe;
         margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
         margin: auto;
@@ -213,4 +214,4 @@ fieldset input{
         }
     }
   
-/* LOGIN FORM end xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+/* login FORM end xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */

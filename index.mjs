@@ -85,110 +85,9 @@ console.log('total memory:- ',os.totalmem()/1000000000);
 console.log('free memory:- ',os.freemem()/1000000000);
 
 console.log(Date().slice(0,25));
-    app.listen( process.env.PORT || v_portNumber, () => { 
+app.listen( process.env.PORT || v_portNumber, () => { 
     console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber + '\n');
 });
-
-// SERVER REQUESTS LOG start
-app.all('*', (req, res) => {
-    console.log('app.all information START');
-    const v_ipAddress = req.connection.remoteAddress;
-    const v_ipAddressForwarded = req.headers['x-forwarded-for'];
-    console.log('total memory:- ',os.totalmem()/1000000000);
-    console.log('free memory:- ',os.freemem()/1000000000);
-    console.log(`incoming IP address:-  ${v_ipAddress}`);
-    console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
-    console.log('app.all req.url:- ', req.url);
-    // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
-    console.log(`app.all req date:- ${Date().slice(0, 25)}`);
-    console.log('app.all information END\n');
-
-    if (v_ipAddress.length > 3){
-        const emailBody = 'Incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
-        // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
-        emailSiteVisit(emailBody);
-    }
-    switch (req.url) {
-        case '/create':
-            // console.log(req.body);
-            const userPIN = createRSDuserPIN();
-            sendNewUserEmail(req,res,userPIN);
-            createUserFile(req,res,userPIN);
-            break;
-        case '/logIn':
-            logIn(req,res);
-            break;
-        case '/checkOut':
-            const userPIN_checkOut = req.body.v_userPIN;
-            checkOutUserFile(req,res,userPIN_checkOut);
-            break;
-        case '/update':
-            updateUserFile(req,res);
-            break;
-        case '/append':
-            break;
-    // case '*':
-    //     emailSiteVisit(emailBody);
-    // case '/getATOrss':
-    //     getATOrss(req,res);
-    //     break;
-    // case '/getRBArss':
-    //     getRBArss(req,res);
-    //     break;
-    // case '/emailATOrss':
-    //     emailATOrss(req,res);
-    //     break;
-    case '/saveTheData':
-        saveTheData(req,res);
-        break;
-    // case '/getTickerData_ASX_MI':
-    //     getTickerData_ASX_MI(req,res);
-    //     break;
-    // case '/getTickerData_xyz':
-    //     getTickerData.getTickerData_xyz(req,res);
-    //     break;
-    // case '/getTickerData_ASX_G':
-    //     getTickerData_ASX_G(req,res);
-    //     break;
-    // case '/getTickerData_google':
-    //     getTickerData.getTickerData_google(req,res);
-    //     break;
-    // case '/getTickerData_ASX_YH':
-    //     getTickerData_ASX_YH(req,res);
-    //     break;
-    // case '/getTickerData_yahoo':
-    //     getTickerData.getTickerData_yahoo(req,res);
-    //     break;
-    // case '/getTickerData_ASX_AX':
-    //     getTickerData_ASX_AX(req,res);
-    //     break;
-    // case '/getTickerData_afr':
-    //     getTickerData.getTickerData_afr(req,res);
-    //     break;
-    // case '/getTickerData_financialtimes':
-    //     getTickerData.getTickerData_financialtimes(req,res);
-    //     break;
-    // case '/getTickerData_ASX_MS':
-    //     getTickerData_ASX_MS(req,res);
-    //     break;
-    // case '/getVanguardETFs':
-    //     getVanguardETFs(req,res);
-    //     break;
-    // case '/getTickerData_CommSec':
-    //     getTickerData_CommSec(req,res);
-    //     break;
-    // case '/getASXannouncements':
-    //     getASXannouncements(req,res);
-    //     break;
-    case '/txtFromClient':
-        txtFromClient(req,res);
-        break;
-    case '/logAnalytics':
-        logAnalytics(req,res);
-        break;
-    }
-});
-// SERVER REQUESTS LOG end
 
 // sendNewUserEmail START //////////////////////////////////////////////////////
 function sendNewUserEmail(req,res,userPIN){
@@ -246,26 +145,93 @@ function createUserFile(req,res,userPIN){
 }
 // createUserFile END //////////////////////////////////////////////////////
 
-// logIn START //////////////////////////////////////////////////////
-    function logIn(req,res,userPIN_checkOut){
-        console.log("logIn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+// login1 START //////////////////////////////////////////////////////
+    function login1(req,res,userPIN_checkOut){
+        let _otup;
+        console.log("login1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         console.log(req.body.v_uEmail);
         const v_fileName = req.body.v_uEmail + "_accountDetails";
         // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
             fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
+                // if (errASync){
+                //     console.log('v_dataASyncERR:- ',errASync);
+                //     console.log('login:- error');
+                // } else {
+                //     console.log('v_dataASync:- ',v_dataASync);
+                //     if (JSON.parse(v_dataASync)[1].v_userW === req.body.v_userW){
+                //         console.log('login:- OK');
+                //         console.log(JSON.parse(v_dataASync)[2].v_uEmail);
+                //         sendAccessCode(JSON.parse(v_dataASync)[2].v_uEmail);
+                //         // res.send(v_dataASync);
+                //         res.send(`[{"response":"login1 ok"}]`);
+                //         res.end();
+                //     } else {
+                //         console.log('login:- incorrect password',JSON.parse(v_dataASync)[1].v_userW,req.body.v_userW);
+                //         res.send(`[{"response":"incorrect password"}]`);
+                //         res.end();
+                //     }
+                // }
                 if (errASync){
-                    console.log('v_dataASyncERR:- ',errASync);
-                    console.log('logIn:- error');
+                    console.log('login1 v_dataASyncERR:- ',errASync);
+                    console.log('login1:- error');
+                    res.send(`[{"response":"login error for email address:- ${req.body.v_uEmail}"}]`);
+                    res.end();
                 } else {
-                    console.log('v_dataASync:- ',v_dataASync);
-                    console.log('logIn:- OK');
-                    res.send(v_dataASync);
+                    console.log('login1 v_dataASync:- ',v_dataASync);
+                    // sendAccessCode(req.body.v_uEmail);
+                    _otup = createRSDuserPIN();
+                    emailUSERpin(req.body.v_uEmail,_otup);
+                    fs.writeFile(`../RideShareDriver.com.au-express-data/` + req.body.v_uEmail + `_otup.json`, `[{"_otup":"${_otup}"}]`,(err) => {
+                    });                
+                    res.send(`[{"response":"login1 ok"}]`);
                     res.end();
                 }
             });
         // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
     }
-// logIn END //////////////////////////////////////////////////////
+// login1 END //////////////////////////////////////////////////////
+
+function sendAccessCode(emailAddress){
+    console.log("login1 sendAccessCode(emailAddress) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",emailAddress);
+    const _otup = createRSDuserPIN();
+    emailUSERpin(emailAddress,_otup);
+}
+
+// login2 START //////////////////////////////////////////////////////
+function login2(req,res){
+    console.log("login2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(req.body.v_uEmail);
+    const v_fileName = req.body.v_uEmail + "_otup";
+    // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+        fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
+            if (errASync){
+                console.log('login2 errASync v_dataASyncERR:- ',errASync);
+                console.log('login2 errASync:- error');
+            } else {
+                console.log('login2 v_dataASync:- ',v_dataASync);
+                if (JSON.parse(v_dataASync)[0]._otup === req.body.v_accessCode){
+                    console.log('login2:- OK');
+                    const v_fileName2 = req.body.v_uEmail + "_accountDetails";
+                    fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName2 + '.json','utf8',(errASync2,v_dataASync2) => {
+                        if (errASync2){
+                            console.log('login2 errASync2 v_dataASync2ERR:- ',errASync);
+                            console.log('login2 errASync2:- error');
+                        } else {
+                            // res.send(`[{"response":"login2 ok"}]`);
+                            res.send(v_dataASync2);
+                            res.end();
+                        }
+                    });
+                } else {
+                    console.log('login2:- incorrect password',JSON.parse(v_dataASync)[1].v_userW,req.body.v_userW);
+                    res.send(`[{"response":"login2 incorrect otup"}]`);
+                    res.end();
+                }
+            }
+        });
+    // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
+}
+// login2 END //////////////////////////////////////////////////////
 
 // updateUserFile START //////////////////////////////////////////////////////
 function updateUserFile(req,res){
@@ -273,7 +239,8 @@ function updateUserFile(req,res){
     console.log("updateUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     // console.log(req.body);
     // console.log(req.body[0].v_userPIN);
-    const v_fileName = req.body[0].v_userPIN + "_checkedIN";
+    // const v_fileName = req.body[0].v_userPIN + "_checkedIN";
+    const v_fileName = req.body[2].v_uEmail + "_accountDetails";
 
     // fs.writeFile('data/' + v_fileName + '.json', JSON.stringify(req.body) ,(err) => {
     // });
@@ -711,3 +678,107 @@ console.log("time delay in minutes",(date1Time - date0Time) / 60 / 60 / 24);
 //         onSuccess: (i) => console.log(i)
 //     });
 // }
+
+// SERVER REQUESTS LOG start
+app.all('*', (req, res) => {
+    console.log('app.all information START');
+    const v_ipAddress = req.connection.remoteAddress;
+    const v_ipAddressForwarded = req.headers['x-forwarded-for'];
+    console.log('total memory:- ',os.totalmem()/1000000000);
+    console.log('free memory:- ',os.freemem()/1000000000);
+    console.log(`incoming IP address:-  ${v_ipAddress}`);
+    console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
+    console.log('app.all req.url:- ', req.url);
+    // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
+    console.log(`app.all req date:- ${Date().slice(0, 25)}`);
+    console.log('app.all information END\n');
+
+    if (v_ipAddress.length > 3){
+        const emailBody = 'Incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
+        // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
+        emailSiteVisit(emailBody);
+    }
+    switch (req.url) {
+        case '/create':
+            // console.log(req.body);
+            const userPIN = createRSDuserPIN();
+            sendNewUserEmail(req,res,userPIN);
+            createUserFile(req,res,userPIN);
+            break;
+        case '/login1':
+            login1(req,res);
+            break;
+        case '/login2':
+            login2(req,res);
+            break;
+        case '/checkOut':
+            const userPIN_checkOut = req.body.v_userPIN;
+            checkOutUserFile(req,res,userPIN_checkOut);
+            break;
+        case '/update':
+            updateUserFile(req,res);
+            break;
+        case '/append':
+            break;
+    // case '*':
+    //     emailSiteVisit(emailBody);
+    // case '/getATOrss':
+    //     getATOrss(req,res);
+    //     break;
+    // case '/getRBArss':
+    //     getRBArss(req,res);
+    //     break;
+    // case '/emailATOrss':
+    //     emailATOrss(req,res);
+    //     break;
+    case '/saveTheData':
+        saveTheData(req,res);
+        break;
+    // case '/getTickerData_ASX_MI':
+    //     getTickerData_ASX_MI(req,res);
+    //     break;
+    // case '/getTickerData_xyz':
+    //     getTickerData.getTickerData_xyz(req,res);
+    //     break;
+    // case '/getTickerData_ASX_G':
+    //     getTickerData_ASX_G(req,res);
+    //     break;
+    // case '/getTickerData_google':
+    //     getTickerData.getTickerData_google(req,res);
+    //     break;
+    // case '/getTickerData_ASX_YH':
+    //     getTickerData_ASX_YH(req,res);
+    //     break;
+    // case '/getTickerData_yahoo':
+    //     getTickerData.getTickerData_yahoo(req,res);
+    //     break;
+    // case '/getTickerData_ASX_AX':
+    //     getTickerData_ASX_AX(req,res);
+    //     break;
+    // case '/getTickerData_afr':
+    //     getTickerData.getTickerData_afr(req,res);
+    //     break;
+    // case '/getTickerData_financialtimes':
+    //     getTickerData.getTickerData_financialtimes(req,res);
+    //     break;
+    // case '/getTickerData_ASX_MS':
+    //     getTickerData_ASX_MS(req,res);
+    //     break;
+    // case '/getVanguardETFs':
+    //     getVanguardETFs(req,res);
+    //     break;
+    // case '/getTickerData_CommSec':
+    //     getTickerData_CommSec(req,res);
+    //     break;
+    // case '/getASXannouncements':
+    //     getASXannouncements(req,res);
+    //     break;
+    case '/txtFromClient':
+        txtFromClient(req,res);
+        break;
+    case '/logAnalytics':
+        logAnalytics(req,res);
+        break;
+    }
+});
+// SERVER REQUESTS LOG end

@@ -1,3 +1,7 @@
+/* <!-- collapse all     Ctrl + k + 0 --> */
+/* <!-- expand all       Ctrl + k + j --> */
+/* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
+/* <!-- word wrap toggle Alt + z --> */
 
 function getClientOS() {
     // returns i)@ | Windows | Android
@@ -61,17 +65,21 @@ const v_clientOS = getClientOS();
     }
 // GEOLOCATION end
 
-// LOGIN FORM start
+// login FORM start
     // // Get the modal
-    // var modal = document.getElementById('id01');
+    // var modal = document.getElementById('login1');
     // // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         // alert("screen clicked");
         // console.log(event.target.id);
         // if (event.target == modal) {
-        if (event.target.id === "id01") {
-            document.getElementById('id01').style.display="none";
+        if (event.target.id === "login1") {
+            document.getElementById('login1').style.display="none";
+            // modal.style.display = "none";
+        }
+        if (event.target.id === "login2") {
+            document.getElementById('login2').style.display="none";
             // modal.style.display = "none";
         }
     }
-// LOGIN FORM end
+// login FORM end

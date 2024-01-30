@@ -49,7 +49,7 @@
                 <fieldset>
                     <div class="form-as-table">
                         <label for="xDate">Date: </label>
-                        <input type="date" name="xDate" id="xDate" NOTrequired class="xData"/>
+                        <input type="date" name="xDate" id="xDate" required class="xData"/>
                     </div>
                     <fieldset>
                         <legend>End of day totals:</legend>
@@ -404,25 +404,25 @@
         </div>
         <div id="IndexedDB_rsd_rsdDayBook" class="IndexedDB_rsd_rsdDayBook"></div>
 
-    <!-- LOGIN DIV start -->
+    <!-- login DIV start -->
         <div id="driverRecordsAccessControl" class="driver-records-access-control">
-            <i>Access My Driver Records</i>
+            <!-- <i>Access My Driver Records</i> -->
             <!-- <label for="xAccess">Please enter "User Access Code" to access driver records data:<br><i style="color:green">(New User?  Enter code "aus")</i></label> -->
             <!-- <input type="text" name="xAccess" id ="xAccess" value="" onclick="viewDataStored()" autocapitalize="none"/> -->
             <!-- <input type="password" name="xAccess" id ="xAccess" autocapitalize="none" onchange="driverRecordsAccess(this)"/> -->
             <!-- <br> -->
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+            <button onclick="document.getElementById('login1').style.display='block'" style="width:auto;cursor:pointer;">Driver login</button>
         </div>
         <br>
-    <!-- LOGIN DIV end -->
+    <!-- login DIV end -->
 
-    <!-- LOGIN FORM MODAL start -->
-        <div id="id01" class="modal">
+    <!-- login FORM login1 start -->
+        <div id="login1" class="login1">
 
-            <!-- <form class="modal-content animate" action="/action_page.php" method="post"> -->
-            <form class="modal-content animate">
+            <!-- <form class="login1-form animate" action="/action_page.php" method="post"> -->
+            <form class="login1-form animate">
                 <!-- <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <span onclick="document.getElementById('login1').style.display='none'" class="close" title="Close login1">&times;</span>
                     <img src="img_avatar2.png" alt="Avatar" class="avatar">
                 </div> -->
 
@@ -430,30 +430,55 @@
                     <label for="uEmail"><b>Username</b></label>
                     <input type="text" placeholder="Enter Username" id="uEmail" name="uEmail" required>
 
-                    <label for="pw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" id="pw" name="pw" required>
+                    <label for="pw"><b>Password?<br>( Not required, a One Time Use Password will be emailed to you. )</b></label>
+                    <input type="password" placeholder="OTUP security" id="pw" name="pw" disabled>
                     <!-- <div id="pw2" style="left: -100;">
                         <label for="pw2"><b>Password confirmation</b></label>
                         <input type="password" placeholder="Confirm Password" id="pw2" name="pw2" required>
                     </div> -->
 
                     <br>
-                    <!-- <button type="submit" onclick="create()">Login</button> -->
-                    <!-- <button type="submit" onclick="logIn()">Login</button> -->
-                    <button type="button" onclick="logIn()">Login</button>
+                    <!-- <button type="submit" onclick="create()">login</button> -->
+                    <!-- <button type="submit" onclick="login()">login</button> -->
+                    <button type="button" onclick="login()" style="cursor:pointer;">login</button>
                     <!-- <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                     </label> -->
                 </div>
 
                 <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('login1').style.display='none'" class="cancelbtn">Cancel</button>
                     <!-- <span class="pw">Forgot <a href="#">password?</a></span> -->
                 </div>
             </form>
         </div>
-    <!-- LOGIN FORM MODAL end -->
-          
+    <!-- login FORM login1 end -->
+
+    <!-- login FORM login2 start -->
+    <div id="login2" class="login2">
+
+        <!-- <form class="login1-form animate" action="/action_page.php" method="post"> -->
+        <form class="login2-form animate">
+            <!-- <div class="imgcontainer">
+                <span onclick="document.getElementById('login1').style.display='none'" class="close" title="Close login1">&times;</span>
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+            </div> -->
+
+            <div class="container">
+                <label for="login2code"><b>One Time Use Password - emailed to you just now.</b></label>
+                <input type="text" placeholder="OTUP" id="login2code" name="login2code" required>
+                <br>
+                <button type="button" onclick="login2()" style="cursor:pointer;">Submit OTUP</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('login2').style.display='none'" class="cancelbtn">Cancel</button>
+                <!-- <span class="pw">Forgot <a href="#">password?</a></span> -->
+            </div>
+        </form>
+    </div>
+    <!-- login FORM login2 end -->
+
     <footer>
         <div style="border-top:1px solid rgba(255,255,255,.5);text-align:right;"><a href="https://netit.com.au" target="_blank" style="padding:5px;color:green;font-size:0.8rem;">Web Site by Net IT Australia</a></div>
         <!-- SEO -->

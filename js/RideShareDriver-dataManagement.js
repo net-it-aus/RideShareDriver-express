@@ -2,16 +2,18 @@
 // <!-- expand all       Ctrl + k + j -->
 // <!-- word wrap toggle Alt + z -->
 
-let aDriverDayBook;
+let aDriverDayBook = [];
 const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 // nlr? let userPIN;
 
-// wait for DOM to load
+// wait for DOM to load START
     window.addEventListener("load", () => {
         // Fully loaded!
-       
-        var v_today = new Date();
-        document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+
+        const datval_xDate = document.getElementById("xDate");
+        console.log(datval_xDate);
+        const frm = document.getElementById("driver-day-book");
+        console.log(frm);
 
         // document.getElementById("xAccess").focus();
         // document.getElementById("xAccess").select();
@@ -28,29 +30,45 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         // document.getElementById("ttName").select();
 
         // DATE CHANGE DETECT start
-        const datval_xDate = document.getElementById("xDate");
         datval_xDate.addEventListener("change", (event) => {
+            dateChange();
             // if(getClientOS()=="Windows"){console.log('datval_xDate.addEventListener("change", (event) =>')};
             // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-            const frm = document.getElementById("driver-day-book");
-            for (var i=0; i < aDriverDayBook.length; i++){
-                // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
-                if (aDriverDayBook[i].xDate===datval_xDate.value){
-                    // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
-                    for (const key in aDriverDayBook[i]){
-                        // console.log(key);
-                        // console.log(`${key}:${aDriverDayBook[i][key]}`);
-                        if (aDriverDayBook[i][key].length>0){
-                            // console.log([key]);
-                            // console.log([key][0].slice(0,1));
-                            if ([key][0].slice(0,1)==="x"){
-                                // console.log(aDriverDayBook[i][key]);
-                                document.getElementById(key).value = aDriverDayBook[i][key];
-                            }
-                        }
-                    }
-                }
-            }
+            // const frm = document.getElementById("driver-day-book");
+            // for (var i=0; i < aDriverDayBook.length; i++){``
+            //     // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
+            //     if (aDriverDayBook[i].xDate===datval_xDate.value){
+            //         // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
+            //         for (const key in aDriverDayBook[i]){
+            //             // console.log(key);
+            //             // console.log(`${key}:${aDriverDayBook[i][key]}`);
+            //             if (aDriverDayBook[i][key].length>0){
+            //                 // console.log([key]);
+            //                 // console.log([key][0].slice(0,1));
+            //                 if ([key][0].slice(0,1)==="x"){
+            //                     console.log(aDriverDayBook[i][key]);
+            //                     document.getElementById(key).value = aDriverDayBook[i][key];
+            //                 }
+            //             }
+            //         }
+            //         return;
+            //     } else {
+            //         for (const key in aDriverDayBook[i]){
+            //             // console.log(key);
+            //             // console.log(`${key}:${aDriverDayBook[i][key]}`);
+            //             if (aDriverDayBook[i][key].length>0){
+            //                 // console.log([key]);
+            //                 // console.log([key][0].slice(0,1));
+            //                 if ([key][0].slice(0,1)==="x"){
+            //                    if (key!=="xDate"){
+            //                         console.log(key);
+            //                         document.getElementById(key).value = "";
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         });
         // DATE CHANGE DETECT end
 
@@ -112,7 +130,49 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         });
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
-});
+    });
+// wait for DOM to load END
+
+function dateChange(){
+    const datval_xDate = document.getElementById("xDate");
+    console.log(datval_xDate);
+    const frm = document.getElementById("driver-day-book");
+    console.log(frm);
+    for (var i=0; i < aDriverDayBook.length; i++){``
+        console.log(aDriverDayBook[i].xDate,datval_xDate.value);
+        if (aDriverDayBook[i].xDate===datval_xDate.value){
+            // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
+            for (const key in aDriverDayBook[i]){
+                // console.log(key);
+                // console.log(`${key}:${aDriverDayBook[i][key]}`);
+                if (aDriverDayBook[i][key].length>0){
+                    // console.log([key]);
+                    // console.log([key][0].slice(0,1));
+                    if ([key][0].slice(0,1)==="x"){
+                        console.log(aDriverDayBook[i][key]);
+                        document.getElementById(key).value = aDriverDayBook[i][key];
+                    }
+                }
+            }
+            return;
+        } else {
+            for (const key in aDriverDayBook[i]){
+                // console.log(key);
+                // console.log(`${key}:${aDriverDayBook[i][key]}`);
+                if (aDriverDayBook[i][key].length>0){
+                    // console.log([key]);
+                    // console.log([key][0].slice(0,1));
+                    if ([key][0].slice(0,1)==="x"){
+                       if (key!=="xDate"){
+                            console.log(key);
+                            document.getElementById(key).value = "";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 function timeStampString(){
     const v_dateNow = new Date(); 
@@ -261,9 +321,9 @@ async function create(){
 }
 // create user file - end /////////////////////////////////////////////////////////////////////////////////////////////////
 
-// logIn - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-async function logIn(){
-    // if(getClientOS()=="Windows"){console.log('logIn')};
+// login - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+async function login(){
+    // if(getClientOS()=="Windows"){console.log('login')};
     const userW = document.getElementById("pw").value;
     const uEmail = document.getElementById("uEmail").value;
     const v_data = JSON.stringify(
@@ -273,61 +333,91 @@ async function logIn(){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    if(getClientOS()=="Windows"){console.log('/logIn options:- ',v_options)};
-    await fetch('/logIn',v_options)
+    if(getClientOS()=="Windows"){console.log('/login options:- ',v_options)};
+    await fetch('/login1',v_options)
     .then(res => {
-        if(getClientOS()=="Windows"){console.log('logIn:- res.body:- ',res.body)};
-        // if(getClientOS()=="Windows"){console.log('logIn:- res.json():- ',res.json())};
+        if(getClientOS()=="Windows"){console.log('login:- res.body:- ',res.body)};
+        // if(getClientOS()=="Windows"){console.log('login:- res.json():- ',res.json())};
         return res.json();
         // return res.tex4t();
     })
     .then((res_data) => {
-        if(getClientOS()=="Windows"){console.log('logIn:-\n jsonObject:- res_data\n',res_data)};
-        if(getClientOS()=="Windows"){console.log('logIn:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
+        if(getClientOS()=="Windows"){console.log('login:-\n jsonObject:- res_data\n',res_data)};
+        // if(getClientOS()=="Windows"){console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
         aDriverDayBook = res_data;
-        // if(getClientOS()=="Windows"){console.log('logIn:- jsonObject:- ',JSON.stringify(res_data))};
-        // if(getClientOS()=="Windows"){console.log('logIn:- jsonObject:- ',JSON.parse(res_data))};
+        // if(getClientOS()=="Windows"){console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
+        // if(getClientOS()=="Windows"){console.log('login:- jsonObject:- ',JSON.parse(res_data))};
+        if(res_data[0].response === "login1 ok"){
+            if(getClientOS()=="Windows"){console.log(res_data)};
+            document.getElementById("login1").style.display = "none";
+            // document.getElementById("login2").style.display = "body";
+            document.getElementById("login2").style.display = "block";
+        }
+    });
+
+} 
+// login - end \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+// login2fa - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+async function login2(){
+    const uEmail = document.getElementById("uEmail").value;
+    const accessCode = document.getElementById("login2code").value;
+    const v_data = JSON.stringify(
+        {
+            v_uEmail: uEmail,
+            v_accessCode: accessCode
+        }
+    );
+    const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
+    if(getClientOS()=="Windows"){console.log('/login2 options:- ',v_options)};
+    await fetch('/login2',v_options)
+    .then(res => {
+        if(getClientOS()=="Windows"){console.log('login2:- res.body:- ',res.body)};
+        // if(getClientOS()=="Windows"){console.log('login:- res.json():- ',res.json())};
+        return res.json();
+        // return res.tex4t();
     })
+    .then((res_data) => {
+        if(getClientOS()=="Windows"){console.log('login2:-\n jsonObject:- res_data\n',res_data)};
+        // if(getClientOS()=="Windows"){console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
+        aDriverDayBook = res_data;
+        // if(getClientOS()=="Windows"){console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
+        // if(getClientOS()=="Windows"){console.log('login:- jsonObject:- ',JSON.parse(res_data))};
+        if(res_data[2].v_uEmail === uEmail){
+            if(getClientOS()=="Windows"){console.log(res_data)};
+            // document.getElementById("login1").style.display = "none";
+            // document.getElementById("login2").style.display = "body";
+            document.getElementById("login2").style.display = "none";
+        }
+    });
+
+
     if (document.getElementById("driverRecordsContainer").style.display==="block"){
-            document.getElementById("driverRecordsContainer").style.display = "none";
-            document.getElementById("originalBody").style.display = "body";
-            document.getElementById("driverRecordsAccessControl").style.display = "body";
-            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
+        document.getElementById("driverRecordsContainer").style.display = "none";
+        document.getElementById("originalBody").style.display = "body";
+        document.getElementById("driverRecordsAccessControl").style.display = "body";
+        document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
     } else {
-            document.getElementById("driverRecordsContainer").style.display = "block";
-            document.getElementById("originalBody").style.display = "none";
-            document.getElementById("driverRecordsAccessControl").style.display = "none";
-            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
-            document.getElementById("id01").style.display = "none";
+        document.getElementById("driverRecordsContainer").style.display = "block";
+        document.getElementById("originalBody").style.display = "none";
+        document.getElementById("driverRecordsAccessControl").style.display = "none";
+        document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+        document.getElementById("login1").style.display = "none";
     }
+    var v_today = new Date();
+    // document.getElementById("xDate").value = "2000-01-01";
+    document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+    dateChange();
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
+}
+// login2fa - end \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-    // // const containsText = (element) => element.includes("2024-01-15");
-    // // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(containsText))};
-    // for (i=0;i<aDriverDayBook.length;i++){
-    //     // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook[i]))};
-    //     txt = JSON.stringify(aDriverDayBook[i]);
-    //     // if(getClientOS()=="Windows"){console.log(txt.search("2024-01-15"))};
-    //     if (txt.search("2024-01-15")>=0){
 
-    //     };
-    // }
-
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.v_emailAddress)};
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
-    // aDriverDayBook.push(JSON.parse(`{"Date":20231226,"Odometre":64000}`));
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-    // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
-} 
-// logIn - end \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
+// save to Local Storage START
 function saveDriverDayBookRecord(){
-    // saves to Local Storage
+    // save to Local Storage
     // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
-    storeFormDataInIndexedDB();
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
@@ -339,7 +429,7 @@ function saveDriverDayBookRecord(){
         if (input.name.slice(0,1)==="x"){
             txtHeaderRow += input.name + " , ";
             txtDataRow += input.value + " , ";
-            // if(getClientOS()=="Windows"){console.log(input.name + " | " + input.value)};
+            if(getClientOS()=="Windows"){console.log(input.name + " | " + input.value)};
             if(!addCommaPrefix){
                 addCommaPrefix = true;
                 txtDayBookEntry += `"${input.name}":"${input.value}"`;
@@ -354,14 +444,27 @@ function saveDriverDayBookRecord(){
     // if(getClientOS()=="Windows"){console.log("localStorage done")};
     // saves to Local Storage
 
-    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(element === "{xDate: ''2024-01-15"))};
+    // if(getClientOS()=="Windows"){console.log(aDriverDayBook.findIndex(element === `{xDate: "${xDate.value}"}`))};
     // if(getClientOS()=="Windows"){console.log(txtDayBookEntry)};
+    console.log(`{xDate: "${xDate.value}"}`);
+    // const entryExists = (element) => element === `{xDate: "${xDate.value}"}`;
+    const entryExists = (element) => element.xDate === `${xDate.value}`;
+    const entryExistsAtIndex = aDriverDayBook.findIndex(entryExists);
+    console.log(entryExistsAtIndex);
+    console.log(aDriverDayBook);
+    const removed = aDriverDayBook.splice(entryExistsAtIndex, 1);
+    console.log(removed);
+    console.log(aDriverDayBook);
+
     aDriverDayBook.push(JSON.parse(txtDayBookEntry));
     // if(getClientOS()=="Windows"){console.log(aDriverDayBook)};
     // if(getClientOS()=="Windows"){console.log(JSON.stringify(aDriverDayBook))};
+    storeFormDataInIndexedDB();
     updateaDriverDayBook(aDriverDayBook);
 }
+// save to Local Storage END
 
+// save to IndexedDB START
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
     var v_elements = document.getElementsByClassName("xData");
@@ -389,6 +492,7 @@ function storeFormDataInIndexedDB(){
     // v_objectString += `}`;
     idbAdd("rsd","rsdDayBook",v_objectString);
 }
+// save to IndexedDB END
 
 // updateaDriverDayBook() START \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function updateaDriverDayBook(aDriverDayBook){
