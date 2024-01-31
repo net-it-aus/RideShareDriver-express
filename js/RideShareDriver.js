@@ -45,9 +45,9 @@ const v_clientOS = getClientOS();
 
 // GEOLOCATION start
     async function showPosition(position) {
-        if(v_clientOS=="Windows"){console.log("position:- " + position);}
+        q("position:- " + position);
         var v_geolocation  = "Lat: " + position.coords.latitude + "Long: " + position.coords.longitude;
-        if(v_clientOS=="Windows"){console.log("v_geolocation 1 :- " + v_geolocation);}
+        q("v_geolocation 1 :- " + v_geolocation);
         return v_geolocation;
     }
     async function getLocation() {
@@ -59,7 +59,7 @@ const v_clientOS = getClientOS();
                 // onclick @ cost-analysis.html:189
         } else {
             var v_geolocation = "not supported by browser";
-            if(v_clientOS=="Windows"){console.log("v_geolocation 2 :- " + v_geolocation);}
+            q("v_geolocation 2 :- " + v_geolocation);
         }
         return v_geolocation
     }
@@ -71,7 +71,7 @@ const v_clientOS = getClientOS();
     // // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         // alert("screen clicked");
-        // console.log(event.target.id);
+        // q(event.target.id);
         // if (event.target == modal) {
         if (event.target.id === "login1") {
             document.getElementById('login1').style.display="none";
@@ -83,3 +83,10 @@ const v_clientOS = getClientOS();
         }
     }
 // login FORM end
+
+// console.LOG start
+function _q_(logThis){
+    if(getClientOS()=="Windows"){
+        console.log(logThis);
+    };
+}// console.LOG end

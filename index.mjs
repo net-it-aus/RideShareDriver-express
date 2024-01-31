@@ -90,7 +90,7 @@ app.listen( process.env.PORT || v_portNumber, () => {
 });
 
 // sendNewUserEmail START //////////////////////////////////////////////////////
-function sendNewUserEmail(req,res,userPIN){
+function sendNewUserEmail_OBSOLETE(req,res,userPIN){
     console.log("sendNewUserEmail !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(req.body.v_uEmail);
     // emailUSERpin(req.body.v_emailAddress,userPIN);
@@ -140,7 +140,26 @@ function createUserFile(req,res,userPIN){
     // });
 
     fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
+        if (err){
+            const v_data = JSON.stringify(
+                {
+                    response: "create error"
+                }
+            );
+            res.send(v_data);
+            res.end();
+        } else {
+            const v_data = JSON.stringify(
+                {
+                    response: "created"
+                }
+            );
+            res.send(v_data);
+            res.end();
+        }
     });
+
+
 
 }
 // createUserFile END //////////////////////////////////////////////////////
@@ -299,6 +318,35 @@ function checkOutUserFile(req,res,userPIN_checkOut){
 }
 // checkOutUserFile END //////////////////////////////////////////////////////
 
+// emailData START //////////////////////////////////////////////////////
+function emailData(req,res){
+    // console.trace();
+    console.log('emailData:- ',req.body.v_uEmail);
+    emailData_send(req.body.v_uEmail);
+}
+function emailData_send(uEmail){
+    nodeoutlook.sendEmail({
+        auth: {
+            user: "Net.IT.Australia@outlook.com",
+            pass: "SonicBroom.000"
+        },
+        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+        from: '"Net.IT.Australia@outlook.com',
+        to: uEmail,
+        subject: 'RideShareDriver.com.au data',
+        // html: '<b>Do Not reply to this email.</b>',
+        // html: `<p>${emailBody}</p>`,
+        text: 'Raw JSON data is attached.',
+        replyTo: 'NoReply@outlook.com',
+        // attachments: {path: '/path/to/file.txt'},
+        attachments: {path: '../RideShareDriver.com.au-express-data/' + uEmail + '_accountDetails.json'},
+        onError: (e) => console.log(e),
+        onSuccess: (i) => console.log(i)
+    });
+}
+// emailData END //////////////////////////////////////////////////////
+
+
 function emailSiteVisit(emailBody){
     console.log('emailSiteVisit nodeoutlook.sendEmail() START .....................................');
     nodeoutlook.sendEmail({
@@ -328,10 +376,10 @@ function emailUSERpin(emailAddress,userPIN){
         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
         from: '"Net.IT.Australia@outlook.com',
         to: emailAddress,
-        subject: 'RideShareDriver.com.au user account number',
+        subject: 'RideShareDriver.com.au user OTUP (one time user password)',
         // html: '<b>Do Not reply to this email.</b>',
         // html: `<p>${userPIN}</p><p>Use the PIN to access the Driver Records portal.</p><p><b>Anyoone can access your records by using this PIN.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
-        html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au account number.</p><p><b>...you can copy and paste it into your browser when required.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+        html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
         text: 'This is text version!',
         replyTo: 'NoReply@outlook.com',
         onError: (e) => console.log(e),
@@ -702,7 +750,7 @@ app.all('*', (req, res) => {
         case '/create':
             // console.log(req.body);
             const userPIN = createRSDuserPIN();
-            sendNewUserEmail(req,res,userPIN);
+            // sendNewUserEmail(req,res,userPIN);
             createUserFile(req,res,userPIN);
             break;
         case '/login1':
@@ -719,6 +767,9 @@ app.all('*', (req, res) => {
             updateUserFile(req,res);
             break;
         case '/append':
+            break;
+        case '/emailData':
+            emailData(req,res);
             break;
     // case '*':
     //     emailSiteVisit(emailBody);

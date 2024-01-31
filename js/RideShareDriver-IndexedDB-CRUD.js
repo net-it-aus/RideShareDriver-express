@@ -4,7 +4,7 @@
 // <!-- word wrap toggle Alt + z -->
 
 function idbAdd(p_database,p_store,p_objectString){
-    // if(v_clientOS=="Windows"){console.log(p_database,p_store,p_objectString)};
+    // q(p_database,p_store,p_objectString)};
     var dbOpenRequest = indexedDB.open(p_database); // first step is opening the database
     dbOpenRequest.onsuccess = function(e) {
 
@@ -16,14 +16,14 @@ function idbAdd(p_database,p_store,p_objectString){
 
         storeRequest.onsuccess = function(e) {
             // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
-            // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+            // q(e.target.result);} // data retreived
             // idbGetOne(p_database,p_store,e.target.result)
             db.close();
             // idbGetAll(p_database,p_store)
         };
 
         storeRequest.onerror = function(e) {
-            // if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+            // q("Error Getting: ", e);}
         };
 
     };    
@@ -35,9 +35,9 @@ function idbGetOne(p_database,p_store,p_keyPath){
 
     p_keyPath = p_keyPath * 1;
 
-    // if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
-    // if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
-    // if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
+    // q('p_database:- ',p_database);}
+    // q('p_store:- ',p_store);}
+    // q('p_keyPath:- ',p_keyPath);}
 
     var request = indexedDB.open(p_database); // first step is opening the database
     request.onsuccess = function(e) {
@@ -48,11 +48,11 @@ function idbGetOne(p_database,p_store,p_keyPath){
             var request = store.get(p_keyPath); //getting single object by id from object store
             
             request.onsuccess = function(e) {
-                // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+                // q(e.target.result);} // data retreived
                 var myArrayOfKeys = Object.keys(e.target.result); // convert javascript object to an array
                 var myArrayOfValues = Object.values(e.target.result); // convert javascript object to an array
                 var myArray = Object.entries(e.target.result).map(([key, value]) => ({key,value})); // convert javascript object to an array
-                // if(v_clientOS=="Windows"){console.log(myArray);} // data retreived
+                // q(myArray);} // data retreived
                 var v_elements = document.getElementsByTagName("input");
                 var v_element;
                 for (var i = 0; i < myArray.length; i++) {
@@ -60,7 +60,7 @@ function idbGetOne(p_database,p_store,p_keyPath){
                         if (myArray[i].key === "id"){
                             document.getElementById('e_dataSetKeyPath').innerHTML = myArray[i].value;
                         } else {
-                            // if(v_clientOS=="Windows"){console.log(myArray[i].key + ': ' + myArray[i].value);}
+                            // q(myArray[i].key + ': ' + myArray[i].value);}
                             document.getElementById(myArray[i].key).value = myArray[i].value;
                         }
                     }
@@ -79,7 +79,7 @@ function idbGetOne(p_database,p_store,p_keyPath){
             };
             
             request.onerror = function(e) {
-                // if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+                // q("Error Getting: ", e);}
             };
     };
 
@@ -99,14 +99,14 @@ function idbGetAll(p_database,p_store){
         var request = store.getAll(); //getting all objects from object store
         
         request.onsuccess = function(e) {
-            // if(v_clientOS=="Windows"){console.log(request.result)};
-            // if(v_clientOS=="Windows"){console.log(request.result.length)};
+            // q(request.result)};
+            // q(request.result.length)};
             let v_HTML = ``;
             for (i=0;i<request.result.length;i++){
                         v_HTML += `<li keyPath="${request.result[i].id}" onclick="idbGetOne('rsd','rsdCosts','${request.result[i].id}')">[id ${request.result[i].id}] [date ${request.result[i].xDate}] [Odometre: ${request.result[i].xEndingOdometre}]</li>`;
             }
             // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
-            // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+            // q(e.target.result);} // data retreived
 
             // dataSets.innerHTML = request.result
             document.getElementById("IndexedDB_rsd_rsdDayBook").innerHTML = v_HTML;
@@ -129,7 +129,7 @@ function idbGetAll(p_database,p_store){
         };
         
         request.onerror = function(e) {
-            // if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+            // q("Error Getting: ", e);}
         };
     };
 
@@ -153,9 +153,9 @@ function idbUpdateOne(p_database,p_store,p_keyPath){
         return;
     }
 
-    // if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
-    // if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
-    // if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
+    // q('p_database:- ',p_database);}
+    // q('p_store:- ',p_store);}
+    // q('p_keyPath:- ',p_keyPath);}
 
     var v_elements = document.getElementsByTagName("input");
     // v_id = '1';
@@ -177,10 +177,10 @@ function idbUpdateOne(p_database,p_store,p_keyPath){
             v_trxObjStr += `"` + v_key + `":"` + v_value + `",`;
         }
     }
-    // if(v_clientOS=="Windows"){console.log('v_trxObjStr original:-\n',v_trxObjStr);}
+    // q('v_trxObjStr original:-\n',v_trxObjStr);}
     v_trxObjStr = JSON.parse(v_trxObjStr);
     auditTrail(v_trxObjStr);
-    // if(v_clientOS=="Windows"){console.log('v_trxObjStr parsed:-\n',v_trxObjStr);}
+    // q('v_trxObjStr parsed:-\n',v_trxObjStr);}
 
     var request = indexedDB.open(p_database); // first step is opening the database
     request.onsuccess = function(e) {
@@ -192,13 +192,13 @@ function idbUpdateOne(p_database,p_store,p_keyPath){
             
             request.onsuccess = function(e) {
                 // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
-                // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+                // q(e.target.result);} // data retreived
                 idbGetAll(p_database,p_store)
                 db.close();
             };
             
             request.onerror = function(e) {
-                // if(v_clientOS=="Windows"){console.log("Error Getting: ", e);}
+                // q("Error Getting: ", e);}
             };
     };
 
@@ -214,9 +214,9 @@ function idbDeleteOne(p_database,p_store,p_keyPath){
         return;
     }
 
-    // if(v_clientOS=="Windows"){console.log('p_database:- ',p_database);}
-    // if(v_clientOS=="Windows"){console.log('p_store:- ',p_store);}
-    // if(v_clientOS=="Windows"){console.log('p_keyPath:- ',p_keyPath);}
+    // q('p_database:- ',p_database);}
+    // q('p_store:- ',p_store);}
+    // q('p_keyPath:- ',p_keyPath);}
 
     var request = indexedDB.open(p_database); // first step is opening the database
     request.onsuccess = function(e) {
@@ -228,7 +228,7 @@ function idbDeleteOne(p_database,p_store,p_keyPath){
             
             request.onsuccess = function(e) {
                 // showDetails(e.target.result); // data retreived I DON'T THINK THIS WORKS
-                // if(v_clientOS=="Windows"){console.log(e.target.result);} // data retreived
+                // q(e.target.result);} // data retreived
                 idbGetAll(p_database,p_store)
                 switch(p_store) {
                   case 'rsdCosts':
@@ -242,7 +242,7 @@ function idbDeleteOne(p_database,p_store,p_keyPath){
             };
             
             request.onerror = function(e) {
-                // if(v_clientOS=="Windows"){console.log("Error deleting: ", e);}
+                // q("Error deleting: ", e);}
             };
     };
 
