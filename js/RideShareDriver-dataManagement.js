@@ -475,11 +475,12 @@ function saveDriverDayBookRecord(){
     const entryExists = (element) => element.xDate === `${xDate.value}`;
     const entryExistsAtIndex = aDriverDayBook.findIndex(entryExists);
     console.log(entryExistsAtIndex);
-    console.log(aDriverDayBook);
-    const removed = aDriverDayBook.splice(entryExistsAtIndex, 1);
-    console.log(removed);
-    console.log(aDriverDayBook);
-
+    if (entryExistsAtIndex > 0){
+        console.log(aDriverDayBook);
+        const removed = aDriverDayBook.splice(entryExistsAtIndex, 1);
+        console.log(removed);
+        console.log(aDriverDayBook);
+    }
     aDriverDayBook.push(JSON.parse(txtDayBookEntry));
     // console.log(aDriverDayBook);
     // console.log(JSON.stringify(aDriverDayBook));

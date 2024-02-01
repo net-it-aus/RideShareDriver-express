@@ -256,8 +256,9 @@ function login2(req,res){
 function updateUserFile(req,res){
 
     console.log("updateUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body);
+    console.log(req.body);
     // console.log(req.body[0].v_userPIN);
+    console.log(req.body[2].v_uEmail);
     // const v_fileName = req.body[0].v_userPIN + "_checkedIN";
     const v_fileName = req.body[2].v_uEmail + "_accountDetails";
 
