@@ -242,8 +242,8 @@ function login2(req,res){
                         }
                     });
                 } else {
-                    console.log('login2:- incorrect password',JSON.parse(v_dataASync)[1].v_userW,req.body.v_userW);
-                    res.send(`[{"response":"login2 incorrect otup"}]`);
+                    console.log('login2:- incorrect OTUP');
+                    res.send(`[{"response":"Incorrect OTUP, please try again."},{"":""},{"v_uEmail":""}]`);
                     res.end();
                 }
             }
