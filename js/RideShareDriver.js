@@ -71,6 +71,7 @@ const v_clientOS = getClientOS();
     // // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         // alert("screen clicked");
+        // alert(event.target.id);
         // q(event.target.id);
         // if (event.target == modal) {
         if (event.target.id === "login1") {

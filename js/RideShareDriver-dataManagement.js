@@ -12,6 +12,11 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         // Fully loaded!
 
         document.getElementById("uEmail").value = window.localStorage.getItem("rsd_uEmail");
+        document.getElementById("loginButton").addEventListener("click", (event) => {
+            document.getElementById('login1').style.display='block';
+            document.getElementById(`uEmail`).focus();
+            document.getElementById(`uEmail`).select();
+        });
 
         const datval_xDate = document.getElementById("xDate");
         // console.trace();
@@ -37,43 +42,6 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         // DATE CHANGE DETECT start
         datval_xDate.addEventListener("change", (event) => {
             dateChange();
-            // console.log('datval_xDate.addEventListener("change", (event) =>')};
-            // console.log(aDriverDayBook)};
-            // const frm = document.getElementById("driver-day-book");
-            // for (var i=0; i < aDriverDayBook.length; i++){``
-            //     // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
-            //     if (aDriverDayBook[i].xDate===datval_xDate.value){
-            //         // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
-            //         for (const key in aDriverDayBook[i]){
-            //             // console.log(key);
-            //             // console.log(`${key}:${aDriverDayBook[i][key]}`);
-            //             if (aDriverDayBook[i][key].length>0){
-            //                 // console.log([key]);
-            //                 // console.log([key][0].slice(0,1));
-            //                 if ([key][0].slice(0,1)==="x"){
-            //                     console.log(aDriverDayBook[i][key]);
-            //                     document.getElementById(key).value = aDriverDayBook[i][key];
-            //                 }
-            //             }
-            //         }
-            //         return;
-            //     } else {
-            //         for (const key in aDriverDayBook[i]){
-            //             // console.log(key);
-            //             // console.log(`${key}:${aDriverDayBook[i][key]}`);
-            //             if (aDriverDayBook[i][key].length>0){
-            //                 // console.log([key]);
-            //                 // console.log([key][0].slice(0,1));
-            //                 if ([key][0].slice(0,1)==="x"){
-            //                    if (key!=="xDate"){
-            //                         console.log(key);
-            //                         document.getElementById(key).value = "";
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
         });
         // DATE CHANGE DETECT end
 
@@ -153,6 +121,14 @@ function dateChange(){
     // console.log(datval_xDate);
     const frm = document.getElementById("driver-day-book");
     // console.log(frm);
+    Array.from(frm.elements).forEach((input) => {
+        if (input.name==="xDate"){
+        } else {
+            if (input.name.slice(0,1)==="x"){
+                document.getElementById(input.name).value = "";
+            }
+        }
+    });
     for (var i=0; i < aDriverDayBook.length; i++){``
         // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
         if (aDriverDayBook[i].xDate===datval_xDate.value){
@@ -367,6 +343,8 @@ async function login(){
             document.getElementById("login1").style.display = "none";
             // document.getElementById("login2").style.display = "body";
             document.getElementById("login2").style.display = "block";
+            document.getElementById("login2code").focus();
+            document.getElementById("login2code").select();
        } else {
             // console.log(res_data[0].response);
             // create account

@@ -95,6 +95,10 @@
                             <input type="number" inputmode="decimal" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" NOTrequired class="xData" />
                         </div>
                         <div class="form-as-table">
+                            <label for="xCleaningFeeIncludedInGross">Cleaning Fee included in Gross: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xCleaningFeeIncludedInGross" id="xCleaningFeeIncludedInGross" min="0" step="0.01" NOTrequired class="xData" />
+                        </div>
+                        <div class="form-as-table">
                             <label for="xTolls">Tolls (optional): </label>
                             <input type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" onclick="sumTolls()" class="xData" />
                         </div>
@@ -411,7 +415,7 @@
             <!-- <input type="text" name="xAccess" id ="xAccess" value="" onclick="viewDataStored()" autocapitalize="none"/> -->
             <!-- <input type="password" name="xAccess" id ="xAccess" autocapitalize="none" onchange="driverRecordsAccess(this)"/> -->
             <!-- <br> -->
-            <button onclick="document.getElementById('login1').style.display='block'" style="width:auto;cursor:pointer;">Driver login</button>
+            <button id="loginButton" style="width:auto;cursor:pointer;">Driver login</button>
         </div>
         <br>
     <!-- login DIV end -->
