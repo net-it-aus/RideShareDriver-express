@@ -154,6 +154,14 @@
                         <fieldset>
                             <legend>Fuel Purhases</legend>
                             <div class="form-as-table">
+                                <label for="xOdometreAtFillup">Odometre at re-fuel: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xOdometreAtFillup" id="xOdometreAtFillup"  min="0" step="1" class="xData" />
+                            </div>
+                            <div class="form-as-table">
+                                <label for="xKlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" class="xData" />
+                            </div>
+                            <div class="form-as-table">
                                 <label for="xLitresPurchased">Litres purchased: </label>
                                 <input type="number" inputmode="decimal" pattern="\d*" name="xLitresPurchased" id="xLitresPurchased" min="0" step="0.01" class="xData" />
                             </div>
@@ -164,10 +172,6 @@
                             <div class="form-as-table">
                                 <label for="xFuelPurchaseTotal">Total fuel purchase $'s': </label>
                                 <input type="number" inputmode="decimal" pattern="\d*" name="xFuelPurchaseTotal" id="xFuelPurchaseTotal"  min="0" step="0.01" class="xData" />
-                            </div>
-                            <div class="form-as-table">
-                                <label for="xKlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" class="xData" />
                             </div>
                             <div class="form-as-table">
                                 <label for="xFuelEconomyCalculated">Fuel economy - calculated: </label>

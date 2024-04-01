@@ -73,10 +73,17 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
                 if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+                    document.getElementById("xDollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
                 } else {
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
                     document.getElementById("xDollarsPerKlm").value = null;
+                }
+                if (datval_xTotalGross.value.length>0 & datval_xHoursOnline.value.length>0){
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
+                } else {
+                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("xDollarsPerHour").value = null;
                 }
             }
             // if (datval_xTotalGross.validity.valid) {
@@ -94,22 +101,20 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
                 if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
+                    document.getElementById("xDollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
                 } else {
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
                     document.getElementById("xDollarsPerKlm").value = null;
                 }
             }
-            // document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-            // document.getElementById("xDollarsPerKlm").value = datval_xTotalGross.value/datval_xKlms.value;
-            // // if (datval_xTotalGrossX.validity.valid) {
-            // // } else {
-            // //     // datval_xSeconds.setCustomValidity("");
-            // //     alert("value out of range, please try again");
-            // //     document.getElementById("xTotalGrossX").value = 0;
-            // //     document.getElementById("xTotalGrossX").focus();
-            // //     document.getElementById("xTotalGrossX").select();
-            // // }
+        });
+        const datval_xHoursOnline = document.getElementById("xHoursOnline");
+        datval_xHoursOnline.addEventListener("change", (event) => {
+            document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
+        });
+        // const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
+        datval_xMinutesOnline.addEventListener("change", (event) => {
+            document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
         });
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
