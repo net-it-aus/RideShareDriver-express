@@ -11,6 +11,25 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     window.addEventListener("load", () => {
         // Fully loaded!
 
+        document.getElementById("xKlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
+            let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
+            let ltrs = document.getElementById("xLitresPurchased").value | 0;
+            if(klms !== 0 & ltrs !== 0){
+                document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
+            } else {
+                document.getElementById("xFuelEconomyCalculated").value = null;
+            }
+        })
+        document.getElementById("xLitresPurchased").addEventListener("blur",(event)=>{
+            let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
+            let ltrs = document.getElementById("xLitresPurchased").value | 0;
+            if(klms !== 0 & ltrs !== 0){
+                document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
+            } else {
+                document.getElementById("xFuelEconomyCalculated").value = null;
+            }
+        })
+
         document.getElementById("uEmail").value = window.localStorage.getItem("rsd_uEmail");
         document.getElementById("loginButton").addEventListener("click", (event) => {
             document.getElementById('login1').style.display='block';
@@ -226,12 +245,12 @@ async function checkOutUserFiles(userPIN){
             document.getElementById("driverRecordsContainer").style.display = "none";
             document.getElementById("originalBody").style.display = "body";
             document.getElementById("driverRecordsAccessControl").style.display = "body";
-            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
+            // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
     } else {
             document.getElementById("driverRecordsContainer").style.display = "block";
             document.getElementById("originalBody").style.display = "none";
             document.getElementById("driverRecordsAccessControl").style.display = "none";
-            document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+            // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
     }
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
@@ -395,17 +414,22 @@ async function login2(){
                 document.getElementById("driverRecordsContainer").style.display = "none";
                 document.getElementById("originalBody").style.display = "body";
                 document.getElementById("driverRecordsAccessControl").style.display = "body";
-                document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
+                // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
             } else {
                 document.getElementById("driverRecordsContainer").style.display = "block";
                 document.getElementById("originalBody").style.display = "none";
                 document.getElementById("driverRecordsAccessControl").style.display = "none";
-                document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+                // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
                 document.getElementById("login1").style.display = "none";
             }
             var v_today = new Date();
             // document.getElementById("xDate").value = "2000-01-01";
-            document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+
+            const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
+            // console.log(currentIsoDateString);
+            // document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
+            document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
+
             dateChange();
             document.getElementById("xEndingOdometre").focus();
             document.getElementById("xEndingOdometre").select();
@@ -436,7 +460,7 @@ function saveDriverDayBookRecord(){
         if (input.name.slice(0,1)==="x"){
             txtHeaderRow += input.name + " , ";
             txtDataRow += input.value + " , ";
-            console.log(input.name + " | " + input.value);
+            // console.log(input.name + " | " + input.value);
             if(!addCommaPrefix){
                 addCommaPrefix = true;
                 txtDayBookEntry += `"${input.name}":"${input.value}"`;
@@ -453,16 +477,16 @@ function saveDriverDayBookRecord(){
 
     // console.log(aDriverDayBook.findIndex(element === `{xDate: "${xDate.value}"}`))};
     // console.log(txtDayBookEntry)};
-    console.log(`{xDate: "${xDate.value}"}`);
+    // console.log(`{xDate: "${xDate.value}"}`);
     // const entryExists = (element) => element === `{xDate: "${xDate.value}"}`;
     const entryExists = (element) => element.xDate === `${xDate.value}`;
     const entryExistsAtIndex = aDriverDayBook.findIndex(entryExists);
-    console.log(entryExistsAtIndex);
+    // console.log(entryExistsAtIndex);
     if (entryExistsAtIndex > 0){
-        console.log(aDriverDayBook);
+        // console.log(aDriverDayBook);
         const removed = aDriverDayBook.splice(entryExistsAtIndex, 1);
-        console.log(removed);
-        console.log(aDriverDayBook);
+        // console.log(removed);
+        // console.log(aDriverDayBook);
     }
     aDriverDayBook.push(JSON.parse(txtDayBookEntry));
     // console.log(aDriverDayBook);
@@ -601,7 +625,7 @@ async function emailMyDeviceDataTo(){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    console.log('/emailData options:- ',v_options);
+    // console.log('/emailData options:- ',v_options);
     await fetch('/emailData',v_options)
     .then(res => {
         // console.log('emailData:- res:- ',res);
@@ -609,7 +633,7 @@ async function emailMyDeviceDataTo(){
         // return res.body;
     })
     .then((res_data) => {
-        console.log('emailData:- res:- ',res_data);
+        // console.log('emailData:- res:- ',res_data);
         // if (res_data==JSON.parse(v_data)){
         // if (JSON.stringify(res_data)===v_data){
         //     alert("updated ok");

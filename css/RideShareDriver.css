@@ -76,7 +76,7 @@ fieldset input{
     background-color: antiquewhite;
 }
 .driver-records-container{
-    /* display:none; */
+    display:none;
 }
 .IndexedDB_rsd_rsdDayBook{
     display:none;

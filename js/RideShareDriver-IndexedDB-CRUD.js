@@ -134,7 +134,7 @@ function idbGetAll(p_database,p_store){
     };
 
 }
-idbGetAll("rsd","rsdDayBook")
+// idbGetAll("rsd","rsdDayBook")
 
 function idbUpdateOne(p_database,p_store,p_keyPath){
 
