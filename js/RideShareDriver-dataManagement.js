@@ -11,6 +11,43 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     window.addEventListener("load", () => {
         // Fully loaded!
 
+        document.getElementById("dayBook_DateRightButton").addEventListener("click",()=>{
+            let d0 = '';
+            let d1 = '';
+            // console.log( typeof document.getElementById("xDate").value);
+            if( document.getElementById("xDate").value.length === 0) {
+                d0 = new Date(Date.now()).toISOString();
+                document.getElementById("xDate").value = d0.slice(0,10);
+            } else {
+                d0 = new Date(document.getElementById("xDate").value).toISOString();
+            }
+            // console.log(d0);
+            d1 = new Date(d0);
+            // console.log(new Date(d1 * 1 +  86400000));
+            d1 = new Date(d1 * 1 +  86400000);
+            d1 = d1.toISOString()
+            document.getElementById("xDate").value = d1.slice(0,10);
+            dateChange();
+        });
+        document.getElementById("dayBook_DateLeftButton").addEventListener("click",()=>{
+            let d0 = '';
+            let d1 = '';
+            // console.log( typeof document.getElementById("xDate").value);
+            if( document.getElementById("xDate").value.length === 0) {
+                d0 = new Date(Date.now()).toISOString();
+                document.getElementById("xDate").value = d0.slice(0,10);
+            } else {
+                d0 = new Date(document.getElementById("xDate").value).toISOString();
+            }
+            // console.log(d0);
+            d1 = new Date(d0);
+            // console.log(new Date(d1 * 1 -  86400000));
+            d1 = new Date(d1 * 1 -  86400000);
+            d1 = d1.toISOString()
+            document.getElementById("xDate").value = d1.slice(0,10);
+            dateChange();
+        });
+
         document.getElementById("xKlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
             let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
             let ltrs = document.getElementById("xLitresPurchased").value | 0;
@@ -19,7 +56,7 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             } else {
                 document.getElementById("xFuelEconomyCalculated").value = null;
             }
-        })
+        });
         document.getElementById("xLitresPurchased").addEventListener("blur",(event)=>{
             let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
             let ltrs = document.getElementById("xLitresPurchased").value | 0;
@@ -28,7 +65,7 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             } else {
                 document.getElementById("xFuelEconomyCalculated").value = null;
             }
-        })
+        });
 
         document.getElementById("uEmail").value = window.localStorage.getItem("rsd_uEmail");
         document.getElementById("loginButton").addEventListener("click", (event) => {
@@ -341,6 +378,11 @@ async function login(){
     // console.log('login')};
     // const userW = document.getElementById("pw").value;
     const uEmail = document.getElementById("uEmail").value;
+    // console.log(uEmail.length);
+    if (uEmail.length === 0){
+        alert("Plese enter an email address and ry again.");
+        return;
+    }
     const v_data = JSON.stringify(
         {
             // v_userW: userW,

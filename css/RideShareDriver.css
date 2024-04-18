@@ -9,14 +9,15 @@
     /* font-family:'Arial',sans-serif; */
     font-size: 1.1rem;
     margin-left: 5px;
-    color: black;
+    color: white;
     background-color:rgb(170,185,180);
-    /* background-color:rgb(209, 248, 235); */
-    /* background-color:navy; */
+    background-color:rgb(209, 248, 235);
+    background-color:#436850;
+    background-color:darkslategrey;
 }
 h1 {
     /* color:rgba(0,0,255,.7); */
-    color:navy;
+    color:chartreuse;
     /* background-color: rgba(255,255,0,.5); */
     /* background-color:rgb(170,185,180); */
     text-align: center;
@@ -25,6 +26,14 @@ h1 {
 h2 {
     /* color:rgba(0,0,255,.7); */
     color:blue;
+    color:turquoise;
+    color:lightgreen;
+    border-left: 1px solid yellowgreen;
+    border-top: 1px solid yellowgreen;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px 0 0 0;
+    /* max-width: fit-content; */
     /* background-color: rgba(255,255,0,.5); */
     /* background-color:rgb(170,185,180); */
     /* text-align: center; */
@@ -40,25 +49,35 @@ h2 {
     height:1px;
     z-index: -10;
 }
+
+
 form.form-as-table {
     display: table;
 }
 
 div.form-as-table {
     display: table-row;
+    border-bottom: 1px solid black;
 }
 
-label,
-input {
-    display: table-cell;
-    margin-bottom: 10px;
-}
 label {
+    /* border-top: 1px solid chartreuse;
+    border-left: 1px solid chartreuse; */
+    border-radius: 5px;
+    display: table-cell;
     padding-right: 10px;
 }
 input {
-    max-width: 13ch;
+    display: table-cell;
+    margin-bottom: 10px;
+    color:blue;
+    background-color: palegoldenrod;
+    width: 13ch;
+    left:0;
 }
+/* input {
+    max-width: 13ch;
+} */
 input[type=button] {
     max-width: 100%;
     padding:0.25ch;
@@ -66,10 +85,31 @@ input[type=button] {
     border-radius: 5px;
     background-color: ghostwhite;
 }
+.input-width-fit-content{
+    width:max-content;
+}
+.input-no-pointer-events{
+    pointer-events:none;
+}
 
 .driver-records-access-control{
-    /* cursor:pointer; */
+    /* border:1px solid green; */
+    /* border-radius: 10px; */
+    display:flex;
+    flex-direction: column;
+}
+.driver-records-access-control-button{
+    max-width:fit-content;
+    cursor:pointer;
     border:1px solid green;
+    border-radius: 10px;
+    background-color: green;
+    color: chartreuse;
+    padding:5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
 }
 fieldset input{
     color:blue;
@@ -81,13 +121,75 @@ fieldset input{
 .IndexedDB_rsd_rsdDayBook{
     display:none;
 }
-.save-driver-day-book-record-button{
+.button{
+    max-width:fit-content;
     cursor:pointer;
     border:1px solid green;
+    border-radius: 10px;
+    background-color: green;
+    color: chartreuse;
+    padding:5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
 }
-.email-my-device-data-to-button{
+.button-red{
+    max-width:fit-content;
     cursor:pointer;
     border:1px solid green;
+    border-radius: 10px;
+    background-color: crimson;
+    color: white;
+    padding:5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.htmlArrowLeft{
+    display:block;
+    position:fixed;
+    top:0px;
+    left:10px;
+    padding-left:20px;
+    padding-right:20px;
+    /* max-width:fit-content;
+    cursor:pointer;
+    border:1px solid green;
+    border-radius: 10px;
+    background-color: green;
+    color: chartreuse;
+    padding:5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    color:yellow; */
+
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+.htmlArrowRight{
+    display:block;
+    position:fixed;
+    top:0px;
+    left:80px;
+    padding-left:20px;
+    padding-right:20px;
+    /* max-width:fit-content;
+    cursor:pointer;
+    border:1px solid green;
+    border-radius: 10px;
+    background-color: green;
+    color: chartreuse;
+    padding:5px 10px 5px 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    color:yellow; */
 }
 
 
@@ -120,7 +222,7 @@ fieldset input{
   
     /* Extra styles for the cancel button */
     .cancelbtn {
-        width: auto;
+        max-width:fit-content;
         /* padding: 10px 18px; */
         background-color: #f44336;
         cursor:pointer;
@@ -133,19 +235,19 @@ fieldset input{
         position: relative;
     } */
   
-    img.avatar {
+    /* img.avatar {
         width: 40%;
         border-radius: 50%;
     }
-  
+   */
     .container {
         padding: 16px;
     }
   
-    span.pw {
+    /* span.pw {
         float: right;
         padding-top: 16px;
-    }
+    } */
   
     /* The Modal (background) */
     .login1, .login2{
@@ -154,29 +256,37 @@ fieldset input{
         z-index: 1; /* Sit on top */
         left: 0;
         top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
+        width: 100%; 
+        height: 100%; 
+        /* overflow: auto; Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        background-color: rgba(255,255,255,0.5); /* Black w/ opacity */
         padding-top: 60px;
     }
   
     /* Modal Content/Box */
     .login1-form, .login2-form {
-        background-color: #fefefe;
-        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        /* background-color: #fefefe; */
+        /* background-color: rgba(0,0,0,0.4); Black w/ opacity */
+        /* background-color: rgba(255,255,255,0.5); Black w/ opacity */
+        /* background-color: rgba(255,255,255,1);
+        background-color: yellow; */
+        /* margin: 5% auto 15% auto; 5% from the top, 15% from the bottom and centered */
         margin: auto;
-        border: 1px solid #888;
-        width: 80%; /* Could be more or less, depending on screen size */
+        /* border: 1px solid #888;
+        border: 12px chartreuse; */
+        /* border-radius: 10px; */
+        /* /* width: 80%; */
+        max-width: fit-content;
     }
   
     /* The Close Button (x) */
-    .close {
+    /* .close {
         position: absolute;
         right: 25px;
         top: 0;
         color: #000;
+        color: yellow;
         font-size: 35px;
         font-weight: bold;
     }
@@ -185,7 +295,7 @@ fieldset input{
     .close:focus {
         color: red;
         cursor: pointer;
-    }
+    } */
   
     /* Add Zoom Animation */
     .animate {
