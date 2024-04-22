@@ -43,28 +43,6 @@ function getClientOS() {
 }
 const v_clientOS = getClientOS();
 
-// GEOLOCATION start
-    async function showPosition(position) {
-        q("position:- " + position);
-        var v_geolocation  = "Lat: " + position.coords.latitude + "Long: " + position.coords.longitude;
-        q("v_geolocation 1 :- " + v_geolocation);
-        return v_geolocation;
-    }
-    async function getLocation() {
-        if (navigator.geolocation) {
-            // await navigator.geolocation.getCurrentPosition(showPosition);
-                // indexedDB-crud.js:46 [Deprecation] getCurrentPosition() and watchPosition() no longer work on insecure origins. To use this feature, you should consider switching your application to a secure origin, such as HTTPS. See https://goo.gl/rStTGz for more details.
-                // getLocation @ indexedDB-crud.js:46
-                // idbAdd @ indexedDB-crud.js:62
-                // onclick @ cost-analysis.html:189
-        } else {
-            var v_geolocation = "not supported by browser";
-            q("v_geolocation 2 :- " + v_geolocation);
-        }
-        return v_geolocation
-    }
-// GEOLOCATION end
-
 // login FORM start
     // // Get the modal
     // var modal = document.getElementById('login1');

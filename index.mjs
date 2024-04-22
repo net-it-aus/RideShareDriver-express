@@ -125,7 +125,7 @@ function createUserFile(req,res,userPIN){
     function login1(req,res,userPIN_checkOut){
         let _otup;
         console.log("login1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log(req.body.v_uEmail);
+        console.log("login1 email address:- ",req.body.v_uEmail);
         const v_fileName = req.body.v_uEmail + "_accountDetails";
         // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
             fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
@@ -135,7 +135,7 @@ function createUserFile(req,res,userPIN){
                     res.send(`[{"response":"login error for email address:- ${req.body.v_uEmail}"}]`);
                     res.end();
                 } else {
-                    console.log('login1 v_dataASync:- ',v_dataASync);
+                    console.log('login1 v_dataASync.length:- ',v_dataASync.length);
                     _otup = createRSDuserPIN();
                     emailUSERpin(req.body.v_uEmail,_otup);
                     fs.writeFile(`../RideShareDriver.com.au-express-data/` + req.body.v_uEmail + `_otup.json`, `[{"_otup":"${_otup}"}]`,(err) => {
@@ -295,7 +295,8 @@ function emailUSERpin(emailAddress,userPIN){
         text: 'This is text version!',
         replyTo: 'NoReply@outlook.com',
         onError: (e) => console.log(e),
-        onSuccess: (i) => console.log(i)
+        // onSuccess: (i) => console.log(i)
+        onSuccess: (i) => console.log("email sent OK")
     });
 }
 
@@ -343,32 +344,70 @@ function createRSDuserPIN(){
     if (v_millisecond<1000)(v_millisecond="0"+v_millisecond);
     if (v_millisecond<10000)(v_millisecond="0"+v_millisecond);
     const v_rsdUserPIN = v_second + '' + v_day + '' +  v_hour + '' +  v_month + '' +  v_millisecond + '' + v_minute + '' + v_fullYear + '' +  (v_millisecond/19).toFixed(0);
-    console.log("v_rsdUserPIN:- ",v_rsdUserPIN);
-    console.log("v_rsdUserPIN:- ",v_rsdUserPIN.length);
+    // console.log("v_rsdUserPIN:- ",v_rsdUserPIN);
+    console.log("v_rsdUserPIN.length:- ",v_rsdUserPIN.length);
     return v_rsdUserPIN;
 }
 
 
 // SERVER REQUESTS LOG start
 app.all('*', (req, res) => {
-    console.log('app.all information START');
+    console.log('/////////////// app.all information START');
     const v_ipAddress = req.connection.remoteAddress;
     const v_ipAddressForwarded = req.headers['x-forwarded-for'];
     console.log('total memory:- ',os.totalmem()/1000000000);
     console.log('free memory:- ',os.freemem()/1000000000);
     console.log(`incoming IP address:-  ${v_ipAddress}`);
+    console.log(`incoming IP address length:-  ${v_ipAddress.length}`);
     console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
     console.log('app.all req.url:- ', req.url);
+    console.log('app.all req.originalUrl:- ', req.originalUrl);
     // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
+    console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber);
     console.log(`app.all req date:- ${Date().slice(0, 25)}`);
-    console.log('app.all information END\n');
+    console.log('/////////////// app.all information END\n');
 
-    if (v_ipAddress.length > 3){
-        const emailBody = 'Incoming IP address:- ' + v_ipAddress + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
-        // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
-        emailSiteVisit(emailBody);
+    // if (v_ipAddress.length > 3){
+    //     const emailBody = 'Incoming IP address forwarded:- ' + v_ipAddressForwarded + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
+    //     // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
+    //     emailSiteVisit(emailBody);
+    // }
+    // if (v_ipAddressForwarded.length > 3){
+    if (v_ipAddressForwarded !== undefined){
+            // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
+        // const emailBodyText = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
+        // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}\r\n\r\n`;
+        const emailBodyText = `\r\napp.all req.headers['x-forwarded-for']:- ${v_ipAddressForwarded} ${Date().slice(0,25)} req.body:- ${JSON.stringify(req.body)} incoming originalUrl:- ${req.originalUrl}\r\n`;
+        const folderPath_siteLog = "../RideShareDriver.com.au-express-data";
+        // console.log('emailBodyText:- \n' + emailBodyText + '\n' + Date().slice(0,25));
+        console.log('emailBodyText:- ' + emailBodyText + '' + Date().slice(0,25));
+        fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',emailBodyText.slice(0,255),(err) => {
+            if (err){
+                console.log("updated siteLog err");
+            } else {
+                console.log("updated siteLog OK");
+            }
+        });
+        // // emailSiteVisit(emailBodyHTML,emailBodyText);
+        // const timeout1 = setTimeout(() => {
+        //     console.log("Timeout set");
+        //     emailSiteVisit(emailBodyHTML,emailBodyText);
+        // }, 10000);
     }
     switch (req.url) {
+        case '/myIPify':
+            // res.send(v_ipAddressForwarded);
+            const siteVisitedBy = `site visited by:- ${v_ipAddressForwarded} at ${Date().slice(0, 25)}`;
+            console.log(siteVisitedBy);
+            const folderPath_siteLog = "../RideShareDriver.com.au-express-data";
+            fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',siteVisitedBy,(err) => {
+                if (err){
+                    console.log("site visit - updated siteLog err\n");
+                } else {
+                    console.log("site visit - updated siteLog OK\n");
+                }
+            });
+            break;
         case '/create':
             // console.log(req.body);
             const userPIN = createRSDuserPIN();
