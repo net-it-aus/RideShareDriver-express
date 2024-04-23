@@ -236,9 +236,9 @@ function checkOutUserFile(req,res,userPIN_checkOut){
 function emailData(req,res){
     // console.trace();
     console.log('emailData:- ',req.body.v_uEmail);
-    emailData_send(req.body.v_uEmail);
+    emailData_send(req,res,req.body.v_uEmail);
 }
-function emailData_send(uEmail){
+function emailData_send(req,res,uEmail){
     nodeoutlook.sendEmail({
         auth: {
             user: "Net.IT.Australia@outlook.com",
@@ -254,32 +254,41 @@ function emailData_send(uEmail){
         replyTo: 'NoReply@outlook.com',
         // attachments: {path: '/path/to/file.txt'},
         attachments: {path: '../RideShareDriver.com.au-express-data/' + uEmail + '_accountDetails.json'},
-        onError: (e) => console.log(e),
-        onSuccess: (i) => console.log(i)
+        onError: (e) => {
+            console.log(e)
+            res.send({"response":`RideShareDriver.com.au:- emailing data to ${uEmail} FAILED!!!`});
+        },
+        // onSuccess: (i) => console.log(i)
+        // onSuccess: (i) => console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`)
+        onSuccess: (i) => {
+            console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`);
+            res.send({"response":`RideShareDriver.com.au:- emailed data to ${uEmail} OK`});
+        }
     });
 }
 // emailData END //////////////////////////////////////////////////////
 
 
-function emailSiteVisit(emailBody){
-    console.log('emailSiteVisit nodeoutlook.sendEmail() START .....................................');
-    nodeoutlook.sendEmail({
-        auth: {
-            user: "Net.IT.Australia@outlook.com",
-            pass: "SonicBroom.000"
-        },
-        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-        from: '"Net.IT.Australia@outlook.com',
-        to: 'd.garton@outlook.com',
-        subject: 'RideShareDriver.com.au site visit details',
-        // html: '<b>Do Not reply to this email.</b>',
-        html: `<p>${emailBody}</p>`,
-        text: 'This is text version!',
-        replyTo: 'NoReply@outlook.com',
-        onError: (e) => console.log(e),
-        onSuccess: (i) => console.log(i)
-    });
-}
+// function emailSiteVisit(emailBody){
+//     console.log('emailSiteVisit nodeoutlook.sendEmail() START .....................................');
+//     nodeoutlook.sendEmail({
+//         auth: {
+//             user: "Net.IT.Australia@outlook.com",
+//             pass: "SonicBroom.000"
+//         },
+//         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+//         from: '"Net.IT.Australia@outlook.com',
+//         to: 'd.garton@outlook.com',
+//         subject: 'RideShareDriver.com.au site visit details',
+//         // html: '<b>Do Not reply to this email.</b>',
+//         html: `<p>${emailBody}</p>`,
+//         text: 'This is text version!',
+//         replyTo: 'NoReply@outlook.com',
+//         onError: (e) => console.log(e),
+//         onSuccess: (i) => console.log(i)
+//     });
+// }
+
 function emailUSERpin(emailAddress,userPIN){
     // console.log(`emailUSERpin(${emailAddress},${userPIN})`);
     nodeoutlook.sendEmail({
@@ -296,7 +305,7 @@ function emailUSERpin(emailAddress,userPIN){
         replyTo: 'NoReply@outlook.com',
         onError: (e) => console.log(e),
         // onSuccess: (i) => console.log(i)
-        onSuccess: (i) => console.log("email sent OK")
+        onSuccess: (i) => console.log(`RideShareDriver.com.au:- email sent to ${emailAddress} OK`)
     });
 }
 

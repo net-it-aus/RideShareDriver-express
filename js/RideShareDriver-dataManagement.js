@@ -713,7 +713,8 @@ async function emailMyDeviceDataTo(){
         // return res.body;
     })
     .then((res_data) => {
-        // console.log('emailData:- res:- ',res_data);
+        console.log(res_data.response);
+        alert(res_data.response);
         // if (res_data==JSON.parse(v_data)){
         // if (JSON.stringify(res_data)===v_data){
         //     alert("updated ok");
