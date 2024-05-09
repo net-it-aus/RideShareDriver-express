@@ -87,8 +87,8 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         });
 
         document.getElementById("xKlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
-            let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
-            let ltrs = document.getElementById("xLitresPurchased").value | 0;
+            let klms = parseFloat(document.getElementById("xKlmTravelledSinceLastFillup").value) | 0;
+            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value) | 0;
             if(klms !== 0 & ltrs !== 0){
                 document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
             } else {
@@ -96,14 +96,33 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             }
         });
         document.getElementById("xLitresPurchased").addEventListener("blur",(event)=>{
-            let klms = document.getElementById("xKlmTravelledSinceLastFillup").value | 0;
-            let ltrs = document.getElementById("xLitresPurchased").value | 0;
+            let klms = parseFloat(document.getElementById("xKlmTravelledSinceLastFillup").value) | 0;
+            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value) | 0;
             if(klms !== 0 & ltrs !== 0){
                 document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
             } else {
                 document.getElementById("xFuelEconomyCalculated").value = null;
             }
+            calcPrcVar();
         });
+
+        document.getElementById("xPricePerLitre").addEventListener("blur",(event)=>{
+            calcPrcVar();
+        });
+        document.getElementById("xFuelPurchaseTotal").addEventListener("blur",(event)=>{
+            calcPrcVar();
+        });
+        function calcPrcVar(){
+            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value);
+            let price = parseFloat(document.getElementById("xPricePerLitre").value);
+            let total = parseFloat(document.getElementById("xFuelPurchaseTotal").value);
+            console.log(ltrs,price,total);
+            if(ltrs !== 0 & price !== 0 & total !== 0){
+                document.getElementById("xPriceVariance").value = ((ltrs*1) * (price*1) - (total*1)).toFixed(2);
+            } else {
+                document.getElementById("xPriceVariance").value = null;
+            }
+        }
 
         document.getElementById("uEmail").value = window.localStorage.getItem("rsd_uEmail");
         document.getElementById("loginButton").addEventListener("click", (event) => {
@@ -220,6 +239,7 @@ function dateChange(){
     // console.log(datval_xDate);
     const frm = document.getElementById("driver-day-book");
     // console.log(frm);
+    document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
     Array.from(frm.elements).forEach((input) => {
         if (input.name==="xDate"){
         } else {

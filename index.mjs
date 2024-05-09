@@ -367,7 +367,7 @@ app.all('*', (req, res) => {
     console.log('total memory:- ',os.totalmem()/1000000000);
     console.log('free memory:- ',os.freemem()/1000000000);
     console.log(`incoming IP address:-  ${v_ipAddress}`);
-    console.log(`incoming IP address length:-  ${v_ipAddress.length}`);
+    // console.log(`incoming IP address length:-  ${v_ipAddress.length}`);
     console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
     console.log('app.all req.url:- ', req.url);
     console.log('app.all req.originalUrl:- ', req.originalUrl);

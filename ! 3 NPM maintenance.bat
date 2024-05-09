@@ -7,3 +7,6 @@ echo step 3 of 4 completed [ npm update ]
 call npm audit
 echo step 4 of 4 completed [ npm audit ]
 pause
+echo FINALLY...
+call npm update -g
+pause
