@@ -94,8 +94,8 @@ app.listen( process.env.PORT || v_portNumber, () => {
 function createUserFile(req,res,userPIN){
 
     console.log("createUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body.v_userW);
-    console.log(req.body.v_uEmail);
+    // console.log(req.body.v_userW);
+    // console.log(req.body.v_uEmail);
     const v_fileName = req.body.v_uEmail + "_accountDetails";
 
     fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
@@ -125,17 +125,18 @@ function createUserFile(req,res,userPIN){
     function login1(req,res,userPIN_checkOut){
         let _otup;
         console.log("login1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log("login1 email address:- ",req.body.v_uEmail);
+        // console.log("login1 email address:- ",req.body.v_uEmail);
         const v_fileName = req.body.v_uEmail + "_accountDetails";
         // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
             fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
                 if (errASync){
-                    console.log('login1 v_dataASyncERR:- ',errASync);
+                    // console.log('login1 v_dataASyncERR:- ',errASync);
                     console.log('login1:- error');
                     res.send(`[{"response":"login error for email address:- ${req.body.v_uEmail}"}]`);
                     res.end();
                 } else {
-                    console.log('login1 v_dataASync.length:- ',v_dataASync.length);
+                    // console.log('login1 v_dataASync.length:- ',v_dataASync.length);
+                    console.log('login1:- ok');
                     _otup = createRSDuserPIN();
                     emailUSERpin(req.body.v_uEmail,_otup);
                     fs.writeFile(`../RideShareDriver.com.au-express-data/` + req.body.v_uEmail + `_otup.json`, `[{"_otup":"${_otup}"}]`,(err) => {
@@ -151,30 +152,32 @@ function createUserFile(req,res,userPIN){
 // login2 START //////////////////////////////////////////////////////
 function login2(req,res){
     console.log("login2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body.v_uEmail);
+    // console.log(req.body.v_uEmail);
     const v_fileName = req.body.v_uEmail + "_otup";
     // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
         fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
             if (errASync){
-                console.log('login2 errASync v_dataASyncERR:- ',errASync);
-                console.log('login2 errASync:- error');
+                // console.log('login2 errASync v_dataASyncERR:- ',errASync);
+                console.log('login2:- error');
             } else {
-                console.log('login2 v_dataASync:- ',v_dataASync);
+                // console.log('login2 v_dataASync:- ',v_dataASync);
+                console.log('login2:- ok');
                 if (JSON.parse(v_dataASync)[0]._otup === req.body.v_accessCode || req.body.v_accessCode === "06"){
                     let v_fileName2
                     if (req.body.v_accessCode === "06"){
-                        console.log('login2:- OK',"06" );
+                        // console.log('login2:- OK',"06" );
                         v_fileName2 = "donald.garton@outlook.com_accountDetails";
                     } else {
-                        console.log('login2:- OK', JSON.parse(v_dataASync)[0]._otup);
+                        // console.log('login2:- OK', JSON.parse(v_dataASync)[0]._otup);
                         v_fileName2 = req.body.v_uEmail + "_accountDetails";
                     }
                     fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName2 + '.json','utf8',(errASync2,v_dataASync2) => {
                         if (errASync2){
-                            console.log('login2 errASync2 v_dataASync2ERR:- ',errASync);
+                            // console.log('login2 errASync2 v_dataASync2ERR:- ',errASync);
                             console.log('login2 errASync2:- error');
                         } else {
                             // res.send(`[{"response":"login2 ok"}]`);
+                            console.log('login2 v_dataASync2:- ok');
                             res.send(v_dataASync2);
                             res.end();
                         }
