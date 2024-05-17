@@ -117,6 +117,7 @@ fieldset input{
 }
 .driver-records-container{
     display:none;
+    margin-top: 40px;
 }
 .IndexedDB_rsd_rsdDayBook{
     display:none;
@@ -161,69 +162,62 @@ fieldset input{
     margin-right:auto;
 }
 
-.htmlArrowLeft{
-    display:block;
-    position:fixed;
-    top:0px;
-    left:10px;
-    padding-left:20px;
-    padding-right:20px;
-    /* max-width:fit-content;
-    cursor:pointer;
-    border:1px solid green;
-    border-radius: 10px;
-    background-color: green;
-    color: chartreuse;
-    padding:5px 10px 5px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left:auto;
-    margin-right:auto;
-    color:yellow; */
-
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
-.htmlArrowRight{
-    display:block;
-    position:fixed;
-    top:0px;
-    left:80px;
-    padding-left:20px;
-    padding-right:20px;
-    /* max-width:fit-content;
-    cursor:pointer;
-    border:1px solid green;
-    border-radius: 10px;
-    background-color: green;
-    color: chartreuse;
-    padding:5px 10px 5px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left:auto;
-    margin-right:auto;
-    color:yellow; */
-}
-.dateFixedPos{
-    display:block;
-    position:fixed;
-    top:0px;
-    left:180px;
-    padding-left:20px;
-    padding-right:20px;
-    /* max-width:fit-content;
-    cursor:pointer;
-    border:1px solid green;
-    border-radius: 10px;
-    background-color: green;
-    color: chartreuse;
-    padding:5px 10px 5px 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left:auto;
-    margin-right:auto;
-    color:yellow; */
-}
+/* DATE NAVIGATION BUTTONS start ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    .dateNavigationButtonsContainer{
+        display:flex;
+        flex-direction: row;
+        position:fixed;
+        top:0px;
+        left:10px;
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+        user-select: none;
+    }
+    .htmlArrowLeft_day{
+        /* display:block; */
+        /* position:fixed; */
+        /* top:0px; */
+        /* left:10px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    .htmlArrowRight_day{
+        /* display:block; */
+        /* position:fixed; */
+        /* top:0px; */
+        /* left:80px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+    }
+    .htmlArrowLeft_week{
+        /* display:block; */
+        /* position:fixed; */
+        /* top:0px; */
+        /* left:170px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+    .htmlArrowRight_week{
+        /* display:block; */
+        /* position:fixed; */
+        /* top:0px; */
+        /* left:240px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+    }
+    .dateFixedPos{
+        /* display:block; */
+        /* position:fixed; */
+        /* top:0px; */
+        /* left:150px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+    }
+/* DATE NAVIGATION BUTTONS start ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 
 /* login FORM start xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */

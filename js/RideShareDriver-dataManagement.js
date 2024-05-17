@@ -4,12 +4,21 @@
 
 let t;
 let aDriverDayBook = [];
-const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+// Sunday is the first day of the week
+    const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+// Sunday is the first day of the week
 // nlr? let userPIN;
 
 // wait for DOM to load START
     window.addEventListener("load", () => {
         // Fully loaded!
+
+// document.getElementById("driverRecordsContainer").style.display = "block";
+// document.getElementById("originalBody").style.display = "none";
+// document.getElementById("driverRecordsAccessControl").style.display = "none";
+// const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
+// document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
+// dateChange();
 
         var myBody = document.getElementsByTagName("BODY")[0];
         myBody.addEventListener("mousemove",(event)=>{
@@ -85,6 +94,44 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
             document.getElementById("xDate").value = d1.slice(0,10);
             dateChange();
         });
+
+        document.getElementById("dayBook_WeekRightButton").addEventListener("click",()=>{
+            let d0 = '';
+            let d1 = '';
+            // console.log( typeof document.getElementById("xDate").value);
+            if( document.getElementById("xDate").value.length === 0) {
+                d0 = new Date(Date.now()).toISOString();
+                document.getElementById("xDate").value = d0.slice(0,10);
+            } else {
+                d0 = new Date(document.getElementById("xDate").value).toISOString();
+            }
+            // console.log(d0);
+            d1 = new Date(d0);
+            // console.log(new Date(d1 * 1 + (86400000 * 7)));
+            d1 = new Date(d1 * 1 +  (86400000 * 7));
+            d1 = d1.toISOString()
+            document.getElementById("xDate").value = d1.slice(0,10);
+            dateChange();
+        });
+        document.getElementById("dayBook_WeekLeftButton").addEventListener("click",()=>{
+            let d0 = '';
+            let d1 = '';
+            // console.log( typeof document.getElementById("xDate").value);
+            if( document.getElementById("xDate").value.length === 0) {
+                d0 = new Date(Date.now()).toISOString();
+                document.getElementById("xDate").value = d0.slice(0,10);
+            } else {
+                d0 = new Date(document.getElementById("xDate").value).toISOString();
+            }
+            // console.log(d0);
+            d1 = new Date(d0);
+            // console.log(new Date(d1 * 1 - (86400000 * 7)));
+            d1 = new Date(d1 * 1 -  (86400000 * 7));
+            d1 = d1.toISOString()
+            document.getElementById("xDate").value = d1.slice(0,10);
+            dateChange();
+        });
+
 
         document.getElementById("xKlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
             let klms = parseFloat(document.getElementById("xKlmTravelledSinceLastFillup").value) | 0;
@@ -235,19 +282,28 @@ const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 // wait for DOM to load END
 
 function dateChange(){
+
     const datval_xDate = document.getElementById("xDate");
+    let d = new Date(datval_xDate.value).getDay();
+    document.getElementById("weekdayText").innerHTML = dayNames[d];
     // console.log(datval_xDate);
+
     const frm = document.getElementById("driver-day-book");
     // console.log(frm);
+
     document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
-    Array.from(frm.elements).forEach((input) => {
-        if (input.name==="xDate"){
-        } else {
-            if (input.name.slice(0,1)==="x"){
-                document.getElementById(input.name).value = "";
+
+    // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
+        Array.from(frm.elements).forEach((input) => {
+            if (input.name==="xDate"){
+            } else {
+                if (input.name.slice(0,1)==="x"){
+                    document.getElementById(input.name).value = "";
+                }
             }
-        }
-    });
+        });
+    // re-set HTML form to null values, except for the date field END ~~~~~~~~~~~~~~~~~~~~~~~~~
+
     for (var i=0; i < aDriverDayBook.length; i++){``
         // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
         if (aDriverDayBook[i].xDate===datval_xDate.value){
@@ -264,7 +320,7 @@ function dateChange(){
                     }
                 }
             }
-            return;
+            break;
         } else {
             for (const key in aDriverDayBook[i]){
                 // console.log(key);
@@ -282,6 +338,72 @@ function dateChange(){
             }
         }
     }
+    updateWeekStats(datval_xDate.value);
+}
+
+function updateWeekStats(myDate){
+
+    const d0 = new Date(myDate);
+    const d0Day = new Date(myDate).getDay();
+
+    console.log(d0);
+    // Sunday is the start of the week
+        let standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
+        const dStdDay = new Date(standardWeekBeginDate).getDay();
+        if (dStdDay===0){
+            standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
+        } else {
+            standardWeekBeginDate = new Date(d0 * 1 - (86400000 * 7));
+        }
+        console.log("standard week start date = " + standardWeekBeginDate.toDateString());
+    // Sunday is the start of the week
+    // Uber week starts on Monday
+        let uberWeekBeginDate = 0;
+        if (d0Day===0){
+            uberWeekBeginDate = new Date(standardWeekBeginDate * 1 - (86400000 * 6));
+        } else {
+            uberWeekBeginDate = new Date(standardWeekBeginDate * 1 + (86400000 * 1));
+        }
+        console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
+    // Uber week starts on Monday
+    // console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString());
+    console.log("\n");
+
+    let statDate;
+    let vTotalGross = 0;
+    let vKlms = 0;
+    let vTrips = 0;
+    let vIncentiveNOTIncludedInGross = 0;
+    let vFuelPurchaseTotal = 0;
+    let vHours = 0;
+    let vMinutes = 0;
+    for (d = 0; d < 7; d++){
+        statDate = new Date(uberWeekBeginDate * 1 + (86400000 * d));
+        // console.log(statDate.toISOString().slice(0,10));
+        for (var i=0; i < aDriverDayBook.length; i++){
+            // console.log(aDriverDayBook[i].xDate);
+            if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
+                console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+                vTotalGross += aDriverDayBook[i].xTotalGross * 1;
+                vKlms += aDriverDayBook[i].xKlms * 1;
+                vTrips += aDriverDayBook[i].xTrips * 1
+                vHours += aDriverDayBook[i].xHoursOnline * 1
+                vMinutes += aDriverDayBook[i].xMinutesOnline * 1
+                vIncentiveNOTIncludedInGross += aDriverDayBook[i].xIncentiveNOTIncludedInGross * 1
+                vFuelPurchaseTotal += aDriverDayBook[i].xFuelPurchaseTotal * 1
+            }
+        }
+    }
+    console.log(vTotalGross,vKlms,vTotalGross/vKlms);
+    document.getElementById("vTotalGross").value = (vTotalGross).toFixed(2);
+    document.getElementById("vKlms").value = (vKlms).toFixed(1);
+    document.getElementById("vGrossPerKlm").value = (vTotalGross / vKlms).toFixed(2);
+    document.getElementById("vTrips").value = vTrips;
+    document.getElementById("vGrossPerTrip").value = (vTotalGross / vTrips).toFixed(2);
+    document.getElementById("vHours").value = (vHours + (vMinutes / 60)).toFixed(1);
+    document.getElementById("vGrossPerHour").value = (vTotalGross / vHours).toFixed(2);
+    document.getElementById("vIncentiveNOTIncludedInGross").value = vIncentiveNOTIncludedInGross;
+    document.getElementById("vFuelPurchaseTotal").value = vFuelPurchaseTotal;
 }
 
 function timeStampString(){
