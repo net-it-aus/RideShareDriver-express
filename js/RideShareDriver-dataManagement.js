@@ -9,16 +9,27 @@ let aDriverDayBook = [];
 // Sunday is the first day of the week
 // nlr? let userPIN;
 
-// wait for DOM to load START
+// wait for DOM to load START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     window.addEventListener("load", () => {
         // Fully loaded!
 
-// document.getElementById("driverRecordsContainer").style.display = "block";
+// document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
+// document.getElementById("driverRecordsContainer").style.display = "flex";
 // document.getElementById("originalBody").style.display = "none";
 // document.getElementById("driverRecordsAccessControl").style.display = "none";
 // const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
 // document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
 // dateChange();
+
+        document.getElementById("xKlms").addEventListener("blur",()=>{
+            calcBusinessPrivateKlms();
+        })
+        document.getElementById("xKlmsPrivate").addEventListener("blur",()=>{
+            calcBusinessPrivateKlms();
+        })
+        function calcBusinessPrivateKlms(){
+            document.getElementById("xKlms").value = document.getElementById("xKlms").value * 1 - document.getElementById("xKlmsPrivate").value
+        }
 
         var myBody = document.getElementsByTagName("BODY")[0];
         myBody.addEventListener("mousemove",(event)=>{
@@ -28,7 +39,7 @@ let aDriverDayBook = [];
             logSiteVisit();
         },{once: true});
         function logSiteVisit(){
-            console.log("mousemove detected");
+            // console.log("mousemove detected");
             // // GEOLOCATION start
             //     function getLocation() {
             //         if (navigator.geolocation) {
@@ -163,7 +174,7 @@ let aDriverDayBook = [];
             let ltrs = parseFloat(document.getElementById("xLitresPurchased").value);
             let price = parseFloat(document.getElementById("xPricePerLitre").value);
             let total = parseFloat(document.getElementById("xFuelPurchaseTotal").value);
-            console.log(ltrs,price,total);
+            // console.log(ltrs,price,total);
             if(ltrs !== 0 & price !== 0 & total !== 0){
                 document.getElementById("xPriceVariance").value = ((ltrs*1) * (price*1) - (total*1)).toFixed(2);
             } else {
@@ -279,7 +290,7 @@ let aDriverDayBook = [];
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
     });
-// wait for DOM to load END
+// wait for DOM to load END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function dateChange(){
 
@@ -346,7 +357,7 @@ function updateWeekStats(myDate){
     const d0 = new Date(myDate);
     const d0Day = new Date(myDate).getDay();
 
-    console.log(d0);
+    // console.log(d0);
     // Sunday is the start of the week
         let standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
         const dStdDay = new Date(standardWeekBeginDate).getDay();
@@ -355,7 +366,7 @@ function updateWeekStats(myDate){
         } else {
             standardWeekBeginDate = new Date(d0 * 1 - (86400000 * 7));
         }
-        console.log("standard week start date = " + standardWeekBeginDate.toDateString());
+        // console.log("standard week start date = " + standardWeekBeginDate.toDateString());
     // Sunday is the start of the week
     // Uber week starts on Monday
         let uberWeekBeginDate = 0;
@@ -364,10 +375,10 @@ function updateWeekStats(myDate){
         } else {
             uberWeekBeginDate = new Date(standardWeekBeginDate * 1 + (86400000 * 1));
         }
-        console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
+        // console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
     // Uber week starts on Monday
     // console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString());
-    console.log("\n");
+    // console.log("\n");
 
     let statDate;
     let vTotalGross = 0;
@@ -383,7 +394,7 @@ function updateWeekStats(myDate){
         for (var i=0; i < aDriverDayBook.length; i++){
             // console.log(aDriverDayBook[i].xDate);
             if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
-                console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+                // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
                 vTotalGross += aDriverDayBook[i].xTotalGross * 1;
                 vKlms += aDriverDayBook[i].xKlms * 1;
                 vTrips += aDriverDayBook[i].xTrips * 1
@@ -394,7 +405,7 @@ function updateWeekStats(myDate){
             }
         }
     }
-    console.log(vTotalGross,vKlms,vTotalGross/vKlms);
+    // console.log(vTotalGross,vKlms,vTotalGross/vKlms);
     document.getElementById("vTotalGross").value = (vTotalGross).toFixed(2);
     document.getElementById("vKlms").value = (vKlms).toFixed(1);
     document.getElementById("vGrossPerKlm").value = (vTotalGross / vKlms).toFixed(2);
@@ -458,16 +469,18 @@ async function checkOutUserFiles(userPIN){
         // writeToLocalStorage(`lastDateTime_CommSec_${p_ticker}`,v_dateTime);
         // return res_data.price;
     })
-    if (document.getElementById("driverRecordsContainer").style.display==="block"){
-            document.getElementById("driverRecordsContainer").style.display = "none";
-            document.getElementById("originalBody").style.display = "body";
-            document.getElementById("driverRecordsAccessControl").style.display = "body";
-            // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
+    if (document.getElementById("driverRecordsContainer").style.display==="flex"){
+        document.getElementById("dateNavigationButtonsContainer").style.display = "none";
+        document.getElementById("driverRecordsContainer").style.display = "none";
+        document.getElementById("originalBody").style.display = "body";
+        document.getElementById("driverRecordsAccessControl").style.display = "body";
+        // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
     } else {
-            document.getElementById("driverRecordsContainer").style.display = "block";
-            document.getElementById("originalBody").style.display = "none";
-            document.getElementById("driverRecordsAccessControl").style.display = "none";
-            // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
+        document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
+        document.getElementById("driverRecordsContainer").style.display = "flex";
+        document.getElementById("originalBody").style.display = "none";
+        document.getElementById("driverRecordsAccessControl").style.display = "none";
+        // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
     }
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
@@ -632,13 +645,15 @@ async function login2(){
             // document.getElementById("login1").style.display = "none";
             // document.getElementById("login2").style.display = "body";
             document.getElementById("login2").style.display = "none";
-            if (document.getElementById("driverRecordsContainer").style.display==="block"){
+            if (document.getElementById("driverRecordsContainer").style.display==="flex"){
+                document.getElementById("dateNavigationButtonsContainer").style.display = "none";
                 document.getElementById("driverRecordsContainer").style.display = "none";
                 document.getElementById("originalBody").style.display = "body";
                 document.getElementById("driverRecordsAccessControl").style.display = "body";
                 // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "none";
             } else {
-                document.getElementById("driverRecordsContainer").style.display = "block";
+                document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
+                document.getElementById("driverRecordsContainer").style.display = "flex";
                 document.getElementById("originalBody").style.display = "none";
                 document.getElementById("driverRecordsAccessControl").style.display = "none";
                 // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
@@ -855,7 +870,7 @@ async function emailMyDeviceDataTo(){
         // return res.body;
     })
     .then((res_data) => {
-        console.log(res_data.response);
+        // console.log(res_data.response);
         alert(res_data.response);
         // if (res_data==JSON.parse(v_data)){
         // if (JSON.stringify(res_data)===v_data){

@@ -40,6 +40,10 @@ h2 {
     /* font-size: 1.4em; */
 }
 
+.hr-basic{
+    border: 1px solid white;
+}
+
 .mySEOelement{
     position:fixed;
     top:0;
@@ -163,12 +167,18 @@ fieldset input{
 }
 
 /* DATE NAVIGATION BUTTONS start ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    .driver-day-book{
+        /* position: absolute; */
+        margin-top: 5px;
+    }
     .dateNavigationButtonsContainer{
-        display:flex;
+        display:none;
         flex-direction: row;
         position:fixed;
         top:0px;
         left:10px;
+        width:100%;
+        /* margin-bottom: 5px; */
         /* padding-left:20px; */
         /* padding-right:20px; */
         user-select: none;
