@@ -13,13 +13,13 @@ let aDriverDayBook = [];
     window.addEventListener("load", () => {
         // Fully loaded!
 
-document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
-document.getElementById("driverRecordsContainer").style.display = "flex";
-document.getElementById("originalBody").style.display = "none";
-document.getElementById("driverRecordsAccessControl").style.display = "none";
-const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
-document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
-dateChange();
+// document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
+// document.getElementById("driverRecordsContainer").style.display = "flex";
+// document.getElementById("originalBody").style.display = "none";
+// document.getElementById("driverRecordsAccessControl").style.display = "none";
+// const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
+// document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
+// dateChange();
 
         document.getElementById("xKlms").addEventListener("blur",()=>{
             calcBusinessPrivateKlms();
