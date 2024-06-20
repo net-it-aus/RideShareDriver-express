@@ -12,8 +12,9 @@ let aDriverDayBook = [];
 
 // wait for DOM to load START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     window.addEventListener("load", () => {
-        login2();
         // Fully loaded!
+
+        // login2();
 
 // document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
 // document.getElementById("driverRecordsContainer").style.display = "flex";
@@ -801,10 +802,10 @@ async function login(){
 
 // login2fa - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function login2(){
-    // const uEmail = document.getElementById("uEmail").value;
-    const uEmail = "donald.garton@outlook.com";
-    // const accessCode = document.getElementById("login2code").value;
-    const accessCode = "06";
+    const uEmail = document.getElementById("uEmail").value;
+    // const uEmail = "donald.garton@outlook.com";
+    const accessCode = document.getElementById("login2code").value;
+    // const accessCode = "06";
     const v_data = JSON.stringify(
         {
             v_uEmail: uEmail,
