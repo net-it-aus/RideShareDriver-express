@@ -2,6 +2,7 @@
 // <!-- expand all       Ctrl + k + j -->
 // <!-- word wrap toggle Alt + z -->
 
+const consoleOn = true;
 let t;
 let aDriverDayBook = [];
 // Sunday is the first day of the week
@@ -11,6 +12,7 @@ let aDriverDayBook = [];
 
 // wait for DOM to load START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     window.addEventListener("load", () => {
+        login2();
         // Fully loaded!
 
 // document.getElementById("dateNavigationButtonsContainer").style.display = "flex";
@@ -350,9 +352,190 @@ function dateChange(){
         }
     }
     updateWeekStats(datval_xDate.value);
+    updateQtrStats(datval_xDate.value);
+
 }
 
-function updateWeekStats(myDate){
+// UPDATE WEEK STATS start
+    function updateWeekStats(myDate){
+
+        const d0 = new Date(myDate);
+        const d0Day = new Date(myDate).getDay();
+
+        // console.log(d0);
+        // Sunday is the start of the week
+            let standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
+            const dStdDay = new Date(standardWeekBeginDate).getDay();
+            if (dStdDay===0){
+                standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
+            } else {
+                standardWeekBeginDate = new Date(d0 * 1 - (86400000 * 7));
+            }
+            // console.log("standard week start date = " + standardWeekBeginDate.toDateString());
+        // Sunday is the start of the week
+        // Uber week starts on Monday
+            let uberWeekBeginDate = 0;
+            if (d0Day===0){
+                uberWeekBeginDate = new Date(standardWeekBeginDate * 1 - (86400000 * 6));
+            } else {
+                uberWeekBeginDate = new Date(standardWeekBeginDate * 1 + (86400000 * 1));
+            }
+            // console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
+        // Uber week starts on Monday
+        // console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString());
+        // console.log("\n");
+
+        let statDate;
+        let vTotalGross = 0;
+        let vKlms = 0;
+        let vTrips = 0;
+        let vIncentiveNOTIncludedInGross = 0;
+        let vFuelPurchaseTotal = 0;
+        let vHours = 0;
+        let vMinutes = 0;
+        for (d = 0; d < 7; d++){
+            statDate = new Date(uberWeekBeginDate * 1 + (86400000 * d));
+            // console.log(statDate.toISOString().slice(0,10));
+            for (var i=0; i < aDriverDayBook.length; i++){
+                // console.log(aDriverDayBook[i].xDate);
+                if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
+                    // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+                    vTotalGross += aDriverDayBook[i].xTotalGross * 1;
+                    vKlms += aDriverDayBook[i].xKlms * 1;
+                    vTrips += aDriverDayBook[i].xTrips * 1
+                    vHours += aDriverDayBook[i].xHoursOnline * 1
+                    vMinutes += aDriverDayBook[i].xMinutesOnline * 1
+                    vIncentiveNOTIncludedInGross += aDriverDayBook[i].xIncentiveNOTIncludedInGross * 1
+                    vFuelPurchaseTotal += aDriverDayBook[i].xFuelPurchaseTotal * 1
+                }
+            }
+        }
+        // console.log(vTotalGross,vKlms,vTotalGross/vKlms);
+        document.getElementById("vTotalGross").value = (vTotalGross).toFixed(2);
+        document.getElementById("vKlms").value = (vKlms).toFixed(1);
+        document.getElementById("vGrossPerKlm").value = (vTotalGross / vKlms).toFixed(2);
+        document.getElementById("vTrips").value = vTrips;
+        document.getElementById("vGrossPerTrip").value = (vTotalGross / vTrips).toFixed(2);
+        document.getElementById("vHours").value = (vHours + (vMinutes / 60)).toFixed(1);
+        document.getElementById("vGrossPerHour").value = (vTotalGross / (vHours + (vMinutes / 60))).toFixed(2);
+        document.getElementById("vIncentiveNOTIncludedInGross").value = vIncentiveNOTIncludedInGross;
+        document.getElementById("vFuelPurchaseTotal").value = vFuelPurchaseTotal;
+    }
+// UPDATE WEEK STATS end
+
+// UPDATE QTR STATS start
+function updateQtrStats(myDate){
+
+    console.log(myDate);
+    const selectedMonth = parseFloat(new Date(myDate).getMonth() + 1,0);
+    console.log(selectedMonth);
+    let selectedQuarter;
+    switch(true) {
+        case selectedMonth <= 3:
+            console.log("selected quarter = 3");
+            selectedQuarter = 3
+            break;
+        case selectedMonth <= 6:
+            console.log("selected quarter = 4");
+            selectedQuarter = 4
+            break;
+        case selectedMonth <= 9:
+            console.log("selected quarter = 1");
+            selectedQuarter = 1
+            break;
+        case selectedMonth <= 12:
+            console.log("selected quarter = 2");
+            selectedQuarter = 2
+            break;
+        default:
+            console.log("selected quarter = ?");
+            selectedQuarter = 0
+    }
+
+    let vTotalGrossQtr = 0;
+    let vFuelPurchaseTotalQtr = 0;
+    let vVehicleServiceScheduledQtr = 0;
+    let vVehicleServiceNonScheduledQtr = 0;
+    let vVehicleRepairsQtr = 0;
+    let vVehicleTyresReplaceQtr = 0;
+    let vVehicleTyresRepairQtr = 0;
+    let vVehicleInsurancePremiumQtr = 0;
+    let vVehicleInsuranceExcessQtr = 0;
+    let vOtherCostDollars1Qtr = 0;
+
+    let dayBookMonth;
+    let dayBookQuarter;
+    for (var i=0; i < aDriverDayBook.length; i++){
+        dayBookMonth = new Date(aDriverDayBook[i].xDate).getMonth() + 1;
+        switch(true) {
+            case dayBookMonth <= 3:
+                console.log("dayBook quarter = 3");
+                dayBookQuarter = 3
+                break;
+            case dayBookMonth <= 6:
+                console.log("dayBook quarter = 4");
+                dayBookQuarter = 4
+                break;
+            case dayBookMonth <= 9:
+                console.log("dayBook quarter = 1");
+                dayBookQuarter = 1
+                break;
+            case dayBookMonth <= 12:
+                console.log("dayBook quarter = 2");
+                dayBookQuarter = 2
+                break;
+            default:
+                console.log("dayBook quarter = ?");
+                dayBookQuarter = 0
+        }
+        if (dayBookQuarter===selectedQuarter){
+            console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter);
+            vTotalGrossQtr += aDriverDayBook[i].xTotalGross * 1;
+            vFuelPurchaseTotalQtr += aDriverDayBook[i].xFuelPurchaseTotal * 1;
+            vVehicleServiceScheduledQtr += aDriverDayBook[i].xVehicleServiceScheduled * 1;
+            vVehicleServiceNonScheduledQtr += aDriverDayBook[i].xVehicleServiceNonScheduled * 1;
+            vVehicleRepairsQtr  += aDriverDayBook[i].xVehicleRepairs * 1;
+            vVehicleTyresReplaceQtr  += aDriverDayBook[i].xVehicleTyresReplace * 1;
+            vVehicleTyresRepairQtr  += aDriverDayBook[i].xVehicleTyresRepair * 1;
+            vVehicleInsurancePremiumQtr  += aDriverDayBook[i].xVehicleInsurancePremium * 1;
+            vVehicleInsuranceExcessQtr  += aDriverDayBook[i].xVehicleInsuranceExcess * 1;
+            vOtherCostDollars1Qtr  += aDriverDayBook[i].xOtherCostDollars1 * 1;
+        }
+        document.getElementById("vTotalGrossQtr").value = (vTotalGrossQtr).toFixed(2);
+        document.getElementById("vFuelPurchaseTotalQtr").value = vFuelPurchaseTotalQtr.toFixed(2);
+        document.getElementById("vVehicleServiceScheduledQtr").value = vVehicleServiceScheduledQtr.toFixed(2);
+        document.getElementById("vVehicleServiceNonScheduledQtr").value = vVehicleServiceNonScheduledQtr.toFixed(2);
+        document.getElementById("vVehicleRepairsQtr").value = vVehicleRepairsQtr.toFixed(2);
+        document.getElementById("vVehicleTyresReplaceQtr").value = vVehicleTyresReplaceQtr.toFixed(2);
+        document.getElementById("vVehicleTyresRepairQtr").value = vVehicleTyresRepairQtr.toFixed(2);
+        document.getElementById("vVehicleInsurancePremiumQtr").value = vVehicleInsurancePremiumQtr.toFixed(2);
+        document.getElementById("vVehicleInsuranceExcessQtr").value = vVehicleInsuranceExcessQtr.toFixed(2);
+        document.getElementById("vOtherCostDollars1Qtr").value = vOtherCostDollars1Qtr.toFixed(2);
+    
+ 
+    
+        // // console.log(aDriverDayBook[i].xDate);
+        // if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
+        //     // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+        //     vTotalGross += aDriverDayBook[i].xTotalGross * 1;
+        //     vKlms += aDriverDayBook[i].xKlms * 1;
+        //     vTrips += aDriverDayBook[i].xTrips * 1
+        //     vHours += aDriverDayBook[i].xHoursOnline * 1
+        //     vMinutes += aDriverDayBook[i].xMinutesOnline * 1
+        //     vIncentiveNOTIncludedInGross += aDriverDayBook[i].xIncentiveNOTIncludedInGross * 1
+        //     vFuelPurchaseTotal += aDriverDayBook[i].xFuelPurchaseTotal * 1
+        // }
+    }
+
+    // const basQtr1DateStart = new Date("01-07" + xDate.getFullYear());
+    // const basQtr1DateEnd = new Date("30-09" + xDate.getFullYear());
+    // const basQtr2DateStart = new Date("01-10" + xDate.getFullYear());
+    // const basQtr2DateEnd = new Date("31-12" + xDate.getFullYear());
+    // const basQtr3DateStart = new Date("01-01" + xDate.getFullYear());
+    // const basQtr3DateEnd = new Date("31-03" + xDate.getFullYear());
+    // const basQtr4DateStart = new Date("01-04" + xDate.getFullYear());
+    // const basQtr4DateEnd = new Date("30-06" + xDate.getFullYear());
+
 
     const d0 = new Date(myDate);
     const d0Day = new Date(myDate).getDay();
@@ -416,6 +599,8 @@ function updateWeekStats(myDate){
     document.getElementById("vIncentiveNOTIncludedInGross").value = vIncentiveNOTIncludedInGross;
     document.getElementById("vFuelPurchaseTotal").value = vFuelPurchaseTotal;
 }
+// UPDATE QTR STATS end
+
 
 function timeStampString(){
     const v_dateNow = new Date(); 
@@ -442,27 +627,27 @@ function timeStampString(){
 
 // CHECK OUT user file START
 async function checkOutUserFiles(userPIN){
-    // console.log('checkOut')};
+    if(consoleOn===true){console.log('checkOut')};
     const v_data = JSON.stringify(
         {
             v_userPIN: userPIN
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/checkOut options:- ',v_options)};
+    if(consoleOn===true){console.log('/checkOut options:- ',v_options)};
     await fetch('/checkOut',v_options)
     .then(res => {
-        // console.log('checkOut:- res.body:- ',res.body)};
-        // console.log('checkOut:- res.json():- ',res.json())};
+        if(consoleOn===true){console.log('checkOut:- res.body:- ',res.body)};
+        if(consoleOn===true){console.log('checkOut:- res.json():- ',res.json())};
         return res.json();
         // return res.tex4t();
     })
     .then((res_data) => {
-        // console.log('checkOut:-\n jsonObject:- res_data\n',res_data)};
-        // console.log('checkOut:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[1].v_emailAddress)};
+        if(consoleOn===true){console.log('checkOut:-\n jsonObject:- res_data\n',res_data)};
+        if(consoleOn===true){console.log('checkOut:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[1].v_emailAddress)};
         aDriverDayBook = res_data;
-        // console.log('checkOut:- jsonObject:- ',JSON.stringify(res_data))};
-        // console.log('checkOut:- jsonObject:- ',JSON.parse(res_data))};
+        if(consoleOn===true){console.log('checkOut:- jsonObject:- ',JSON.stringify(res_data))};
+        if(consoleOn===true){console.log('checkOut:- jsonObject:- ',JSON.parse(res_data))};
         // writeToLocalStorage('clickedTickerPrice',res_data.price);
         // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
         // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
@@ -485,24 +670,24 @@ async function checkOutUserFiles(userPIN){
     document.getElementById("xEndingOdometre").focus();
     document.getElementById("xEndingOdometre").select();
 
-    // console.log(aDriverDayBook)};
+    if(consoleOn===true){console.log(aDriverDayBook)};
     // const containsText = (element) => element.includes("2024-01-15");
-    // console.log(aDriverDayBook.findIndex(containsText))};
+    if(consoleOn===true){console.log(aDriverDayBook.findIndex(containsText))};
     for (i=0;i<aDriverDayBook.length;i++){
-        // console.log(JSON.stringify(aDriverDayBook[i]))};
+        if(consoleOn===true){console.log(JSON.stringify(aDriverDayBook[i]))};
         txt = JSON.stringify(aDriverDayBook[i]);
-        // console.log(txt.search("2024-01-15"))};
+        if(consoleOn===true){console.log(txt.search("2024-01-15"))};
         if (txt.search("2024-01-15")>=0){
 
         };
     }
 
-    // console.log(aDriverDayBook.v_emailAddress)};
-    // console.log(aDriverDayBook)};
-    // console.log(JSON.stringify(aDriverDayBook))};
+    if(consoleOn===true){console.log(aDriverDayBook.v_emailAddress)};
+    if(consoleOn===true){console.log(aDriverDayBook)};
+    if(consoleOn===true){console.log(JSON.stringify(aDriverDayBook))};
     // aDriverDayBook.push(JSON.parse(`{"Date":20231226,"Odometre":64000}`));
-    // console.log(aDriverDayBook)};
-    // console.log(JSON.stringify(aDriverDayBook))};
+    if(consoleOn===true){console.log(aDriverDayBook)};
+    if(consoleOn===true){console.log(JSON.stringify(aDriverDayBook))};
 } 
 // CHECK OUT user file END
 
@@ -616,8 +801,10 @@ async function login(){
 
 // login2fa - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function login2(){
-    const uEmail = document.getElementById("uEmail").value;
-    const accessCode = document.getElementById("login2code").value;
+    // const uEmail = document.getElementById("uEmail").value;
+    const uEmail = "donald.garton@outlook.com";
+    // const accessCode = document.getElementById("login2code").value;
+    const accessCode = "06";
     const v_data = JSON.stringify(
         {
             v_uEmail: uEmail,

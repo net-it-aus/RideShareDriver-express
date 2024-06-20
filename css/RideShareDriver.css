@@ -121,7 +121,7 @@ fieldset input{
 }
 .driver-records-container{
     display:none;
-    margin-top: 40px;
+    margin-top: 100px;
 }
 .IndexedDB_rsd_rsdDayBook{
     display:none;
@@ -173,7 +173,7 @@ fieldset input{
     }
     .dateNavigationButtonsContainer{
         display:none;
-        flex-direction: row;
+        flex-direction: column;
         position:fixed;
         top:0px;
         left:10px;
@@ -183,6 +183,40 @@ fieldset input{
         /* padding-right:20px; */
         user-select: none;
         background-color:darkslategrey;
+        border-bottom: 1px solid black;
+        z-index: 100;
+    }
+    .dateNavigationButtonsContainer1of2{
+        display:flex;
+        flex-direction: row;
+        /* position:fixed; */
+        /* top:0px; */
+        left:10px;
+        gap:10px;
+        max-width:fit-content;
+        /* margin-bottom: 5px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+        user-select: none;
+        background-color:darkslategrey;
+        /* border-bottom: 1px solid black; */
+        z-index: 100;
+    }
+    .dateNavigationButtonsContainer2of2{
+        display:flex;
+        flex-direction: row;
+        /* position:fixed; */
+        /* top:0px; */
+        left:10px;
+        gap:10px;
+        max-width:fit-content;
+        /* margin-bottom: 5px; */
+        /* padding-left:20px; */
+        /* padding-right:20px; */
+        user-select: none;
+        background-color:darkslategrey;
+        /* border-bottom: 1px solid black; */
+        z-index: 100;
     }
     .htmlArrowLeft_day{
         /* display:block; */

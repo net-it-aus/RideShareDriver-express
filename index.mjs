@@ -217,7 +217,7 @@ function updateUserFile(req,res){
 // checkOutUserFile START //////////////////////////////////////////////////////
 function checkOutUserFile(req,res,userPIN_checkOut){
     console.log("checkOut !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body);
+    console.log(req.body);
     const v_fileName = userPIN_checkOut + "_checkedIN";
 
     // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
@@ -434,6 +434,7 @@ app.all('*', (req, res) => {
             break;
         case '/checkOut':
             const userPIN_checkOut = req.body.v_userPIN;
+            console.log(userPIN_checkOut);
             checkOutUserFile(req,res,userPIN_checkOut);
             break;
         case '/update':
