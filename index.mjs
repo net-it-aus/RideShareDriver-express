@@ -203,9 +203,9 @@ function updateUserFile(req,res){
 
     fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
         if (err){
-            console.log("updateUserFile err");
+            console.log("updateUserFile err\n",Date().slice(0, 25));
         } else {
-            console.log("updateUserFile OK");
+            console.log("updateUserFile OK\n",Date().slice(0, 25));
             res.send(req.body);
             res.end
         }
@@ -395,9 +395,9 @@ app.all('*', (req, res) => {
         console.log('emailBodyText:- ' + emailBodyText + '' + Date().slice(0,25));
         fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',emailBodyText.slice(0,255),(err) => {
             if (err){
-                console.log("updated siteLog err");
+                console.log("updated siteLog err\n",Date().slice(0, 25));
             } else {
-                console.log("updated siteLog OK");
+                console.log("updated siteLog OK\n",Date().slice(0, 25));
             }
         });
         // // emailSiteVisit(emailBodyHTML,emailBodyText);

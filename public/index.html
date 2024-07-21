@@ -520,14 +520,25 @@
             Ride Share vehicles cannot pick you up at a Taxi Rank or in a Taxi Zone.</p>
             <ul>Ride Share vehicles cannot pick you up
                 <li>at Traffic Lights</li>
+                <li>on Clearways</li>
                 <li>in No Stopping Zones</li>
                 <li>at Bus Stops</li>
                 <li>in Taxi Zones</li>
-                <li>in unsafe places, for example:-
-                    <ul>
-                        <li>at street corners</li>
-                    </ul>
-                </li>
+                <li>at Pedestrian Crossings</li>
+                <li>at Fire Hydrants</li>
+                <li>at street corners</li>
+            </ul>
+            <ul>Best places to wait for pickup
+                <li>wherever parking is allowed</li>
+                <ul>
+                    <li>...please stand in a parking spot to reserve it for your pickup, but only if safe to do so<br>
+                        ...move back off the roadway to allow the driver to park for pickup
+                    </li>
+                </ul>
+                <li>No Parking Zones</li>
+                <li>parking bays</li>
+                <li>Loading Zones</li>
+                <li>Mail Zones</li>
             </ul>
             <ul><u>Do</u>
                 <li>wait for the vehicle to stop</li>
@@ -539,6 +550,7 @@
                 <li>Riding in the front seat?</u>
                     <ul>
                         <li>Front seat riders should not enter the vehicle unless the driver is also seated in the vehicle.</li>
+                        <li>Ask for permission before adjusting the seat.</li>
                     </ul>
                 </li>
             </ul>
@@ -580,23 +592,18 @@
             <ul>
                 <li>safety*</li>
                 <li>emergencies</li>
-                <!-- <li>Driver</li> -->
-                <!-- <li>Driver's vehicle</li> -->
                 <li>ending a Ride</li>
                 <li>physical contact</li>
                 <li>threatening and rude behaviour</li>
                 <li>property damage</li>
             </ul>
-            * The SAFETY both mental and physical of Riders, the Driver and their property is at the forefront of these guidelines.
+            * The SAFETY both mental and physical of Riders, the Driver & their property and the Public are at the forefront of these guidelines.
 
             <h2>Safety*</h2>
-            <p>The SAFETY both mental and physical of Riders, Drivers and their property (including the Driver's vehicle) is at the forefront of these guidelines.</p>
+            <p>The SAFETY both mental and physical of Riders, Drivers & their property (including the Driver's vehicle) and the Public are at the forefront of these guidelines.</p>
 
             <h2>Emergencies</h2>
             <p>Do not use Ride Share for emergency transport.  Consider if an Ambulance or a Police escort is necessary and make arrangements by calling your local emergency services.</p>
-
-            <!-- <h2>Driver's Vehicle</h2> -->
-            <!-- <p>A Motor Vehicle is an expensive asset to a Ride Share Driver. ...to anyone really. </p> -->
 
             <h2>Ending a Ride</h2>
             <p>The Ride can be cancelled/ended by the Rider or the Driver at any time.</p>
@@ -625,85 +632,49 @@
             <h2>Property damage</h2>
             <p>If you damage property, you’re responsible for the cost of cleaning and repair fees.</p>
         </div>
-        <!-- <div id="IndexedDB_rsd_rsdDayBook" class="IndexedDB_rsd_rsdDayBook"></div> -->
 
-    <!-- login DIV start -->
         <div id="driverRecordsAccessControl" class="driver-records-access-control">
-            <!-- <h1>Driver login</h1> -->
-            <!-- <i>Access My Driver Records</i> -->
-            <!-- <label for="xAccess">Please enter "User Access Code" to access driver records data:<br><i style="color:green">(New User?  Enter code "aus")</i></label> -->
-            <!-- <input type="text" name="xAccess" id ="xAccess" value="" onclick="viewDataStored()" autocapitalize="none"/> -->
-            <!-- <input type="password" name="xAccess" id ="xAccess" autocapitalize="none" onchange="driverRecordsAccess(this)"/> -->
-            <!-- <br> -->
             <div id="loginButton" class="driver-records-access-control-button">Driver login</div>
         </div>
         <br>
-    <!-- login DIV end -->
 
-    <!-- login FORM login1 start -->
         <div id="login1" class="login1">
 
-            <!-- <form class="login1-form animate" action="/action_page.php" method="post"> -->
             <form class="login1-form animate">
-                <!-- <div class="imgcontainer">
-                    <span onclick="document.getElementById('login1').style.display='none'" class="close" title="Close login1">&times;</span>
-                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                </div> -->
-
                 <div class="container">
+
                     <label for="uEmail"><b>Username</b></label>
                     <input type="text" class="input-width-fit-content" placeholder="Enter Username" id="uEmail" name="uEmail" required pattern="^\S+@\S+$">
 
                     <label for="pw"><b>Password?<br>( Not required, a One Time Use Password will be emailed to you. )</b></label>
-                    <!-- <input type="password" placeholder="OTUP security" id="pw" name="pw" disabled> -->
-
-                    <!-- <div id="pw2" style="left: -100;">
-                        <label for="pw2"><b>Password confirmation</b></label>
-                        <input type="password" placeholder="Confirm Password" id="pw2" name="pw2" required>
-                    </div> -->
-
                     <br>
-                    <!-- <button type="submit" onclick="create()">login</button> -->
-                    <!-- <button type="submit" onclick="login()">login</button> -->
+
                     <div class="button" onclick="login()" >login</div>
-                    <!-- <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label> -->
+
                 </div>
 
                 <div class="container" style="x-background-color:#f1f1f1">
                     <div class="button-red" onclick="document.getElementById('login1').style.display='none'" >Cancel</div>
-                    <!-- <span class="pw">Forgot <a href="#">password?</a></span> -->
                 </div>
             </form>
         </div>
-    <!-- login FORM login1 end -->
 
-    <!-- login FORM login2 start -->
     <div id="login2" class="login2">
 
-        <!-- <form class="login1-form animate" action="/action_page.php" method="post"> -->
         <form class="login2-form animate">
-            <!-- <div class="imgcontainer">
-                <span onclick="document.getElementById('login1').style.display='none'" class="close" title="Close login1">&times;</span>
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
-            </div> -->
 
             <div class="container">
                 <label for="login2code"><b>Please enter the 'One Time Use Password' - emailed to you just now.</b></label>
                 <input type="number" inputmode="decimal" pattern="\d*" id="login2code" name="login2code" min="0" step="1" required>
-                <!-- <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" class="xData" /> -->
                 <br>
                 <div class="button" onclick="login2()" >Submit OTUP</div>
             </div>
 
             <div class="container" style="x-background-color:#f1f1f1">
                 <div class="button-red" onclick="document.getElementById('login2').style.display='none'" >Cancel</div>
-                <!-- <span class="pw">Forgot <a href="#">password?</a></span> -->
             </div>
         </form>
     </div>
-    <!-- login FORM login2 end -->
 
     <footer>
         <div style="border-top:1px solid rgba(255,255,255,.5);text-align:right;"><a href="https://netit.com.au" target="_blank" style="padding:5px;color:green;font-size:0.8rem;">Web Site by Net IT Australia</a></div>
