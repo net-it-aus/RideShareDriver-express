@@ -120,7 +120,7 @@ fieldset input{
     background-color: antiquewhite;
 }
 .driver-records-container{
-    /* display:none; */
+    display:none;
     margin-top: 100px;
 }
 .IndexedDB_rsd_rsdDayBook{
@@ -172,7 +172,7 @@ fieldset input{
         margin-top: 5px;
     }
     .dateNavigationButtonsContainer{
-        /* display:none; */
+        display:none;
         flex-direction: column;
         position:fixed;
         top:0px;

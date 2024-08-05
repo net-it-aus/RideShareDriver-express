@@ -9,6 +9,7 @@
 .global-button-animation{
     /* 1) animation-name 2) animation-duration 3) animation-timing-function 4) animation-delay 5) animation-iteration-count 6) animation-direction 7) animation-fill-mode */
     animation: buttonClick_Scale_Wobble 0.25s ease 0s 1 normal;
+    -webkit-animation: buttonClick_Scale_Wobble 0.25s ease 0s 1 normal;
     /* animation-name: buttonClick_Scale_Wobble; */
     /* animation-duration: 0.25s; */
     /* animation-timing-function:ease; */
