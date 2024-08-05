@@ -1,0 +1,29 @@
+/* <!-- collapse all     Ctrl + k + 0 --> */
+/* <!-- expand all       Ctrl + k + j --> */
+/* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
+/* <!-- word wrap toggle Alt + z --> */
+
+.x-global-button-animation{ 
+    color:red !important;
+}
+.global-button-animation{
+    /* 1) animation-name 2) animation-duration 3) animation-timing-function 4) animation-delay 5) animation-iteration-count 6) animation-direction 7) animation-fill-mode */
+    animation: buttonClick_Scale_Wobble 0.25s ease 0s 1 normal;
+    /* animation-name: buttonClick_Scale_Wobble; */
+    /* animation-duration: 0.25s; */
+    /* animation-timing-function:ease; */
+        /* linear ease ease-in ease-out ease-in-out cubic-bezier(n,n,n,n) */ 
+    /* animation-delay: 0s; */
+    /* animation-iteration-count: 1; */
+    /* animation-direction: normal; */
+        /* normal reverse alternate alternate-reverse */
+    /* animation-fill-mode: none; */
+        /* none forwards backwards both */
+}
+@keyframes buttonClick_Scale_Wobble {
+    0%   {rotate: 2.5deg; scale:1.3;background-color:black;}
+    25%  {rotate: -2.5deg;scale:1.2;background-color:white;}
+    50%  {rotate: 2.5deg;scale:1.2;background-color:black;}
+    75%  {rotate: -2.5deg;scale:1.1;background-color:white;}
+    100% {rotate: 0deg;scale:1.0;background-color:black;}
+}

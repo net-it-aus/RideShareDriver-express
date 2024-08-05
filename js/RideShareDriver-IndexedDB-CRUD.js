@@ -4,6 +4,7 @@
 // <!-- word wrap toggle Alt + z -->
 
 function idbAdd(p_database,p_store,p_objectString){
+    return
     // q(p_database,p_store,p_objectString)};
     var dbOpenRequest = indexedDB.open(p_database); // first step is opening the database
     dbOpenRequest.onsuccess = function(e) {

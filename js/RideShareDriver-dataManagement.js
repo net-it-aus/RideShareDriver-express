@@ -1,6 +1,7 @@
-// <!-- collapse all     Ctrl + k + 0 -->
-// <!-- expand all       Ctrl + k + j -->
-// <!-- word wrap toggle Alt + z -->
+/* <!-- collapse all     Ctrl + k + 0 --> */
+/* <!-- expand all       Ctrl + k + j --> */
+/* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
+/* <!-- word wrap toggle Alt + z --> */
 
 const consoleOn = true;
 let t;

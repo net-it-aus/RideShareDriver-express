@@ -21,6 +21,6 @@
     "helmet": "^7.1.0",
     "node-fetch": "^3.3.2",
     "nodejs-nodemailer-outlook": "^1.2.4",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.14"
   }
 }

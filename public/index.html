@@ -21,6 +21,9 @@
 
         <link href="https://fonts.googleapis.com/css?family=Cagliostro" rel="stylesheet">
 
+        <link rel="stylesheet" href="net-it-aus-animations.css" type="text/css">
+        <script src="net-it-aus-animations.js" type="text/JavaScript"></script>
+
         <link rel="stylesheet" href="RideShareDriver.css" type="text/css">
         <!-- <link rel="stylesheet" href="../css/RideShareDriver.css" type="text/css"> -->
 
@@ -49,29 +52,29 @@
 
                     <!-- <div> -->
                         <!-- <span>&nbsp;</span> -->
-                        <div id="dateFixedPos" class="button-date dateFixedPos"></div>
+                        <div id="dateFixedPos" class="button-date dateFixedPos" ></div>
                         <!-- <span>&nbsp;</span> -->
                     <!-- </div> -->
                     
                     <!-- <div> -->
                         <!-- <span>&nbsp;</span> -->
-                        <div id="dayBook_DateLeftButton" class="button htmlArrowLeft_day">&#10148;</div>
+                        <div id="dayBook_DateLeftButton" class="button htmlArrowLeft_day  animated-button">&#10148;</div>
                         <!-- <span>&nbsp;</span> -->
                     <!-- </div> -->
                     <!-- <div> -->
                         <!-- <span>&nbsp;</span> -->
-                        <div id="dayBook_DateRightButton" class="button htmlArrowRight_day">&#10148;</div>
+                        <div id="dayBook_DateRightButton" class="button htmlArrowRight_day  animated-button">&#10148;</div>
                         <!-- <span>&nbsp;</span> -->
                     <!-- </div> -->
 
                     <!-- <div> -->
                         <!-- <span>&nbsp;</span> -->
-                        <div id="dayBook_WeekLeftButton" class="button htmlArrowLeft_week">&#10148;&#10148;</div>
+                        <div id="dayBook_WeekLeftButton" class="button htmlArrowLeft_week  animated-button">&#10148;&#10148;</div>
                         <!-- <span>&nbsp;</span> -->
                     <!-- </div> -->
                     <!-- <div> -->
                         <!-- <span>&nbsp;</span> -->
-                        <div id="dayBook_WeekRightButton" class="button htmlArrowRight_week">&#10148;&#10148;</div>
+                        <div id="dayBook_WeekRightButton" class="button htmlArrowRight_week  animated-button">&#10148;&#10148;</div>
                         <!-- <span>&nbsp;</span> -->
                     <!-- </div> -->
 
@@ -80,13 +83,13 @@
                 <div id="dateNavigationButtonsContainer2of2" class="dateNavigationButtonsContainer2of2">
 
                     <!-- <div class="form-as-table"> -->
-                        <div class="button" onclick="saveDriverDayBookRecord()">Save.</div>
+                        <div id="dayBook_saveButton" class="button animated-button" onclick="saveDriverDayBookRecord()" >Save.</div>
                     <!-- </div> -->
                     <!-- <div class="form-as-table"> -->
-                        <div class="button" onclick="emailMyDeviceDataTo()">Email.</div>
+                        <div id="dayBook_emailButton" class="button animated-button" onclick="emailMyDeviceDataTo()" >Email.</div>
                     <!-- </div> -->
                     <!-- <div class="form-as-table"> -->
-                        <div class="button" onclick="exportDayBookToCSV()">Download.</div>
+                        <div id="dayBook_downloadButton" class="button animated-button" onclick="exportDayBookToCSV()" >Download.</div>
                     <!-- </div> -->
 
                 </div>
@@ -538,7 +541,7 @@
                 <li>No Parking Zones</li>
                 <li>parking bays</li>
                 <li>Loading Zones</li>
-                <li>Mail Zones</li>
+                <!-- <li>Mail Zones</li> -->
             </ul>
             <ul><u>Do</u>
                 <li>wait for the vehicle to stop</li>
