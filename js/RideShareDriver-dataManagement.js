@@ -3,7 +3,7 @@
 /* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
 /* <!-- word wrap toggle Alt + z --> */
 
-const consoleOn = true;
+const consoleOn = false;
 let t;
 let aDriverDayBook = [];
 // Sunday is the first day of the week
@@ -260,6 +260,10 @@ let aDriverDayBook = [];
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
                     document.getElementById("xDollarsPerHour").value = null;
                 }
+                if (datval_xTotalGross.value.length>0){
+                    document.getElementById("xTotalGrossXexclGST").value = (parseFloat(datval_xTotalGross.value) / 1.1).toFixed(2);
+                }
+                calcNetB4tax();
             }
             // if (datval_xTotalGross.validity.valid) {
             //     console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length)};
@@ -281,8 +285,16 @@ let aDriverDayBook = [];
                     document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
                     document.getElementById("xDollarsPerKlm").value = null;
                 }
+                calcNetB4tax();
             }
         });
+        function calcNetB4tax(){
+            if (document.getElementById("xKlms").value.length>0){
+                document.getElementById("xExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
+                document.getElementById("xExpensesCentsPerKlm").value = (document.getElementById("xKlms").value * document.getElementById("xExpensesCentsPerKlmRate").value).toFixed(2);
+                document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
+            }
+        }
         const datval_xHoursOnline = document.getElementById("xHoursOnline");
         datval_xHoursOnline.addEventListener("change", (event) => {
             document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
@@ -428,29 +440,29 @@ function dateChange(){
 // UPDATE QTR STATS start
 function updateQtrStats(myDate){
 
-    console.log(myDate);
+    // console.log(myDate);
     const selectedMonth = parseFloat(new Date(myDate).getMonth() + 1,0);
-    console.log(selectedMonth);
+    // console.log(selectedMonth);
     let selectedQuarter;
     switch(true) {
         case selectedMonth <= 3:
-            console.log("selected quarter = 3");
+            // console.log("selected quarter = 3");
             selectedQuarter = 3
             break;
         case selectedMonth <= 6:
-            console.log("selected quarter = 4");
+            // console.log("selected quarter = 4");
             selectedQuarter = 4
             break;
         case selectedMonth <= 9:
-            console.log("selected quarter = 1");
+            // console.log("selected quarter = 1");
             selectedQuarter = 1
             break;
         case selectedMonth <= 12:
-            console.log("selected quarter = 2");
+            // console.log("selected quarter = 2");
             selectedQuarter = 2
             break;
         default:
-            console.log("selected quarter = ?");
+            // console.log("selected quarter = ?");
             selectedQuarter = 0
     }
 
@@ -471,27 +483,27 @@ function updateQtrStats(myDate){
         dayBookMonth = new Date(aDriverDayBook[i].xDate).getMonth() + 1;
         switch(true) {
             case dayBookMonth <= 3:
-                console.log("dayBook quarter = 3");
+                // console.log("dayBook quarter = 3");
                 dayBookQuarter = 3
                 break;
             case dayBookMonth <= 6:
-                console.log("dayBook quarter = 4");
+                // console.log("dayBook quarter = 4");
                 dayBookQuarter = 4
                 break;
             case dayBookMonth <= 9:
-                console.log("dayBook quarter = 1");
+                // console.log("dayBook quarter = 1");
                 dayBookQuarter = 1
                 break;
             case dayBookMonth <= 12:
-                console.log("dayBook quarter = 2");
+                // console.log("dayBook quarter = 2");
                 dayBookQuarter = 2
                 break;
             default:
-                console.log("dayBook quarter = ?");
+                // console.log("dayBook quarter = ?");
                 dayBookQuarter = 0
         }
         if (dayBookQuarter===selectedQuarter){
-            console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter);
+            // console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter);
             vTotalGrossQtr += aDriverDayBook[i].xTotalGross * 1;
             vFuelPurchaseTotalQtr += aDriverDayBook[i].xFuelPurchaseTotal * 1;
             vVehicleServiceScheduledQtr += aDriverDayBook[i].xVehicleServiceScheduled * 1;

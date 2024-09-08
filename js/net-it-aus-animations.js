@@ -9,15 +9,15 @@ window.addEventListener("load", () => {
     function animateButtons(){
         const buttonsToAnimate = document.getElementsByClassName("animated-button");
         for (i = 0; i < buttonsToAnimate.length;i++){
-            console.log(buttonsToAnimate[i].id);
+            // console.log(buttonsToAnimate[i].id);
             document.getElementById(buttonsToAnimate[i].id).addEventListener("click", (event) => {
                 animatedButtonClicked(event.target.id);
             });
         }
     }
     function animatedButtonClicked(targetID){
-        console.log(targetID,"click");
-        console.log(targetID,document.getElementById(targetID).classList);
+        // console.log(targetID,"click");
+        // console.log(targetID,document.getElementById(targetID).classList);
         document.getElementById(targetID).classList.add("global-button-animation");
         setTimeout(animatedButtonRemoveAnimation,1000,targetID);
     }
