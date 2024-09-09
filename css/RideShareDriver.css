@@ -10,14 +10,17 @@
     font-size: 1.1rem;
     margin-left: 5px;
     color: white;
+    color: black;
     background-color:rgb(170,185,180);
     background-color:rgb(209, 248, 235);
     background-color:#436850;
     background-color:darkslategrey;
+    background-color:lightsteelblue;
 }
 h1 {
     /* color:rgba(0,0,255,.7); */
     color:chartreuse;
+    color:navy;
     /* background-color: rgba(255,255,0,.5); */
     /* background-color:rgb(170,185,180); */
     text-align: center;
@@ -26,10 +29,12 @@ h1 {
 h2 {
     /* color:rgba(0,0,255,.7); */
     color:blue;
-    color:turquoise;
-    color:lightgreen;
+    /* color:turquoise; */
+    /* color:lightgreen; */
     border-left: 1px solid yellowgreen;
     border-top: 1px solid yellowgreen;
+    border-left: 1px solid crimson;
+    border-top: 1px solid crimson;
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 5px 0 0 0;
@@ -70,6 +75,7 @@ label {
     border-radius: 5px;
     display: table-cell;
     padding-right: 10px;
+    background-color: inherit;
 }
 input {
     display: table-cell;

@@ -203,8 +203,8 @@
                             <input type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" onclick="sumTolls()" class="xData" />
                         <!-- </div> -->
                     </fieldset>
-                    <fieldset>
-                        <legend>Today's Performance</legend>
+                    <fieldset style="background-color:cadetblue;">
+                        <legend style="background-color:cadetblue;">&nbspToday's Performance&nbsp</legend>
                         <!-- <div class="form-as-table"> -->
                             <label for="xTotalGrossX">Total gross dollars earned: </label>
                             <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossX" id="xTotalGrossX" disabled readonly class="xData" />
@@ -274,8 +274,8 @@
                     </fieldset> -->
                     <fieldset>
                         <legend>Vehicle Costs</legend>
-                        <fieldset>
-                            <legend>Fuel Purhases</legend>
+                        <fieldset style="background-color:orange;">
+                            <legend style="background-color:orange;">&nbspFuel Purhases&nbsp</legend>
                             <!-- <div class="form-as-table"> -->
                                 <label for="xOdometreAtFillup">Odometre at re-fuel: </label>
                                 <input type="number" inputmode="decimal" pattern="\d*" name="xOdometreAtFillup" id="xOdometreAtFillup"  min="0" step="1" class="xData" />
@@ -410,8 +410,8 @@
                     let vIncentiveNOTIncludedInGross = 0;
                     let vFuelPurchaseTotal = 0; 
                 -->
-                <fieldset>
-                    <legend>Week Summary</legend>
+                <fieldset style="background-color:aquamarine;">
+                    <legend style="background-color:aquamarine;">&nbspWeek Summary&nbsp</legend>
                     <!-- <div class="form-as-table"> -->
                         <label for="vTotalGross">Total $'s earned: </label>
                         <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGross" id="vTotalGross" disabled readonly class="xData" />
@@ -457,6 +457,29 @@
                         <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotal" id="vFuelPurchaseTotal" disabled readonly class="xData" />
                         <!-- <hr class="hr-basic"> -->
                     <!-- </div> -->
+                     <fieldset style="background-color:white;">
+                        <legend style="background-color:white;">&nbspWeek Net Profit Estimate&nbsp</legend>
+                        <!-- <div class="form-as-table"> -->
+                            <label for="xTotalGrossXexclGSTWeek">Total gross dollars earned excl. GST: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossXexclGSTWeek" id="xTotalGrossXexclGSTWeek" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="xExpensesCentsPerKlmRateWeek">Expenses @ cents per klm rate: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmRateWeek" id="xExpensesCentsPerKlmRateWeek" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="xExpensesCentsPerKlmWeek">Expenses @ cents per klm: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmWeek" id="xExpensesCentsPerKlmWeek" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="xNetEarningsB4taxWeek">Net earnings before tax: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="xNetEarningsB4taxWeek" id="xNetEarningsB4taxWeek" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                     </fieldset>
                 </fieldset>
 
                 <fieldset>

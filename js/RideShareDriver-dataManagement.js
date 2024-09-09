@@ -295,6 +295,19 @@ let aDriverDayBook = [];
                 document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
             }
         }
+        document.getElementById("vKlms").addEventListener("change",(event) =>{
+            calcNetB4taxWeek();
+        });
+        document.getElementById("vTotalGross").addEventListener("change",(event) =>{
+            calcNetB4taxWeek();
+        });
+        function calcNetB4taxWeek(){
+            if (document.getElementById("vKlms").value.length>0){
+                document.getElementById("xExpensesCentsPerKlmRateWeek").value = (0.85).toFixed(2);
+                document.getElementById("xExpensesCentsPerKlmWeek").value = (document.getElementById("vKlms").value * document.getElementById("xExpensesCentsPerKlmRateWeek").value).toFixed(2);
+                document.getElementById("xNetEarningsB4taxWeek").value = (document.getElementById("xTotalGrossXexclGSTWeek").value - document.getElementById("xExpensesCentsPerKlmWeek").value).toFixed(2);
+            }
+        }
         const datval_xHoursOnline = document.getElementById("xHoursOnline");
         datval_xHoursOnline.addEventListener("change", (event) => {
             document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
