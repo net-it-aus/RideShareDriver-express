@@ -304,6 +304,7 @@ let aDriverDayBook = [];
 // wait for DOM to load END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function calcNetB4tax(){
     if (document.getElementById("xKlms").value.length>0){
+        document.getElementById("xTotalGrossXexclGST").value = (document.getElementById("xTotalGross").value / 1.1).toFixed(2);
         document.getElementById("xExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
         document.getElementById("xExpensesCentsPerKlm").value = (document.getElementById("xKlms").value * document.getElementById("xExpensesCentsPerKlmRate").value).toFixed(2);
         document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
@@ -329,6 +330,7 @@ function dateChange(){
     // console.log(frm);
 
     document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
+    document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
 
     // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
         Array.from(frm.elements).forEach((input) => {
