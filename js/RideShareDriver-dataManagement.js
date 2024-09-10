@@ -264,6 +264,7 @@ let aDriverDayBook = [];
                     document.getElementById("xTotalGrossXexclGST").value = (parseFloat(datval_xTotalGross.value) / 1.1).toFixed(2);
                 }
                 calcNetB4tax();
+                calcNetB4taxWeek();
             }
             // if (datval_xTotalGross.validity.valid) {
             //     console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length)};
@@ -286,28 +287,9 @@ let aDriverDayBook = [];
                     document.getElementById("xDollarsPerKlm").value = null;
                 }
                 calcNetB4tax();
+                calcNetB4taxWeek();
             }
         });
-        function calcNetB4tax(){
-            if (document.getElementById("xKlms").value.length>0){
-                document.getElementById("xExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
-                document.getElementById("xExpensesCentsPerKlm").value = (document.getElementById("xKlms").value * document.getElementById("xExpensesCentsPerKlmRate").value).toFixed(2);
-                document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
-            }
-        }
-        document.getElementById("vKlms").addEventListener("change",(event) =>{
-            calcNetB4taxWeek();
-        });
-        document.getElementById("vTotalGross").addEventListener("change",(event) =>{
-            calcNetB4taxWeek();
-        });
-        function calcNetB4taxWeek(){
-            if (document.getElementById("vKlms").value.length>0){
-                document.getElementById("xExpensesCentsPerKlmRateWeek").value = (0.85).toFixed(2);
-                document.getElementById("xExpensesCentsPerKlmWeek").value = (document.getElementById("vKlms").value * document.getElementById("xExpensesCentsPerKlmRateWeek").value).toFixed(2);
-                document.getElementById("xNetEarningsB4taxWeek").value = (document.getElementById("xTotalGrossXexclGSTWeek").value - document.getElementById("xExpensesCentsPerKlmWeek").value).toFixed(2);
-            }
-        }
         const datval_xHoursOnline = document.getElementById("xHoursOnline");
         datval_xHoursOnline.addEventListener("change", (event) => {
             document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
@@ -320,6 +302,21 @@ let aDriverDayBook = [];
     // window.addEventListener("load", () => {
     });
 // wait for DOM to load END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function calcNetB4tax(){
+    if (document.getElementById("xKlms").value.length>0){
+        document.getElementById("xExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
+        document.getElementById("xExpensesCentsPerKlm").value = (document.getElementById("xKlms").value * document.getElementById("xExpensesCentsPerKlmRate").value).toFixed(2);
+        document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
+    }
+}
+function calcNetB4taxWeek(){
+    if (document.getElementById("vKlms").value.length>0){
+        document.getElementById("xTotalGrossXexclGSTWeek").value = (document.getElementById("vTotalGross").value / 1.1).toFixed(2);
+        document.getElementById("xExpensesCentsPerKlmRateWeek").value = (0.85).toFixed(2);
+        document.getElementById("xExpensesCentsPerKlmWeek").value = (document.getElementById("vKlms").value * document.getElementById("xExpensesCentsPerKlmRateWeek").value).toFixed(2);
+        document.getElementById("xNetEarningsB4taxWeek").value = (document.getElementById("xTotalGrossXexclGSTWeek").value - document.getElementById("xExpensesCentsPerKlmWeek").value).toFixed(2);
+    }
+}
 
 function dateChange(){
 
@@ -380,6 +377,8 @@ function dateChange(){
     }
     updateWeekStats(datval_xDate.value);
     updateQtrStats(datval_xDate.value);
+    calcNetB4tax();
+    calcNetB4taxWeek();
 
 }
 
@@ -447,6 +446,7 @@ function dateChange(){
         document.getElementById("vGrossPerHour").value = (vTotalGross / (vHours + (vMinutes / 60))).toFixed(2);
         document.getElementById("vIncentiveNOTIncludedInGross").value = vIncentiveNOTIncludedInGross;
         document.getElementById("vFuelPurchaseTotal").value = vFuelPurchaseTotal;
+
     }
 // UPDATE WEEK STATS end
 
@@ -816,6 +816,10 @@ async function login(){
             document.getElementById("login2").style.display = "block";
             document.getElementById("login2code").focus();
             document.getElementById("login2code").select();
+            document.getElementById("login2code").addEventListener("blur",(event) =>{
+                document.getElementById("login2Button").focus();
+            });
+
        } else {
             // console.log(res_data[0].response);
             // create account

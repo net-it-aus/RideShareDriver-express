@@ -411,75 +411,77 @@
                     let vFuelPurchaseTotal = 0; 
                 -->
                 <fieldset style="background-color:aquamarine;">
-                    <legend style="background-color:aquamarine;">&nbspWeek Summary&nbsp</legend>
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vTotalGross">Total $'s earned: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGross" id="vTotalGross" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vKlms">Klms travelled: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vKlms" id="vKlms" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vGrossPerKlm">Gross per Klm: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerKlm" id="vGrossPerKlm" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vTrips">Trips: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vTrips" id="vTrips" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vGrossPerTrip">Gross per Trip: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerTrip" id="vGrossPerTrip" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vHours">Hours online: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vHours" id="vHours" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vGrossPerHour">Gross per Hour: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerHour" id="vGrossPerHour" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vIncentiveNOTIncludedInGross">Incentives received: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vIncentiveNOTIncludedInGross" id="vIncentiveNOTIncludedInGross" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                    <!-- <div class="form-as-table"> -->
-                        <label for="vFuelPurchaseTotal">Total fuel purchase $'s: </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotal" id="vFuelPurchaseTotal" disabled readonly class="xData" />
-                        <!-- <hr class="hr-basic"> -->
-                    <!-- </div> -->
-                     <fieldset style="background-color:white;">
-                        <legend style="background-color:white;">&nbspWeek Net Profit Estimate&nbsp</legend>
+                    <div id="weekSummaryFieldset">
+                        <legend style="background-color:aquamarine;">&nbspWeek Summary&nbsp</legend>
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTotalGrossXexclGSTWeek">Total gross dollars earned excl. GST: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossXexclGSTWeek" id="xTotalGrossXexclGSTWeek" disabled readonly class="xData" />
+                            <label for="vTotalGross">Total $'s earned: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGross" id="vTotalGross" disabled readonly class="xData" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xExpensesCentsPerKlmRateWeek">Expenses @ cents per klm rate: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmRateWeek" id="xExpensesCentsPerKlmRateWeek" disabled readonly class="xData" />
+                            <label for="vKlms">Klms travelled: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vKlms" id="vKlms" disabled readonly class="xData" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xExpensesCentsPerKlmWeek">Expenses @ cents per klm: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmWeek" id="xExpensesCentsPerKlmWeek" disabled readonly class="xData" />
+                            <label for="vGrossPerKlm">Gross per Klm: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerKlm" id="vGrossPerKlm" disabled readonly class="xData" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xNetEarningsB4taxWeek">Net earnings before tax: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xNetEarningsB4taxWeek" id="xNetEarningsB4taxWeek" disabled readonly class="xData" />
+                            <label for="vTrips">Trips: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vTrips" id="vTrips" disabled readonly class="xData" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
-                     </fieldset>
+                        <!-- <div class="form-as-table"> -->
+                            <label for="vGrossPerTrip">Gross per Trip: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerTrip" id="vGrossPerTrip" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="vHours">Hours online: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vHours" id="vHours" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="vGrossPerHour">Gross per Hour: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerHour" id="vGrossPerHour" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="vIncentiveNOTIncludedInGross">Incentives received: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vIncentiveNOTIncludedInGross" id="vIncentiveNOTIncludedInGross" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-as-table"> -->
+                            <label for="vFuelPurchaseTotal">Total fuel purchase $'s: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotal" id="vFuelPurchaseTotal" disabled readonly class="xData" />
+                            <!-- <hr class="hr-basic"> -->
+                        <!-- </div> -->
+                        <fieldset style="background-color:white;">
+                            <legend style="background-color:white;">&nbspWeek Net Profit Estimate&nbsp</legend>
+                            <!-- <div class="form-as-table"> -->
+                                <label for="xTotalGrossXexclGSTWeek">Total gross dollars earned excl. GST: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossXexclGSTWeek" id="xTotalGrossXexclGSTWeek" disabled readonly class="xData" />
+                                <!-- <hr class="hr-basic"> -->
+                            <!-- </div> -->
+                            <!-- <div class="form-as-table"> -->
+                                <label for="xExpensesCentsPerKlmRateWeek">Expenses @ cents per klm rate: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmRateWeek" id="xExpensesCentsPerKlmRateWeek" disabled readonly class="xData" />
+                                <!-- <hr class="hr-basic"> -->
+                            <!-- </div> -->
+                            <!-- <div class="form-as-table"> -->
+                                <label for="xExpensesCentsPerKlmWeek">Expenses @ cents per klm: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmWeek" id="xExpensesCentsPerKlmWeek" disabled readonly class="xData" />
+                                <!-- <hr class="hr-basic"> -->
+                            <!-- </div> -->
+                            <!-- <div class="form-as-table"> -->
+                                <label for="xNetEarningsB4taxWeek">Net earnings before tax: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="xNetEarningsB4taxWeek" id="xNetEarningsB4taxWeek" disabled readonly class="xData" />
+                                <!-- <hr class="hr-basic"> -->
+                            <!-- </div> -->
+                        </fieldset>
+                    </div>
                 </fieldset>
 
                 <fieldset>
@@ -713,7 +715,7 @@
                 <label for="login2code"><b>Please enter the 'One Time Use Password' - emailed to you just now.</b></label>
                 <input type="number" inputmode="decimal" pattern="\d*" id="login2code" name="login2code" min="0" step="1" required>
                 <br>
-                <div class="button" onclick="login2()" >Submit OTUP</div>
+                <div id="login2Button" tabindex="0" class="button" onclick="login2()" >Submit OTUP</div>
             </div>
 
             <div class="container" style="x-background-color:#f1f1f1">
@@ -723,7 +725,7 @@
     </div>
 
     <footer>
-        <div style="border-top:1px solid rgba(255,255,255,.5);text-align:right;"><a href="https://netit.com.au" target="_blank" style="padding:5px;color:green;font-size:0.8rem;">Web Site by Net IT Australia</a></div>
+        <div style="border-top:1px solid rgba(255,255,255,.5);text-align:right;"><a href="https://netit.com.au" target="_blank" style="padding:5px;color:navy;font-size:0.8rem;">Web Site by Net IT Australia</a></div>
         <!-- SEO -->
             <div class="mySEOelement">
                 <a href="https://www.netit.com.au"></a>
