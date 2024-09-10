@@ -189,6 +189,7 @@ fieldset input{
         /* padding-right:20px; */
         user-select: none;
         background-color:darkslategrey;
+        background-color:white;
         border-bottom: 1px solid black;
         z-index: 100;
     }
@@ -205,6 +206,7 @@ fieldset input{
         /* padding-right:20px; */
         user-select: none;
         background-color:darkslategrey;
+        background-color:white;
         /* border-bottom: 1px solid black; */
         z-index: 100;
     }
@@ -221,6 +223,7 @@ fieldset input{
         /* padding-right:20px; */
         user-select: none;
         background-color:darkslategrey;
+        background-color:white;
         /* border-bottom: 1px solid black; */
         z-index: 100;
     }
