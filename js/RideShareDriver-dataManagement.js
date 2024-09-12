@@ -331,6 +331,8 @@ function dateChange(){
 
     document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
     document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
+    document.getElementById("weekSummary1").innerHTML = `&nbspWeek Summary - ${dayNames[d]}`;
+    document.getElementById("weekSummary2").innerHTML = `&nbspWeek Net Profit Estimate - ${dayNames[d]}`;
 
     // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
         Array.from(frm.elements).forEach((input) => {
