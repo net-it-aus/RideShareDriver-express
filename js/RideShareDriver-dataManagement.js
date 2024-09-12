@@ -330,7 +330,7 @@ function dateChange(){
     // console.log(frm);
 
     document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
-    document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
+    // document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
     document.getElementById("weekSummary1").innerHTML = `&nbspWeek Summary - ${dayNames[d]}`;
     document.getElementById("weekSummary2").innerHTML = `&nbspWeek Net Profit Estimate - ${dayNames[d]}`;
 
