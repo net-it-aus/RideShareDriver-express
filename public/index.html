@@ -683,13 +683,14 @@
         </div>
 
         <div id="driverRecordsAccessControl" class="driver-records-access-control">
-            <div id="loginButton" class="driver-records-access-control-button">Driver login</div>
+            <div id="loginButton" tabindex="0" role="button" class="driver-records-access-control-button">Driver login</div>
         </div>
         <br>
 
         <div id="login1" class="login1">
 
-            <form class="login1-form animate">
+            <!-- <form class="login1-form animate"> -->
+            <div class="login1-form animate">
                 <div class="container">
 
                     <label for="uEmail"><b>Username</b></label>
@@ -698,14 +699,15 @@
                     <label for="pw"><b>Password?<br>( Not required, a One Time Use Password will be emailed to you. )</b></label>
                     <br>
 
-                    <div class="button" onclick="login()" >login</div>
+                    <div class="button" tabindex="0" role="button" onclick="login()" class="driver-records-access-control-button">login</div>
 
                 </div>
 
-                <div class="container" style="x-background-color:#f1f1f1">
+                <div class="container">
                     <div class="button-red" onclick="document.getElementById('login1').style.display='none'" >Cancel</div>
                 </div>
-            </form>
+            </div>
+            <!-- </form> -->
         </div>
 
     <div id="login2" class="login2">
@@ -716,7 +718,7 @@
                 <label for="login2code"><b>Please enter the 'One Time Use Password' - emailed to you just now.</b></label>
                 <input type="number" inputmode="decimal" pattern="\d*" id="login2code" name="login2code" min="0" step="1" required>
                 <br>
-                <div id="login2Button" tabindex="0" class="button" onclick="login2()" >Submit OTUP</div>
+                <div id="login2Button" tabindex="1" class="button" onclick="login2()" >Submit OTUP</div>
             </div>
 
             <div class="container" style="x-background-color:#f1f1f1">

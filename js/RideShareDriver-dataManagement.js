@@ -192,7 +192,21 @@ let aDriverDayBook = [];
             document.getElementById(`uEmail`).focus();
             document.getElementById(`uEmail`).select();
         });
-
+        document.getElementById('loginButton').addEventListener('keydown', (event) => {
+            // console.log(event.key);
+            if (event.key === 'Enter') {
+                document.getElementById('login1').style.display='block';
+                document.getElementById(`uEmail`).focus();
+                document.getElementById(`uEmail`).select();
+            }
+        });
+        document.getElementById('login2Button').addEventListener('keydown', (event) => {
+            console.log(event.key);
+            if (event.key === 'Enter') {
+                login2();
+            }
+        });
+    
         const datval_xDate = document.getElementById("xDate");
         // console.trace();
         // console.log(datval_xDate);
@@ -784,7 +798,7 @@ async function create(uEmail){
 
 // login - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function login(){
-    // console.log('login')};
+    console.log('login');
     // const userW = document.getElementById("pw").value;
     const uEmail = document.getElementById("uEmail").value;
     // console.log(uEmail.length);
