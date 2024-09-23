@@ -147,12 +147,19 @@ async function exportDayBookToCSV(){
             for (ii = 0; ii < Object.keys(aDriverDayBook[i]).length; ii++){
                 myKey = Object.keys(aDriverDayBook[i])[ii];
                 if (aDriverDayBook_UniqueKeys.indexOf(myKey) === -1){
-                    // console.log("insert into 'aDriverDayBook_UniqueKeys':- |" + myKey + "|");
                     aDriverDayBook_UniqueKeys.push(myKey);
                 }
             }
         }
     // scan for additional keys to add to aDriverDayBook_UniqueKeys END
+
+// for (i = 0; i < aDriverDayBook_UniqueKeys.length; i++){
+//     console.log(aDriverDayBook_UniqueKeys[i]);
+//     console.log(document.getElementById(aDriverDayBook_UniqueKeys[i]).getAttribute("dataColHead"));
+//     if (document.getElementById(aDriverDayBook_UniqueKeys[i]).getAttribute("dataColHead")){
+//         aDriverDayBook_UniqueKeys[i] = document.getElementById(aDriverDayBook_UniqueKeys[i]).getAttribute("dataColHead");
+//     };
+// }
 
     // sort the unique list of headings START
         let aMyHeadings = new Array(0);
@@ -195,7 +202,18 @@ async function exportDayBookToCSV(){
         var v_csvString = "";
         for (i = 0; i < aMyDataRows.length; i++){
             for (ii = 0; ii < aMyDataRows[i].length; ii++){
-                v_csvString += aMyDataRows[i][ii] + ",";
+                // substitue headings for row 0 START
+                    if(i === 0){
+                        // console.log(document.getElementById(aMyDataRows[i][ii]).getAttribute("dataColHead"));
+                        if (document.getElementById(aMyDataRows[i][ii]).getAttribute("dataColHead")){
+                            v_csvString += document.getElementById(aMyDataRows[i][ii]).getAttribute("dataColHead") + ",";
+                        } else {
+                            v_csvString += aMyDataRows[i][ii] + ",";
+                        }
+                // substitue headings for row 0 END
+                } else {
+                    v_csvString += aMyDataRows[i][ii] + ",";
+                }
             }
             v_csvString += "\n";
         }

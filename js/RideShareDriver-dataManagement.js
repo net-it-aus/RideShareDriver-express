@@ -200,6 +200,12 @@ let aDriverDayBook = [];
                 document.getElementById(`uEmail`).select();
             }
         });
+        document.getElementById('login').addEventListener('keydown', (event) => {
+            console.log(event.key);
+            if (event.key === 'Enter') {
+                login();
+            }
+        });
         document.getElementById('login2Button').addEventListener('keydown', (event) => {
             console.log(event.key);
             if (event.key === 'Enter') {
