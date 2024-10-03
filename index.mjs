@@ -196,8 +196,8 @@ function login2(req,res){
 // updateUserFile START //////////////////////////////////////////////////////
 function updateUserFile(req,res){
     console.log("updateUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(req.body);
-    console.log(req.body[2].v_uEmail);
+    // console.log(req.body);
+    // console.log(req.body[2].v_uEmail);
     const v_fileName = req.body[2].v_uEmail + "_accountDetails";
 
     fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json',JSON.stringify(req.body),(err) => {
