@@ -320,7 +320,7 @@ function checkOutUserFile(req,res,userPIN_checkOut){
                 port: 587,
                 secure: false,
             // // secure
-            //     port:465,
+            //     port: 465,
             //     secure: true, // uses SSL
             auth: {
                 // user: 'donald.garton@outlook.com',
@@ -350,7 +350,9 @@ function checkOutUserFile(req,res,userPIN_checkOut){
             return console.log(error);
         }
             console.log('Message sent: %s', info.messageId);
-            res.send({message:"Email sent by server OK.","email":req.body});
+            // res.send({message:"Email sent by server OK.","email":req.body});
+            console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`);
+            res.send({"response":`RideShareDriver.com.au:- emailed data to ${uEmail} OK`});
         });
     }
     function emailData(req,res){
