@@ -25,8 +25,11 @@ if (v_portNumber == undefined) {
 // const fs = require('fs');
     import fs from 'fs';
 
-// nodeoutlook
-     import nodeoutlook from 'nodejs-nodemailer-outlook';
+// const nodemailer = require('nodemailer');
+    import nodemailer from 'nodemailer';
+
+// // nodeoutlook
+//      import nodeoutlook from 'nodejs-nodemailer-outlook';
 
 // // NODEOUTLOOK - START ================================================================================================
 //     // nodemailer initialise - start
@@ -122,7 +125,46 @@ function createUserFile(req,res,userPIN){
 // createUserFile END //////////////////////////////////////////////////////
 
 // login1 START //////////////////////////////////////////////////////
-    function login1(req,res,userPIN_checkOut){
+    function login1(req,res){
+        async function emailUSERpin(emailAddress,userPIN){
+            console.log(emailAddress,userPIN);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.mail.me.com',
+                // non-secure
+                    port: 587,
+                    secure: false,
+                // // // secure
+                //     port: 465,
+                //     secure: true, // uses SSL
+                auth: {
+                    // user: 'donald.garton@outlook.com',
+                    user: 'Net.IT.Australia@icloud.com',
+                    pass: 'oqzr-tfsb-hazp-xcus' // app specific password
+                },
+                tls: {
+                    // rejectUnauthorized: false // set to true for better security
+                    rejectUnauthorized: true // set to true for better security
+                }
+            });
+            let mailOptions = {
+                from: 'Net.IT.Australia@icloud.com',
+                to: emailAddress,
+                subject: 'RideShareDriver.com.au user OTUP (one time user password)',
+                // text: 'Content of the email',
+                // html: JSON.stringify(req.body.emailBody),
+                // html: `<p>CCT Connect code is: ${cctConnectCode}</p>`,
+                html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+                replyTo: 'support@netit.com.au',
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    // res.send({message:"Email NOT sent by server!","email":req.body});
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // res.send({message:"Email sent by server OK.","email":req.body});
+            });
+        }            
         let _otup;
         console.log("login1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         // console.log("login1 email address:- ",req.body.v_uEmail);
@@ -234,44 +276,91 @@ function checkOutUserFile(req,res,userPIN_checkOut){
 }
 // checkOutUserFile END //////////////////////////////////////////////////////
 
-// emailData START //////////////////////////////////////////////////////
-function emailData(req,res){
-    // console.trace();
-    console.log('emailData:- ',req.body.v_uEmail);
-    emailData_send(req,res,req.body.v_uEmail);
-}
-function emailData_send(req,res,uEmail){
-    nodeoutlook.sendEmail({
-        host: 'smtp.mail.me.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: "Net.IT.Australia@icloud.com",
-            pass: "bbtg-cozx-jyez-qjkj"
-        },
-        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-        from: '"Net.IT.Australia@icloud.com',
-        to: uEmail,
-        subject: 'RideShareDriver.com.au data',
-        // html: '<b>Do Not reply to this email.</b>',
-        // html: `<p>${emailBody}</p>`,
-        text: 'Raw JSON data is attached.',
-        replyTo: 'NoReply@outlook.com',
-        // attachments: {path: '/path/to/file.txt'},
-        attachments: {path: '../RideShareDriver.com.au-express-data/' + uEmail + '_accountDetails.json'},
-        onError: (e) => {
-            console.log(e)
-            res.send({"response":`RideShareDriver.com.au:- emailing data to ${uEmail} FAILED!!!`});
-        },
-        // onSuccess: (i) => console.log(i)
-        // onSuccess: (i) => console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`)
-        onSuccess: (i) => {
-            console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`);
-            res.send({"response":`RideShareDriver.com.au:- emailed data to ${uEmail} OK`});
+// // emailData START //////////////////////////////////////////////////////
+// function emailData_send(req,res,uEmail){
+//     nodeoutlook.sendEmail({
+//         host: 'smtp.mail.me.com',
+//         port: 587,
+//         secure: false,
+//         auth: {
+//             user: "Net.IT.Australia@icloud.com",
+//             pass: "bbtg-cozx-jyez-qjkj"
+//         },
+//         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+//         from: 'Net.IT.Australia@icloud.com',
+//         to: uEmail,
+//         subject: 'RideShareDriver.com.au data',
+//         // html: '<b>Do Not reply to this email.</b>',
+//         // html: `<p>${emailBody}</p>`,
+//         text: 'Raw JSON data is attached.',
+//         replyTo: 'NoReply@outlook.com',
+//         // attachments: {path: '/path/to/file.txt'},
+//         attachments: {path: '../RideShareDriver.com.au-express-data/' + uEmail + '_accountDetails.json'},
+//         onError: (e) => {
+//             console.log(e)
+//             res.send({"response":`RideShareDriver.com.au:- emailing data to ${uEmail} FAILED!!!`});
+//         },
+//         // onSuccess: (i) => console.log(i)
+//         // onSuccess: (i) => console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`)
+//         onSuccess: (i) => {
+//             console.log(`RideShareDriver.com.au:- emailed data to ${uEmail} OK`);
+//             res.send({"response":`RideShareDriver.com.au:- emailed data to ${uEmail} OK`});
+//         }
+//     });
+// }
+// // emailData END //////////////////////////////////////////////////////
+
+
+
+// sendDataViaEmail START //////////////////////////////////////////////////////
+    async function sendDataViaEmail(req,res,uEmail){
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.mail.me.com',
+            // non-secure
+                port: 587,
+                secure: false,
+            // // secure
+            //     port:465,
+            //     secure: true, // uses SSL
+            auth: {
+                // user: 'donald.garton@outlook.com',
+                user: 'Net.IT.Australia@icloud.com',
+                pass: 'oqzr-tfsb-hazp-xcus' // app specific password
+            },
+            tls: {
+                // rejectUnauthorized: false // set to true for better security
+                rejectUnauthorized: true // set to true for better security
+            }
+        });
+        let mailOptions = {
+            from: 'Net.IT.Australia@icloud.com',
+            to: uEmail,
+            subject: 'RideShareDriver.com.au data',
+            text: 'Raw JSON data is attached.',
+            // html: JSON.stringify(req.body.emailBody),
+            // html: `<p>CCT Connect code is: ${cctConnectCode}</p>`,
+            replyTo: 'support@netit.com.au',
+            attachments: {
+                path: '../RideShareDriver.com.au-express-data/' + uEmail + '_accountDetails.json'
+            },
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            res.send({message:"Email NOT sent by server!","email":req.body});
+            return console.log(error);
         }
-    });
-}
-// emailData END //////////////////////////////////////////////////////
+            console.log('Message sent: %s', info.messageId);
+            res.send({message:"Email sent by server OK.","email":req.body});
+        });
+    }
+    function emailData(req,res){
+        // console.trace();
+        console.log('emailData:- ',req.body.v_uEmail);
+        // emailData_send(req,res,req.body.v_uEmail);
+        sendDataViaEmail(req,res,req.body.v_uEmail);
+    }
+// sendDataViaEmail END //////////////////////////////////////////////////////
+
 
 
 // function emailSiteVisit(emailBody){
@@ -294,28 +383,28 @@ function emailData_send(req,res,uEmail){
 //     });
 // }
 
-function emailUSERpin(emailAddress,userPIN){
-    // console.log(`emailUSERpin(${emailAddress},${userPIN})`);
-    nodeoutlook.sendEmail({
-        host: 'smtp.mail.me.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: "Net.IT.Australia@icloud.com",
-            pass: "bbtg-cozx-jyez-qjkj"
-        },
-        // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
-        from: '"Net.IT.Australia@icloud.com',
-        to: emailAddress,
-        subject: 'RideShareDriver.com.au user OTUP (one time user password)',
-        html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
-        text: 'This is text version!',
-        replyTo: 'NoReply@outlook.com',
-        onError: (e) => console.log(e),
-        // onSuccess: (i) => console.log(i)
-        onSuccess: (i) => console.log(`RideShareDriver.com.au:- email sent to ${emailAddress} OK`)
-    });
-}
+// function emailUSERpin(emailAddress,userPIN){
+//     // console.log(`emailUSERpin(${emailAddress},${userPIN})`);
+//     nodeoutlook.sendEmail({
+//         host: 'smtp.mail.me.com',
+//         port: 587,
+//         secure: false,
+//         auth: {
+//             user: "Net.IT.Australia@icloud.com",
+//             pass: "bbtg-cozx-jyez-qjkj"
+//         },
+//         // from: '"No-Reply email from Net It Australia" <Net.IT.Australia@outlook.com>',
+//         from: 'Net.IT.Australia@icloud.com',
+//         to: emailAddress,
+//         subject: 'RideShareDriver.com.au user OTUP (one time user password)',
+//         html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+//         text: 'This is text version!',
+//         replyTo: 'NoReply@outlook.com',
+//         onError: (e) => console.log(e),
+//         // onSuccess: (i) => console.log(i)
+//         onSuccess: (i) => console.log(`RideShareDriver.com.au:- email sent to ${emailAddress} OK`)
+//     });
+// }
 
 
 
