@@ -260,3 +260,55 @@ function downloadCSV(csv, filename) {
 }
 // DOWNLOAD end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// const newUserSetup = async (uEmail) => {
+//     const fetchBody = JSON.stringify(
+//         {
+//             uEmail: uEmail
+//         }
+//     );
+//     const options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: fetchBody};
+//     if(consoleOn===true){console.log('/newUserSetup options:- ',options)};
+//     await fetch('/newUserSetup', options)
+//     .then(res => {
+//         if(consoleOn===true){console.log('newUserSetup:- res:- ',res)};
+//         return res.json();
+//         // return res.body;
+//     })
+//     .then(res_json => {
+//         if(consoleOn===true){console.log('newUserSetup:- res_json:- ',res_json)};
+//         // writeToLocalStorage('clickedTickerPrice',res_data.price);
+//         alert(`Account for email address "${uEmail}" has been created.\n\nPlease click the login button again to log in.`);
+//     })
+// }
+
+async function newUserSetup(uEmail) {
+    try {
+
+        const fetchBody = JSON.stringify({uEmail: uEmail});
+        const options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: fetchBody};
+
+        // First request
+            let response1 = await fetch('/newUserSetupStep1',options);
+            if (!response1.ok) throw new Error('Failed to fetch data1');
+            let data1 = await response1.json();
+            console.log('Data1:', data1);
+
+        // Second request
+            let response2 = await fetch('/newUserSetupStep2',options);
+            if (!response2.ok) throw new Error('Failed to fetch data2');
+            let data2 = await response2.json();
+            console.log('Data2:', data2);
+
+        // Combine the data (example)
+        let combinedData = {
+            data1,
+            data2
+        };
+
+        console.log('Combined Data:', combinedData);
+        return combinedData;
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}

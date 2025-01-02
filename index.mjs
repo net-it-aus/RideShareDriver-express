@@ -93,36 +93,71 @@ app.listen( process.env.PORT || v_portNumber, () => {
 });
 
 
-// createUserFile START //////////////////////////////////////////////////////
-function createUserFile(req,res,userPIN){
+// createUserFiles START //////////////////////////////////////////////////////
+    async function createUserFiles(req,res,userPIN){
 
-    console.log("createUserFile !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body.v_userW);
-    // console.log(req.body.v_uEmail);
-    const v_fileName = req.body.v_uEmail + "_accountDetails";
+        console.log("createUserFiles !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        // console.log(req.body.v_userW);
+        // console.log(req.body.v_uEmail);
 
-    fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
-        if (err){
-            const v_data = JSON.stringify(
-                {
-                    response: "create error"
-                }
-            );
-            res.send(v_data);
-            res.end();
-        } else {
-            const v_data = JSON.stringify(
-                {
-                    response: "created"
-                }
-            );
-            res.send(v_data);
-            res.end();
-        }
-    });
+        let v_fileName;
+        v_fileName = req.body.v_uEmail + "_accountDetails";
+        const accountDetailsFileStatus = await fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
+            if (err){
+                return "createUserFile_accountDetails FAILED";
+                // const v_data = JSON.stringify(
+                //     {
+                //         response: "create error"
+                //     }
+                // );
+                // res.send(v_data);
+                // res.end();
+            } else {
+                return "createUserFile_accountDetails SUCCESS";
+                // const v_data = JSON.stringify(
+                //     {
+                //         response: "created"
+                //     }
+                // );
+                // res.send(v_data);
+                // res.end();
+            }
+        });
 
-}
-// createUserFile END //////////////////////////////////////////////////////
+        v_fileName = req.body.v_uEmail + "_tripsLog";
+        const tripsLogFileStatus = await fs.writeFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_userW":"${req.body.v_userW}"},{"v_uEmail":"${req.body.v_uEmail}"}]`,(err) => {
+            if (err){
+                return "createUserTripsLog FAILED";
+                // const v_data = JSON.stringify(
+                //     {
+                //         response: "create error"
+                //     }
+                // );
+                // res.send(v_data);
+                // res.end();
+            } else {
+                return "createUserTripsLog SUCCESS";
+                // const v_data = JSON.stringify(
+                //     {
+                //         response: "created"
+                //     }
+                // );
+                // res.send(v_data);
+                // res.end();
+            }
+        });
+        const v_data = JSON.stringify(
+            {
+                accountDetailsFileStatus: accountDetailsFileStatus,
+                tripsLogFileStatus: tripsLogFileStatus
+            }
+        );
+        console.log(v_data);
+        res.send(v_data);
+        res.end();
+
+    }
+// createUserTripsLog END //////////////////////////////////////////////////////
 
 // login1 START //////////////////////////////////////////////////////
     function login1(req,res){
@@ -457,6 +492,69 @@ function createRSDuserPIN(){
     return v_rsdUserPIN;
 }
 
+async function newUserSetup(req,res,userPIN){
+    const uEmail = req.body.uEmail;
+    const fileName1 = req.body.uEmail + "_accountDetails";
+    let fileName1_status;
+    const fileName2 = req.body.uEmail + "_tripsLog";
+    let fileName2_status;
+
+    async function createFile(fileName){
+        await fs.writeFile('../RideShareDriver.com.au-express-data/' + fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_uEmail":"${uEmail}"}]`,(err) => {
+            let msg;
+            console.log(msg);
+            if (err){
+                msg = "FAILED";
+            } else {
+                msg = "SUCCESS";
+            }
+            console.log(msg);
+            return msg;
+        });
+    }
+    fileName1_status = await createFile(fileName1);
+    fileName2_status = await createFile(fileName2);
+
+    const serverResponse = JSON.stringify(
+        {
+            accountDetailsFileStatus: fileName1_status,
+            tripsLogFileStatus: fileName2_status
+        }
+    );
+    console.log('serverResponse:- ',serverResponse);
+    res.send(serverResponse);
+    res.end();
+}
+
+async function newUserSetupStep1(req,res){
+    const uEmail = req.body.uEmail;
+    const fileName = uEmail + "_accountDetails";
+    let fileName_status;
+
+    const userPIN = await createRSDuserPIN();
+
+    createFile(req,res,fileName,uEmail,userPIN);
+}
+async function newUserSetupStep2(req,res){
+    const uEmail = req.body.uEmail;
+    const fileName = uEmail + "_tripsLog";
+    let fileName_status;
+
+    const userPIN = await createRSDuserPIN();
+
+    createFile(req,res,fileName,uEmail,userPIN);
+}
+async function createFile(req,res,fileName,uEmail,userPIN){
+    await fs.writeFile('../RideShareDriver.com.au-express-data/' + fileName + '.json', `[{"v_userPIN":"${userPIN}"},{"v_uEmail":"${uEmail}"}]`,(err) => {
+        if (err){
+            res.send(JSON.stringify({fileCreateStatus: "FAILED"}));
+            res.end();
+        } else {
+            res.send(JSON.stringify({fileCreateStatus: "SUCCESS"}));
+            res.end();
+        }
+    });
+}
 
 // SERVER REQUESTS LOG start
 app.all('*', (req, res) => {
@@ -518,9 +616,45 @@ app.all('*', (req, res) => {
             break;
         case '/create':
             // console.log(req.body);
-            const userPIN = createRSDuserPIN();
             // sendNewUserEmail(req,res,userPIN);
-            createUserFile(req,res,userPIN);
+            let userFileStatus;
+            async function create(req,res){
+                const userPIN = await createRSDuserPIN();
+                userFileStatus = await createUserFiles(req,res,userPIN);
+                // const v_data = JSON.stringify(
+                //     {
+                //         userFileStatus: `${userFileStatus}`,
+                //         userTripsLogStatus: `${userTripsLogStatus}`
+                //     }
+                // );
+                // console.log('v_data:- ',v_data);
+                // res.send(v_data);
+                // res.end();
+            }
+            create(req,res);
+            // const v_data = JSON.stringify(
+            //     {
+            //         userFileStatus: `${userFileStatus}`,
+            //         userTripsLogStatus: `${userTripsLogStatus}`
+            //     }
+            // );
+            // console.log('v_data:- ',v_data);
+            // res.send(v_data);
+            // res.end();
+            break;
+        // case '/newUserSetup':
+        //     console.log(req.body);
+        //     const newUser = async (req,res) => {
+        //         const userPIN = await createRSDuserPIN();
+        //         const status = await newUserSetup(req,res,userPIN);
+        //     }
+        //     newUser(req,res);
+        //     break;
+        case '/newUserSetupStep1':
+            newUserSetupStep1(req,res);
+            break;
+        case '/newUserSetupStep2':
+            newUserSetupStep2(req,res);
             break;
         case '/login1':
             login1(req,res);

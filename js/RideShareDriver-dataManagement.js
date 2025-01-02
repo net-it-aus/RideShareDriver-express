@@ -43,28 +43,28 @@ let aDriverDayBook = [];
             logSiteVisit();
         },{once: true});
         function logSiteVisit(){
-            // console.log("mousemove detected");
+            // if(consoleOn===true){console.log("mousemove detected")};
             // // GEOLOCATION start
             //     function getLocation() {
             //         if (navigator.geolocation) {
             //             navigator.geolocation.getCurrentPosition(showPosition);
             //         } else {
             //             // x.innerHTML = "Geolocation is not supported by this browser.";
-            //             console.log("Geolocation is not supported by this browser.");
+            //             if(consoleOn===true){console.log("Geolocation is not supported by this browser.")};
             //         }
             //     }
             //     getLocation();
             //     function showPosition(position) {
             //         // x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-            //         console.log("Latitude: " + position.coords.latitude + "\nLongitude: " + position.coords.longitude);
+            //         if(consoleOn===true){console.log("Latitude: " + position.coords.latitude + "\nLongitude: " + position.coords.longitude)};
             //     }
             // // GEOLOCATION end
             // IPADDRESS start
                 // // external source START
                 //     fetch('https://api.ipify.org/?format=json')
                 //     .then(res => res.json())
-                //     .then(data => console.log(data.ip))
-                //     .catch(err => console.log(err))
+                //     .then(data => if(consoleOn===true){console.log(data.ip)})
+                //     .catch(err => if(consoleOn===true){console.log(err)})
                 // // external source END
                 // mySERVER start
                     fetch('/myIPify');
@@ -76,16 +76,16 @@ let aDriverDayBook = [];
         document.getElementById("dayBook_DateRightButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // console.log( typeof document.getElementById("xDate").value);
+            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
             if( document.getElementById("xDate").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
                 document.getElementById("xDate").value = d0.slice(0,10);
             } else {
                 d0 = new Date(document.getElementById("xDate").value).toISOString();
             }
-            // console.log(d0);
+            // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
-            // console.log(new Date(d1 * 1 +  86400000));
+            // if(consoleOn===true){console.log(new Date(d1 * 1 +  86400000))};
             d1 = new Date(d1 * 1 +  86400000);
             d1 = d1.toISOString()
             document.getElementById("xDate").value = d1.slice(0,10);
@@ -94,16 +94,16 @@ let aDriverDayBook = [];
         document.getElementById("dayBook_DateLeftButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // console.log( typeof document.getElementById("xDate").value);
+            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
             if( document.getElementById("xDate").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
                 document.getElementById("xDate").value = d0.slice(0,10);
             } else {
                 d0 = new Date(document.getElementById("xDate").value).toISOString();
             }
-            // console.log(d0);
+            // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
-            // console.log(new Date(d1 * 1 -  86400000));
+            // if(consoleOn===true){console.log(new Date(d1 * 1 -  86400000))};
             d1 = new Date(d1 * 1 -  86400000);
             d1 = d1.toISOString()
             document.getElementById("xDate").value = d1.slice(0,10);
@@ -113,16 +113,16 @@ let aDriverDayBook = [];
         document.getElementById("dayBook_WeekRightButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // console.log( typeof document.getElementById("xDate").value);
+            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
             if( document.getElementById("xDate").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
                 document.getElementById("xDate").value = d0.slice(0,10);
             } else {
                 d0 = new Date(document.getElementById("xDate").value).toISOString();
             }
-            // console.log(d0);
+            // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
-            // console.log(new Date(d1 * 1 + (86400000 * 7)));
+            // if(consoleOn===true){console.log(new Date(d1 * 1 + (86400000 * 7)))};
             d1 = new Date(d1 * 1 +  (86400000 * 7));
             d1 = d1.toISOString()
             document.getElementById("xDate").value = d1.slice(0,10);
@@ -131,16 +131,16 @@ let aDriverDayBook = [];
         document.getElementById("dayBook_WeekLeftButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // console.log( typeof document.getElementById("xDate").value);
+            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
             if( document.getElementById("xDate").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
                 document.getElementById("xDate").value = d0.slice(0,10);
             } else {
                 d0 = new Date(document.getElementById("xDate").value).toISOString();
             }
-            // console.log(d0);
+            // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
-            // console.log(new Date(d1 * 1 - (86400000 * 7)));
+            // if(consoleOn===true){console.log(new Date(d1 * 1 - (86400000 * 7)))};
             d1 = new Date(d1 * 1 -  (86400000 * 7));
             d1 = d1.toISOString()
             document.getElementById("xDate").value = d1.slice(0,10);
@@ -178,7 +178,7 @@ let aDriverDayBook = [];
             let ltrs = parseFloat(document.getElementById("xLitresPurchased").value);
             let price = parseFloat(document.getElementById("xPricePerLitre").value);
             let total = parseFloat(document.getElementById("xFuelPurchaseTotal").value);
-            // console.log(ltrs,price,total);
+            // if(consoleOn===true){console.log(ltrs,price,total)};
             if(ltrs !== 0 & price !== 0 & total !== 0){
                 document.getElementById("xPriceVariance").value = ((ltrs*1) * (price*1) - (total*1)).toFixed(2);
             } else {
@@ -193,7 +193,7 @@ let aDriverDayBook = [];
             document.getElementById(`uEmail`).select();
         });
         document.getElementById('loginButton').addEventListener('keydown', (event) => {
-            // console.log(event.key);
+            // if(consoleOn===true){console.log(event.key)};
             if (event.key === 'Enter') {
                 document.getElementById('login1').style.display='block';
                 document.getElementById(`uEmail`).focus();
@@ -201,13 +201,13 @@ let aDriverDayBook = [];
             }
         });
         document.getElementById('login').addEventListener('keydown', (event) => {
-            console.log(event.key);
+            if(consoleOn===true){console.log(event.key)};
             if (event.key === 'Enter') {
                 login();
             }
         });
         document.getElementById('login2Button').addEventListener('keydown', (event) => {
-            console.log(event.key);
+            if(consoleOn===true){console.log(event.key)};
             if (event.key === 'Enter') {
                 login2();
             }
@@ -215,10 +215,10 @@ let aDriverDayBook = [];
     
         const datval_xDate = document.getElementById("xDate");
         // console.trace();
-        // console.log(datval_xDate);
+        // if(consoleOn===true){console.log(datval_xDate)};
         const frm = document.getElementById("driver-day-book");
-        // console.trace();
-        // console.log(frm);
+        // if(consoleOn===true){console.trace()};
+        // if(consoleOn===true){console.log(frm)};
 
         // document.getElementById("xAccess").focus();
         // document.getElementById("xAccess").select();
@@ -287,9 +287,9 @@ let aDriverDayBook = [];
                 calcNetB4taxWeek();
             }
             // if (datval_xTotalGross.validity.valid) {
-            //     console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length)};
+            //     if(consoleOn===true){console.log("datval_xTotalGross.validity.valid - OK",datval_xTotalGross.value.length)}};
             // } else {
-            //     console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length)};
+            //     if(consoleOn===true){console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length)}};
             // //     // datval_xSeconds.setCustomValidity("");
             // //     alert("value out of range, please try again");
             // //     document.getElementById("xTotalGrossX").value = 0;
@@ -344,10 +344,10 @@ function dateChange(){
     const datval_xDate = document.getElementById("xDate");
     let d = new Date(datval_xDate.value).getDay();
     document.getElementById("weekdayText").innerHTML = dayNames[d];
-    // console.log(datval_xDate);
+    // if(consoleOn===true){console.log(datval_xDate)};
 
     const frm = document.getElementById("driver-day-book");
-    // console.log(frm);
+    // if(consoleOn===true){console.log(frm)};
 
     document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
     // document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
@@ -366,17 +366,17 @@ function dateChange(){
     // re-set HTML form to null values, except for the date field END ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     for (var i=0; i < aDriverDayBook.length; i++){``
-        // console.log(aDriverDayBook[i].xDate,datval_xDate.value);
+        // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value)};
         if (aDriverDayBook[i].xDate===datval_xDate.value){
-            // console.log(aDriverDayBook[i].xDate,datval_xDate.value,i);
+            // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value,i)};
             for (const key in aDriverDayBook[i]){
-                // console.log(key);
-                // console.log(`${key}:${aDriverDayBook[i][key]}`);
+                // if(consoleOn===true){console.log(key)};
+                // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
                 if (aDriverDayBook[i][key].length>0){
-                    // console.log([key]);
-                    // console.log([key][0].slice(0,1));
+                    // if(consoleOn===true){console.log([key])};
+                    // if(consoleOn===true){console.log([key][0].slice(0,1))};
                     if ([key][0].slice(0,1)==="x"){
-                        // console.log(aDriverDayBook[i][key]);
+                        // if(consoleOn===true){console.log(aDriverDayBook[i][key])};
                         document.getElementById(key).value = aDriverDayBook[i][key];
                     }
                 }
@@ -384,14 +384,14 @@ function dateChange(){
             break;
         } else {
             for (const key in aDriverDayBook[i]){
-                // console.log(key);
-                // console.log(`${key}:${aDriverDayBook[i][key]}`);
+                // if(consoleOn===true){console.log(key)};
+                // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
                 if (aDriverDayBook[i][key].length>0){
-                    // console.log([key]);
-                    // console.log([key][0].slice(0,1));
+                    // if(consoleOn===true){console.log([key])};
+                    // if(consoleOn===true){console.log([key][0].slice(0,1))};
                     if ([key][0].slice(0,1)==="x"){
                        if (key!=="xDate"){
-                            // console.log(key);
+                            // if(consoleOn===true){console.log(key)};
                             document.getElementById(key).value = "";
                         }
                     }
@@ -412,7 +412,7 @@ function dateChange(){
         const d0 = new Date(myDate);
         const d0Day = new Date(myDate).getDay();
 
-        // console.log(d0);
+        // if(consoleOn===true){console.log(d0)};
         // Sunday is the start of the week
             let standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
             const dStdDay = new Date(standardWeekBeginDate).getDay();
@@ -421,7 +421,7 @@ function dateChange(){
             } else {
                 standardWeekBeginDate = new Date(d0 * 1 - (86400000 * 7));
             }
-            // console.log("standard week start date = " + standardWeekBeginDate.toDateString());
+            // if(consoleOn===true){console.log("standard week start date = " + standardWeekBeginDate.toDateString())};
         // Sunday is the start of the week
         // Uber week starts on Monday
             let uberWeekBeginDate = 0;
@@ -430,10 +430,10 @@ function dateChange(){
             } else {
                 uberWeekBeginDate = new Date(standardWeekBeginDate * 1 + (86400000 * 1));
             }
-            // console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
+            // if(consoleOn===true){console.log("Uber week start date = " + uberWeekBeginDate.toDateString())};
         // Uber week starts on Monday
-        // console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString());
-        // console.log("\n");
+        // if(consoleOn===true){console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString())};
+        // if(consoleOn===true){console.log("\n")};
 
         let statDate;
         let vTotalGross = 0;
@@ -445,11 +445,11 @@ function dateChange(){
         let vMinutes = 0;
         for (d = 0; d < 7; d++){
             statDate = new Date(uberWeekBeginDate * 1 + (86400000 * d));
-            // console.log(statDate.toISOString().slice(0,10));
+            // if(consoleOn===true){console.log(statDate.toISOString().slice(0,10))};
             for (var i=0; i < aDriverDayBook.length; i++){
-                // console.log(aDriverDayBook[i].xDate);
+                // if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
                 if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
-                    // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+                    // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i)};
                     vTotalGross += aDriverDayBook[i].xTotalGross * 1;
                     vKlms += aDriverDayBook[i].xKlms * 1;
                     vTrips += aDriverDayBook[i].xTrips * 1
@@ -460,7 +460,7 @@ function dateChange(){
                 }
             }
         }
-        // console.log(vTotalGross,vKlms,vTotalGross/vKlms);
+        // if(consoleOn===true){console.log(vTotalGross,vKlms,vTotalGross/vKlms)};
         document.getElementById("vTotalGross").value = (vTotalGross).toFixed(2);
         document.getElementById("vKlms").value = (vKlms).toFixed(1);
         document.getElementById("vGrossPerKlm").value = (vTotalGross / vKlms).toFixed(2);
@@ -477,30 +477,38 @@ function dateChange(){
 // UPDATE QTR STATS start
 function updateQtrStats(myDate){
 
-    // console.log(myDate);
-    const selectedMonth = parseFloat(new Date(myDate).getMonth() + 1,0);
-    // console.log(selectedMonth);
+    if(consoleOn===true){console.log(myDate)};
+    // const selectedYear = parseFloat(new Date(myDate).getFullYear());
+    // const selectedMonth = parseFloat(new Date(myDate).getMonth() + 1,0);
+    const selectedYear = new Date(myDate).getFullYear();
+    const selectedMonth = new Date(myDate).getMonth() + 1;
+    if(consoleOn===true){console.log(selectedYear,selectedMonth)};
     let selectedQuarter;
     switch(true) {
         case selectedMonth <= 3:
-            // console.log("selected quarter = 3");
-            selectedQuarter = 3
+            // if(consoleOn===true){console.log("selected quarter = 3")};
+            // selectedQuarter = 3
+            selectedQuarter = selectedYear + "_3"
             break;
         case selectedMonth <= 6:
-            // console.log("selected quarter = 4");
-            selectedQuarter = 4
+            // if(consoleOn===true){console.log("selected quarter = 4")};
+            // selectedQuarter = 4
+            selectedQuarter = selectedYear + "_4"
             break;
         case selectedMonth <= 9:
-            // console.log("selected quarter = 1");
-            selectedQuarter = 1
+            // if(consoleOn===true){console.log("selected quarter = 1")};
+            // selectedQuarter = 1
+            selectedQuarter = selectedYear + "_1"
             break;
         case selectedMonth <= 12:
-            // console.log("selected quarter = 2");
-            selectedQuarter = 2
+            // if(consoleOn===true){console.log("selected quarter = 2")};
+            // selectedQuarter = 2
+            selectedQuarter = selectedYear + "_2"
             break;
         default:
-            // console.log("selected quarter = ?");
-            selectedQuarter = 0
+            // if(consoleOn===true){console.log("selected quarter = ?")};
+            // selectedQuarter = 0
+            selectedQuarter = selectedYear + "_0"
     }
 
     let vTotalGrossQtr = 0;
@@ -516,66 +524,79 @@ function updateQtrStats(myDate){
 
     let dayBookMonth;
     let dayBookQuarter;
+    let dayBookYear;
     for (var i=0; i < aDriverDayBook.length; i++){
-        dayBookMonth = new Date(aDriverDayBook[i].xDate).getMonth() + 1;
-        switch(true) {
-            case dayBookMonth <= 3:
-                // console.log("dayBook quarter = 3");
-                dayBookQuarter = 3
-                break;
-            case dayBookMonth <= 6:
-                // console.log("dayBook quarter = 4");
-                dayBookQuarter = 4
-                break;
-            case dayBookMonth <= 9:
-                // console.log("dayBook quarter = 1");
-                dayBookQuarter = 1
-                break;
-            case dayBookMonth <= 12:
-                // console.log("dayBook quarter = 2");
-                dayBookQuarter = 2
-                break;
-            default:
-                // console.log("dayBook quarter = ?");
-                dayBookQuarter = 0
-        }
-        if (dayBookQuarter===selectedQuarter){
-            // console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter);
-            vTotalGrossQtr += aDriverDayBook[i].xTotalGross * 1;
-            vFuelPurchaseTotalQtr += aDriverDayBook[i].xFuelPurchaseTotal * 1;
-            vVehicleServiceScheduledQtr += aDriverDayBook[i].xVehicleServiceScheduled * 1;
-            vVehicleServiceNonScheduledQtr += aDriverDayBook[i].xVehicleServiceNonScheduled * 1;
-            vVehicleRepairsQtr  += aDriverDayBook[i].xVehicleRepairs * 1;
-            vVehicleTyresReplaceQtr  += aDriverDayBook[i].xVehicleTyresReplace * 1;
-            vVehicleTyresRepairQtr  += aDriverDayBook[i].xVehicleTyresRepair * 1;
-            vVehicleInsurancePremiumQtr  += aDriverDayBook[i].xVehicleInsurancePremium * 1;
-            vVehicleInsuranceExcessQtr  += aDriverDayBook[i].xVehicleInsuranceExcess * 1;
-            vOtherCostDollars1Qtr  += aDriverDayBook[i].xOtherCostDollars1 * 1;
-        }
-        document.getElementById("vTotalGrossQtr").value = (vTotalGrossQtr).toFixed(2);
-        document.getElementById("vFuelPurchaseTotalQtr").value = vFuelPurchaseTotalQtr.toFixed(2);
-        document.getElementById("vVehicleServiceScheduledQtr").value = vVehicleServiceScheduledQtr.toFixed(2);
-        document.getElementById("vVehicleServiceNonScheduledQtr").value = vVehicleServiceNonScheduledQtr.toFixed(2);
-        document.getElementById("vVehicleRepairsQtr").value = vVehicleRepairsQtr.toFixed(2);
-        document.getElementById("vVehicleTyresReplaceQtr").value = vVehicleTyresReplaceQtr.toFixed(2);
-        document.getElementById("vVehicleTyresRepairQtr").value = vVehicleTyresRepairQtr.toFixed(2);
-        document.getElementById("vVehicleInsurancePremiumQtr").value = vVehicleInsurancePremiumQtr.toFixed(2);
-        document.getElementById("vVehicleInsuranceExcessQtr").value = vVehicleInsuranceExcessQtr.toFixed(2);
-        document.getElementById("vOtherCostDollars1Qtr").value = vOtherCostDollars1Qtr.toFixed(2);
+        if(aDriverDayBook[i].xDate){
+            if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
+            dayBookYear = new Date(aDriverDayBook[i].xDate).getFullYear();
+            dayBookMonth = new Date(aDriverDayBook[i].xDate).getMonth() + 1;
+            if(consoleOn===true){console.log(dayBookYear,dayBookMonth)};
+            switch(true) {
+                case dayBookMonth <= 3:
+                    // if(consoleOn===true){console.log("dayBook quarter = 3")};
+                    // dayBookQuarter = 3
+                    dayBookQuarter = dayBookYear + "_3"
+                    break;
+                case dayBookMonth <= 6:
+                    // if(consoleOn===true){console.log("dayBook quarter = 4")};
+                    // dayBookQuarter = 4
+                    dayBookQuarter = dayBookYear + "_4"
+                    break;
+                case dayBookMonth <= 9:
+                    // if(consoleOn===true){console.log("dayBook quarter = 1")};
+                    // dayBookQuarter = 1
+                    dayBookQuarter = dayBookYear + "_1"
+                    break;
+                case dayBookMonth <= 12:
+                    // if(consoleOn===true){console.log("dayBook quarter = 2")};
+                    // dayBookQuarter = 2
+                    dayBookQuarter = dayBookYear + "_2"
+                    break;
+                default:
+                    // if(consoleOn===true){console.log("dayBook quarter = ?")};
+                    // dayBookQuarter = 0
+                    dayBookQuarter = dayBookYear + "_0"
+            }
+            if(consoleOn===true){console.log(dayBookQuarter)};
+            if(consoleOn===true){console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
+            if (dayBookQuarter===selectedQuarter){
+                if(consoleOn===true){console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
+                vTotalGrossQtr += aDriverDayBook[i].xTotalGross * 1;
+                vFuelPurchaseTotalQtr += aDriverDayBook[i].xFuelPurchaseTotal * 1;
+                vVehicleServiceScheduledQtr += aDriverDayBook[i].xVehicleServiceScheduled * 1;
+                vVehicleServiceNonScheduledQtr += aDriverDayBook[i].xVehicleServiceNonScheduled * 1;
+                vVehicleRepairsQtr  += aDriverDayBook[i].xVehicleRepairs * 1;
+                vVehicleTyresReplaceQtr  += aDriverDayBook[i].xVehicleTyresReplace * 1;
+                vVehicleTyresRepairQtr  += aDriverDayBook[i].xVehicleTyresRepair * 1;
+                vVehicleInsurancePremiumQtr  += aDriverDayBook[i].xVehicleInsurancePremium * 1;
+                vVehicleInsuranceExcessQtr  += aDriverDayBook[i].xVehicleInsuranceExcess * 1;
+                vOtherCostDollars1Qtr  += aDriverDayBook[i].xOtherCostDollars1 * 1;
+            }
+            document.getElementById("vTotalGrossQtr").value = (vTotalGrossQtr).toFixed(2);
+            document.getElementById("vFuelPurchaseTotalQtr").value = vFuelPurchaseTotalQtr.toFixed(2);
+            document.getElementById("vVehicleServiceScheduledQtr").value = vVehicleServiceScheduledQtr.toFixed(2);
+            document.getElementById("vVehicleServiceNonScheduledQtr").value = vVehicleServiceNonScheduledQtr.toFixed(2);
+            document.getElementById("vVehicleRepairsQtr").value = vVehicleRepairsQtr.toFixed(2);
+            document.getElementById("vVehicleTyresReplaceQtr").value = vVehicleTyresReplaceQtr.toFixed(2);
+            document.getElementById("vVehicleTyresRepairQtr").value = vVehicleTyresRepairQtr.toFixed(2);
+            document.getElementById("vVehicleInsurancePremiumQtr").value = vVehicleInsurancePremiumQtr.toFixed(2);
+            document.getElementById("vVehicleInsuranceExcessQtr").value = vVehicleInsuranceExcessQtr.toFixed(2);
+            document.getElementById("vOtherCostDollars1Qtr").value = vOtherCostDollars1Qtr.toFixed(2);
+        
     
- 
-    
-        // // console.log(aDriverDayBook[i].xDate);
-        // if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
-        //     // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
-        //     vTotalGross += aDriverDayBook[i].xTotalGross * 1;
-        //     vKlms += aDriverDayBook[i].xKlms * 1;
-        //     vTrips += aDriverDayBook[i].xTrips * 1
-        //     vHours += aDriverDayBook[i].xHoursOnline * 1
-        //     vMinutes += aDriverDayBook[i].xMinutesOnline * 1
-        //     vIncentiveNOTIncludedInGross += aDriverDayBook[i].xIncentiveNOTIncludedInGross * 1
-        //     vFuelPurchaseTotal += aDriverDayBook[i].xFuelPurchaseTotal * 1
-        // }
+        
+            // // if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
+            // if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
+            //     // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i)};
+            //     vTotalGross += aDriverDayBook[i].xTotalGross * 1;
+            //     vKlms += aDriverDayBook[i].xKlms * 1;
+            //     vTrips += aDriverDayBook[i].xTrips * 1
+            //     vHours += aDriverDayBook[i].xHoursOnline * 1
+            //     vMinutes += aDriverDayBook[i].xMinutesOnline * 1
+            //     vIncentiveNOTIncludedInGross += aDriverDayBook[i].xIncentiveNOTIncludedInGross * 1
+            //     vFuelPurchaseTotal += aDriverDayBook[i].xFuelPurchaseTotal * 1
+            // }
+        }
     }
 
     // const basQtr1DateStart = new Date("01-07" + xDate.getFullYear());
@@ -591,7 +612,7 @@ function updateQtrStats(myDate){
     const d0 = new Date(myDate);
     const d0Day = new Date(myDate).getDay();
 
-    // console.log(d0);
+    // if(consoleOn===true){console.log(d0)};
     // Sunday is the start of the week
         let standardWeekBeginDate = new Date(d0 - (86400000 * d0Day));
         const dStdDay = new Date(standardWeekBeginDate).getDay();
@@ -600,7 +621,7 @@ function updateQtrStats(myDate){
         } else {
             standardWeekBeginDate = new Date(d0 * 1 - (86400000 * 7));
         }
-        // console.log("standard week start date = " + standardWeekBeginDate.toDateString());
+        // if(consoleOn===true){console.log("standard week start date = " + standardWeekBeginDate.toDateString())};
     // Sunday is the start of the week
     // Uber week starts on Monday
         let uberWeekBeginDate = 0;
@@ -609,10 +630,10 @@ function updateQtrStats(myDate){
         } else {
             uberWeekBeginDate = new Date(standardWeekBeginDate * 1 + (86400000 * 1));
         }
-        // console.log("Uber week start date = " + uberWeekBeginDate.toDateString());
+        // if(consoleOn===true){console.log("Uber week start date = " + uberWeekBeginDate.toDateString())};
     // Uber week starts on Monday
-    // console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString());
-    // console.log("\n");
+    // if(consoleOn===true){console.log("updateWeekStats for " + myDate + " Weekday " + d0Day + " week start date = " + uberWeekBeginDate.toDateString())};
+    // if(consoleOn===true){console.log("\n")};
 
     let statDate;
     let vTotalGross = 0;
@@ -624,11 +645,11 @@ function updateQtrStats(myDate){
     let vMinutes = 0;
     for (d = 0; d < 7; d++){
         statDate = new Date(uberWeekBeginDate * 1 + (86400000 * d));
-        // console.log(statDate.toISOString().slice(0,10));
+        // if(consoleOn===true){console.log(statDate.toISOString().slice(0,10))};
         for (var i=0; i < aDriverDayBook.length; i++){
-            // console.log(aDriverDayBook[i].xDate);
+            // if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
             if (aDriverDayBook[i].xDate===statDate.toISOString().slice(0,10)){
-                // console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i);
+                // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,statDate.toISOString().slice(0,10),i)};
                 vTotalGross += aDriverDayBook[i].xTotalGross * 1;
                 vKlms += aDriverDayBook[i].xKlms * 1;
                 vTrips += aDriverDayBook[i].xTrips * 1
@@ -639,7 +660,7 @@ function updateQtrStats(myDate){
             }
         }
     }
-    // console.log(vTotalGross,vKlms,vTotalGross/vKlms);
+    // if(consoleOn===true){console.log(vTotalGross,vKlms,vTotalGross/vKlms)};
     document.getElementById("vTotalGross").value = (vTotalGross).toFixed(2);
     document.getElementById("vKlms").value = (vKlms).toFixed(1);
     document.getElementById("vGrossPerKlm").value = (vTotalGross / vKlms).toFixed(2);
@@ -672,7 +693,7 @@ function timeStampString(){
     if (v_millisecond<100)(v_millisecond="0"+v_millisecond);
     // const v_timeStampStr = "timeStamped_" + v_fullYear + "-" + v_month + "-" + v_day + "_" + v_dayName + "_" + v_hour + ":" + v_minute + "_" + v_second + v_millisecond;
     const v_timeStampStr = v_fullYear + "-" + v_month + "-" + v_day + "_" + v_dayName + "_" + v_hour + ":" + v_minute + "_" + v_second + v_millisecond;
-    // console.log("v_timeStampString:- ",v_timeStampStr)};
+    // if(consoleOn===true){console.log("v_timeStampString:- ",v_timeStampStr)};
     return v_timeStampStr;
 }
 
@@ -743,7 +764,7 @@ async function checkOutUserFiles(userPIN){
 // CHECK OUT user file END
 
 function driverRecordsAccess(e){
-    // console.log(e.value)};
+    // if(consoleOn===true){console.log(e.value)};
     // const accessCode = prompt("Please enter access code (get the code from support@netit.com.au)");
     // if (accessCode!=="aus"){
     //     return;
@@ -759,7 +780,7 @@ function driverRecordsAccess(e){
             location.reload();
             // return;
         } else {
-            // console.log(newUserEmailAddress)};
+            // if(consoleOn===true){console.log(newUserEmailAddress)};
             create(newUserEmailAddress);
         }
     }
@@ -768,7 +789,7 @@ function driverRecordsAccess(e){
 // create user file - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 // async function create(newUserEmailAddress){
 async function create(uEmail){
-    // console.log('create')};
+    // if(consoleOn===true){console.log('create')};
     // const userW = document.getElementById("pw").value;
     // const userW2 = document.getElementById("pw2").value;
     // const uEmail = document.getElementById("uEmail").value;
@@ -783,15 +804,15 @@ async function create(uEmail){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/create options:- ',v_options)};
+    // if(consoleOn===true){console.log('/create options:- ',v_options)};
     await fetch('/create',v_options)
     .then(res => {
-        // console.log('create:- res:- ',res)};
+        if(consoleOn===true){console.log('create:- res:- ',res)};
         return res.json();
         // return res.body;
     })
     .then((res_data) => {
-        // console.log('create:- userPIN:- ',res_data)};
+        if(consoleOn===true){console.log('create:- res_data:- ',res_data)};
         // writeToLocalStorage('clickedTickerPrice',res_data.price);
         // writeToLocalStorage('clickedTickerDateTime',v_dateTime);
         // writeToLocalStorage(`lastPrice_CommSec_${p_ticker}`,res_data.price);
@@ -804,10 +825,10 @@ async function create(uEmail){
 
 // login - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function login(){
-    console.log('login');
+    if(consoleOn===true){console.log('login')};
     // const userW = document.getElementById("pw").value;
     const uEmail = document.getElementById("uEmail").value;
-    // console.log(uEmail.length);
+    // if(consoleOn===true){console.log(uEmail.length)};
     if (uEmail.length === 0){
         alert("Plese enter an email address and ry again.");
         return;
@@ -819,22 +840,22 @@ async function login(){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/login options:- ' + v_options);
+    // if(consoleOn===true){console.log('/login options:- ' + v_options)};
     await fetch('/login1',v_options)
     .then(res => {
-        // console.log('login:- res.body:- ' + res.body);
-        // console.log('login:- res.json():- ',res.json())};
+        // if(consoleOn===true){console.log('login:- res.body:- ' + res.body)};
+        // if(consoleOn===true){console.log('login:- res.json():- ',res.json())};
         return res.json();
         // return res.tex4t();
     })
     .then((res_data) => {
-        // console.log('login:-\n jsonObject:- res_data\n' + res_data);
-        // console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
+        // if(consoleOn===true){console.log('login:-\n jsonObject:- res_data\n' + res_data)};
+        // if(consoleOn===true){console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
         // aDriverDayBook = res_data;
-        // console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
-        // console.log('login:- jsonObject:- ',JSON.parse(res_data))};
+        // if(consoleOn===true){console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
+        // if(consoleOn===true){console.log('login:- jsonObject:- ',JSON.parse(res_data))};
         if(res_data[0].response === "login1 ok"){
-            // console.log(res_data[0].response);
+            // if(consoleOn===true){console.log(res_data[0].response)};
             document.getElementById("login1").style.display = "none";
             // document.getElementById("login2").style.display = "body";
             document.getElementById("login2").style.display = "block";
@@ -845,9 +866,10 @@ async function login(){
             });
 
        } else {
-            // console.log(res_data[0].response);
+            // if(consoleOn===true){console.log(res_data[0].response)};
             // create account
-            create(uEmail);
+            // create(uEmail);
+            newUserSetup(uEmail);
         }
     });
 
@@ -867,23 +889,23 @@ async function login2(){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/login2 options:- ',v_options);
+    // if(consoleOn===true){console.log('/login2 options:- ',v_options)};
     await fetch('/login2',v_options)
     .then(res => {
-        // console.log('login2:- res.body:- ',res.body);
-        // console.log('login:- res.json():- ',res.json());
+        // if(consoleOn===true){console.log('login2:- res.body:- ',res.body)};
+        // if(consoleOn===true){console.log('login:- res.json():- ',res.json())};
         return res.json();
         // return res.tex4t();
     })
     .then((res_data) => {
-        // console.log('login2:-\n jsonObject:- res_data\n',res_data);
-        // console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
-        // console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
-        // console.log('login:- jsonObject:- ',JSON.parse(res_data))};
+        // if(consoleOn===true){console.log('login2:-\n jsonObject:- res_data\n',res_data)};
+        // if(consoleOn===true){console.log('login:-\n jsonObject:- res_data[1].v_emailAddress\n',res_data[2].v_uEmail)};
+        // if(consoleOn===true){console.log('login:- jsonObject:- ',JSON.stringify(res_data))};
+        // if(consoleOn===true){console.log('login:- jsonObject:- ',JSON.parse(res_data))};
         if(res_data[2].v_uEmail === uEmail){
 
             aDriverDayBook = res_data;
-            // console.log(res_data);
+            // if(consoleOn===true){console.log(res_data)};
             // document.getElementById("login1").style.display = "none";
             // document.getElementById("login2").style.display = "body";
             document.getElementById("login2").style.display = "none";
@@ -905,7 +927,7 @@ async function login2(){
             // document.getElementById("xDate").value = "2000-01-01";
 
             const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
-            // console.log(currentIsoDateString);
+            // if(consoleOn===true){console.log(currentIsoDateString)};
             // document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
             document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
 
@@ -927,7 +949,7 @@ async function login2(){
 // save to Local Storage START
 function saveDriverDayBookRecord(){
     // save to Local Storage
-    // console.log(aDriverDayBook)};
+    // if(consoleOn===true){console.log(aDriverDayBook)};
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
@@ -939,7 +961,7 @@ function saveDriverDayBookRecord(){
         if (input.name.slice(0,1)==="x"){
             txtHeaderRow += input.name + " , ";
             txtDataRow += input.value + " , ";
-            // console.log(input.name + " | " + input.value);
+            // if(consoleOn===true){console.log(input.name + " | " + input.value)};
             if(!addCommaPrefix){
                 addCommaPrefix = true;
                 txtDayBookEntry += `"${input.name}":"${input.value}"`;
@@ -951,25 +973,25 @@ function saveDriverDayBookRecord(){
     txtDayBookEntry += `,"xTimeStamp":"${xTimeStamp}"}`;
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
-    // console.log("localStorage done")};
+    // if(consoleOn===true){console.log("localStorage done")};
     // saves to Local Storage
 
-    // console.log(aDriverDayBook.findIndex(element === `{xDate: "${xDate.value}"}`))};
-    // console.log(txtDayBookEntry)};
-    // console.log(`{xDate: "${xDate.value}"}`);
+    // if(consoleOn===true){console.log(aDriverDayBook.findIndex(element === `{xDate: "${xDate.value}"}`))};
+    // if(consoleOn===true){console.log(txtDayBookEntry)};
+    // if(consoleOn===true){console.log(`{xDate: "${xDate.value}"}`);
     // const entryExists = (element) => element === `{xDate: "${xDate.value}"}`;
     const entryExists = (element) => element.xDate === `${xDate.value}`;
     const entryExistsAtIndex = aDriverDayBook.findIndex(entryExists);
-    // console.log(entryExistsAtIndex);
+    // if(consoleOn===true){console.log(entryExistsAtIndex)};
     if (entryExistsAtIndex > 0){
-        // console.log(aDriverDayBook);
+        // if(consoleOn===true){console.log(aDriverDayBook)};
         const removed = aDriverDayBook.splice(entryExistsAtIndex, 1);
-        // console.log(removed);
-        // console.log(aDriverDayBook);
+        // if(consoleOn===true){console.log(removed)};
+        // if(consoleOn===true){console.log(aDriverDayBook)};
     }
     aDriverDayBook.push(JSON.parse(txtDayBookEntry));
-    // console.log(aDriverDayBook);
-    // console.log(JSON.stringify(aDriverDayBook));
+    // if(consoleOn===true){console.log(aDriverDayBook)};
+    // if(consoleOn===true){console.log(JSON.stringify(aDriverDayBook))};
     storeFormDataInIndexedDB();
     updateaDriverDayBook(aDriverDayBook);
 }
@@ -979,7 +1001,7 @@ function saveDriverDayBookRecord(){
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
     var v_elements = document.getElementsByClassName("xData");
-    // console.log(v_elements)};
+    // if(consoleOn===true){console.log(v_elements)};
     var v_objectString = `{`;
     for (var i = 0; i < v_elements.length; i++) {
         v_fieldName = v_elements[i].name;
@@ -1007,28 +1029,28 @@ function storeFormDataInIndexedDB(){
 
 // updateaDriverDayBook() START \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function updateaDriverDayBook(aDriverDayBook){
-    // console.log('updateaDriverDayBook() triggered')};
-    // console.log(aDriverDayBook)};
+    // if(consoleOn===true){console.log('updateaDriverDayBook() triggered')};
+    // if(consoleOn===true){console.log(aDriverDayBook)};
     const v_data = JSON.stringify(aDriverDayBook);
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/update options:- ',v_options)};
+    // if(consoleOn===true){console.log('/update options:- ',v_options)};
     await fetch('/update',v_options)
     .then(res => {
-        // console.log('update:- res:- ',res)};
+        // if(consoleOn===true){console.log('update:- res:- ',res)};
         return res.json();
         // return res.body;
     })
     .then((res_data) => {
-        // console.log('update:- ...:- ',res_data)};
+        // if(consoleOn===true){console.log('update:- ...:- ',res_data)};
         // if (res_data==JSON.parse(v_data)){
         if (JSON.stringify(res_data)===v_data){
             alert("updated ok");
         } else {
             alert("update error!");
-            // console.log(res_data)};
-            // console.log(JSON.parse(v_data))};
-            // console.log(JSON.stringify(res_data))};
-            // console.log(v_data)};
+            // if(consoleOn===true){console.log(res_data)};
+            // if(consoleOn===true){console.log(JSON.parse(v_data))};
+            // if(consoleOn===true){console.log(JSON.stringify(res_data))};
+            // if(consoleOn===true){console.log(v_data)};
         };
     })
 }
@@ -1038,20 +1060,20 @@ function emailMyDeviceDataTo_OLD1(){
         let aRSDdata = [];
         for (let i = 0; i < localStorage.length; i++) {
             if (localStorage.key(i).slice(0,4)==="rsd!"){
-                // console.log(localStorage.getItem(localStorage.key(i)) + " , " + localStorage.key(i) + " , ")};
-                // console.log(localStorage.getItem(localStorage.key(i)) + localStorage.key(i) + " , ")};
+                // if(consoleOn===true){console.log(localStorage.getItem(localStorage.key(i)) + " , " + localStorage.key(i) + " , ")};
+                // if(consoleOn===true){console.log(localStorage.getItem(localStorage.key(i)) + localStorage.key(i) + " , ")};
                 // aRSDdata.push(localStorage.getItem(localStorage.key(i)) + " , " + localStorage.key(i) + " , ");
                 aRSDdata.push(localStorage.getItem(localStorage.key(i)) + localStorage.key(i) + " , ");
             }
         }
         aRSDdata.sort();
         aRSDdata.reverse();
-        // console.log(aRSDdata)};
+        // if(consoleOn===true){console.log(aRSDdata)};
         let vTEXT = "";
         for (let i = 0; i < aRSDdata.length; i++) {
             vTEXT += aRSDdata[i] + `%0D%0A`;
         }
-        // console.log(vTEXT)};
+        // if(consoleOn===true){console.log(vTEXT)};
         var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
         window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
@@ -1064,7 +1086,7 @@ function emailMyDeviceDataTo_OLD2(){
             aRSDdataRowSplit = localStorage.getItem(localStorage.key(i)).split(",");
             aRSDdataRowSplit.push(localStorage.key(i));
             for (let a = 0; a < aRSDdataRowSplit.length; a++) {
-                // console.log(i,a,aRSDdataRowSplit[a])};
+                // if(consoleOn===true){console.log(i,a,aRSDdataRowSplit[a])};
             }
             aRSDdataRow = localStorage.getItem(localStorage.key(i)) + localStorage.key(i);
             aRSDdata.push(aRSDdataRow);
@@ -1072,9 +1094,9 @@ function emailMyDeviceDataTo_OLD2(){
     }
     // aRSDdata.sort();
     // aRSDdata.reverse();
-    // console.log(aRSDdata)};
-    // console.log(aRSDdata[0])};
-    // console.log(aRSDdata[0].indexOf("_0]head"))};
+    // if(consoleOn===true){console.log(aRSDdata)};
+    // if(consoleOn===true){console.log(aRSDdata[0])};
+    // if(consoleOn===true){console.log(aRSDdata[0].indexOf("_0]head"))};
     let vTEXT = ``;
     vTEXT += aRSDdata[0] + `%0D%0A`;
     for (let i = 0; i < aRSDdata.length; i++) {
@@ -1082,7 +1104,7 @@ function emailMyDeviceDataTo_OLD2(){
             vTEXT += aRSDdata[i] + `%0D%0A`;
         }
     }
-    // console.log(vTEXT)};
+    // if(consoleOn===true){console.log(vTEXT)};
     var emailSubject = "Ride Share Driver Australia - driver's day records - comma separated for spreadsheet compatibility";
     window.location.href = "mailto:?subject=" + emailSubject + "&body=" + vTEXT;
 }
@@ -1104,25 +1126,25 @@ async function emailMyDeviceDataTo(){
         }
     );
     const v_options = {method: 'POST', headers: {'Content-Type': 'application/json'},body: v_data};
-    // console.log('/emailData options:- ',v_options);
+    // if(consoleOn===true){console.log('/emailData options:- ',v_options)};
     await fetch('/emailData',v_options)
     .then(res => {
-        // console.log('emailData:- res:- ',res);
+        // if(consoleOn===true){console.log('emailData:- res:- ',res)};
         return res.json();
         // return res.body;
     })
     .then((res_data) => {
-        // console.log(res_data.response);
+        // if(consoleOn===true){console.log(res_data.response)};
         alert(res_data.response);
         // if (res_data==JSON.parse(v_data)){
         // if (JSON.stringify(res_data)===v_data){
         //     alert("updated ok");
         // } else {
         //     alert("update error!");
-        //     // console.log(res_data)};
-        //     // console.log(JSON.parse(v_data))};
-        //     // console.log(JSON.stringify(res_data))};
-        //     // console.log(v_data)};
+        //     // if(consoleOn===true){console.log(res_data)};
+        //     // if(consoleOn===true){console.log(JSON.parse(v_data))};
+        //     // if(consoleOn===true){console.log(JSON.stringify(res_data))};
+        //     // if(consoleOn===true){console.log(v_data)};
         // };
     })
 }
@@ -1135,7 +1157,7 @@ function viewDataStored(){
             aRSDdataRowSplit = localStorage.getItem(localStorage.key(i)).split(",");
             aRSDdataRowSplit.push(localStorage.key(i));
             for (let a = 0; a < aRSDdataRowSplit.length; a++) {
-                // console.log(i,a,aRSDdataRowSplit[a])};
+                // if(consoleOn===true){console.log(i,a,aRSDdataRowSplit[a])};
             }
             aRSDdataRow = localStorage.getItem(localStorage.key(i)) + localStorage.key(i);
             aRSDdata.push(aRSDdataRow);
@@ -1143,9 +1165,9 @@ function viewDataStored(){
     }
     // aRSDdata.sort();
     // aRSDdata.reverse();
-    // console.log(aRSDdata)};
-    // console.log(aRSDdata[0])};
-    // console.log(aRSDdata[0].indexOf("_0]head"))};
+    // if(consoleOn===true){console.log(aRSDdata)};
+    // if(consoleOn===true){console.log(aRSDdata[0])};
+    // if(consoleOn===true){console.log(aRSDdata[0].indexOf("_0]head"))};
     let vHTML = ``;
     vHTML += aRSDdata[0] + `<br>`;
     for (let i = 0; i < aRSDdata.length; i++) {
@@ -1153,20 +1175,20 @@ function viewDataStored(){
             vHTML += aRSDdata[i] + `<br>`;
         }
     }
-    // console.log(vHTML)};
+    // if(consoleOn===true){console.log(vHTML)};
     document.getElementById("displayLocalStorage").innerHTML = vHTML;
 }
 function sumTolls(){
     let tollsNumber = 0;
     tollsNumber = window.prompt('Enter a number to add to Tolls (negatives allowed, use -), then click OK.',tollsNumber);
-    // console.log(tollsNumber)};
+    // if(consoleOn===true){console.log(tollsNumber)};
     if (!tollsNumber){
         // document.getElementById("xTolls").blur();
     } else {
         tollsNumber = tollsNumber * 1;
-        // console.log(tollsNumber)};
+        // if(consoleOn===true){console.log(tollsNumber)};
         tollsNumber += document.getElementById("xTolls").value * 1;
-        // console.log(tollsNumber)};
+        // if(consoleOn===true){console.log(tollsNumber)};
         document.getElementById("xTolls").value = tollsNumber;
     }
 }
