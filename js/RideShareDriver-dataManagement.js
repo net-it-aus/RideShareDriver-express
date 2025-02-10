@@ -31,7 +31,7 @@ let aDriverDayBook = [];
         if ('serviceWorker' in navigator) {
             // window.addEventListener('load', function() {
                 navigator.serviceWorker.register('service-worker.js').then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
+                    // console.log('Service Worker registered with scope:', registration.scope);
                 }, function(error) {
                     console.log('Service Worker registration failed:', error);
                 });
@@ -230,7 +230,7 @@ let aDriverDayBook = [];
             }
         });
         document.getElementById('login2Button').addEventListener('keydown', (event) => {
-            if(consoleOn===true){console.log(event.key)};
+            // if(consoleOn===true){console.log(event.key)};
             if (event.key === 'Enter') {
                 login2();
             }
@@ -367,8 +367,8 @@ function dateChange(){
     const datval_xDate = document.getElementById("xDate");
     let d = new Date(datval_xDate.value).getDay();
     document.getElementById("weekdayText").innerHTML = dayNames[d];
-    if(consoleOn===true){console.log(datval_xDate)};
-    if(consoleOn===true){console.log(datval_xDate.value)};
+    // if(consoleOn===true){console.log(datval_xDate)};
+    // if(consoleOn===true){console.log(datval_xDate.value)};
 
     // get xEndingOdometre from the previous date START
         if(datval_xDate.value){
@@ -414,15 +414,15 @@ function dateChange(){
             break;
         } else {
             for (const key in aDriverDayBook[i]){
-                if(consoleOn===true){console.log(key)};
-                // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
+                // if(consoleOn===true){console.log(key)};
+                // // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
                 if (aDriverDayBook[i][key].length>0){
-                    if(consoleOn===true){console.log(key)};
+                    // if(consoleOn===true){console.log(key)};
                     if(document.getElementById(key)){
-                        if(consoleOn===true){console.log(key)};
+                        // if(consoleOn===true){console.log(key)};
                         if(document.getElementById(key).classList){
                             if(document.getElementById(key).classList.contains("initToZero")){
-                                if(consoleOn===true){console.log(key)};
+                                // if(consoleOn===true){console.log(key)};
                                 document.getElementById(key).value = "0";
                             } else {
                                 // if(consoleOn===true){console.log(key)};
@@ -870,7 +870,7 @@ async function create(uEmail){
 
 // login - start \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 async function login(){
-    if(consoleOn===true){console.log('login')};
+    // if(consoleOn===true){console.log('login')};
     // const userW = document.getElementById("pw").value;
     const uEmail = document.getElementById("uEmail").value;
     // if(consoleOn===true){console.log(uEmail.length)};
