@@ -3,7 +3,7 @@
 /* <!-- format           Alt + Shift + F (USE WITH CAUTION)--> */
 /* <!-- word wrap toggle Alt + z --> */
 
-const consoleOn = false;
+const consoleOn = true;
 let t;
 let aDriverDayBook = [];
 // Sunday is the first day of the week
@@ -13,7 +13,30 @@ let aDriverDayBook = [];
 
 // wait for DOM to load START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     window.addEventListener("load", () => {
+
+        // // hide js START
+        //     // Disable Right-Click: You can disable the right-click context menu to prevent users from easily accessing the "View Source" option. This can be done using JavaScript:
+        //     document.addEventListener("contextmenu", e => e.preventDefault(), false);
+        //     // Disable Shortcut Keys: Prevent users from using keyboard shortcuts like Ctrl+U (View Source) or F12 (Developer Tools) by capturing and stopping these events:
+        //     document.addEventListener("keydown", e => {
+        //         if (e.ctrlKey || e.keyCode == 123) { // Ctrl or F12
+        //             e.stopPropagation();
+        //             e.preventDefault();
+        //         }
+        //     }, false);
+        // // hide js END
+
         // Fully loaded!
+
+        if ('serviceWorker' in navigator) {
+            // window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }, function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            // });
+        }
 
         // login2();
 
@@ -344,7 +367,14 @@ function dateChange(){
     const datval_xDate = document.getElementById("xDate");
     let d = new Date(datval_xDate.value).getDay();
     document.getElementById("weekdayText").innerHTML = dayNames[d];
-    // if(consoleOn===true){console.log(datval_xDate)};
+    if(consoleOn===true){console.log(datval_xDate)};
+    if(consoleOn===true){console.log(datval_xDate.value)};
+
+    // get xEndingOdometre from the previous date START
+        if(datval_xDate.value){
+
+        }
+    // get xEndingOdometre from the previous date END
 
     const frm = document.getElementById("driver-day-book");
     // if(consoleOn===true){console.log(frm)};
@@ -365,7 +395,7 @@ function dateChange(){
         });
     // re-set HTML form to null values, except for the date field END ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    for (var i=0; i < aDriverDayBook.length; i++){``
+    for (var i=0; i < aDriverDayBook.length; i++){
         // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value)};
         if (aDriverDayBook[i].xDate===datval_xDate.value){
             // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value,i)};
@@ -384,15 +414,20 @@ function dateChange(){
             break;
         } else {
             for (const key in aDriverDayBook[i]){
-                // if(consoleOn===true){console.log(key)};
+                if(consoleOn===true){console.log(key)};
                 // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
                 if (aDriverDayBook[i][key].length>0){
-                    // if(consoleOn===true){console.log([key])};
-                    // if(consoleOn===true){console.log([key][0].slice(0,1))};
-                    if ([key][0].slice(0,1)==="x"){
-                       if (key!=="xDate"){
-                            // if(consoleOn===true){console.log(key)};
-                            document.getElementById(key).value = "";
+                    if(consoleOn===true){console.log(key)};
+                    if(document.getElementById(key)){
+                        if(consoleOn===true){console.log(key)};
+                        if(document.getElementById(key).classList){
+                            if(document.getElementById(key).classList.contains("initToZero")){
+                                if(consoleOn===true){console.log(key)};
+                                document.getElementById(key).value = "0";
+                            } else {
+                                // if(consoleOn===true){console.log(key)};
+                                // DO NOTHING
+                            }
                         }
                     }
                 }
@@ -477,38 +512,43 @@ function dateChange(){
 // UPDATE QTR STATS start
 function updateQtrStats(myDate){
 
-    if(consoleOn===true){console.log(myDate)};
-    // const selectedYear = parseFloat(new Date(myDate).getFullYear());
+    // if(consoleOn===true){console.log(myDate)};
+    // const selectedTaxYear = parseFloat(new Date(myDate).getFullYear());
     // const selectedMonth = parseFloat(new Date(myDate).getMonth() + 1,0);
-    const selectedYear = new Date(myDate).getFullYear();
+    let selectedTaxYear = new Date(myDate).getFullYear();
     const selectedMonth = new Date(myDate).getMonth() + 1;
-    if(consoleOn===true){console.log(selectedYear,selectedMonth)};
+    if(selectedMonth>6){
+        selectedTaxYear = `${selectedTaxYear}-${selectedTaxYear+1}`;
+    } else {
+        selectedTaxYear = `${selectedTaxYear-1}-${selectedTaxYear}`;
+    }
+    // if(consoleOn===true){console.log(selectedTaxYear,selectedMonth)};
     let selectedQuarter;
     switch(true) {
         case selectedMonth <= 3:
             // if(consoleOn===true){console.log("selected quarter = 3")};
             // selectedQuarter = 3
-            selectedQuarter = selectedYear + "_3"
+            selectedQuarter = selectedTaxYear + "_Q3"
             break;
         case selectedMonth <= 6:
             // if(consoleOn===true){console.log("selected quarter = 4")};
             // selectedQuarter = 4
-            selectedQuarter = selectedYear + "_4"
+            selectedQuarter = selectedTaxYear + "_Q4"
             break;
         case selectedMonth <= 9:
             // if(consoleOn===true){console.log("selected quarter = 1")};
             // selectedQuarter = 1
-            selectedQuarter = selectedYear + "_1"
+            selectedQuarter = selectedTaxYear + "_Q1"
             break;
         case selectedMonth <= 12:
             // if(consoleOn===true){console.log("selected quarter = 2")};
             // selectedQuarter = 2
-            selectedQuarter = selectedYear + "_2"
+            selectedQuarter = selectedTaxYear + "_Q2"
             break;
         default:
             // if(consoleOn===true){console.log("selected quarter = ?")};
             // selectedQuarter = 0
-            selectedQuarter = selectedYear + "_0"
+            selectedQuarter = selectedTaxYear + "_Q0"
     }
 
     let vTotalGrossQtr = 0;
@@ -524,43 +564,48 @@ function updateQtrStats(myDate){
 
     let dayBookMonth;
     let dayBookQuarter;
-    let dayBookYear;
+    let dayBookTaxYear;
     for (var i=0; i < aDriverDayBook.length; i++){
         if(aDriverDayBook[i].xDate){
-            if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
-            dayBookYear = new Date(aDriverDayBook[i].xDate).getFullYear();
+            // if(consoleOn===true){console.log(aDriverDayBook[i].xDate)};
+            dayBookTaxYear = new Date(aDriverDayBook[i].xDate).getFullYear();
             dayBookMonth = new Date(aDriverDayBook[i].xDate).getMonth() + 1;
-            if(consoleOn===true){console.log(dayBookYear,dayBookMonth)};
+            if(dayBookMonth>6){
+                dayBookTaxYear = `${dayBookTaxYear}-${dayBookTaxYear+1}`;
+            } else {
+                dayBookTaxYear = `${dayBookTaxYear-1}-${dayBookTaxYear}`;
+            }
+            // if(consoleOn===true){console.log(dayBookTaxYear,dayBookMonth)};
             switch(true) {
                 case dayBookMonth <= 3:
                     // if(consoleOn===true){console.log("dayBook quarter = 3")};
                     // dayBookQuarter = 3
-                    dayBookQuarter = dayBookYear + "_3"
+                    dayBookQuarter = dayBookTaxYear + "_Q3"
                     break;
                 case dayBookMonth <= 6:
                     // if(consoleOn===true){console.log("dayBook quarter = 4")};
                     // dayBookQuarter = 4
-                    dayBookQuarter = dayBookYear + "_4"
+                    dayBookQuarter = dayBookTaxYear + "_Q4"
                     break;
                 case dayBookMonth <= 9:
                     // if(consoleOn===true){console.log("dayBook quarter = 1")};
                     // dayBookQuarter = 1
-                    dayBookQuarter = dayBookYear + "_1"
+                    dayBookQuarter = dayBookTaxYear + "_Q1"
                     break;
                 case dayBookMonth <= 12:
                     // if(consoleOn===true){console.log("dayBook quarter = 2")};
                     // dayBookQuarter = 2
-                    dayBookQuarter = dayBookYear + "_2"
+                    dayBookQuarter = dayBookTaxYear + "_Q2"
                     break;
                 default:
                     // if(consoleOn===true){console.log("dayBook quarter = ?")};
                     // dayBookQuarter = 0
-                    dayBookQuarter = dayBookYear + "_0"
+                    dayBookQuarter = dayBookTaxYear + "_Q0"
             }
-            if(consoleOn===true){console.log(dayBookQuarter)};
-            if(consoleOn===true){console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
+            // if(consoleOn===true){console.log('dayBookQuarter:- ',dayBookQuarter)};
+            // if(consoleOn===true){console.log('date / quarter / selected quarter :- ', aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
             if (dayBookQuarter===selectedQuarter){
-                if(consoleOn===true){console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
+                // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,dayBookQuarter,selectedQuarter)};
                 vTotalGrossQtr += aDriverDayBook[i].xTotalGross * 1;
                 vFuelPurchaseTotalQtr += aDriverDayBook[i].xFuelPurchaseTotal * 1;
                 vVehicleServiceScheduledQtr += aDriverDayBook[i].xVehicleServiceScheduled * 1;

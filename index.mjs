@@ -74,7 +74,7 @@ if (v_portNumber == undefined) {
     app.use(express.static('css'));
     // app.use(express.static('images'));
     app.use(express.static('js'));
-    app.use(express.static('media - partial'));
+    app.use(express.static('media-partial'));
 // app.use(express.static('resources'));
 
 //  tell the express server to recognise incoming data as JSON
