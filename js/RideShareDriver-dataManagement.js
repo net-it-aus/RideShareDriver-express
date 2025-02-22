@@ -362,85 +362,6 @@ function calcNetB4taxWeek(){
     }
 }
 
-function dateChange(){
-
-    const datval_xDate = document.getElementById("xDate");
-    let d = new Date(datval_xDate.value).getDay();
-    document.getElementById("weekdayText").innerHTML = dayNames[d];
-    // if(consoleOn===true){console.log(datval_xDate)};
-    // if(consoleOn===true){console.log(datval_xDate.value)};
-
-    // get xEndingOdometre from the previous date START
-        if(datval_xDate.value){
-
-        }
-    // get xEndingOdometre from the previous date END
-
-    const frm = document.getElementById("driver-day-book");
-    // if(consoleOn===true){console.log(frm)};
-
-    document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
-    // document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
-    document.getElementById("weekSummary1").innerHTML = `&nbspWeek Summary - ${dayNames[d]}`;
-    document.getElementById("weekSummary2").innerHTML = `&nbspWeek Net Profit Estimate - ${dayNames[d]}`;
-
-    // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
-        Array.from(frm.elements).forEach((input) => {
-            if (input.name==="xDate"){
-            } else {
-                if (input.name.slice(0,1)==="x"){
-                    document.getElementById(input.name).value = "";
-                }
-            }
-        });
-    // re-set HTML form to null values, except for the date field END ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    for (var i=0; i < aDriverDayBook.length; i++){
-        // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value)};
-        if (aDriverDayBook[i].xDate===datval_xDate.value){
-            // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value,i)};
-            for (const key in aDriverDayBook[i]){
-                // if(consoleOn===true){console.log(key)};
-                // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
-                if (aDriverDayBook[i][key].length>0){
-                    // if(consoleOn===true){console.log([key])};
-                    // if(consoleOn===true){console.log([key][0].slice(0,1))};
-                    if ([key][0].slice(0,1)==="x"){
-                        // if(consoleOn===true){console.log(aDriverDayBook[i][key])};
-                        document.getElementById(key).value = aDriverDayBook[i][key];
-                    }
-                }
-            }
-            break;
-        } else {
-            for (const key in aDriverDayBook[i]){
-                // if(consoleOn===true){console.log(key)};
-                // // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
-                if (aDriverDayBook[i][key].length>0){
-                    // if(consoleOn===true){console.log(key)};
-                    if(document.getElementById(key)){
-                        // if(consoleOn===true){console.log(key)};
-                        if(document.getElementById(key).classList){
-                            if(document.getElementById(key).classList.contains("initToZero")){
-                                // if(consoleOn===true){console.log(key)};
-                                document.getElementById(key).value = "0";
-                            } else {
-                                // if(consoleOn===true){console.log(key)};
-                                // DO NOTHING
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    updateWeekStats(datval_xDate.value);
-    updateQtrStats(datval_xDate.value);
-    calcNetB4tax();
-    calcNetB4taxWeek();
-
-}
-
 // UPDATE WEEK STATS start
     function updateWeekStats(myDate){
 
@@ -718,6 +639,85 @@ function updateQtrStats(myDate){
 }
 // UPDATE QTR STATS end
 
+// dateChange() START
+function dateChange(){
+
+    const datval_xDate = document.getElementById("xDate");
+    let d = new Date(datval_xDate.value).getDay();
+    document.getElementById("weekdayText").innerHTML = dayNames[d];
+    // if(consoleOn===true){console.log(datval_xDate)};
+    // if(consoleOn===true){console.log(datval_xDate.value)};
+
+    // get xEndingOdometre from the previous date START
+        if(datval_xDate.value){
+
+        }
+    // get xEndingOdometre from the previous date END
+
+    const frm = document.getElementById("driver-day-book");
+    // if(consoleOn===true){console.log(frm)};
+
+    document.getElementById("dateFixedPos").innerHTML = datval_xDate.value;
+    // document.getElementById("dateFixedPosDay").innerHTML = dayNames[d];
+    document.getElementById("weekSummary1").innerHTML = `&nbspWeek Summary - ${dayNames[d]}`;
+    document.getElementById("weekSummary2").innerHTML = `&nbspWeek Net Profit Estimate - ${dayNames[d]}`;
+
+    // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
+        Array.from(frm.elements).forEach((input) => {
+            if (input.name==="xDate"){
+            } else {
+                if (input.name.slice(0,1)==="x"){
+                    document.getElementById(input.name).value = "";
+                }
+            }
+        });
+    // re-set HTML form to null values, except for the date field END ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    for (var i=0; i < aDriverDayBook.length; i++){
+        // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value)};
+        if (aDriverDayBook[i].xDate===datval_xDate.value){
+            // if(consoleOn===true){console.log(aDriverDayBook[i].xDate,datval_xDate.value,i)};
+            for (const key in aDriverDayBook[i]){
+                // if(consoleOn===true){console.log(key)};
+                // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
+                if (aDriverDayBook[i][key].length>0){
+                    // if(consoleOn===true){console.log([key])};
+                    // if(consoleOn===true){console.log([key][0].slice(0,1))};
+                    if ([key][0].slice(0,1)==="x"){
+                        // if(consoleOn===true){console.log(aDriverDayBook[i][key])};
+                        document.getElementById(key).value = aDriverDayBook[i][key];
+                    }
+                }
+            }
+            break;
+        } else {
+            for (const key in aDriverDayBook[i]){
+                // if(consoleOn===true){console.log(key)};
+                // // if(consoleOn===true){console.log(`${key}:${aDriverDayBook[i][key]}`)};
+                if (aDriverDayBook[i][key].length>0){
+                    // if(consoleOn===true){console.log(key)};
+                    if(document.getElementById(key)){
+                        // if(consoleOn===true){console.log(key)};
+                        if(document.getElementById(key).classList){
+                            if(document.getElementById(key).classList.contains("initToZero")){
+                                // if(consoleOn===true){console.log(key)};
+                                document.getElementById(key).value = "0";
+                            } else {
+                                // if(consoleOn===true){console.log(key)};
+                                // DO NOTHING
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    updateWeekStats(datval_xDate.value);
+    updateQtrStats(datval_xDate.value);
+    calcNetB4tax();
+    calcNetB4taxWeek();
+}
+// dateChange() END
 
 function timeStampString(){
     const v_dateNow = new Date(); 
@@ -990,7 +990,6 @@ async function login2(){
 }
 // login2fa - end \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
 // save to Local Storage START
 function saveDriverDayBookRecord(){
     // save to Local Storage
@@ -998,6 +997,7 @@ function saveDriverDayBookRecord(){
     const xTimeStamp = timeStampString();
     let txtHeaderRow = "";
     let txtDataRow = "";
+    let txtDataRowValue = "";
     let txtDayBookEntry = "";
     txtDayBookEntry += "{";
     addCommaPrefix = false;
@@ -1005,20 +1005,31 @@ function saveDriverDayBookRecord(){
     Array.from(frm.elements).forEach((input) => {
         if (input.name.slice(0,1)==="x"){
             txtHeaderRow += input.name + " , ";
-            txtDataRow += input.value + " , ";
-            // if(consoleOn===true){console.log(input.name + " | " + input.value)};
+            txtDataRowValue = input.value;
+            if(txtDataRowValue.slice(0,1)==="0"){
+                if(consoleOn===true){console.log("txtDataRowValue:- " + txtDataRowValue)};
+                txtDataRowValue = removeLeadingZeros(txtDataRowValue);
+                txtDataRow += txtDataRowValue + " , ";
+            } else {
+                if(consoleOn===true){console.log("txtDataRowValue:- " + txtDataRowValue)};
+                txtDataRow += txtDataRowValue + " , ";
+            }
+            if(consoleOn===true){console.log(input.name + " | " + input.value)};
             if(!addCommaPrefix){
                 addCommaPrefix = true;
-                txtDayBookEntry += `"${input.name}":"${input.value}"`;
+                // txtDayBookEntry += `"${input.name}":"${input.value}"`;
+                txtDayBookEntry += `"${input.name}":"${txtDataRowValue}"`;
             } else {
-                txtDayBookEntry += `,"${input.name}":"${input.value}"`;
+                // txtDayBookEntry += `,"${input.name}":"${input.value}"`;
+                txtDayBookEntry += `,"${input.name}":"${txtDataRowValue}"`;
             }
         }
     });
     txtDayBookEntry += `,"xTimeStamp":"${xTimeStamp}"}`;
+    if(consoleOn===true){console.log("txtDayBookEntry:-/n",txtDayBookEntry)};
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
-    // if(consoleOn===true){console.log("localStorage done")};
+    if(consoleOn===true){console.log("localStorage done")};
     // saves to Local Storage
 
     // if(consoleOn===true){console.log(aDriverDayBook.findIndex(element === `{xDate: "${xDate.value}"}`))};
@@ -1069,6 +1080,7 @@ function storeFormDataInIndexedDB(){
     }
     // v_objectString += `}`;
     idbAdd("rsd","rsdDayBook",v_objectString);
+    if(consoleOn===true){console.log("indexedDB done")};
 }
 // save to IndexedDB END
 
