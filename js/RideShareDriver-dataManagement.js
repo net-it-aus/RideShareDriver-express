@@ -45,17 +45,17 @@ let aDriverDayBook = [];
 // document.getElementById("originalBody").style.display = "none";
 // document.getElementById("driverRecordsAccessControl").style.display = "none";
 // const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
-// document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
+// document.getElementById("x_Date").value = currentIsoDateString.slice(0,10);
 // dateChange();
 
-        document.getElementById("xKlms").addEventListener("blur",()=>{
+        document.getElementById("x_Klms").addEventListener("blur",()=>{
             calcBusinessPrivateKlms();
         })
-        document.getElementById("xKlmsPrivate").addEventListener("blur",()=>{
+        document.getElementById("x_KlmsPrivate").addEventListener("blur",()=>{
             calcBusinessPrivateKlms();
         })
         function calcBusinessPrivateKlms(){
-            document.getElementById("xKlms").value = document.getElementById("xKlms").value * 1 - document.getElementById("xKlmsPrivate").value
+            document.getElementById("x_Klms").value = document.getElementById("x_Klms").value * 1 - document.getElementById("x_KlmsPrivate").value
         }
 
         var myBody = document.getElementsByTagName("BODY")[0];
@@ -99,113 +99,113 @@ let aDriverDayBook = [];
         document.getElementById("dayBook_DateRightButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
-            if( document.getElementById("xDate").value.length === 0) {
+            // if(consoleOn===true){console.log( typeof document.getElementById("x_Date").value)};
+            if( document.getElementById("x_Date").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
-                document.getElementById("xDate").value = d0.slice(0,10);
+                document.getElementById("x_Date").value = d0.slice(0,10);
             } else {
-                d0 = new Date(document.getElementById("xDate").value).toISOString();
+                d0 = new Date(document.getElementById("x_Date").value).toISOString();
             }
             // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
             // if(consoleOn===true){console.log(new Date(d1 * 1 +  86400000))};
             d1 = new Date(d1 * 1 +  86400000);
             d1 = d1.toISOString()
-            document.getElementById("xDate").value = d1.slice(0,10);
+            document.getElementById("x_Date").value = d1.slice(0,10);
             dateChange();
         });
         document.getElementById("dayBook_DateLeftButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
-            if( document.getElementById("xDate").value.length === 0) {
+            // if(consoleOn===true){console.log( typeof document.getElementById("x_Date").value)};
+            if( document.getElementById("x_Date").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
-                document.getElementById("xDate").value = d0.slice(0,10);
+                document.getElementById("x_Date").value = d0.slice(0,10);
             } else {
-                d0 = new Date(document.getElementById("xDate").value).toISOString();
+                d0 = new Date(document.getElementById("x_Date").value).toISOString();
             }
             // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
             // if(consoleOn===true){console.log(new Date(d1 * 1 -  86400000))};
             d1 = new Date(d1 * 1 -  86400000);
             d1 = d1.toISOString()
-            document.getElementById("xDate").value = d1.slice(0,10);
+            document.getElementById("x_Date").value = d1.slice(0,10);
             dateChange();
         });
 
         document.getElementById("dayBook_WeekRightButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
-            if( document.getElementById("xDate").value.length === 0) {
+            // if(consoleOn===true){console.log( typeof document.getElementById("x_Date").value)};
+            if( document.getElementById("x_Date").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
-                document.getElementById("xDate").value = d0.slice(0,10);
+                document.getElementById("x_Date").value = d0.slice(0,10);
             } else {
-                d0 = new Date(document.getElementById("xDate").value).toISOString();
+                d0 = new Date(document.getElementById("x_Date").value).toISOString();
             }
             // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
             // if(consoleOn===true){console.log(new Date(d1 * 1 + (86400000 * 7)))};
             d1 = new Date(d1 * 1 +  (86400000 * 7));
             d1 = d1.toISOString()
-            document.getElementById("xDate").value = d1.slice(0,10);
+            document.getElementById("x_Date").value = d1.slice(0,10);
             dateChange();
         });
         document.getElementById("dayBook_WeekLeftButton").addEventListener("click",()=>{
             let d0 = '';
             let d1 = '';
-            // if(consoleOn===true){console.log( typeof document.getElementById("xDate").value)};
-            if( document.getElementById("xDate").value.length === 0) {
+            // if(consoleOn===true){console.log( typeof document.getElementById("x_Date").value)};
+            if( document.getElementById("x_Date").value.length === 0) {
                 d0 = new Date(Date.now()).toISOString();
-                document.getElementById("xDate").value = d0.slice(0,10);
+                document.getElementById("x_Date").value = d0.slice(0,10);
             } else {
-                d0 = new Date(document.getElementById("xDate").value).toISOString();
+                d0 = new Date(document.getElementById("x_Date").value).toISOString();
             }
             // if(consoleOn===true){console.log(d0)};
             d1 = new Date(d0);
             // if(consoleOn===true){console.log(new Date(d1 * 1 - (86400000 * 7)))};
             d1 = new Date(d1 * 1 -  (86400000 * 7));
             d1 = d1.toISOString()
-            document.getElementById("xDate").value = d1.slice(0,10);
+            document.getElementById("x_Date").value = d1.slice(0,10);
             dateChange();
         });
 
 
-        document.getElementById("xKlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
-            let klms = parseFloat(document.getElementById("xKlmTravelledSinceLastFillup").value) | 0;
-            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value) | 0;
+        document.getElementById("x_KlmTravelledSinceLastFillup").addEventListener("blur",(event)=>{
+            let klms = parseFloat(document.getElementById("x_KlmTravelledSinceLastFillup").value) | 0;
+            let ltrs = parseFloat(document.getElementById("x_LitresPurchased").value) | 0;
             if(klms !== 0 & ltrs !== 0){
-                document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
+                document.getElementById("x_FuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
             } else {
-                document.getElementById("xFuelEconomyCalculated").value = null;
+                document.getElementById("x_FuelEconomyCalculated").value = null;
             }
         });
-        document.getElementById("xLitresPurchased").addEventListener("blur",(event)=>{
-            let klms = parseFloat(document.getElementById("xKlmTravelledSinceLastFillup").value) | 0;
-            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value) | 0;
+        document.getElementById("x_LitresPurchased").addEventListener("blur",(event)=>{
+            let klms = parseFloat(document.getElementById("x_KlmTravelledSinceLastFillup").value) | 0;
+            let ltrs = parseFloat(document.getElementById("x_LitresPurchased").value) | 0;
             if(klms !== 0 & ltrs !== 0){
-                document.getElementById("xFuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
+                document.getElementById("x_FuelEconomyCalculated").value = (ltrs*1/klms*1*100).toFixed(1);
             } else {
-                document.getElementById("xFuelEconomyCalculated").value = null;
+                document.getElementById("x_FuelEconomyCalculated").value = null;
             }
             calcPrcVar();
         });
 
-        document.getElementById("xPricePerLitre").addEventListener("blur",(event)=>{
+        document.getElementById("x_PricePerLitre").addEventListener("blur",(event)=>{
             calcPrcVar();
         });
-        document.getElementById("xFuelPurchaseTotal").addEventListener("blur",(event)=>{
+        document.getElementById("x_FuelPurchaseTotal").addEventListener("blur",(event)=>{
             calcPrcVar();
         });
         function calcPrcVar(){
-            let ltrs = parseFloat(document.getElementById("xLitresPurchased").value);
-            let price = parseFloat(document.getElementById("xPricePerLitre").value);
-            let total = parseFloat(document.getElementById("xFuelPurchaseTotal").value);
+            let ltrs = parseFloat(document.getElementById("x_LitresPurchased").value);
+            let price = parseFloat(document.getElementById("x_PricePerLitre").value);
+            let total = parseFloat(document.getElementById("x_FuelPurchaseTotal").value);
             // if(consoleOn===true){console.log(ltrs,price,total)};
             if(ltrs !== 0 & price !== 0 & total !== 0){
-                document.getElementById("xPriceVariance").value = ((ltrs*1) * (price*1) - (total*1)).toFixed(2);
+                document.getElementById("x_PriceVariance").value = ((ltrs*1) * (price*1) - (total*1)).toFixed(2);
             } else {
-                document.getElementById("xPriceVariance").value = null;
+                document.getElementById("x_PriceVariance").value = null;
             }
         }
 
@@ -236,25 +236,25 @@ let aDriverDayBook = [];
             }
         });
     
-        const datval_xDate = document.getElementById("xDate");
+        const datval_xDate = document.getElementById("x_Date");
         // console.trace();
         // if(consoleOn===true){console.log(datval_xDate)};
         const frm = document.getElementById("driver-day-book");
         // if(consoleOn===true){console.trace()};
         // if(consoleOn===true){console.log(frm)};
 
-        // document.getElementById("xAccess").focus();
-        // document.getElementById("xAccess").select();
+        // document.getElementById("x_Access").focus();
+        // document.getElementById("x_Access").select();
 
         // document.getElementById("futureDate").value = getFutureDate();
-        // document.getElementById("xHours").addEventListener("change",calcStats());
-        // document.getElementById("xMinutes").addEventListener("change",calcStats());
-        // document.getElementById("xSeconds").addEventListener("change",calcStats());
-        // document.getElementById("xDistance").addEventListener("change",calcStats());
+        // document.getElementById("x_Hours").addEventListener("change",calcStats());
+        // document.getElementById("x_Minutes").addEventListener("change",calcStats());
+        // document.getElementById("x_Seconds").addEventListener("change",calcStats());
+        // document.getElementById("x_Distance").addEventListener("change",calcStats());
         // document.getElementById("ttCourse").addEventListener("change",calcStats());
-        // document.getElementById("xPace").addEventListener("mouseover",calcStats());
-        // document.getElementById("xPace").addEventListener("touchstart",calcStats());
-        // document.getElementById("ttName").addEventListener("change",document.getElementById("xHours").focus())
+        // document.getElementById("x_Pace").addEventListener("mouseover",calcStats());
+        // document.getElementById("x_Pace").addEventListener("touchstart",calcStats());
+        // document.getElementById("ttName").addEventListener("change",document.getElementById("x_Hours").focus())
         // document.getElementById("ttName").select();
 
         // DATE CHANGE DETECT start
@@ -274,37 +274,37 @@ let aDriverDayBook = [];
                 document.getElementById("uEmail").select();
             }
         });
-        const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
+        const datval_xMinutesOnline = document.getElementById("x_MinutesOnline");
         datval_xMinutesOnline.addEventListener("input", (event) => {
             if (datval_xMinutesOnline.validity.valid) {
             } else {
                 // datval_xMinutesOnline.setCustomValidity("");
                 alert("value out of range, please try again");
-                document.getElementById("xMinutesOnline").value = 0;
-                document.getElementById("xMinutesOnline").focus();
-                document.getElementById("xMinutesOnline").select();
+                document.getElementById("x_MinutesOnline").value = 0;
+                document.getElementById("x_MinutesOnline").focus();
+                document.getElementById("x_MinutesOnline").select();
             }
         });
-        const datval_xTotalGross = document.getElementById("xTotalGross");
-        const datval_xKlms = document.getElementById("xKlms");
+        const datval_xTotalGross = document.getElementById("x_TotalGross");
+        const datval_xKlms = document.getElementById("x_Klms");
         datval_xTotalGross.addEventListener("change", (event) => {
             if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
                 if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
                 } else {
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = null;
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerKlm").value = null;
                 }
                 if (datval_xTotalGross.value.length>0 & datval_xHoursOnline.value.length>0){
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
                 } else {
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerHour").value = null;
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerHour").value = null;
                 }
                 if (datval_xTotalGross.value.length>0){
-                    document.getElementById("xTotalGrossXexclGST").value = (parseFloat(datval_xTotalGross.value) / 1.1).toFixed(2);
+                    document.getElementById("x_TotalGrossXexclGST").value = (parseFloat(datval_xTotalGross.value) / 1.1).toFixed(2);
                 }
                 calcNetB4tax();
                 calcNetB4taxWeek();
@@ -315,50 +315,50 @@ let aDriverDayBook = [];
             //     if(consoleOn===true){console.log("datval_xTotalGross.validity.valid - ERROR",datval_xTotalGross.value.length)}};
             // //     // datval_xSeconds.setCustomValidity("");
             // //     alert("value out of range, please try again");
-            // //     document.getElementById("xTotalGrossX").value = 0;
-            // //     document.getElementById("xTotalGrossX").focus();
-            // //     document.getElementById("xTotalGrossX").select();
+            // //     document.getElementById("x_TotalGrossX").value = 0;
+            // //     document.getElementById("x_TotalGrossX").focus();
+            // //     document.getElementById("x_TotalGrossX").select();
             // }
         });
         datval_xKlms.addEventListener("change", (event) => {
             if (datval_xTotalGross.validity.valid & datval_xKlms.validity.valid) {
                 if (datval_xTotalGross.value.length>0 & datval_xKlms.value.length>0){
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerKlm").value = (datval_xTotalGross.value/datval_xKlms.value).toFixed(2);
                 } else {
-                    document.getElementById("xTotalGrossX").value = datval_xTotalGross.value;
-                    document.getElementById("xDollarsPerKlm").value = null;
+                    document.getElementById("x_TotalGrossX").value = datval_xTotalGross.value;
+                    document.getElementById("x_DollarsPerKlm").value = null;
                 }
                 calcNetB4tax();
                 calcNetB4taxWeek();
             }
         });
-        const datval_xHoursOnline = document.getElementById("xHoursOnline");
+        const datval_xHoursOnline = document.getElementById("x_HoursOnline");
         datval_xHoursOnline.addEventListener("change", (event) => {
-            document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
+            document.getElementById("x_DollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
         });
-        // const datval_xMinutesOnline = document.getElementById("xMinutesOnline");
+        // const datval_xMinutesOnline = document.getElementById("x_MinutesOnline");
         datval_xMinutesOnline.addEventListener("change", (event) => {
-            document.getElementById("xDollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
+            document.getElementById("x_DollarsPerHour").value = (datval_xTotalGross.value/(datval_xHoursOnline.value * 1 + datval_xMinutesOnline.value / 60)).toFixed(2);
         });
         // DATA VALIDATION END 
     // window.addEventListener("load", () => {
     });
 // wait for DOM to load END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function calcNetB4tax(){
-    if (document.getElementById("xKlms").value.length>0){
-        document.getElementById("xTotalGrossXexclGST").value = (document.getElementById("xTotalGross").value / 1.1).toFixed(2);
-        document.getElementById("xExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
-        document.getElementById("xExpensesCentsPerKlm").value = (document.getElementById("xKlms").value * document.getElementById("xExpensesCentsPerKlmRate").value).toFixed(2);
-        document.getElementById("xNetEarningsB4tax").value = (document.getElementById("xTotalGrossXexclGST").value - document.getElementById("xExpensesCentsPerKlm").value).toFixed(2);
+    if (document.getElementById("x_Klms").value.length>0){
+        document.getElementById("x_TotalGrossXexclGST").value = (document.getElementById("x_TotalGross").value / 1.1).toFixed(2);
+        document.getElementById("x_ExpensesCentsPerKlmRate").value = (0.85).toFixed(2);
+        document.getElementById("x_ExpensesCentsPerKlm").value = (document.getElementById("x_Klms").value * document.getElementById("x_ExpensesCentsPerKlmRate").value).toFixed(2);
+        document.getElementById("x_NetEarningsB4tax").value = (document.getElementById("x_TotalGrossXexclGST").value - document.getElementById("x_ExpensesCentsPerKlm").value).toFixed(2);
     }
 }
 function calcNetB4taxWeek(){
     if (document.getElementById("vKlms").value.length>0){
-        document.getElementById("xTotalGrossXexclGSTWeek").value = (document.getElementById("vTotalGross").value / 1.1).toFixed(2);
-        document.getElementById("xExpensesCentsPerKlmRateWeek").value = (0.85).toFixed(2);
-        document.getElementById("xExpensesCentsPerKlmWeek").value = (document.getElementById("vKlms").value * document.getElementById("xExpensesCentsPerKlmRateWeek").value).toFixed(2);
-        document.getElementById("xNetEarningsB4taxWeek").value = (document.getElementById("xTotalGrossXexclGSTWeek").value - document.getElementById("xExpensesCentsPerKlmWeek").value).toFixed(2);
+        document.getElementById("x_TotalGrossXexclGSTWeek").value = (document.getElementById("vTotalGross").value / 1.1).toFixed(2);
+        document.getElementById("x_ExpensesCentsPerKlmRateWeek").value = (0.85).toFixed(2);
+        document.getElementById("x_ExpensesCentsPerKlmWeek").value = (document.getElementById("vKlms").value * document.getElementById("x_ExpensesCentsPerKlmRateWeek").value).toFixed(2);
+        document.getElementById("x_NetEarningsB4taxWeek").value = (document.getElementById("x_TotalGrossXexclGSTWeek").value - document.getElementById("x_ExpensesCentsPerKlmWeek").value).toFixed(2);
     }
 }
 
@@ -642,7 +642,7 @@ function updateQtrStats(myDate){
 // dateChange() START
 function dateChange(){
 
-    const datval_xDate = document.getElementById("xDate");
+    const datval_xDate = document.getElementById("x_Date");
     let d = new Date(datval_xDate.value).getDay();
     document.getElementById("weekdayText").innerHTML = dayNames[d];
     // if(consoleOn===true){console.log(datval_xDate)};
@@ -664,9 +664,9 @@ function dateChange(){
 
     // re-set HTML form to null values, except for the date field START ~~~~~~~~~~~~~~~~~~~~~~~~~
         Array.from(frm.elements).forEach((input) => {
-            if (input.name==="xDate"){
+            if (input.name==="x_Date"){
             } else {
-                if (input.name.slice(0,1)==="x"){
+                if (input.name.slice(0,1)==="x_"){
                     document.getElementById(input.name).value = "";
                 }
             }
@@ -683,7 +683,7 @@ function dateChange(){
                 if (aDriverDayBook[i][key].length>0){
                     // if(consoleOn===true){console.log([key])};
                     // if(consoleOn===true){console.log([key][0].slice(0,1))};
-                    if ([key][0].slice(0,1)==="x"){
+                    if ([key][0].slice(0,1)==="x_"){
                         // if(consoleOn===true){console.log(aDriverDayBook[i][key])};
                         document.getElementById(key).value = aDriverDayBook[i][key];
                     }
@@ -784,8 +784,8 @@ async function checkOutUserFiles(userPIN){
         document.getElementById("driverRecordsAccessControl").style.display = "none";
         // document.getElementById("IndexedDB_rsd_rsdDayBook").style.display = "body";
     }
-    document.getElementById("xEndingOdometre").focus();
-    document.getElementById("xEndingOdometre").select();
+    document.getElementById("x_EndingOdometre").focus();
+    document.getElementById("x_EndingOdometre").select();
 
     if(consoleOn===true){console.log(aDriverDayBook)};
     // const containsText = (element) => element.includes("2024-01-15");
@@ -969,16 +969,16 @@ async function login2(){
                 document.getElementById("login1").style.display = "none";
             }
             var v_today = new Date();
-            // document.getElementById("xDate").value = "2000-01-01";
+            // document.getElementById("x_Date").value = "2000-01-01";
 
             const currentIsoDateString = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString();
             // if(consoleOn===true){console.log(currentIsoDateString)};
-            // document.getElementById("xDate").value = v_today.toISOString().slice(0,10);
-            document.getElementById("xDate").value = currentIsoDateString.slice(0,10);
+            // document.getElementById("x_Date").value = v_today.toISOString().slice(0,10);
+            document.getElementById("x_Date").value = currentIsoDateString.slice(0,10);
 
             dateChange();
-            document.getElementById("xEndingOdometre").focus();
-            document.getElementById("xEndingOdometre").select();
+            document.getElementById("x_EndingOdometre").focus();
+            document.getElementById("x_EndingOdometre").select();
         
             window.localStorage.setItem("rsd_uEmail" ,document.getElementById("uEmail").value);
         
@@ -1003,7 +1003,7 @@ function saveDriverDayBookRecord(){
     addCommaPrefix = false;
     const frm = document.getElementById("driver-day-book");
     Array.from(frm.elements).forEach((input) => {
-        if (input.name.slice(0,1)==="x"){
+        if (input.name.slice(0,1)==="x_"){
             txtHeaderRow += input.name + " , ";
             txtDataRowValue = input.value;
             if(txtDataRowValue.slice(0,1)==="0"){
@@ -1025,7 +1025,7 @@ function saveDriverDayBookRecord(){
             }
         }
     });
-    txtDayBookEntry += `,"xTimeStamp":"${xTimeStamp}"}`;
+    txtDayBookEntry += `,"x_TimeStamp":"${xTimeStamp}"}`;
     if(consoleOn===true){console.log("txtDayBookEntry:-/n",txtDayBookEntry)};
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_0]head" ,txtHeaderRow);
     window.localStorage.setItem("rsd!" + xDate.value + "[" + xTimeStamp + "_1]data" ,txtDataRow);
@@ -1056,13 +1056,13 @@ function saveDriverDayBookRecord(){
 // save to IndexedDB START
 function storeFormDataInIndexedDB(){
     // var v_elements = document.getElementsByTagName("input");
-    var v_elements = document.getElementsByClassName("xData");
+    var v_elements = document.getElementsByClassName("x_Data");
     // if(consoleOn===true){console.log(v_elements)};
     var v_objectString = `{`;
     for (var i = 0; i < v_elements.length; i++) {
         v_fieldName = v_elements[i].name;
         v_fieldValue = v_elements[i].value;
-        if (v_fieldName.slice(0,1)==="x"){
+        if (v_fieldName.slice(0,1)==="x_"){
             // idbAdd("rsd","rsdDayBook",v_fieldName,v_fieldValue);
             if (i+1==v_elements.length){
                 v_objectString += `"` + v_fieldName + `":"` + v_fieldValue + `",`;
@@ -1240,12 +1240,12 @@ function sumTolls(){
     tollsNumber = window.prompt('Enter a number to add to Tolls (negatives allowed, use -), then click OK.',tollsNumber);
     // if(consoleOn===true){console.log(tollsNumber)};
     if (!tollsNumber){
-        // document.getElementById("xTolls").blur();
+        // document.getElementById("x_Tolls").blur();
     } else {
         tollsNumber = tollsNumber * 1;
         // if(consoleOn===true){console.log(tollsNumber)};
-        tollsNumber += document.getElementById("xTolls").value * 1;
+        tollsNumber += document.getElementById("x_Tolls").value * 1;
         // if(consoleOn===true){console.log(tollsNumber)};
-        document.getElementById("xTolls").value = tollsNumber;
+        document.getElementById("x_Tolls").value = tollsNumber;
     }
 }

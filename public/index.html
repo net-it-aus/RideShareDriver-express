@@ -48,7 +48,7 @@
 
     </head>
 
-    <body>
+    <body oncontextmenu="return false">
 
         <!-- NAVIGATION START -->
             <!-- <div>&nbsp;<span id="dayBook_DateLeftButton" class="button htmlArrowLeft">&#10148;</span><span>&nbsp;</span><span id="dayBook_DateRightButton" class="button htmlArrowRight">&#10148;</span><span id="dateFixedPos" class="button-date dateFixedPos"></span></div> -->
@@ -113,170 +113,170 @@
                 <br>
                 <fieldset>
                     <div class="form-as-table">
-                        <label for="xDate">Date: </label>
-                        <input dataColHead="01_Date" type="date" name="xDate" id="xDate" required class="xData"/><span id="weekdayText"></span>
+                        <label for="x_Date">Date: </label>
+                        <input dataColHead="01_Date" type="date" name="x_Date" id="x_Date" required class="x_Data"/><span id="weekdayText"></span>
                         <br>
                         <span>Uber week start on Monday</span>
                     </div>
                     <fieldset>
                         <legend>End of day totals:</legend>
                         <!-- <div class="form-as-table"> -->
-                            <label for="xEndingOdometre">Ending odometre: </label>
-                            <input dataColHead="04_Odometre" type="number" inputmode="decimal" pattern="\d*" name="xEndingOdometre" id="xEndingOdometre" min="0" step="0.01" NOTrequired class="xData" />
+                            <label for="x_EndingOdometre">Ending odometre: </label>
+                            <input dataColHead="04_Odometre" type="number" inputmode="decimal" pattern="\d*" name="x_EndingOdometre" id="x_EndingOdometre" min="0" step="0.01" NOTrequired class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xKlms">Kilometres travelled: </label>
-                            <input dataColHead="03_BusinessKms" type="number" inputmode="decimal" pattern="\d*" name="xKlms" id="xKlms" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_Klms">Kilometres travelled: </label>
+                            <input dataColHead="03_BusinessKms" type="number" inputmode="decimal" pattern="\d*" name="x_Klms" id="x_Klms" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xKlmsPrivate">Private Kilometres: </label>
-                            <input dataColHead="02_PersonalKms" type="number" inputmode="decimal" pattern="\d*" name="xKlmsPrivate" id="xKlmsPrivate" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_KlmsPrivate">Private Kilometres: </label>
+                            <input dataColHead="02_PersonalKms" type="number" inputmode="decimal" pattern="\d*" name="x_KlmsPrivate" id="x_KlmsPrivate" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xFuelEconomyPerDashComputer">Litres/100klm: </label>
-                            <!-- <input type="text" inputmode="decimal" pattern="^\d*(\.\d{0,2})?$" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired /> -->
-                            <input dataColHead="05_Litres100Km" type="number" inputmode="decimal" name="xFuelEconomyPerDashComputer" id="xFuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_FuelEconomyPerDashComputer">Litres/100klm: </label>
+                            <!-- <input type="text" inputmode="decimal" pattern="^\d*(\.\d{0,2})?$" name="x_FuelEconomyPerDashComputer" id="x_FuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired /> -->
+                            <input dataColHead="05_Litres100Km" type="number" inputmode="decimal" name="x_FuelEconomyPerDashComputer" id="x_FuelEconomyPerDashComputer" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTotalGross">Gross dollars earned: </label>
-                            <input dataColHead="06_TotalInomeExclTolls" type="number" inputmode="decimal" name="xTotalGross" id="xTotalGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_TotalGross">Gross dollars earned: </label>
+                            <input dataColHead="06_TotalInomeExclTolls" type="number" inputmode="decimal" name="x_TotalGross" id="x_TotalGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTrips">Trips completed: </label>
-                            <input dataColHead="07_Trips" type="number" inputmode="decimal" pattern="\d*" name="xTrips" id="xTrips" NOTrequired class="xData initToZero" />
+                            <label for="x_Trips">Trips completed: </label>
+                            <input dataColHead="07_Trips" type="number" inputmode="decimal" pattern="\d*" name="x_Trips" id="x_Trips" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xPointsEarned">Points earned: </label>
-                            <input dataColHead="08_Points" type="number" inputmode="decimal" pattern="\d*" name="xPointsEarned" id="xPointsEarned" NOTrequired class="xData initToZero" />
+                            <label for="x_PointsEarned">Points earned: </label>
+                            <input dataColHead="08_Points" type="number" inputmode="decimal" pattern="\d*" name="x_PointsEarned" id="x_PointsEarned" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xHoursOnline">Hours online: </label>
-                            <input dataColHead="09_Hours" type="number" inputmode="decimal" pattern="\d*" name="xHoursOnline" id="xHoursOnline" NOTrequired class="xData initToZero" />
+                            <label for="x_HoursOnline">Hours online: </label>
+                            <input dataColHead="09_Hours" type="number" inputmode="decimal" pattern="\d*" name="x_HoursOnline" id="x_HoursOnline" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xMinutesOnline">Minutes online: </label>
-                            <input dataColHead="10_Minutes" type="number" inputmode="decimal" pattern="\d*" name="xMinutesOnline" id="xMinutesOnline" NOTrequired class="xData initToZero" />
+                            <label for="x_MinutesOnline">Minutes online: </label>
+                            <input dataColHead="10_Minutes" type="number" inputmode="decimal" pattern="\d*" name="x_MinutesOnline" id="x_MinutesOnline" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTipsIncludedInGross">Tips in Gross: </label>
-                            <input dataColHead="11_Tips" type="number" inputmode="decimal" pattern="\d*" name="xTipsIncludedInGross" id="xTipsIncludedInGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_TipsIncludedInGross">Tips in Gross: </label>
+                            <input dataColHead="11_Tips" type="number" inputmode="decimal" pattern="\d*" name="x_TipsIncludedInGross" id="x_TipsIncludedInGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xPromosIncludedInGross">Promotions in Gross: </label>
-                            <input dataColHead="12_Promos" type="number" inputmode="decimal" pattern="\d*" name="xPromosIncludedInGross" id="xPromosIncludedInGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_PromosIncludedInGross">Promotions in Gross: </label>
+                            <input dataColHead="12_Promos" type="number" inputmode="decimal" pattern="\d*" name="x_PromosIncludedInGross" id="x_PromosIncludedInGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xPoolIncludedInGross">Pool in Gross: </label>
-                            <input dataColHead="13_Pool" type="number" inputmode="decimal" pattern="\d*" name="xPoolIncludedInGross" id="xPoolIncludedInGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_PoolIncludedInGross">Pool in Gross: </label>
+                            <input dataColHead="13_Pool" type="number" inputmode="decimal" pattern="\d*" name="x_PoolIncludedInGross" id="x_PoolIncludedInGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xCleaningFeeIncludedInGross">Cleaning Fee in Gross: </label>
-                            <input dataColHead="14_FareAdjs" type="number" inputmode="decimal" pattern="\d*" name="xCleaningFeeIncludedInGross" id="xCleaningFeeIncludedInGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_CleaningFeeIncludedInGross">Cleaning Fee in Gross: </label>
+                            <input dataColHead="14_FareAdjs" type="number" inputmode="decimal" pattern="\d*" name="x_CleaningFeeIncludedInGross" id="x_CleaningFeeIncludedInGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xIncentiveNOTIncludedInGross">Incentive NOT in Gross: </label>
-                            <input dataColHead="15_Incentives" type="number" inputmode="decimal" pattern="\d*" name="xIncentiveNOTIncludedInGross" id="xIncentiveNOTIncludedInGross" min="0" step="0.01" NOTrequired class="xData initToZero" />
+                            <label for="x_IncentiveNOTIncludedInGross">Incentive NOT in Gross: </label>
+                            <input dataColHead="15_Incentives" type="number" inputmode="decimal" pattern="\d*" name="x_IncentiveNOTIncludedInGross" id="x_IncentiveNOTIncludedInGross" min="0" step="0.01" NOTrequired class="x_Data initToZero" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
 
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTolls">Tolls (optional): </label>
-                            <input dataColHead="16_TollsReimbursed" type="number" inputmode="decimal" pattern="\d*" name="xTolls" id="xTolls" min="0" step="0.01" onclick="sumTolls()" class="xData initToZero" />
+                            <label for="x_Tolls">Tolls (optional): </label>
+                            <input dataColHead="16_TollsReimbursed" type="number" inputmode="decimal" pattern="\d*" name="x_Tolls" id="x_Tolls" min="0" step="0.01" onclick="sumTolls()" class="x_Data initToZero" />
                         <!-- </div> -->
                     </fieldset>
                     <fieldset style="background-color:cadetblue;">
                         <legend style="background-color:cadetblue;">&nbspToday's Performance&nbsp</legend>
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTotalGrossX">Total gross dollars earned: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossX" id="xTotalGrossX" disabled readonly class="xData" />
+                            <label for="x_TotalGrossX">Total gross dollars earned: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_TotalGrossX" id="x_TotalGrossX" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xDollarsPerKlm">Average $'s earned per klm': </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerKlm" id="xDollarsPerKlm" disabled readonly class="xData" />
+                            <label for="x_DollarsPerKlm">Average $'s earned per klm': </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_DollarsPerKlm" id="x_DollarsPerKlm" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xDollarsPerHour">Average $'s earned per hour: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xDollarsPerHour" id="xDollarsPerHour" disabled readonly class="xData" />
+                            <label for="x_DollarsPerHour">Average $'s earned per hour: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_DollarsPerHour" id="x_DollarsPerHour" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xTotalGrossXexclGST">Total gross dollars earned excl. GST: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossXexclGST" id="xTotalGrossXexclGST" disabled readonly class="xData" />
+                            <label for="x_TotalGrossXexclGST">Total gross dollars earned excl. GST: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_TotalGrossXexclGST" id="x_TotalGrossXexclGST" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xExpensesCentsPerKlmRate">Expenses @ cents per klm rate: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmRate" id="xExpensesCentsPerKlmRate" disabled readonly class="xData" />
+                            <label for="x_ExpensesCentsPerKlmRate">Expenses @ cents per klm rate: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_ExpensesCentsPerKlmRate" id="x_ExpensesCentsPerKlmRate" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xExpensesCentsPerKlm">Expenses @ cents per klm: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlm" id="xExpensesCentsPerKlm" disabled readonly class="xData" />
+                            <label for="x_ExpensesCentsPerKlm">Expenses @ cents per klm: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_ExpensesCentsPerKlm" id="x_ExpensesCentsPerKlm" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xNetEarningsB4tax">Net earnings before tax: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xNetEarningsB4tax" id="xNetEarningsB4tax" disabled readonly class="xData" />
+                            <label for="x_NetEarningsB4tax">Net earnings before tax: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_NetEarningsB4tax" id="x_NetEarningsB4tax" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                     </fieldset>
                     <!-- <fieldset>
                         <legend>My Star Rating</legend>
                         <div class="form-as-table">
-                            <label for="xStarsCurrent1">Current 1 star ratings: </label>
-                            <input type="number" pattern="\d*" name="xStarsCurrent1" id="xStarsCurrent1" NOTrequired />
+                            <label for="x_StarsCurrent1">Current 1 star ratings: </label>
+                            <input type="number" pattern="\d*" name="x_StarsCurrent1" id="x_StarsCurrent1" NOTrequired />
                         </div>
                         <div class="form-as-table">
-                            <label for="xStarsCurrent2">Current 2 star ratings: </label>
-                            <input type="number" pattern="\d*" name="xStarsCurrent2" id="xStarsCurrent2" NOTrequired />
+                            <label for="x_StarsCurrent2">Current 2 star ratings: </label>
+                            <input type="number" pattern="\d*" name="x_StarsCurrent2" id="x_StarsCurrent2" NOTrequired />
                         </div>
                         <div class="form-as-table">
-                            <label for="xStarsCurrent3">Current 3 star ratings: </label>
-                            <input type="number" pattern="\d*" name="xStarsCurrent3" id="xStarsCurrent3" NOTrequired />
+                            <label for="x_StarsCurrent3">Current 3 star ratings: </label>
+                            <input type="number" pattern="\d*" name="x_StarsCurrent3" id="x_StarsCurrent3" NOTrequired />
                         </div>
                         <div class="form-as-table">
-                            <label for="xStarsCurrent4">Current 4 star ratings: </label>
-                            <input type="number" pattern="\d*" name="xStarsCurrent4" id="xStarsCurrent4" NOTrequired />
+                            <label for="x_StarsCurrent4">Current 4 star ratings: </label>
+                            <input type="number" pattern="\d*" name="x_StarsCurrent4" id="x_StarsCurrent4" NOTrequired />
                         </div>
                         <div class="form-as-table">
-                            <label for="xStarsCurrent5">Current 5 star ratings: </label>
-                            <input type="number" pattern="\d*" name="xStarsCurrent5" id="xStarsCurrent5" NOTrequired />
+                            <label for="x_StarsCurrent5">Current 5 star ratings: </label>
+                            <input type="number" pattern="\d*" name="x_StarsCurrent5" id="x_StarsCurrent5" NOTrequired />
                         </div>
                         <div class="form-as-table">
-                            <label for="xTotalRidesRated">Total rides rated: </label>
-                            <input type="number" pattern="\d*" name="xTotalRidesRated" id="xTotalRidesRated" disabled readonly />
+                            <label for="x_TotalRidesRated">Total rides rated: </label>
+                            <input type="number" pattern="\d*" name="x_TotalRidesRated" id="x_TotalRidesRated" disabled readonly />
                         </div>
                         <div class="form-as-table">
-                            <label for="xMyRating">My Curent Rating: </label>
-                            <input type="number" pattern="\d*" name="xMyRating" id="xMyRating" disabled readonly />
+                            <label for="x_MyRating">My Curent Rating: </label>
+                            <input type="number" pattern="\d*" name="x_MyRating" id="x_MyRating" disabled readonly />
                         </div>
                     </fieldset> -->
                     <fieldset>
@@ -284,76 +284,76 @@
                         <fieldset style="background-color:orange;">
                             <legend style="background-color:orange;">&nbspFuel Purhases&nbsp</legend>
                             <!-- <div class="form-as-table"> -->
-                                <label for="xOdometreAtFillup">Odometre at re-fuel: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xOdometreAtFillup" id="xOdometreAtFillup"  min="0" step="1" class="xData" />
+                                <label for="x_OdometreAtFillup">Odometre at re-fuel: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_OdometreAtFillup" id="x_OdometreAtFillup"  min="0" step="1" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xKlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xKlmTravelledSinceLastFillup" id="xKlmTravelledSinceLastFillup"  min="0" step="0.01" class="xData" />
+                                <label for="x_KlmTravelledSinceLastFillup">Klms travelled since last re-fuel: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_KlmTravelledSinceLastFillup" id="x_KlmTravelledSinceLastFillup"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xLitresPurchased">Litres purchased: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xLitresPurchased" id="xLitresPurchased" min="0" step="0.01" class="xData" />
+                                <label for="x_LitresPurchased">Litres purchased: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_LitresPurchased" id="x_LitresPurchased" min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xPricePerLitre">Price $'s per litre': </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xPricePerLitre" id="xPricePerLitre"  min="0" step="0.01" class="xData" />
+                                <label for="x_PricePerLitre">Price $'s per litre': </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_PricePerLitre" id="x_PricePerLitre"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xFuelPurchaseTotal">Total fuel purchase $'s': </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelPurchaseTotal" id="xFuelPurchaseTotal"  min="0" step="0.01" class="xData" />
+                                <label for="x_FuelPurchaseTotal">Total fuel purchase $'s': </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_FuelPurchaseTotal" id="x_FuelPurchaseTotal"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xFuelEconomyCalculated">Fuel economy - calculated: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xFuelEconomyCalculated" id="xFuelEconomyCalculated"  min="0" step="0.01" disabled readonly class="xData" />
+                                <label for="x_FuelEconomyCalculated">Fuel economy - calculated: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_FuelEconomyCalculated" id="x_FuelEconomyCalculated"  min="0" step="0.01" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xPriceVariance">Price variance - calculated: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xPriceVariance" id="xPriceVariance"  min="0" step="0.01" disabled readonly class="xData" />
+                                <label for="x_PriceVariance">Price variance - calculated: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_PriceVariance" id="x_PriceVariance"  min="0" step="0.01" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                         </fieldset>
                         <fieldset>
                             <legend>Other Vehicle Costs</legend>
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleServiceScheduled">Vehicle service - scheduled $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceScheduled" id="xVehicleServiceScheduled"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleServiceScheduled">Vehicle service - scheduled $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleServiceScheduled" id="x_VehicleServiceScheduled"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleServiceNonScheduled">Vehicle service - non-scheduled $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleServiceNonScheduled" id="xVehicleServiceNonScheduled"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleServiceNonScheduled">Vehicle service - non-scheduled $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleServiceNonScheduled" id="x_VehicleServiceNonScheduled"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleRepairs">Vehicle repairs $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleRepairs" id="xVehicleRepairs"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleRepairs">Vehicle repairs $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleRepairs" id="x_VehicleRepairs"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleTyresReplace">Vehicle tyres - replace $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresReplace" id="xVehicleTyresReplace"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleTyresReplace">Vehicle tyres - replace $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleTyresReplace" id="x_VehicleTyresReplace"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleTyresRepair">Vehicle tyres - repair $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleTyresRepair" id="xVehicleTyresRepair"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleTyresRepair">Vehicle tyres - repair $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleTyresRepair" id="x_VehicleTyresRepair"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleInsurancePremium">Vehicle insurance premium $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsurancePremium" id="xVehicleInsurancePremium"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleInsurancePremium">Vehicle insurance premium $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleInsurancePremium" id="x_VehicleInsurancePremium"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xVehicleInsuranceExcess">Vehicle insurance excess $'s: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xVehicleInsuranceExcess" id="xVehicleInsuranceExcess"  min="0" step="0.01" class="xData" />
+                                <label for="x_VehicleInsuranceExcess">Vehicle insurance excess $'s: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_VehicleInsuranceExcess" id="x_VehicleInsuranceExcess"  min="0" step="0.01" class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                         </fieldset>
@@ -361,53 +361,53 @@
                     <fieldset>
                         <legend>Other Costs</legend>
                         <!-- <div class="form-as-table"> -->
-                            <label for="xOtherCostDescription1">Other cost # 1 description: </label>
-                            <input type="text" name="xOtherCostDescription1" id="xOtherCostDescription1" class="xData" />
+                            <label for="x_OtherCostDescription1">Other cost # 1 description: </label>
+                            <input type="text" name="x_OtherCostDescription1" id="x_OtherCostDescription1" class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xOtherCostDollars1">Other cost # 1 $'s: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xOtherCostDollars1" id="xOtherCostDollars1"  min="0" step="0.01" class="xData" />
+                            <label for="x_OtherCostDollars1">Other cost # 1 $'s: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_OtherCostDollars1" id="x_OtherCostDollars1"  min="0" step="0.01" class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table">
-                            <label for="xOtherCostDescription2">Other cost # 2 description: </label>
-                            <input type="text" name="xOtherCostDescription2" id="xOtherCostDescription2"  />
+                            <label for="x_OtherCostDescription2">Other cost # 2 description: </label>
+                            <input type="text" name="x_OtherCostDescription2" id="x_OtherCostDescription2"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDollars2">Other cost # 2 $'s: </label>
-                            <input type="number" pattern="\d*" name="xOtherCostDollars2" id="xOtherCostDollars2"  />
+                            <label for="x_OtherCostDollars2">Other cost # 2 $'s: </label>
+                            <input type="number" pattern="\d*" name="x_OtherCostDollars2" id="x_OtherCostDollars2"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDescription3">Other cost # 3 description: </label>
-                            <input type="text" name="xOtherCostDescription3" id="xOtherCostDescription3"  />
+                            <label for="x_OtherCostDescription3">Other cost # 3 description: </label>
+                            <input type="text" name="x_OtherCostDescription3" id="x_OtherCostDescription3"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDollars3">Other cost # 3 $'s: </label>
-                            <input type="number" pattern="\d*" name="xOtherCostDollars3" id="xOtherCostDollars3"  />
+                            <label for="x_OtherCostDollars3">Other cost # 3 $'s: </label>
+                            <input type="number" pattern="\d*" name="x_OtherCostDollars3" id="x_OtherCostDollars3"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDescription4">Other cost # 4 description: </label>
-                            <input type="text" name="xOtherCostDescription4" id="xOtherCostDescription4"  />
+                            <label for="x_OtherCostDescription4">Other cost # 4 description: </label>
+                            <input type="text" name="x_OtherCostDescription4" id="x_OtherCostDescription4"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDollars4">Other cost # 4 $'s: </label>
-                            <input type="number" pattern="\d*" name="xOtherCostDollars4" id="xOtherCostDollars4"  />
+                            <label for="x_OtherCostDollars4">Other cost # 4 $'s: </label>
+                            <input type="number" pattern="\d*" name="x_OtherCostDollars4" id="x_OtherCostDollars4"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDescription5">Other cost # 5 description: </label>
-                            <input type="text" name="xOtherCostDescription5" id="xOtherCostDescription5"  />
+                            <label for="x_OtherCostDescription5">Other cost # 5 description: </label>
+                            <input type="text" name="x_OtherCostDescription5" id="x_OtherCostDescription5"  />
                         </div>
                         <div class="form-as-table">
-                            <label for="xOtherCostDollars5">Other cost # 5 $'s: </label>
-                            <input type="number" pattern="\d*" name="xOtherCostDollars5" id="xOtherCostDollars5"  />
+                            <label for="x_OtherCostDollars5">Other cost # 5 $'s: </label>
+                            <input type="number" pattern="\d*" name="x_OtherCostDollars5" id="x_OtherCostDollars5"  />
                         </div> -->
                     </fieldset>
                     <br>
                     <!-- <div class="form-as-table"> -->
-                        <label for="xTimeStamp">time stamped: </label>
-                        <!-- <input type="number" inputmode="decimal" pattern="\d*" name="xTimeStamp" id="xTimeStamp"  min="0" step="0.01" class="xData" /> -->
-                        <input type="text" class="input-width-fit-content input-no-pointer-events" name="xTimeStamp" id="xTimeStamp" disabled readonly class="xData" />
+                        <label for="x_TimeStamp">time stamped: </label>
+                        <!-- <input type="number" inputmode="decimal" pattern="\d*" name="x_TimeStamp" id="x_TimeStamp"  min="0" step="0.01" class="x_Data" /> -->
+                        <input type="text" class="input-width-fit-content input-no-pointer-events" name="x_TimeStamp" id="x_TimeStamp" disabled readonly class="x_Data" />
                     <!-- </div> -->
                 </fieldset>
                 <!-- 
@@ -422,74 +422,74 @@
                         <legend id="weekSummary1" style="background-color:aquamarine;">&nbspWeek Summary&nbsp</legend>
                         <!-- <div class="form-as-table"> -->
                             <label for="vTotalGross">Total $'s earned: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGross" id="vTotalGross" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGross" id="vTotalGross" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vKlms">Klms travelled: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vKlms" id="vKlms" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vKlms" id="vKlms" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vGrossPerKlm">Gross per Klm: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerKlm" id="vGrossPerKlm" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerKlm" id="vGrossPerKlm" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vTrips">Trips: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vTrips" id="vTrips" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vTrips" id="vTrips" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vGrossPerTrip">Gross per Trip: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerTrip" id="vGrossPerTrip" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerTrip" id="vGrossPerTrip" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vHours">Hours online: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vHours" id="vHours" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vHours" id="vHours" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vGrossPerHour">Gross per Hour: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerHour" id="vGrossPerHour" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vGrossPerHour" id="vGrossPerHour" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vIncentiveNOTIncludedInGross">Incentives received: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vIncentiveNOTIncludedInGross" id="vIncentiveNOTIncludedInGross" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vIncentiveNOTIncludedInGross" id="vIncentiveNOTIncludedInGross" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
                             <label for="vFuelPurchaseTotal">Total fuel purchase $'s: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotal" id="vFuelPurchaseTotal" disabled readonly class="xData" />
+                            <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotal" id="vFuelPurchaseTotal" disabled readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <!-- <div class="form-as-table"> -->
-                            <label for="xUberTollsReimbursement">Tolls reimbursed by UBER $'s: </label>
-                            <input type="number" inputmode="decimal" pattern="\d*" name="xUberTollsReimbursement" id="xUberTollsReimbursement" not-disabled not-readonly class="xData" />
+                            <label for="x_UberTollsReimbursement">Tolls reimbursed by UBER $'s: </label>
+                            <input type="number" inputmode="decimal" pattern="\d*" name="x_UberTollsReimbursement" id="x_UberTollsReimbursement" not-disabled not-readonly class="x_Data" />
                             <!-- <hr class="hr-basic"> -->
                         <!-- </div> -->
                         <fieldset style="background-color:white;">
                             <legend id="weekSummary2" style="background-color:white;">&nbspWeek Net Profit Estimate&nbsp</legend>
                             <!-- <div class="form-as-table"> -->
-                                <label for="xTotalGrossXexclGSTWeek">Total gross dollars earned excl. GST: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xTotalGrossXexclGSTWeek" id="xTotalGrossXexclGSTWeek" disabled readonly class="xData" />
+                                <label for="x_TotalGrossXexclGSTWeek">Total gross dollars earned excl. GST: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_TotalGrossXexclGSTWeek" id="x_TotalGrossXexclGSTWeek" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xExpensesCentsPerKlmRateWeek">Expenses @ cents per klm rate: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmRateWeek" id="xExpensesCentsPerKlmRateWeek" disabled readonly class="xData" />
+                                <label for="x_ExpensesCentsPerKlmRateWeek">Expenses @ cents per klm rate: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_ExpensesCentsPerKlmRateWeek" id="x_ExpensesCentsPerKlmRateWeek" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xExpensesCentsPerKlmWeek">Expenses @ cents per klm: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xExpensesCentsPerKlmWeek" id="xExpensesCentsPerKlmWeek" disabled readonly class="xData" />
+                                <label for="x_ExpensesCentsPerKlmWeek">Expenses @ cents per klm: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_ExpensesCentsPerKlmWeek" id="x_ExpensesCentsPerKlmWeek" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                             <!-- <div class="form-as-table"> -->
-                                <label for="xNetEarningsB4taxWeek">Net earnings before tax: </label>
-                                <input type="number" inputmode="decimal" pattern="\d*" name="xNetEarningsB4taxWeek" id="xNetEarningsB4taxWeek" disabled readonly class="xData" />
+                                <label for="x_NetEarningsB4taxWeek">Net earnings before tax: </label>
+                                <input type="number" inputmode="decimal" pattern="\d*" name="x_NetEarningsB4taxWeek" id="x_NetEarningsB4taxWeek" disabled readonly class="x_Data" />
                                 <!-- <hr class="hr-basic"> -->
                             <!-- </div> -->
                         </fieldset>
@@ -500,34 +500,34 @@
                     <legend>BAS Estimates</legend>
 
                         <label for="vTotalGrossQtr">$'s earned (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGrossQtr" id="vTotalGrossQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vTotalGrossQtr" id="vTotalGrossQtr" disabled readonly class="x_Data" />
     
                         <label for="vFuelPurchaseTotalQtr">fuel purchase $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotalQtr" id="vFuelPurchaseTotalQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vFuelPurchaseTotalQtr" id="vFuelPurchaseTotalQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleServiceScheduledQtr">scheduled service $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleServiceScheduledQtr" id="vVehicleServiceScheduledQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleServiceScheduledQtr" id="vVehicleServiceScheduledQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleServiceNonScheduledQtr">non-scheduled service $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleServiceNonScheduledQtr" id="vVehicleServiceNonScheduledQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleServiceNonScheduledQtr" id="vVehicleServiceNonScheduledQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleRepairsQtr">repairs $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleRepairsQtr" id="vVehicleRepairsQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleRepairsQtr" id="vVehicleRepairsQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleTyresReplaceQtr">tyres replaced $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleTyresReplaceQtr" id="vVehicleTyresReplaceQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleTyresReplaceQtr" id="vVehicleTyresReplaceQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleTyresRepairQtr">tyres repaired $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleTyresRepairQtr" id="vVehicleTyresRepairQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleTyresRepairQtr" id="vVehicleTyresRepairQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleInsurancePremiumQtr">insurance premium $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleInsurancePremiumQtr" id="vVehicleInsurancePremiumQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleInsurancePremiumQtr" id="vVehicleInsurancePremiumQtr" disabled readonly class="x_Data" />
     
                         <label for="vVehicleInsuranceExcessQtr">insurance excess $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleInsuranceExcessQtr" id="vVehicleInsuranceExcessQtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vVehicleInsuranceExcessQtr" id="vVehicleInsuranceExcessQtr" disabled readonly class="x_Data" />
     
                         <label for="vOtherCostDollars1Qtr">other $'s (Qtr): </label>
-                        <input type="number" inputmode="decimal" pattern="\d*" name="vOtherCostDollars1Qtr" id="vOtherCostDollars1Qtr" disabled readonly class="xData" />
+                        <input type="number" inputmode="decimal" pattern="\d*" name="vOtherCostDollars1Qtr" id="vOtherCostDollars1Qtr" disabled readonly class="x_Data" />
     
                     </fieldset>
 
@@ -733,7 +733,7 @@
                 <div id="login2Button" tabindex="1" class="button" onclick="login2()" >Submit OTUP</div>
             </div>
 
-            <div class="container" style="x-background-color:#f1f1f1">
+            <div class="container" style="x_-background-color:#f1f1f1">
                 <div class="button-red" onclick="document.getElementById('login2').style.display='none'" >Cancel</div>
             </div>
         </form>
