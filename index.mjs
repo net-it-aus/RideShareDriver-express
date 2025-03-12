@@ -229,7 +229,7 @@ app.listen( process.env.PORT || v_portNumber, () => {
 // login2 START //////////////////////////////////////////////////////
 function login2(req,res){
     console.log("login2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(req.body.v_uEmail);
+    console.log(req.body.v_uEmail);
     const v_fileName = req.body.v_uEmail + "_otup";
     // fs.readFile - read the file content in a non-blocking asynchronous manner and return the content in a callback function
         fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName + '.json','utf8',(errASync,v_dataASync) => {
@@ -248,14 +248,26 @@ function login2(req,res){
                         // console.log('login2:- OK', JSON.parse(v_dataASync)[0]._otup);
                         v_fileName2 = req.body.v_uEmail + "_accountDetails";
                     }
+                    // validate JSON start
+                        function isJSON(str) {
+                            try {
+                                JSON.parse(str);
+                            } catch (e) {
+                                return false;
+                            }
+                            return true;
+                        }
+                    // validate JSON end
                     fs.readFile('../RideShareDriver.com.au-express-data/' + v_fileName2 + '.json','utf8',(errASync2,v_dataASync2) => {
                         if (errASync2){
                             // console.log('login2 errASync2 v_dataASync2ERR:- ',errASync);
                             console.log('login2 errASync2:- error');
                         } else {
                             // res.send(`[{"response":"login2 ok"}]`);
-                            console.log('login2 v_dataASync2:- ok');
-                            res.send(v_dataASync2);
+                            console.log('login2 v_dataASync2:-\n',v_dataASync2);
+                            console.log('login2 v_dataASync2:- isJSON()?',isJSON(v_dataASync2));
+                            // res.send(JSON.parse(v_dataASync2));
+                            res.json(v_dataASync2);
                             res.end();
                         }
                     });
