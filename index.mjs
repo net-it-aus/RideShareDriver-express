@@ -6,7 +6,7 @@
 import dotenv from 'dotenv';
     dotenv.config();
 
-const consoleOn = true;
+const consoleOn = false;
 const port = 2019;
 const aDayNamesShort = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const aDayNamesLong = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -82,7 +82,7 @@ if (v_portNumber == undefined) {
 //     // nodemailer initialise - start
 //         // var nodeoutlook = require('nodejs-nodemailer-outlook')
 //            // import nodeoutlook from 'nodejs-nodemailer-outlook';
-//         nodeoutlook.sendEmail({
+        nodeoutlook.sendEmail({
 //             auth: {
 //                 user: "Net.IT.Australia@outlook.com",
 //                 pass: "SonicBroom.000"
@@ -112,7 +112,7 @@ if (v_portNumber == undefined) {
 //             //                 ],
 //             onError: (e) => console.log(e),
 //             onSuccess: (i) => console.log(i)
-//         });
+        });
 //     // nodemailer initialise - end
 // // NODEOUTLOOK - END  =================================================================================================
 
@@ -212,7 +212,7 @@ app.listen( process.env.PORT || v_portNumber, () => {
             console.log(consoleTrace());
             console.log(emailAddress,userPIN);
             // OBSOLETE start ...
-                // let transporter = nodemailer.createTransport({
+                let transporter = nodemailer.createTransport({
                 //     host: 'smtp.mail.me.com',
                 //     // non-secure
                 //         port: 587,
@@ -247,7 +247,7 @@ app.listen( process.env.PORT || v_portNumber, () => {
                 //     }
                 //     console.log('Message sent: %s', info.messageId);
                 //     // res.send({message:"Email sent by server OK.","email":req.body});
-                // });
+                });
             // OSOLETE end ...
             try {
                 // const { name, subject, email, message } = req.body;
@@ -311,10 +311,10 @@ app.listen( process.env.PORT || v_portNumber, () => {
                                         <p>Dear User,</p>
                                         <p>Your access code is: <strong>${userPIN}</strong></p>
                                         <p>Use this code to access your Ride Share Driver account.  (You can copy and paste it.)</p>
-                                        <p>Click the "Remember me" checkbox at the website/app to save re-typing your email address each time you sign in.</p>
-                                        <p style="color:red"><b>PLEASE DELETE THIS EMAIL WHEN DONE.</b></p>
+                                        // <p>Click the "Remember me" checkbox at the website/app to save re-typing your email address each time you sign in.</p>
+                                        <p style="color:red"><b>DELETE THIS EMAIL WHEN DONE. A code will be issued each time you log in.</b></p>
                                         <p>This method of sign-in is secure so long as your email account is secure, a password is not necessary.</p>
-                                        <p>If you believe your email account is insecure or if you believe your emails are being intercepted, please do not use your Ride Share Driver account untill your email account is secure.</p>
+                                        <p>If you believe your email account is insecure or if you believe your emails are being intercepted, DO NOT use your Ride Share Driver account untill your email account is secure.</p>
                                     </div>
                                     <div class="footer">
                                         <p>&copy; 2025 Ride Share Driver. All rights reserved.</p>
@@ -482,7 +482,7 @@ function checkOutUserFile(req,res,userPIN_checkOut){
 // checkOutUserFile END //////////////////////////////////////////////////////
 
 // // emailData START //////////////////////////////////////////////////////
-// function emailData_send(req,res,uEmail){
+function emailData_send(req,res,uEmail){
 //     nodeoutlook.sendEmail({
 //         host: 'smtp.mail.me.com',
 //         port: 587,
@@ -512,7 +512,7 @@ function checkOutUserFile(req,res,userPIN_checkOut){
 //             res.send({"response":`RideShareDriver.com.au:- emailed data to ${uEmail} OK`});
 //         }
 //     });
-// }
+}
 // // emailData END //////////////////////////////////////////////////////
 
 
@@ -727,70 +727,81 @@ async function createFile(req,res,fileName,uEmail,userPIN){
 }
 
 // SERVER REQUESTS LOG start
-app.all('*', (req, res) => {
-    console.log('/////////////// app.all information START');
-    const v_ipAddress = req.connection.remoteAddress;
-    const v_ipAddressForwarded = req.headers['x-forwarded-for'];
-    console.log('total memory:- ',os.totalmem()/1000000000);
-    console.log('free memory:- ',os.freemem()/1000000000);
-    console.log(`incoming IP address:-  ${v_ipAddress}`);
-    // console.log(`incoming IP address length:-  ${v_ipAddress.length}`);
-    console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
-    console.log('app.all req.url:- ', req.url);
-    console.log('app.all req.originalUrl:- ', req.originalUrl);
-    // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
-    console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber);
-    console.log(`app.all req date:- ${Date().slice(0, 25)}`);
-    console.log('/////////////// app.all information END\n');
+    app.all('*', (req, res) => {
+        console.log('/////////////// app.all information START');
+        const v_ipAddress = req.connection.remoteAddress;
+        const v_ipAddressForwarded = req.headers['x-forwarded-for'];
+        console.log('total memory:- ',os.totalmem()/1000000000);
+        console.log('free memory:- ',os.freemem()/1000000000);
+        console.log(`incoming IP address:-  ${v_ipAddress}`);
+        // console.log(`incoming IP address length:-  ${v_ipAddress.length}`);
+        console.log(`app.all req.connection.remoteAddressForwarded:- ${v_ipAddressForwarded}`);
+        console.log('app.all req.url:- ', req.url);
+        console.log('app.all req.originalUrl:- ', req.originalUrl);
+        // console.log(`app.all req date:- ${Date().slice(0, 25)}\n`);
+        console.log('RideShareDriver.com.au server is listening at port ' + v_portNumber);
+        console.log(`app.all req date:- ${Date().slice(0, 25)}`);
+        console.log('/////////////// app.all information END\n');
 
-    // if (v_ipAddress.length > 3){
-    //     const emailBody = 'Incoming IP address forwarded:- ' + v_ipAddressForwarded + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
-    //     // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
-    //     emailSiteVisit(emailBody);
-    // }
-    // if (v_ipAddressForwarded.length > 3){
-    if (v_ipAddressForwarded !== undefined){
-            // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
-        // const emailBodyText = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
-        // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}\r\n\r\n`;
-        const emailBodyText = `\r\napp.all req.headers['x-forwarded-for']:- ${v_ipAddressForwarded} ${Date().slice(0,25)} req.body:- ${JSON.stringify(req.body)} incoming originalUrl:- ${req.originalUrl}\r\n`;
-        const folderPath_siteLog = "../RideShareDriver.com.au-express-data";
-        // console.log('emailBodyText:- \n' + emailBodyText + '\n' + Date().slice(0,25));
-        console.log('emailBodyText:- ' + emailBodyText + '' + Date().slice(0,25));
-        fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',emailBodyText.slice(0,255),(err) => {
-            if (err){
-                console.log("updated siteLog err\n",Date().slice(0, 25));
-            } else {
-                console.log("updated siteLog OK\n",Date().slice(0, 25));
-            }
-        });
-        // // emailSiteVisit(emailBodyHTML,emailBodyText);
-        // const timeout1 = setTimeout(() => {
-        //     console.log("Timeout set");
-        //     emailSiteVisit(emailBodyHTML,emailBodyText);
-        // }, 10000);
-    }
-    switch (req.url) {
-        case '/myIPify':
-            // res.send(v_ipAddressForwarded);
-            const siteVisitedBy = `site visited by:- ${v_ipAddressForwarded} at ${Date().slice(0, 25)}`;
-            console.log(siteVisitedBy);
+        // if (v_ipAddress.length > 3){
+        //     const emailBody = 'Incoming IP address forwarded:- ' + v_ipAddressForwarded + ' ' + Date().slice(0,25) + ' ' + 'incoming originalUrl:- "' + req.originalUrl + '"';
+        //     // console.log('emailBody:- ' + v_ipAddress + ' ' + Date().slice(0,25));
+        //     emailSiteVisit(emailBody);
+        // }
+        // if (v_ipAddressForwarded.length > 3){
+        if (v_ipAddressForwarded !== undefined){
+                // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
+            // const emailBodyText = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}%0D%0A`;
+            // const emailBodyHTML = `Incoming IP address:- ${v_ipAddress} ${Date().slice(0,25)} incoming originalUrl:- ${req.originalUrl}\r\n\r\n`;
+            const emailBodyText = `\r\napp.all req.headers['x-forwarded-for']:- ${v_ipAddressForwarded} ${Date().slice(0,25)} req.body:- ${JSON.stringify(req.body)} incoming originalUrl:- ${req.originalUrl}\r\n`;
             const folderPath_siteLog = "../RideShareDriver.com.au-express-data";
-            fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',siteVisitedBy,(err) => {
+            // console.log('emailBodyText:- \n' + emailBodyText + '\n' + Date().slice(0,25));
+            console.log('emailBodyText:- ' + emailBodyText + '' + Date().slice(0,25));
+            fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',emailBodyText.slice(0,255),(err) => {
                 if (err){
-                    console.log("site visit - updated siteLog err\n");
+                    console.log("updated siteLog err\n",Date().slice(0, 25));
                 } else {
-                    console.log("site visit - updated siteLog OK\n");
+                    console.log("updated siteLog OK\n",Date().slice(0, 25));
                 }
             });
-            break;
-        case '/create':
-            // console.log(req.body);
-            // sendNewUserEmail(req,res,userPIN);
-            let userFileStatus;
-            async function create(req,res){
-                const userPIN = await createRSDuserPIN();
-                userFileStatus = await createUserFiles(req,res,userPIN);
+            // // emailSiteVisit(emailBodyHTML,emailBodyText);
+            // const timeout1 = setTimeout(() => {
+            //     console.log("Timeout set");
+            //     emailSiteVisit(emailBodyHTML,emailBodyText);
+            // }, 10000);
+        }
+        switch (req.url) {
+            case '/myIPify':
+                // res.send(v_ipAddressForwarded);
+                const siteVisitedBy = `site visited by:- ${v_ipAddressForwarded} at ${Date().slice(0, 25)}`;
+                console.log(siteVisitedBy);
+                const folderPath_siteLog = "../RideShareDriver.com.au-express-data";
+                fs.appendFile(folderPath_siteLog + "/siteLog" + '.txt',siteVisitedBy,(err) => {
+                    if (err){
+                        console.log("site visit - updated siteLog err\n");
+                    } else {
+                        console.log("site visit - updated siteLog OK\n");
+                    }
+                });
+                break;
+            case '/create':
+                // console.log(req.body);
+                // sendNewUserEmail(req,res,userPIN);
+                let userFileStatus;
+                async function create(req,res){
+                    const userPIN = await createRSDuserPIN();
+                    userFileStatus = await createUserFiles(req,res,userPIN);
+                    // const v_data = JSON.stringify(
+                    //     {
+                    //         userFileStatus: `${userFileStatus}`,
+                    //         userTripsLogStatus: `${userTripsLogStatus}`
+                    //     }
+                    // );
+                    // console.log('v_data:- ',v_data);
+                    // res.send(v_data);
+                    // res.end();
+                }
+                create(req,res);
                 // const v_data = JSON.stringify(
                 //     {
                 //         userFileStatus: `${userFileStatus}`,
@@ -800,54 +811,43 @@ app.all('*', (req, res) => {
                 // console.log('v_data:- ',v_data);
                 // res.send(v_data);
                 // res.end();
-            }
-            create(req,res);
-            // const v_data = JSON.stringify(
-            //     {
-            //         userFileStatus: `${userFileStatus}`,
-            //         userTripsLogStatus: `${userTripsLogStatus}`
+                break;
+            // case '/newUserSetup':
+            //     console.log(req.body);
+            //     const newUser = async (req,res) => {
+            //         const userPIN = await createRSDuserPIN();
+            //         const status = await newUserSetup(req,res,userPIN);
             //     }
-            // );
-            // console.log('v_data:- ',v_data);
-            // res.send(v_data);
-            // res.end();
-            break;
-        // case '/newUserSetup':
-        //     console.log(req.body);
-        //     const newUser = async (req,res) => {
-        //         const userPIN = await createRSDuserPIN();
-        //         const status = await newUserSetup(req,res,userPIN);
-        //     }
-        //     newUser(req,res);
-        //     break;
-        case '/newUserSetupStep1':
-            newUserSetupStep1(req,res);
-            break;
-        case '/newUserSetupStep2':
-            newUserSetupStep2(req,res);
-            break;
-        case '/login1':
-            login1(req,res);
-            break;
-        case '/login2':
-            login2(req,res);
-            break;
-        case '/checkOut':
-            const userPIN_checkOut = req.body.v_userPIN;
-            console.log(userPIN_checkOut);
-            checkOutUserFile(req,res,userPIN_checkOut);
-            break;
-        case '/update':
-            updateUserFile(req,res);
-            break;
-        case '/append':
-            break;
-        case '/emailData':
-            emailData(req,res);
-            break;
-        case '/saveTheData':
-            saveTheData(req,res);
-            break;
-    }
-});
+            //     newUser(req,res);
+            //     break;
+            case '/newUserSetupStep1':
+                newUserSetupStep1(req,res);
+                break;
+            case '/newUserSetupStep2':
+                newUserSetupStep2(req,res);
+                break;
+            case '/login1':
+                login1(req,res);
+                break;
+            case '/login2':
+                login2(req,res);
+                break;
+            case '/checkOut':
+                const userPIN_checkOut = req.body.v_userPIN;
+                console.log(userPIN_checkOut);
+                checkOutUserFile(req,res,userPIN_checkOut);
+                break;
+            case '/update':
+                updateUserFile(req,res);
+                break;
+            case '/append':
+                break;
+            case '/emailData':
+                emailData(req,res);
+                break;
+            case '/saveTheData':
+                saveTheData(req,res);
+                break;
+        }
+    });
 // SERVER REQUESTS LOG end
