@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/net-it-aus/RideShareDriver-express#readme",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
     "node-fetch": "^3.3.2",

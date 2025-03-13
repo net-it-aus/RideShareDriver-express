@@ -3,6 +3,30 @@
 // <!-- format           Alt + Shift + F (USE WITH CAUTION)-->
 // <!-- word wrap toggle Alt + z -->
 
+import dotenv from 'dotenv';
+    dotenv.config();
+
+const consoleOn = true;
+const port = 2019;
+const aDayNamesShort = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const aDayNamesLong = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const aMonthNamesShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const aMonthNamesLong = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+// Override console.trace to only output the first line of the stack trace START =======================
+	// version 5 START
+        function consoleTrace() {
+            try {
+                const stack = new Error().stack;
+                const firstLine = stack.split('\n')[2].trim();
+                return `Trace line: ${firstLine}`;
+            } catch (error) {
+                return 'Trace line: not available';
+            }
+        };
+    // version 5 END
+// Override console.trace to only output the first line of the stack trace END =======================
+
 //  set the port number for the server
 var v_portNumber = process.argv[2];
 if (v_portNumber == undefined) {
@@ -16,7 +40,8 @@ if (v_portNumber == undefined) {
 // express server framework
 // const express = require('express');
     import express from 'express';
-    const app = express();
+        const app = express();
+	    app.disable('x-powered-by'); // Reduce fingerprinting by hiding that this is an ExpressJS app
 
 // // npm install node-fetch --save
 // // const fetch = require('node-fetch');
@@ -27,6 +52,28 @@ if (v_portNumber == undefined) {
 
 // const nodemailer = require('nodemailer');
     import nodemailer from 'nodemailer';
+	// Create a transporter object using SMTP transport START
+		const transporter = nodemailer.createTransport({
+			host: process.env.SMTP_HOST,
+			// secure settings
+			// non-secure settings
+				port: 587,
+				secure: false, // true for 465, false for other ports
+					// // secure settings
+					//     port: 465,
+					//     secure: true, // uses SSL
+			auth: {
+				user: process.env.SMTP_USER,
+				pass: process.env.SMTP_PASS
+			},
+			tls: {
+				// rejectUnauthorized: false // set to true for better security
+				rejectUnauthorized: true // set to true for better security
+			}
+		});
+		if(consoleOn){console.log(consoleTrace());}
+		if(consoleOn){console.log(`${process.env.SMTP_HOST}\n${process.env.SMTP_USER}\n${process.env.SMTP_PASS}\n`);}
+	// Create a transporter object using SMTP transport END
 
 // // nodeoutlook
 //      import nodeoutlook from 'nodejs-nodemailer-outlook';
@@ -162,43 +209,154 @@ app.listen( process.env.PORT || v_portNumber, () => {
 // login1 START //////////////////////////////////////////////////////
     function login1(req,res){
         async function emailUSERpin(emailAddress,userPIN){
+            console.log(consoleTrace());
             console.log(emailAddress,userPIN);
-            let transporter = nodemailer.createTransport({
-                host: 'smtp.mail.me.com',
-                // non-secure
-                    port: 587,
-                    secure: false,
-                // // // secure
-                //     port: 465,
-                //     secure: true, // uses SSL
-                auth: {
-                    // user: 'donald.garton@outlook.com',
-                    user: 'Net.IT.Australia@icloud.com',
-                    pass: 'oqzr-tfsb-hazp-xcus' // app specific password
-                },
-                tls: {
-                    // rejectUnauthorized: false // set to true for better security
-                    rejectUnauthorized: true // set to true for better security
+            // OBSOLETE start ...
+                // let transporter = nodemailer.createTransport({
+                //     host: 'smtp.mail.me.com',
+                //     // non-secure
+                //         port: 587,
+                //         secure: false,
+                //     // // // secure
+                //     //     port: 465,
+                //     //     secure: true, // uses SSL
+                //     auth: {
+                //         // user: 'donald.garton@outlook.com',
+                //         user: 'Net.IT.Australia@icloud.com',
+                //         pass: 'oqzr-tfsb-hazp-xcus' // app specific password
+                //     },
+                //     tls: {
+                //         // rejectUnauthorized: false // set to true for better security
+                //         rejectUnauthorized: true // set to true for better security
+                //     }
+                // });
+                // let mailOptions = {
+                //     from: 'Net.IT.Australia@icloud.com',
+                //     to: emailAddress,
+                //     subject: 'RideShareDriver.com.au user OTUP (one time user password)',
+                //     // text: 'Content of the email',
+                //     // html: JSON.stringify(req.body.emailBody),
+                //     // html: `<p>CCT Connect code is: ${cctConnectCode}</p>`,
+                //     html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
+                //     replyTo: 'support@netit.com.au',
+                // };
+                // transporter.sendMail(mailOptions, (error, info) => {
+                //     if (error) {
+                //         // res.send({message:"Email NOT sent by server!","email":req.body});
+                //         return console.log(error);
+                //     }
+                //     console.log('Message sent: %s', info.messageId);
+                //     // res.send({message:"Email sent by server OK.","email":req.body});
+                // });
+            // OSOLETE end ...
+            try {
+                // const { name, subject, email, message } = req.body;
+                const mailOptions = {
+                    from: process.env.SMTP_USER,
+                    to: emailAddress,
+                    subject: "Ride Share Driver user access code",
+                    html:  `
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <style>
+                                    body {
+                                        font-family: Arial, sans-serif;
+                                        background-color: #f4f4f4;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                    .container {
+                                        width: 100%;
+                                        max-width: 600px;
+                                        margin: 0 auto;
+                                        background-color: #ffffff;
+                                        padding: 20px;
+                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .header {
+                                        background-color: #4CAF50;
+                                        color: #ffffff;
+                                        padding: 10px 0;
+                                        text-align: center;
+                                        font-size:2em;
+                                    }
+                                    .content {
+                                        padding: 20px;
+                                    }
+                                    .footer {
+                                        background-color: #f4f4f4;
+                                        color: #888888;
+                                        text-align: center;
+                                        padding: 10px 0;
+                                        font-size: 12px;
+                                    }
+                                    .button {
+                                        display: inline-block;
+                                        padding: 10px 20px;
+                                        margin: 20px 0;
+                                        background-color: #4CAF50;
+                                        color: #ffffff;
+                                        text-decoration: none;
+                                        border-radius: 5px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="container">
+                                    <div class="header">
+                                        <p>Ride Share Driver Access Code</p>
+                                    </div>
+                                    <div class="content">
+                                        <p>Dear User,</p>
+                                        <p>Your access code is: <strong>${userPIN}</strong></p>
+                                        <p>Use this code to access your Ride Share Driver account.  (You can copy and paste it.)</p>
+                                        <p>Click the "Remember me" checkbox at the website/app to save re-typing your email address each time you sign in.</p>
+                                        <p style="color:red"><b>PLEASE DELETE THIS EMAIL WHEN DONE.</b></p>
+                                        <p>This method of sign-in is secure so long as your email account is secure, a password is not necessary.</p>
+                                        <p>If you believe your email account is insecure or if you believe your emails are being intercepted, please do not use your Ride Share Driver account untill your email account is secure.</p>
+                                    </div>
+                                    <div class="footer">
+                                        <p>&copy; 2025 Ride Share Driver. All rights reserved.</p>
+                                    </div>
+                                </div>
+                            </body>
+                            </html>
+                        `,
+                    text: `Ride Share Driver Access Code\n\nDear User,\n\nYour access code is: ${userPIN}\n\nUse this code to access your Ride Share Driver account.  (You can copy and paste it.)\n\nClick the "Remember me" checkbox at the website/app to save re-typing your email address each time you sign in.\n\nPLEASE DELETE THIS EMAIL WHEN DONE.\n\nThis method of sign-in is secure so long as your email account is secure, a password is not necessary.\n\nIf you believe your email account is insecure or if you believe your emails are being intercepted, please do not use your Ride Share Driver account untill your email account is secure.\n\n© 2025 Ride Share Driver. All rights reserved.`
                 }
-            });
-            let mailOptions = {
-                from: 'Net.IT.Australia@icloud.com',
-                to: emailAddress,
-                subject: 'RideShareDriver.com.au user OTUP (one time user password)',
-                // text: 'Content of the email',
-                // html: JSON.stringify(req.body.emailBody),
-                // html: `<p>CCT Connect code is: ${cctConnectCode}</p>`,
-                html: `<p>${userPIN}</p><p>Above is your RideShareDriver.com.au OTUP (one time user password).</p><p><b>...you can copy and paste it into your browser.</b></p><p>Contact support:- support@NetIT.com.au</p>`,
-                replyTo: 'support@netit.com.au',
-            };
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    // res.send({message:"Email NOT sent by server!","email":req.body});
-                    return console.log(error);
-                }
-                console.log('Message sent: %s', info.messageId);
-                // res.send({message:"Email sent by server OK.","email":req.body});
-            });
+                // ALL "mailOptions" START
+                    // from: The sender's email address.
+                    // to: The recipient's email address or a list of recipients.
+                    // cc: Carbon copy recipients.
+                    // bcc: Blind carbon copy recipients.
+                    // subject: The subject of the email.
+                    // text: The plain text body of the email.
+                    // html: The HTML body of the email.
+                    // attachments: An array of attachment objects.
+                    // replyTo: An email address to which replies should be sent.
+                    // headers: Custom headers for the email.
+                    // priority: Priority of the email ('high', 'normal', 'low').
+                    // alternatives: An array of alternative text contents (e.g., plain text and HTML versions).
+                    // envelope: SMTP envelope, if different from the from and to fields.
+                    // messageId: Custom message ID.
+                    // date: Custom date header.
+                    // encoding: Content transfer encoding.
+                    // raw: Raw email content.
+                // ALL "mailOptions" END
+                // if(consoleOn){console.log(consoleTrace());}
+                // if(consoleOn){console.log(mailOptions);}
+                await transporter.sendMail(mailOptions);
+                // res.status(200).send('Email sent successfully');
+                if(consoleOn){console.log(consoleTrace());}
+                if(consoleOn){console.log('Email sent successfully');}
+                returnUserAccessCode(req,res,userPIN);
+            } catch (error) {
+                // res.status(500).send('Error sending email');
+                if(consoleOn){console.log(consoleTrace());}
+                if(consoleOn){console.log('Error sending email');}
+                console.error(error);
+            }
         }            
         let _otup;
         console.log("login1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
